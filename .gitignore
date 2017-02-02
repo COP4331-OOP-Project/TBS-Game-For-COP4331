@@ -3,3 +3,7 @@
 .settings
 .idea
 *.iml
+*.class
+*.name
+*.xml
+CivGame.iml
