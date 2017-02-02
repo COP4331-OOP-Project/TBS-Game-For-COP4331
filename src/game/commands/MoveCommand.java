@@ -20,7 +20,7 @@ public class MoveCommand<T> extends Command {
 
     // Execute move from Gameboard function
     public void exec() {
-//        gameBoard.handleMoveCmd()
+        gameBoard.handleMoveCmd(actor, direction);
     }
 
 }
