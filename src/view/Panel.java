@@ -1,7 +1,7 @@
 package view;
 
 public abstract class Panel {
-	private static int TICKS_PER_IMAGE = 25;
+	private static int TICKS_PER_IMAGE = 5;
 	private static int IMAGES_TO_LOOP = 4;
 	private int animationImage = 0;
 	private int animationCount = 0;
