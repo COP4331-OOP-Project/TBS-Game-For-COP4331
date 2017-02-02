@@ -51,6 +51,7 @@ local.properties
 
 # Eclipse Core
 .project
+<<<<<<< HEAD
 
 # External tool builders
 .externalToolBuilders/
