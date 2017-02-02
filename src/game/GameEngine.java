@@ -9,11 +9,7 @@ public class GameEngine {
 	EventController events;
 	Window window;
 	
-	public static void main(String[] args) {
-		new GameEngine();
-	}
-	
-	private GameEngine() {
+	public GameEngine() {
 		Assets.getInstance().loadResources();
 		Thread mainThread = new Thread() {
 			public void run() {
