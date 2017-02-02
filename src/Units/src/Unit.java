@@ -1,6 +1,6 @@
 import java.io.*;
 
-public class Unit
+public abstract class Unit
 {
   public int combatPower;
   public int armor;
@@ -11,6 +11,7 @@ public class Unit
   public Tile location;
   public char owner;
   public String unitType;
+  public int id;
   
   public Unit(){}
 
@@ -24,6 +25,7 @@ public class Unit
   public Tile getLocation(){ return this.location; }
   public char getOwner(){ return this.owner; }
   public String getUnitType(){ return this.unitType; }
+  public int getId(){ return this.id; }
 
   /* Mutators */
   public void setCombatPower(int cp){ this.combatPower = cp; }
@@ -35,6 +37,8 @@ public class Unit
   public void setLocation(Tile t){ this.location = t; }
   public void setOwner(char o){ this.owner = o; }
   public void setUnitType(String u){ this.unitType = u; }
+  public void setId(int newId){ this.id = newId; }
+
   
   public void printUnit()
   {

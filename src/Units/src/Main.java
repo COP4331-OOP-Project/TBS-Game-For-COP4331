@@ -5,8 +5,27 @@ public class Main {
         Tile t = new Tile(1, 2);
         Structure base = new Structure(t);
 
-        Melee m = new Melee(base);
+        Unit m = new Melee(base);
         m.printUnit();
+
+        Unit r = new Ranged(base);
+        r.printUnit();
+
+        Unit c = new Colonist(base);
+        c.printUnit();
+
+        Unit w = new Worker(base);
+        w.printUnit();
+
+        Unit e = new Explorer(base);
+        e.printUnit();
+
+        Army a = new Army(m);
+        a.addSoldier(r);
+        a.addSoldier(c);
+        a.addSoldier(w);
+        a.addSoldier(e);
+        a.printArmy();
     }
 }
 
