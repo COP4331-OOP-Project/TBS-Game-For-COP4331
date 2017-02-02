@@ -24,8 +24,4 @@ public class CivilizationPanel extends Panel{
 			g.drawImage(Assets.getInstance().getImage("GUI_TOP_MIDDLE"), i, 0, null); 
 		}
 	}
-
-	@Override
-	public void draw(Graphics g) {
-	}
 }

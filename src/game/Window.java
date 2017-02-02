@@ -25,4 +25,8 @@ public class Window extends JFrame {
 	public void renderGame() {
 		frame.repaint();
 	}
+
+	public void updateAnimationTime() {
+		frame.updateAnimationTime();
+	}
 }

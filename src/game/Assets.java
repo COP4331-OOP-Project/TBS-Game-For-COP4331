@@ -16,7 +16,10 @@ public class Assets {
 	private static final String GUI_TOP_RIGHT = "assets/gui/rightTop.png";
 	private static final String TERRAIN_SAND = "assets/terrain/sand.jpg";
 	private static final String TERRAIN_GRASS = "assets/terrain/grass.jpg";
-	private static final String TERRAIN_WATER = "assets/terrain/water.jpg";
+	private static final String TERRAIN_WATER1 = "assets/terrain/water1.jpg";
+	private static final String TERRAIN_WATER2 = "assets/terrain/water2.jpg";
+	private static final String TERRAIN_WATER3 = "assets/terrain/water3.jpg";
+	
 	private ArrayList<BufferedImage> gameImages;
 	
 	private Assets() {} //Constructor is Private, only one instance of Resources can be created
@@ -34,8 +37,12 @@ public class Assets {
 			assets.put("TERRAIN_SAND", 3);
 			gameImages.add(ImageIO.read(new File(TERRAIN_GRASS)));
 			assets.put("TERRAIN_GRASS", 4);
-			gameImages.add(ImageIO.read(new File(TERRAIN_WATER)));
-			assets.put("TERRAIN_WATER", 5);
+			gameImages.add(ImageIO.read(new File(TERRAIN_WATER1)));
+			assets.put("TERRAIN_WATER1", 5);
+			gameImages.add(ImageIO.read(new File(TERRAIN_WATER2)));
+			assets.put("TERRAIN_WATER2", 6);
+			gameImages.add(ImageIO.read(new File(TERRAIN_WATER3)));
+			assets.put("TERRAIN_WATER3", 7);
 		} catch (IOException e) {
 			System.out.println("File Not Found");
 			e.printStackTrace();

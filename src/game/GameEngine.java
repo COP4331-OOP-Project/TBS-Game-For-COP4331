@@ -34,6 +34,7 @@ public class GameEngine {
 				      loops = 0;
 				      while (System.currentTimeMillis() > lastTime && loops < 10) {
 				    	  game.updateGame();
+				    	  window.updateAnimationTime();
 				    	  lastTime += GAME_UPDATES_PER_SECOND;
 				    	  loops++;
 				      }

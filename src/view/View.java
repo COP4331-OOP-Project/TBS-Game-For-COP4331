@@ -18,12 +18,22 @@ public class View {
 		modePanel = new ControlModePanel();
 		gamePanel = new GamePanel(game);
 		structureOverviewPanel = new StructureOverviewPanel();
+		unitOverviewPanel = new UnitOverviewPanel();
 		unitDetailsPanel = new UnitDetailsPanel();
+		structureDetailsPanel = new StructureDetailsPanel();
 	}
 	
 	public void drawVisiblePanels(Graphics g, int width, int height) {
 		//Add Structure And Unit Overview Modes
 		gamePanel.draw(g);
 		civPanel.draw(g, width, height);
+	}
+
+	public void updateAnimationTime() {
+		gamePanel.updateAnimationCount();
+		civPanel.updateAnimationCount();
+		modePanel.updateAnimationCount();
+		structureOverviewPanel.updateAnimationCount();
+		unitDetailsPanel.updateAnimationCount();	
 	}
 }

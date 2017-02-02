@@ -31,28 +31,50 @@ public class GamePanel extends Panel {
 		}
 	}
 	
-	@Override
 	public void draw(Graphics g) {
-		for (int i = 0; i < 5; i++) {
-			for (int j = 0; j < 5; j++) {
+		drawTiles(g);
+	}
 
-				if(gBoard.GameMap[i][j].getTileType()==0) {
-					g.drawImage(Assets.getInstance().getImage("TERRAIN_GRASS"), tileLocation(gBoard.GameMap[i][j].getlocation().xIndex),
-							tileLocation(gBoard.GameMap[i][j].getlocation().yIndex), null);
+	/**
+	 * This function draws calls the functions
+	 * that draw all the tiles
+	 */
+	private void drawTiles(Graphics g) {
+		for (int i = 0; i < tiles.length; i++) {
+			for (int j = 0; j < tiles.length; j++) {
+				if (tiles[i][j] == 0) {
+					drawGrassTile(g, i, j);
+				} else if (tiles[i][j] == 1) {
+					drawSandTile(g, i, j);
+				} else if (tiles[i][j] == 2) {
+					drawWaterTile(g, i, j);	
 				}
-				if(gBoard.GameMap[i][j].getTileType()==1) {
-					g.drawImage(Assets.getInstance().getImage("TERRAIN_SAND"), tileLocation(gBoard.GameMap[i][j].getlocation().xIndex),
-							tileLocation(gBoard.GameMap[i][j].getlocation().yIndex), null);
-				}
-				if(gBoard.GameMap[i][j].getTileType()==2) {
-					g.drawImage(Assets.getInstance().getImage("TERRAIN_WATER"), tileLocation(gBoard.GameMap[i][j].getlocation().xIndex),
-							tileLocation(gBoard.GameMap[i][j].getlocation().yIndex), null);
-				}
-
 			}
 		}
 	}
+		
+	private void drawWaterTile(Graphics g, int x, int y) {
+		switch (getAnimationImage()) {
+		case 0:
+			g.drawImage(Assets.getInstance().getImage("TERRAIN_WATER1"), tileLocation(x), tileLocation(y), null);
+			break;
+		case 2:
+			g.drawImage(Assets.getInstance().getImage("TERRAIN_WATER3"), tileLocation(x), tileLocation(y), null);
+			break;
+		default:
+			g.drawImage(Assets.getInstance().getImage("TERRAIN_WATER2"), tileLocation(x), tileLocation(y), null);
 	
+		}
+	}
+	
+	private void drawSandTile(Graphics g, int x, int y) {
+		g.drawImage(Assets.getInstance().getImage("TERRAIN_SAND"), tileLocation(x), tileLocation(y), null); 
+	}
+	
+	private void drawGrassTile(Graphics g, int x, int y) {
+		g.drawImage(Assets.getInstance().getImage("TERRAIN_GRASS"), tileLocation(x), tileLocation(y), null); 
+	}
+
 	/**
 	 * This takes the location of the tile
 	 * in the array, and converts the value
