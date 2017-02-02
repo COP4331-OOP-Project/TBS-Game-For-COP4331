@@ -1,7 +1,8 @@
 .classpath
 .project
 .settings
+.idea
 *.class
 *.name
 *.xml
-CivGame.iml
+*.iml
