@@ -1,25 +1,16 @@
-package game.entities;
-import game.entities.units.Unit;
-
 import java.util.*;
 
 public class Army
 {
     public char owner;
-    public ArrayList<Unit> soldiers;
-    public String uuid;
+    public List<Unit> soldiers = new ArrayList<Unit>();
 
-    public Army()
-    {
-        this.uuid = UUID.randomUUID().toString();
-    }
+    public Army(){}
 
     public Army(Unit u)
     {
         this.owner = u.owner;
         soldiers.add(u);
-        soldiers = new ArrayList<Unit>();
-        this.uuid = UUID.randomUUID().toString();
     }
 
     public void addSoldier(Unit u)

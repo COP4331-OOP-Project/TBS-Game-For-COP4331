@@ -1,6 +1,3 @@
-package game.entities.units;
-import game.entities.structures.Structure;
-
 import java.io.*;
 
 public class Colonist extends Unit
@@ -15,9 +12,8 @@ public class Colonist extends Unit
     this.orientation = 1;
     this.speed = 5;
     this.upkeep = 0.2f;
-//    this.location = base.getLocation();
-//    this.owner = base.getOwner();
-    this.unitType = 4;
-    this.uuid = UUID.randomUUID().toString();
+    this.location = base.getLocation();
+    this.owner = base.getOwner();
+    this.unitType = "Colonist";
   }
 }

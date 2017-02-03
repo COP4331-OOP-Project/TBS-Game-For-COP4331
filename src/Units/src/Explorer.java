@@ -1,6 +1,3 @@
-package game.entities.units;
-import game.entities.structures.Structure;
-
 import java.io.*;
 
 public class Explorer extends Unit
@@ -15,9 +12,8 @@ public class Explorer extends Unit
     this.orientation = 1;
     this.speed = 9;
     this.upkeep = 0.2f;
-//    this.location = base.getLocation();
-//    this.owner = base.getOwner();
-    this.unitType = 3;
-    this.uuid = UUID.randomUUID().toString();
+    this.location = base.getLocation();
+    this.owner = base.getOwner();
+    this.unitType = "Explorer";
   }
 }

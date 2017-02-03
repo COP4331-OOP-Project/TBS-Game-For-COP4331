@@ -1,6 +1,3 @@
-package game.entities.units;
-import game.entities.structures.Structure;
-
 import java.io.*;
 
 public class Melee extends Unit
@@ -15,9 +12,8 @@ public class Melee extends Unit
   this.orientation = 1;
   this.speed = 3;
   this.upkeep = 0.2f;
-//  this.location = base.getLocation();
-//  this.owner = base.getOwner();
-  this.unitType = 1;
-  this.uuid = UUID.randomUUID().toString();
+  this.location = base.getLocation();
+  this.owner = base.getOwner();
+  this.unitType = "Melee";
 }
 }

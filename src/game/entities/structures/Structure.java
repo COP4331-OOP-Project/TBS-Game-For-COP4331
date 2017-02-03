@@ -11,16 +11,18 @@ public abstract class Structure {
     private int health;
     private int upkeep;
     private int ownerID;
+    private Tile location;
     //TODO get queue to work!
 //    private queue<Command> commands;
 
-    public Structure(int ad, int dd, int armor, int health, int upkeep, int ownerID){
+    public Structure(int ad, int dd, int armor, int health, int upkeep, int ownerID, Tile loc){
         attackDamage=ad;
         defenseDamage=dd;
         this.armor=armor;
         this.health=health;
         this.upkeep=upkeep;
         this.ownerID=ownerID;
+        this.location = loc;
 //        commands= new queue<Command>();
     }
 

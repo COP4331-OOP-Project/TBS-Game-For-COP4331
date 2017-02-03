@@ -1,21 +1,16 @@
-package game.entities.units;
-import game.gameboard.Tile;
-
 import java.io.*;
 
-public abstract class Unit
+public class Unit
 {
-  protected int combatPower;
-  protected int armor;
-  protected int health;
-  protected int orientation;
-  protected int speed;
-  protected float upkeep;
-  protected Tile location;
-  protected char owner;
-  protected int unitType;
-  protected String uuid;
-
+  public int combatPower;
+  public int armor;
+  public int health;
+  public int orientation;
+  public int speed;
+  public float upkeep;
+  public Tile location;
+  public char owner;
+  public String unitType;
   
   public Unit(){}
 
@@ -28,8 +23,7 @@ public abstract class Unit
   public float getUpkeep(){ return this.upkeep; }
   public Tile getLocation(){ return this.location; }
   public char getOwner(){ return this.owner; }
-  public int getUnitType(){ return this.unitType; }
-  public String getUuid(){ return this.uuid; }
+  public String getUnitType(){ return this.unitType; }
 
   /* Mutators */
   public void setCombatPower(int cp){ this.combatPower = cp; }
@@ -41,7 +35,6 @@ public abstract class Unit
   public void setLocation(Tile t){ this.location = t; }
   public void setOwner(char o){ this.owner = o; }
   public void setUnitType(String u){ this.unitType = u; }
-
   
   public void printUnit()
   {
@@ -52,7 +45,7 @@ public abstract class Unit
   	System.out.println("	Orientation: " + this.getOrientation());
   	System.out.println("	Speed: " + this.getSpeed());
   	System.out.println("	Upkeep: " + this.getUpkeep());
-//  	System.out.println("	Location: " + this.getLocation().getX() + ", " + this.getLocation().getY());
+  	System.out.println("	Location: " + this.getLocation().getX() + ", " + this.getLocation().getY());
   	System.out.println("	Owner: " + this.getOwner());
   }
 }
