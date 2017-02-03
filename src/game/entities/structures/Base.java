@@ -26,16 +26,7 @@ public class Base extends Structure{
     public void ExecuteNextCommand(){
 
     }
-    public void Attack(int direction){
-
-    }
     public void MakeUnit(Unit unit){
-
-    }
-    public void Defend(int direction){
-
-    }
-    public void Heal(Unit unit){
 
     }
     public void Decomission(){
