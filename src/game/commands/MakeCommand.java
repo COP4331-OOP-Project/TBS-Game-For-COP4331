@@ -12,7 +12,7 @@ public class MakeCommand<T> extends Command {
     private String entityCode;          // Unique entity code to create
 
     // Constructor
-    MakeCommand(GameBoard gameBoard, T actor, int direction, int duration, String entityCode) {
+    public MakeCommand(GameBoard gameBoard, T actor, int direction, int duration, String entityCode) {
         super.gameBoard = gameBoard;
         this.actor = actor;
         this.direction = direction;

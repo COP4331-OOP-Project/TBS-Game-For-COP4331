@@ -14,7 +14,7 @@ public class BandArmyCommand extends Command {
     private int direction;                          // Direction of banding
 
     // Constructor
-    BandArmyCommand(GameBoard gameboard, ArrayList<Unit> actors, int direction, int duration) {
+    public BandArmyCommand(GameBoard gameboard, ArrayList<Unit> actors, int direction, int duration) {
         super.gameBoard = gameboard;
         this.actors = actors;
         this.direction = direction;

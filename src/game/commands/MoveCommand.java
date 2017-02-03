@@ -11,7 +11,7 @@ public class MoveCommand<T> extends Command {
     private int direction;      // Direction of move
 
     // Constructor
-    MoveCommand(GameBoard gameBoard, T actor, int direction, int duration) {
+    public MoveCommand(GameBoard gameBoard, T actor, int direction, int duration) {
         super.gameBoard = gameBoard;
         this.actor = actor;
         this.direction = direction;

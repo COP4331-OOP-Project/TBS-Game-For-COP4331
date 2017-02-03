@@ -11,7 +11,7 @@ public class AttackCommand<T> extends Command {
     private int direction;      // Direction of attack
 
     // Constructor
-    AttackCommand(GameBoard gameBoard, T actor, int direction, int duration) {
+    public AttackCommand(GameBoard gameBoard, T actor, int direction, int duration) {
         super.gameBoard = gameBoard;
         this.actor = actor;
         this.direction = direction;
