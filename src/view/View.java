@@ -25,7 +25,7 @@ public class View {
 	
 	public void drawVisiblePanels(Graphics g, int width, int height) {
 		//Add Structure And Unit Overview Modes
-		gamePanel.draw(g);
+		gamePanel.draw(g, width, height);
 		civPanel.draw(g, width, height);
 	}
 

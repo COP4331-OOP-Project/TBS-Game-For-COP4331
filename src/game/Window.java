@@ -10,6 +10,8 @@ public class Window extends JFrame {
 			//java.awt.Toolkit.getDefaultToolkit().getScreenSize().width;
 	private int screenHeight = 600;
 			//java.awt.Toolkit.getDefaultToolkit().getScreenSize().height;
+	public int viewOffsetY = 0;
+	public int viewOffsetX = 0;
 
 	public Window(Game game, EventController events) {
 		frame = new Frame(game);

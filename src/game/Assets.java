@@ -21,6 +21,8 @@ public class Assets {
 	private static final String TERRAIN_WATER2 = "assets/terrain/water2.jpg";
 	private static final String TERRAIN_WATER3 = "assets/terrain/water3.jpg";
 	
+	private static final String UNIT_SELECTED = "assets/units/selectedUnit.png";
+	
 	private static final String UNIT_MELEE_G = "assets/units/green/GreenMelee.png";
 	private static final String UNIT_RANGED_G = "assets/units/green/GreenRanged.png";
 	private static final String UNIT_EXPLORER_G = "assets/units/green/GreenExplorer.png";

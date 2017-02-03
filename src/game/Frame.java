@@ -8,6 +8,7 @@ public class Frame extends JPanel{
 	private static final long serialVersionUID = 1L;
 	private View view;
 	
+	
 	public Frame(Game game) {
 		view = new View(game);
 		setBackground(Color.BLACK);
