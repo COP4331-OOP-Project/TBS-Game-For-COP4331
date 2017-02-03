@@ -18,5 +18,7 @@ public class Worker extends Unit
 //    this.location = base.getLocation();
 //    this.owner = base.getOwner();
     this.unitType = "Worker";
+    this.id = 5;
+    this.uuid = UUID.randomUUID().toString();
   }
 }

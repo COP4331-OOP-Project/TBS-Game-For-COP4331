@@ -5,16 +5,18 @@ import java.io.*;
 
 public abstract class Unit
 {
-  public int combatPower;
-  public int armor;
-  public int health;
-  public int orientation;
-  public int speed;
-  public float upkeep;
-  public Tile location;
-  public char owner;
-  public String unitType;
-  public int id;
+  protected int combatPower;
+  protected int armor;
+  protected int health;
+  protected int orientation;
+  protected int speed;
+  protected float upkeep;
+  protected Tile location;
+  protected char owner;
+  protected String unitType;
+  protected int id;
+  protected String uuid;
+
   
   public Unit(){}
 

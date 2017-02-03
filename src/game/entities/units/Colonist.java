@@ -18,5 +18,7 @@ public class Colonist extends Unit
 //    this.location = base.getLocation();
 //    this.owner = base.getOwner();
     this.unitType = "Colonist";
+    this.id = 4;
+    this.uuid = UUID.randomUUID().toString();
   }
 }

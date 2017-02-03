@@ -18,5 +18,7 @@ public class Melee extends Unit
 //  this.location = base.getLocation();
 //  this.owner = base.getOwner();
   this.unitType = "Melee";
+  this.id = 1;
+  this.uuid = UUID.randomUUID().toString();
 }
 }
