@@ -23,6 +23,8 @@ public class GameEngine {
 		};
 		mainThread.start();
 	}
+
+
 	
 	/**
 	 * A main loop for updating and rendering
