@@ -1,6 +1,9 @@
 package game;
 import game.entities.Army;
+<<<<<<< HEAD
 import game.entities.structures.Base;
+=======
+>>>>>>> Add Unit Function
 import game.entities.units.Unit;
 import game.entities.units.Melee;
 import game.entities.units.Ranged;
@@ -33,7 +36,9 @@ public class Player {
 	private ArrayList<Colonist> colonists;
 	private ArrayList<Worker> workers;
 	private ArrayList<Structure> structures;
+
 	private ArrayList<Base> bases;
+
 	private ArrayList<Object> rallyPoints;
 	
 	private ArrayList<Unit> totalUnits;
@@ -104,7 +109,11 @@ public class Player {
 	 */
 	public void addUnit(Unit unit)
 	{
+<<<<<<< HEAD
 		switch(unit.getUnitType())
+=======
+		switch(unit.getId())
+>>>>>>> Add Unit Function
 		{
 			case 1:
 				melees.add((Melee)unit);
