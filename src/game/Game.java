@@ -1,7 +1,9 @@
 package game;
 
+import game.gameboard.GameBoard;
+
 public class Game {
-	
+
 	Game() {
 		
 	}

@@ -10,17 +10,52 @@ import game.entities.units.Unit;
  * */
 public class GameBoard {
 
-    private ArrayList<ArrayList<Tile>> GameMap;     // Map for game tiles
+    public Tile[][] GameMap;     // Map for game tiles
+                                 // 0 is grass, 1 is sand, 2 is water
     private ArrayList<Player> players;              // Players for game
 
     // Constructor
-    GameBoard(ArrayList<Player> players) {
+    //Test constructor
+
+    public GameBoard(int players) {
+        //this.players = players;                     // Set players
+        setupMap();                                 // Setup GameMap
+    }
+
+    public GameBoard(ArrayList<Player> players) {
         this.players = players;                     // Set players
         setupMap();                                 // Setup GameMap
     }
 
     // Setup the GameMap array with valid Tiles
-    private void setupMap() {}
+    private void setupMap() {
+
+        int[][] map = new int[][] {
+                {0,1,1,2,1},
+                {1,1,1,2,0},
+                {1,0,0,1,1},
+                {1,1,1,1,1},
+                {2,1,1,2,2}
+        };
+
+
+        GameMap = new Tile[5][];
+        for (int i = 0; i<5;i++)
+        {
+            GameMap[i] = new Tile[5];
+            for (int j = 0; j<5;j++)
+            {
+                Location l = new Location(i,j);
+                if(map[i][j] == 0)
+                    GameMap[i][j] = new Tile(0,l);
+                if(map[i][j] == 1)
+                    GameMap[i][j] = new Tile(1,l);
+                if(map[i][j] == 2)
+                    GameMap[i][j] = new Tile(2,l);
+            }
+        }
+    }
+
 
     // Get specific tile with actor location
     private Tile getTileWithLocation(Location l) {
