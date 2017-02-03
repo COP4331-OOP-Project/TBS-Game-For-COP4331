@@ -109,14 +109,15 @@ public class Player {
 		}
 	}
 	
-	public void addStructure()
+	public void addStructure(Structure structure)
 	{
 		//structures.add(1);
+		structures.add(structure);
 	}
 	
-	public void addArmy(int armyID)
+	public void addArmy(Army army)
 	{
-		//armies.add();
+		armies.add(army);
 	}
 	
 	public void addRallyPoint(Object rallyPoint)
