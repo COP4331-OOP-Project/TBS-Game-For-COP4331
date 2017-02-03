@@ -13,21 +13,16 @@ public abstract class Structure {
     private int defenseDamage;
     private int armor;
     private int health;
-    private int upkeep;
+    private float upkeep;
     private int ownerID;
     private Location location;
     private Queue<Command> commands;
 
     public Structure(){}
 
-    public Structure(int ad, int dd, int armor, int health, int upkeep, int ownerID, Location loc){
-        attackDamage=ad;
-        defenseDamage=dd;
-        this.armor=armor;
-        this.health=health;
-        this.upkeep=upkeep;
+    public Structure(Location loc,int ownerID){
+        this.location=loc;
         this.ownerID=ownerID;
-        location=loc;
         commands= new LinkedList<Command>();
     }
 
@@ -36,7 +31,7 @@ public abstract class Structure {
     public int getDefenseDamage(){return defenseDamage;}
     public int getArmor(){return armor;}
     public int getHealth(){return health;}
-    public int getUpkeep(){return upkeep;}
+    public float getUpkeep(){return upkeep;}
     public int getOwnerID(){return ownerID;}
     public Location getLocation(){return location;}
     //Command Queue Accessors
@@ -48,7 +43,7 @@ public abstract class Structure {
     public void setDefenseDamage(int defenseDamage) {this.defenseDamage = defenseDamage;}
     public void setArmor(int armor) {this.armor = armor;}
     public void setHealth(int health) {this.health = health;}
-    public void setUpkeep(int upkeep) {this.upkeep = upkeep;}
+    public void setUpkeep(float upkeep) {this.upkeep = upkeep;}
     public void setOwnerID(int ownerID) {this.ownerID = ownerID;}
     public void setLocation(Location location) {this.location = location;}
     //Command Queue Setters

@@ -12,8 +12,13 @@ import java.util.LinkedList;
 public class Base extends Structure{
     private int productionRate;
 
-    public Base(int ad, int dd, int armor, int health, int upkeep, int ownerID, Location loc, int prod){
-        super(ad,dd,armor,health,upkeep,ownerID,loc);
+    public Base( int prod, Location loc, int owner){
+        super(loc,owner);
+        this.setAttackDamage(10);
+        this.setDefenseDamage(5);
+        this.setArmor(5);
+        this.setHealth(50);
+        this.setUpkeep(2.0f);
         this.productionRate=prod;
     }
 
