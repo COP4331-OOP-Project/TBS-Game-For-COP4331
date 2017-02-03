@@ -87,7 +87,7 @@ public class Player {
 	 */
 	public void addUnit(Unit unit)
 	{
-		switch(unit.getId())
+		switch(unit.getUnitType())
 		{
 			case 1:
 				melees.add((Melee)unit);
@@ -118,6 +118,7 @@ public class Player {
 	public void addArmy(Army army)
 	{
 		armies.add(army);
+
 	}
 	
 	public void addRallyPoint(Object rallyPoint)
