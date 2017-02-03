@@ -1,9 +1,7 @@
 package game;
 import game.entities.Army;
-<<<<<<< HEAD
 import game.entities.structures.Base;
-=======
->>>>>>> Add Unit Function
+
 import game.entities.units.Unit;
 import game.entities.units.Melee;
 import game.entities.units.Ranged;
@@ -109,11 +107,8 @@ public class Player {
 	 */
 	public void addUnit(Unit unit)
 	{
-<<<<<<< HEAD
 		switch(unit.getUnitType())
-=======
-		switch(unit.getId())
->>>>>>> Add Unit Function
+
 		{
 			case 1:
 				melees.add((Melee)unit);
@@ -141,12 +136,12 @@ public class Player {
 		//structures.add(1);
 		bases.add((Base)structure);
 		structures.add(structure);
+
 	}
 	
 	public void addArmy(Army army)
 	{
 		armies.add(army);
-
 	}
 	
 	public void addRallyPoint(Object rallyPoint)
