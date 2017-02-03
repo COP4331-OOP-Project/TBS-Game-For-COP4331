@@ -30,7 +30,7 @@ public class MakeCommand<T> extends Command {
 
     // Execute make from Gameboard function
     public void exec() {
-//        gameBoard.handleMakeCmd()
+        gameBoard.handleMakeCmd(actor, direction, entityCode);
     }
 
 }

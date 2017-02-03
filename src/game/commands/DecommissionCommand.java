@@ -18,7 +18,7 @@ public class DecommissionCommand<T> extends Command {
 
     // Execute decommission command in Gameboard function
     public void exec() {
-//        gameBoard.handleDecommissionCmd()
+        gameBoard.handleDecommissionCmd(actor);
     }
 
 }

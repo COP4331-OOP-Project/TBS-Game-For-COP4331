@@ -20,7 +20,7 @@ public class HealCommand<T> extends Command {
 
     // Execute heal in Gameboard funcion
     public void exec() {
-//        gameBoard.handleHealCmd()
+        gameBoard.handleHealCmd(actor, direction);
     }
 
 }

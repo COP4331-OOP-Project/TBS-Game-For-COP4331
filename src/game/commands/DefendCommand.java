@@ -20,7 +20,7 @@ public class DefendCommand<T> extends Command {
 
     // Execute from Gameboard defense function
     public void exec() {
-//        gameBoard.handleDefendCmd();
+        gameBoard.handleDefendCmd(actor, direction);
     }
 
 }
