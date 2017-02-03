@@ -1,6 +1,9 @@
 package game.entities.structures;
 import game.commands.Command;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 /**
  * Created by David on 2/1/2017.
  */
@@ -11,8 +14,7 @@ public abstract class Structure {
     private int health;
     private int upkeep;
     private int ownerID;
-    //TODO get queue to work!
-//    private queue<Command> commands;
+    private Queue<Command> commands;
 
     public Structure(int ad, int dd, int armor, int health, int upkeep, int ownerID){
         attackDamage=ad;
@@ -21,11 +23,16 @@ public abstract class Structure {
         this.health=health;
         this.upkeep=upkeep;
         this.ownerID=ownerID;
-//        commands= new queue<Command>();
+        commands= new LinkedList<Command>();
     }
 
-//    public void insertCommand(Command command){
-//        commands.add(command);
-//    }
+    private void insertCommand(Command command){
+        commands.add(command);
+    }
+
+    public void cancelQueuedOrders(){
+        commands.clear();
+    }
+
 
 }
