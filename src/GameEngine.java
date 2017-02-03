@@ -1,5 +1,3 @@
-package game;
-
 public class GameEngine {
 	private final int GAME_UPDATES_PER_SECOND = 20;
 	private boolean running = true;
@@ -23,8 +21,6 @@ public class GameEngine {
 		};
 		mainThread.start();
 	}
-
-
 	
 	/**
 	 * A main loop for updating and rendering
