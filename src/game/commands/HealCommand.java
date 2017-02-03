@@ -11,7 +11,7 @@ public class HealCommand<T> extends Command {
     private int direction;      // Direction of heal
 
     // Constructor
-    HealCommand(GameBoard gameBoard, T actor, int direction, int duration) {
+    public HealCommand(GameBoard gameBoard, T actor, int direction, int duration) {
         super.gameBoard = gameBoard;
         this.actor = actor;
         this.direction = direction;

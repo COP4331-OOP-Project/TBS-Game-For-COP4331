@@ -9,7 +9,7 @@ public class CancelQueueCommand<T> extends Command {
 
     private T actor;
 
-    CancelQueueCommand(GameBoard gameBoard, T actor) {
+    public CancelQueueCommand(GameBoard gameBoard, T actor) {
         super.gameBoard = gameBoard;
         this.actor = actor;
         super.duration = 0;
