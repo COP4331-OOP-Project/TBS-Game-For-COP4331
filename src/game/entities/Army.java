@@ -6,14 +6,21 @@ import java.util.*;
 public class Army
 {
     public char owner;
-    public List<Unit> soldiers = new ArrayList<Unit>();
+    public ArrayList<Unit> soldiers;
+    public String uuid;
 
-    public Army(){}
+    public Army()
+    {
+      soldiers = new ArrayList<Unit>();
+      this.uuid = UUID.randomUUID().toString();
+    }
 
     public Army(Unit u)
     {
         this.owner = u.owner;
+        soldiers = new ArrayList<Unit>();
         soldiers.add(u);
+        this.uuid = UUID.randomUUID().toString();
     }
 
     public void addSoldier(Unit u)

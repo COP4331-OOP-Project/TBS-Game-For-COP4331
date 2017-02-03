@@ -5,16 +5,17 @@ import java.io.*;
 
 public abstract class Unit
 {
-  public int combatPower;
-  public int armor;
-  public int health;
-  public int orientation;
-  public int speed;
-  public float upkeep;
-  public Tile location;
-  public char owner;
-  public String unitType;
-  public int id;
+  protected int combatPower;
+  protected int armor;
+  protected int health;
+  protected int orientation;
+  protected int speed;
+  protected float upkeep;
+  protected Tile location;
+  protected char owner;
+  protected int unitType;
+  protected String uuid;
+
   
   public Unit(){}
 
@@ -27,8 +28,8 @@ public abstract class Unit
   public float getUpkeep(){ return this.upkeep; }
   public Tile getLocation(){ return this.location; }
   public char getOwner(){ return this.owner; }
-  public String getUnitType(){ return this.unitType; }
-  public int getId(){ return this.id; }
+  public int getUnitType(){ return this.unitType; }
+  public String getUuid(){ return this.uuid; }
 
   /* Mutators */
   public void setCombatPower(int cp){ this.combatPower = cp; }
@@ -40,7 +41,6 @@ public abstract class Unit
   public void setLocation(Tile t){ this.location = t; }
   public void setOwner(char o){ this.owner = o; }
   public void setUnitType(String u){ this.unitType = u; }
-  public void setId(int newId){ this.id = newId; }
 
   
   public void printUnit()
