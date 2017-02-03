@@ -131,14 +131,12 @@ public class Player {
 		totalUnits.add(unit);
 	}
 
-	public void addStructure(Structure structure)
-	{
+	public void addStructure(Structure structure) {
 		//structures.add(1);
-		bases.add((Base)structure);
+		bases.add((Base) structure);
 		structures.add(structure);
-
 	}
-	
+
 	public void addArmy(Army army)
 	{
 		armies.add(army);
