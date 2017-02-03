@@ -140,6 +140,7 @@ public class Player {
 	public void addArmy(Army army)
 	{
 		armies.add(army);
+
 	}
 	
 	public void addRallyPoint(Object rallyPoint)
