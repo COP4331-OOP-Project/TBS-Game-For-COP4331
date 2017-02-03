@@ -17,8 +17,7 @@ public class Explorer extends Unit
     this.upkeep = 0.2f;
 //    this.location = base.getLocation();
 //    this.owner = base.getOwner();
-    this.unitType = "Explorer";
-    this.id = 3;
+    this.unitType = 3;
     this.uuid = UUID.randomUUID().toString();
   }
 }

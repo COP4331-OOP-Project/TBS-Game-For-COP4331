@@ -13,8 +13,7 @@ public abstract class Unit
   protected float upkeep;
   protected Tile location;
   protected char owner;
-  protected String unitType;
-  protected int id;
+  protected int unitType;
   protected String uuid;
 
   
