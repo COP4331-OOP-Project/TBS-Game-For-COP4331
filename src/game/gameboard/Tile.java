@@ -1,8 +1,8 @@
-package game.gameboard;
+package src.game.gameboard;
 
-import game.entities.Army;
-import game.entities.structures.Structure;
-import game.entities.units.Unit;
+import src.game.entities.Army;
+import src.game.entities.structures.Structure;
+import src.game.entities.units.Unit;
 
 import java.util.ArrayList;
 

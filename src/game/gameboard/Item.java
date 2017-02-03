@@ -1,4 +1,4 @@
-package game.gameboard;
+package src.game.gameboard;
 /**
  * Created by David on 2/1/2017.
  */

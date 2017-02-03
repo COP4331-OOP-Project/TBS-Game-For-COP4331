@@ -1,6 +1,6 @@
-package controls.Army;
+package src.controls.Army;
 
-import controls.Type;
+import src.controls.Type;
 
 /**
  * Created by gavin on 2/2/17.

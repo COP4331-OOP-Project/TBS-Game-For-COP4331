@@ -1,7 +1,8 @@
-package game.commands;
+package src.game.commands;
 
-import game.entities.units.Unit;
-import game.gameboard.GameBoard;
+
+import src.game.entities.units.Unit;
+import src.game.gameboard.GameBoard;
 
 import java.util.ArrayList;
 

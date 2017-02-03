@@ -1,16 +1,13 @@
-package test;
+package src.test;
 
-import game.Player;
-import game.commands.AttackCommand;
-import game.entities.units.Unit;
-import game.gameboard.GameBoard;
-import org.junit.jupiter.api.AfterEach;
+
+import src.game.commands.AttackCommand;
+import src.game.entities.units.Unit;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Created by Alex on 2/2/17.

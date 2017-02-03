@@ -1,4 +1,4 @@
-package game;
+package src.game;
 
 public class GameEngine {
 	private final int GAME_UPDATES_PER_SECOND = 20;

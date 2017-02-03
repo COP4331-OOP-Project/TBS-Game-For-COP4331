@@ -1,6 +1,7 @@
-package view;
+package src.view;
+import src.game.Game;
+
 import java.awt.Graphics;
-import game.Game;
 
 public class View {
 	Game game;

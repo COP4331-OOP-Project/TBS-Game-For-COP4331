@@ -1,4 +1,4 @@
-package game.gameboard;
+package src.game.gameboard;
 
 
 /**

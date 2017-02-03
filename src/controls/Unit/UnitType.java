@@ -1,5 +1,5 @@
-package controls.Unit;
-import controls.Type;
+package src.controls.Unit;
+import src.controls.Type;
 
 /**
  * Created by gavin on 2/2/17.

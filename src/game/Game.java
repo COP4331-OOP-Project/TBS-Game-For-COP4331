@@ -1,6 +1,7 @@
-package game;
+package src.game;
 
-import controls.ModeController;
+import src.controls.ModeController;
+
 import java.util.ArrayList;
 
 public class Game {

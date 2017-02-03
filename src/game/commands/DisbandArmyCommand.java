@@ -1,7 +1,8 @@
-package game.commands;
+package src.game.commands;
 
-import game.entities.Army;
-import game.gameboard.GameBoard;
+
+import src.game.entities.Army;
+import src.game.gameboard.GameBoard;
 
 /**
  * Disband an established actor army

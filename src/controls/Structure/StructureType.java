@@ -1,6 +1,6 @@
-package controls.Structure;
+package src.controls.Structure;
 
-import controls.Type;
+import src.controls.Type;
 
 /**
  * Created by gavin on 2/1/17.

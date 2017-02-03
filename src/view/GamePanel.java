@@ -1,9 +1,8 @@
-package view;
+package src.view;
 
-import game.Assets;
-import game.Game;
-import game.Player;
-import game.gameboard.GameBoard;
+import src.game.Assets;
+import src.game.Game;
+import src.game.gameboard.GameBoard;
 
 import java.awt.Graphics;
 import java.util.Random;

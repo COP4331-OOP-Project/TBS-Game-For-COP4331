@@ -1,4 +1,4 @@
-package controls.Structure;
+package src.controls.Structure;
 
 /**
  * Created by gavin on 2/2/17.

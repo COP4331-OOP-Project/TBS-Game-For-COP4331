@@ -1,7 +1,7 @@
-package game.commands;
+package src.game.commands;
 
 
-import game.gameboard.GameBoard;
+import src.game.gameboard.GameBoard;
 
 /**
  * Command pattern for action invoking

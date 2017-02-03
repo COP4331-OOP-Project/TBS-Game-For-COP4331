@@ -1,7 +1,7 @@
-package game.entities.units;
-import game.entities.structures.Structure;
+package src.game.entities.units;
 
-import java.io.*;
+
+import src.game.entities.structures.Structure;
 
 public class Colonist extends Unit
 {

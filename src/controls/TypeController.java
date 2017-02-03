@@ -1,8 +1,9 @@
-package controls;
+package src.controls;
 
-import controls.Army.ArmyType;
-import controls.Structure.StructureType;
-import controls.Unit.UnitType;
+
+import src.controls.Army.ArmyType;
+import src.controls.Structure.StructureType;
+import src.controls.Unit.UnitType;
 
 /**
  * Created by gavin on 2/1/17.

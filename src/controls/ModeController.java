@@ -1,15 +1,19 @@
-package controls;
+package src.controls;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+
 /**
  * Created by gavin on 2/1/17.
  */
 public class ModeController {
     private ModeEnum mode;
     private TypeController typeController;
-    static Logger log = Logger.getLogger(ModeController.class.getName());
+    private final static Logger log = LogManager.getLogger(ModeController.class);
 
     public ModeController() {
+        log.debug("Mode controller instantiated");
         this.mode = ModeEnum.RALLY_POINT;
         this.typeController = new TypeController(this.mode);
     }

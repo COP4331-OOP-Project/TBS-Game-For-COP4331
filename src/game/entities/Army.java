@@ -1,7 +1,11 @@
-package game.entities;
-import game.entities.units.Unit;
+package src.game.entities;
 
-import java.util.*;
+
+import src.game.entities.units.Unit;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 public class Army
 {

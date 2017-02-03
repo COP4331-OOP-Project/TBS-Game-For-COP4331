@@ -1,4 +1,4 @@
-package controls;
+package src.controls;
 
 /**
  * Created by gavin on 2/2/17.

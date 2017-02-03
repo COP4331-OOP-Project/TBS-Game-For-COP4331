@@ -1,10 +1,10 @@
-package game.gameboard;
+package src.game.gameboard;
+
+import src.game.Player;
+import src.game.entities.Army;
+import src.game.entities.units.Unit;
 
 import java.util.ArrayList;
-import game.Player;
-import game.entities.Army;
-import game.entities.units.Unit;
-
 /**
  * Gameboard class containing 2D Tile array for board and interaction handler functions
  * */

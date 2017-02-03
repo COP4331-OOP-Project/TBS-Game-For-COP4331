@@ -1,6 +1,6 @@
-package game.commands;
+package src.game.commands;
 
-import game.gameboard.GameBoard;
+import src.game.gameboard.GameBoard;
 
 /**
  * Initiate a change to powered up state with an actor
