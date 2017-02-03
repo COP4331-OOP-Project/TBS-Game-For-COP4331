@@ -1,11 +1,13 @@
 package controls;
 
+import org.apache.log4j.Logger;
 /**
  * Created by gavin on 2/1/17.
  */
 public class ModeController {
     private ModeEnum mode;
     private TypeController typeController;
+    static Logger log = Logger.getLogger(ModeController.class.getName());
 
     public ModeController() {
         this.mode = ModeEnum.RALLY_POINT;
