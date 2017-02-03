@@ -1,17 +1,20 @@
 package view;
 
 import game.Assets;
+import game.Game;
+
 import java.awt.Graphics;
 import java.awt.Font;
 
 public class CivilizationPanel extends Panel{
 	
 	Font civInfoFont = new Font("Lucida Sans", Font.BOLD, 20);
+	private Game game;
 	
-	public CivilizationPanel() {
-		
+	public CivilizationPanel(Game game) {
+		this.game = game;
 	}
-	
+
 	public static int GUI_PANEL_WIDTH = 
 			Assets.getInstance().getImage("GUI_TOP_LEFT").getWidth();
 	public static int GUI_PANEL_HEIGHT = 
@@ -24,8 +27,8 @@ public class CivilizationPanel extends Panel{
 
 	private void drawText(Graphics g) {
 		g.setFont(civInfoFont);
-		g.drawString("Player: ", 150, 20);
-		g.drawString("Turn: ", 150, 45);
+		g.drawString("Player: ", 5, 20);
+		g.drawString("Turn: ", 5, 45);
 	}
 
 	//Draw the blue panel itself

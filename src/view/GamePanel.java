@@ -28,7 +28,7 @@ public class GamePanel extends Panel {
 	//TEST ELEMENTS BELOW
 	Random rand = new Random(); 
 	
-	private static final int NUM_TILES = 5; 
+	private static final int NUM_TILES = 20; 
 	int[][] tiles = new int[NUM_TILES][NUM_TILES];
 	//END TEST ELEMENTS
 	
@@ -67,15 +67,35 @@ public class GamePanel extends Panel {
 		for (int i = 0; i < tiles.length; i++) {
 			for (int j = 0; j < tiles.length; j++) {
 				if (tiles[i][j] == 0) {
-					drawStaticTileElement(g, i, j, "TERRAIN_GRASS");
-					drawUnit(g, i, j, 0, 2);
+					drawTile(g, i , j, 0);
+					drawBase(g, i, j, 1);
+					drawUnit(g, i, j, 1, 2);
 				} else if (tiles[i][j] == 1) {
-					drawStaticTileElement(g, i, j, "TERRAIN_SAND");
-					drawUnit(g, i, j, 1, 1);
+					drawTile(g, i, j, 1);
+					drawUnit(g, i, j, 3, 1);
 				} else if (tiles[i][j] == 2) {
-					drawAnimatedTileElement(g, i, j, "TERRAIN_WATER1", "TERRAIN_WATER2", "TERRAIN_WATER3");	
+					drawTile(g, i, j, 2);	
 				}
 			}
+		}
+	}
+	
+	private void drawBase(Graphics g, int x, int y, int player) {
+		switch(player) {
+			case 0:
+				drawStaticTileElement(g, x, y, "BASE_G");
+				break;
+			case 1:
+				drawStaticTileElement(g, x, y, "BASE_B");
+				break;
+			case 2:
+				drawStaticTileElement(g, x, y, "BASE_Y");
+				break;
+			case 3:
+				drawStaticTileElement(g, x, y, "BASE_O");
+				break;
+			default:
+				System.out.println("Invalid player specific for drawing base");
 		}
 	}
 	
@@ -119,6 +139,20 @@ public class GamePanel extends Panel {
 		}
 		String unitString = "UNIT_" + typeString + "_" + playerString;
 		drawStaticTileElement(g, x, y, unitString);
+	}
+
+	private void drawTile(Graphics g, int x, int y, int type) {
+		switch(type) {
+			case 0:
+				drawStaticTileElement(g, x, y, "TERRAIN_GRASS");
+				break;
+			case 1:
+				drawStaticTileElement(g, x, y, "TERRAIN_SAND");
+				break;
+			case 2:
+				drawAnimatedTileElement(g, x, y, "TERRAIN_WATER1", "TERRAIN_WATER2", "TERRAIN_WATER3");
+				break;
+		}
 	}
 	
 	private void drawStaticTileElement(Graphics g, int x, int y, String image) {

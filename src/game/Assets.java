@@ -15,6 +15,10 @@ public class Assets {
 	private static final String GUI_TOP_MIDDLE = "assets/gui/barMiddle.png";
 	private static final String GUI_TOP_RIGHT = "assets/gui/rightTop.png";
 	
+	private static final String GUI_BOTTOM_LEFT = "assets/gui/leftBottom.png";
+	private static final String GUI_BOTTOM_MIDDLE = "assets/gui/barMiddleBottom.png";
+	private static final String GUI_BOTTOM_RIGHT = "assets/gui/rightBottom.png";
+	
 	private static final String GUI_MODE_PANEL = "assets/gui/mode/modePanel.png";
 	private static final String GUI_MODE_SELECTED1 = "assets/gui/mode/selected1.png";
 	private static final String GUI_MODE_SELECTED2 = "assets/gui/mode/selected2.png";
@@ -49,6 +53,13 @@ public class Assets {
 	private static final String UNIT_EXPLORER_O = "assets/units/orange/OrangeExplorer.png";
 	private static final String UNIT_COLONIST_O = "assets/units/orange/OrangeColonist.png";
 	
+	private static final String BASE_SELECTED = "assets/structure/baseSelected.png";
+	
+	private static final String BASE_G = "assets/structure/baseGreen.png";
+	private static final String BASE_B = "assets/structure/baseBlue.png";
+	private static final String BASE_Y = "assets/structure/baseYellow.png";
+	private static final String BASE_O = "assets/structure/baseOrange.png";
+	
 	private ArrayList<BufferedImage> gameImages;
 	private int lastItemLoaded = 0;
 	
@@ -59,6 +70,10 @@ public class Assets {
 		loadItem("GUI_TOP_LEFT", GUI_TOP_LEFT);
 		loadItem("GUI_TOP_MIDDLE", GUI_TOP_MIDDLE);
 		loadItem("GUI_TOP_RIGHT", GUI_TOP_RIGHT);
+		
+		loadItem("GUI_BOTTOM_LEFT", GUI_BOTTOM_LEFT);
+		loadItem("GUI_BOTTOM_MIDDLE", GUI_BOTTOM_MIDDLE);
+		loadItem("GUI_BOTTOM_RIGHT", GUI_BOTTOM_RIGHT);
 		
 		loadItem("GUI_MODE_PANEL", GUI_MODE_PANEL);
 		loadItem("GUI_MODE_SELECTED1", GUI_MODE_SELECTED1);
@@ -93,6 +108,12 @@ public class Assets {
 		loadItem("UNIT_RANGED_O", UNIT_RANGED_O);
 		loadItem("UNIT_EXPLORER_O", UNIT_EXPLORER_O);
 		loadItem("UNIT_COLONIST_O", UNIT_COLONIST_O);
+		
+		loadItem("BASE_SELECTED", BASE_SELECTED);
+		loadItem("BASE_G", BASE_G);
+		loadItem("BASE_B", BASE_B);
+		loadItem("BASE_Y", BASE_Y);
+		loadItem("BASE_O", BASE_O);
 	}
 	
 	private void loadItem(String name, String path) {
