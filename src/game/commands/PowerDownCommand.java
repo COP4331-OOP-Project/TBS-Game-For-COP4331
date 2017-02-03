@@ -17,7 +17,7 @@ public class PowerDownCommand<T> extends Command {
 
     // Execute power down from Gameboard function
     public void exec() {
-//        gameBoard.handlePowerDownCmd()
+        gameBoard.handlePowerDownCmd(actor);
     }
 
 }

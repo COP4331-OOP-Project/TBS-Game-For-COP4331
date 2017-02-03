@@ -44,6 +44,11 @@ public class Tile {
         containsUnit=true;
     }
 
+    public int getTileType()
+    {
+        return Terrain;
+    }
+
     public void removeUnit(int unitID){
         units.remove(unitID);
         if(units.isEmpty()){

@@ -18,7 +18,7 @@ public class PowerUpCommand<T> extends Command {
 
     // Execute power up from Gameboard function
     public void exec() {
-//        gameBoard.handlePowerUpCmd()
+        gameBoard.handlePowerUpCmd(actor);
     }
 
 }

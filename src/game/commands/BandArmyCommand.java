@@ -23,7 +23,7 @@ public class BandArmyCommand extends Command {
 
     // Execute command from Gameboard function
     public void exec() {
-//        gameBoard.handleBandArmyCmd();
+        gameBoard.handleBandArmyCmd(actors);
     }
 
 }
