@@ -15,6 +15,12 @@ public class Assets {
 	private static final String GUI_TOP_MIDDLE = "assets/gui/barMiddle.png";
 	private static final String GUI_TOP_RIGHT = "assets/gui/rightTop.png";
 	
+	private static final String GUI_MODE_PANEL = "assets/gui/mode/modePanel.png";
+	private static final String GUI_MODE_SELECTED1 = "assets/gui/mode/selected1.png";
+	private static final String GUI_MODE_SELECTED2 = "assets/gui/mode/selected2.png";
+	private static final String GUI_MODE_SELECTED3 = "assets/gui/mode/selected3.png";
+	private static final String GUI_MODE_SELECTED4 = "assets/gui/mode/selected4.png";
+	
 	private static final String TERRAIN_SAND = "assets/terrain/sand.jpg";
 	private static final String TERRAIN_GRASS = "assets/terrain/grass.jpg";
 	private static final String TERRAIN_WATER1 = "assets/terrain/water1.jpg";
@@ -54,11 +60,19 @@ public class Assets {
 		loadItem("GUI_TOP_MIDDLE", GUI_TOP_MIDDLE);
 		loadItem("GUI_TOP_RIGHT", GUI_TOP_RIGHT);
 		
+		loadItem("GUI_MODE_PANEL", GUI_MODE_PANEL);
+		loadItem("GUI_MODE_SELECTED1", GUI_MODE_SELECTED1);
+		loadItem("GUI_MODE_SELECTED2", GUI_MODE_SELECTED2);
+		loadItem("GUI_MODE_SELECTED3", GUI_MODE_SELECTED3);
+		loadItem("GUI_MODE_SELECTED4", GUI_MODE_SELECTED4);
+		
 		loadItem("TERRAIN_SAND", TERRAIN_SAND);
 		loadItem("TERRAIN_GRASS", TERRAIN_GRASS);
 		loadItem("TERRAIN_WATER1", TERRAIN_WATER1);
 		loadItem("TERRAIN_WATER2", TERRAIN_WATER2);
 		loadItem("TERRAIN_WATER3", TERRAIN_WATER3);
+		
+		loadItem("UNIT_SELECTED", UNIT_SELECTED);
 		
 		loadItem("UNIT_MELEE_G", UNIT_MELEE_G);
 		loadItem("UNIT_RANGED_G", UNIT_RANGED_G);

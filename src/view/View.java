@@ -27,6 +27,7 @@ public class View {
 		//Add Structure And Unit Overview Modes
 		gamePanel.draw(g, width, height);
 		civPanel.draw(g, width, height);
+		modePanel.draw(g, width, height);
 	}
 
 	public void updateAnimationTime() {
