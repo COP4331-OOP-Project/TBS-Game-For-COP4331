@@ -5,6 +5,7 @@ public class Main {
         Tile t = new Tile(1, 2);
         Structure base = new Structure(t);
 
+<<<<<<< f9111a21e12a7294e89984b20c1c1e7e689dc7f5
         Unit m = new Melee(base);
         m.printUnit();
 
@@ -26,6 +27,10 @@ public class Main {
         a.addSoldier(w);
         a.addSoldier(e);
         a.printArmy();
+=======
+        Melee m = new Melee(base);
+        m.printUnit();
+>>>>>>> Added basic Unit files
     }
 }
 
