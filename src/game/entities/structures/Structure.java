@@ -47,7 +47,7 @@ public abstract class Structure {
     public void setOwnerID(int ownerID) {this.ownerID = ownerID;}
     public void setLocation(Location location) {this.location = location;}
     //Command Queue Setters
-    private void insertCommand(Command command){
+    public void insertCommand(Command command){
         commands.add(command);
     }
     public void cancelQueuedOrders(){
