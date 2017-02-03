@@ -49,7 +49,7 @@ public class GameBoard {
 
 
         gameMap = new Tile[5][];
-        for (int i = 0; i<5;i++)
+      for (int i = 0; i<5;i++)
         {
             gameMap[i] = new Tile[5];
             for (int j = 0; j<5;j++)
