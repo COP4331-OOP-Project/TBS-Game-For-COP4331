@@ -48,7 +48,6 @@ public class GamePanel extends Panel {
 					g.drawImage(Assets.getInstance().getImage("TERRAIN_WATER"), tileLocation(gBoard.gameMap[i][j].getlocation().xIndex),
 							tileLocation(gBoard.gameMap[i][j].getlocation().yIndex), null);
 				}
-
 			}
 		}
 	}
