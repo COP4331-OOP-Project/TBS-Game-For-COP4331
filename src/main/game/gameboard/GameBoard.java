@@ -17,7 +17,7 @@ public class GameBoard {
     public Tile[][] gameMap;     // Map for game tiles
                                  // 0 is grass, 1 is sand, 2 is water
     private ArrayList<Player> players;              // Players for game
-
+    private static final int BOARD_SIZE = 15;
     // Constructor
     //Test constructorc
 
@@ -27,36 +27,37 @@ public class GameBoard {
     }
 
     public GameBoard(ArrayList<Player> players) {
+    	
         this.players = players;                     // Set players
         setupMap();                                 // Setup gameMap
     }
 
-    // Setup the gameMap array with valid Tiles
+    // Setup the gameMap array wit5h valid Tiles
     private void setupMap() {
-        /*
         int[][] map = new int[][] {
-                {0,1,1,2,1},
-                {1,1,1,2,0},
-                {1,0,0,1,1},
-                {1,1,1,1,1},
-                {2,1,1,2,2}
+                {0,1,1,2,1,0,1,1,2,1,0,1,1,2,1},
+                {1,1,1,2,0,1,1,1,2,0,0,1,1,2,1},
+                {1,0,0,1,1,1,0,0,1,1,0,1,1,2,1},
+                {1,1,1,1,1,1,0,0,1,1,0,1,1,2,1},
+                {2,1,1,2,2,1,0,0,1,1,0,1,1,2,1},
+                {0,1,1,2,1,0,1,1,2,1,0,1,1,2,1},
+                {1,1,1,2,0,1,1,1,2,0,0,1,1,2,1},
+                {1,0,0,1,1,1,0,0,1,1,0,1,1,2,1},
+                {1,1,1,1,1,1,0,0,1,1,0,1,1,2,1},
+                {2,1,1,2,2,1,0,0,1,1,0,1,1,2,1},
+                {0,1,1,2,1,0,1,1,2,1,0,1,1,2,1},
+                {1,1,1,2,0,1,1,1,2,0,0,1,1,2,1},
+                {1,0,0,1,1,1,0,0,1,1,0,1,1,2,1},
+                {1,1,1,1,1,1,0,0,1,1,0,1,1,2,1},
+                {2,1,1,2,2,1,0,0,1,1,0,1,1,2,1}
         };
-        */
-
-        int [][] map = new int [][]{
-                {0,0,0,0,0},
-                {0,0,0,0,0},
-                {0,0,0,0,0},
-                {0,0,0,0,0},
-                {0,0,0,0,0}
-        };
 
 
-        gameMap = new Tile[5][];
-      for (int i = 0; i<5;i++)
+        gameMap = new Tile[BOARD_SIZE][];
+      for (int i = 0; i< BOARD_SIZE; i++)
         {
-            gameMap[i] = new Tile[5];
-            for (int j = 0; j<5;j++)
+            gameMap[i] = new Tile[BOARD_SIZE];
+            for (int j = 0; j<BOARD_SIZE;j++)
             {
                 Location l = new Location(i,j);
                 if(map[i][j] == 0)

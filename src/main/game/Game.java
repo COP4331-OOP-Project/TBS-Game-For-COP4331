@@ -44,6 +44,10 @@ public class Game {
 	public void createGameBoard() {
 
 	}
+	
+	public GameBoard getGameBoard() {
+		return gBoard;
+	}
 
 	public void addPlayer(Player p) {
 		this.players.add(p);
