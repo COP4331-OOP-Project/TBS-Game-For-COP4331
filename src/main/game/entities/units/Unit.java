@@ -53,6 +53,7 @@ public abstract class Unit implements ICommandable
   public CommandQueue getQueue(){ return this.queue; }
   public boolean isDecomm(){ return this.decomm; }
 
+
   /* Mutators */
   public void setAttackDamage(int attackDamage) {this.attackDamage = attackDamage; }
   public void setDefenseDamage(int defenseDamage) {this.defenseDamage = defenseDamage; }
