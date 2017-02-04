@@ -55,10 +55,14 @@ public class Player {
         this.bases = new ArrayList<Base>();
         this.rallyPoints = new ArrayList<Object>();
         this.totalUnits = new ArrayList<Unit>();
-
+	}
+	private void init()
+	{
+		
 	}
 
 	public int getPlayerID() { return this.playerID; }
+
 	//accessors
 	public int getResourceCount()
 	{
