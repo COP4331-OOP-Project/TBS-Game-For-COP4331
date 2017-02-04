@@ -33,10 +33,6 @@ public abstract class Structure implements ICommandable {
     }
 
 
-    //Command Queue Accessors
-    public Command getNextCommand(){return commands.poll();}
-    public boolean emptyQueue(){return commands.isEmpty();}
-
     // Setup struct stats based on passed values of constructed structure
     protected void setStructureStats(int atk, int def, int armor, int hp, float upkeep, int resourceCost) {
         this.setAttackDamage(atk);
@@ -84,8 +80,12 @@ public abstract class Structure implements ICommandable {
         else peekCommand().iterateDuration();
     }
 
+
+    // Commandable actions
+
     public Command nextCommand() { return commands.poll(); }                    // Look at next command
     public Command peekCommand() { return commands.peek(); }                    // Pop off next command
+    public boolean emptyQueue(){return commands.isEmpty();}
     public void addCommandToQueue(Command command){
         commands.add(command);
     }   // Add next cmd to queue

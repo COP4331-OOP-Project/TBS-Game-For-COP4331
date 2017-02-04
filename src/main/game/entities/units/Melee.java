@@ -12,50 +12,11 @@ public class Melee extends Unit
     public Melee(){}
 
     public Melee(Location loc, int ownerID) {
-       this.setAttackDamage(7);
-       this.setArmor(7);
-       this.setHealth(10);
-       this.setOrientation(1);
-       this.setSpeed(3);
-       this.setUpkeep(1f);
-       this.setBaseResourceCost(10);
-       this.setLocation(loc);
-       this.setOwnerID(ownerID);
-       this.setUnitType(1);
-       this.setUuid(UUID.randomUUID());
+
+        super(loc, ownerID, 1);  // Call super constructor
+        this.setUuid(UUID.randomUUID());
+        setUnitStats(7, 7, 7, 10, 1.0f, 10, 3, 1);
+
      }
 
-    public void addCommandToQueue(Command command) {
-
-    }
-
-    public void doTurn() {
-
-    }
-
-    public Command nextCommand() {
-        // TODO: fix me
-        return null;
-    }
-
-    public Command peekCommand() {
-        // TODO: fix me
-        return null;
-    }
-
-    public void cancelQueuedCommands() {
-
-    }
-
-    public void powerDown() {
-
-    }
-
-    public void powerUp() {
-
-    }
-
-    public void decommissionEntity() {
-
-    }
 }
