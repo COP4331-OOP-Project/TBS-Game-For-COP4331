@@ -35,8 +35,6 @@ public class GamePanel extends Panel {
 	
 	public GamePanel(Game game) {
 
-		gBoard = new GameBoard(1);
-
 		this.game = game;
 		for (int i = 0; i < NUM_TILES; i++) {
 			for(int j = 0; j < NUM_TILES; j++){
