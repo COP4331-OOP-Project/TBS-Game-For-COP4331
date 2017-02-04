@@ -29,7 +29,7 @@ public abstract class Unit implements ICommandable
   public float getUpkeep(){ return this.upkeep; }
   public int getBaseResourceCost() { return this.baseResourceCost; }
   public Tile getLocation(){ return this.location; }
-  public char getOwner(){ return this.owner; }
+  public set getOwnerID(){ return this.ownerID; }
   public int getUnitType(){ return this.unitType; }
   public String getUuid(){ return this.uuid; }
   public int getResourceCost() { return (int)(this.baseResourceCost * this.upkeep); }
@@ -44,7 +44,7 @@ public abstract class Unit implements ICommandable
   public void setUpkeep(float u){ this.upkeep = u; }
   public void setBaseResourceCost(int cost) { this.baseResourceCost = cost; }
   public void setLocation(Tile t){ this.location = t; }
-  public void setOwner(char o){ this.owner = o; }
+  public void setOwnerID(int o){ this.ownerID = o; }
   public void setUnitType(String u){ this.unitType = u; }
   public void setUuid(UUID id){ this.uuid = id; }
 
