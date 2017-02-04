@@ -63,7 +63,6 @@ public abstract class Unit implements ICommandable
   public void printUnit()
   {
   	System.out.println("    Unit type: " + this.getUnitType());
-  	System.out.println("	Combat Power: " + this.getCombatPower());
   	System.out.println("	Armor: " + this.getArmor());
   	System.out.println("	Health: " + this.getHealth());
   	System.out.println("	Orientation: " + this.getOrientation());
