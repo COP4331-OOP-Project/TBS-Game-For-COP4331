@@ -3,6 +3,7 @@ package game.entities.units;
 
 import game.commands.Command;
 import game.entities.structures.Structure;
+import game.gameboard.Location;
 
 import java.util.UUID;
 
@@ -10,7 +11,7 @@ public class Melee extends Unit
 {
     public Melee(){}
 
-     public Melee(Structure base) {
+    public Melee(Location loc, int ownerID) {
        this.setAttackDamage(7);
        this.setArmor(7);
        this.setHealth(10);
@@ -18,8 +19,8 @@ public class Melee extends Unit
        this.setSpeed(3);
        this.setUpkeep(1f);
        this.setBaseResourceCost(10);
-    //    this.location = base.getLocation();
-    //    this.owner = base.getOwner();
+       this.setLocation(loc);
+       this.setOwnerID(ownerID);
        this.setUnitType(1);
        this.setUuid(UUID.randomUUID());
      }

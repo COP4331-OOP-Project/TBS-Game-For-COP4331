@@ -1,7 +1,9 @@
 package game.entities.units;
 
+
 import game.commands.Command;
 import game.entities.structures.Structure;
+import game.gameboard.Location;
 
 import java.util.UUID;
 
@@ -9,8 +11,7 @@ public class Ranged extends Unit
 {
   public Ranged(){}
 
-  public Ranged(Structure base)
-  {
+  public Ranged(Location loc, int ownerID) {
     this.setAttackDamage(7);
     this.setArmor(5);
     this.setHealth(10);
@@ -18,8 +19,8 @@ public class Ranged extends Unit
     this.setSpeed(5);
     this.setUpkeep(1f);
     this.setBaseResourceCost(10);
-//    this.location = base.getLocation();
-//    this.owner = base.getOwner();
+    this.setLocation(loc);
+    this.setOwnerID(ownerID);
     this.setUnitType(2);
     this.setUuid(UUID.randomUUID());
   }

@@ -1,5 +1,6 @@
 package game.entities.units;
 import game.entities.ICommandable;
+import game.gameboard.Location;
 import game.gameboard.Tile;
 import java.io.*;
 import java.util.UUID;
@@ -15,7 +16,7 @@ public abstract class Unit implements ICommandable
   private int speed;
   private float upkeep;
   private int baseResourceCost;
-  private Tile location;
+  private Location location;
   private int ownerID;
   private int unitType;
 
@@ -30,7 +31,7 @@ public abstract class Unit implements ICommandable
   public int getSpeed(){ return this.speed; }
   public float getUpkeep(){ return this.upkeep; }
   public int getBaseResourceCost() { return this.baseResourceCost; }
-  public Tile getLocation(){ return this.location; }
+  public Location getLocation(){ return this.location; }
   public int getOwnerID(){ return this.ownerID; }
   public int getUnitType(){ return this.unitType; }
   public UUID getUuid(){ return this.uuid; }
@@ -45,7 +46,7 @@ public abstract class Unit implements ICommandable
   public void setSpeed(int s){ this.speed = s; }
   public void setUpkeep(float u){ this.upkeep = u; }
   public void setBaseResourceCost(int cost) { this.baseResourceCost = cost; }
-  public void setLocation(Tile t){ this.location = t; }
+  public void setLocation(Location loc){ this.location = loc; }
   public void setOwnerID(int o){ this.ownerID = o; }
   public void setUnitType(int u){ this.unitType = u; }
   public void setUuid(UUID id){ this.uuid = id; }

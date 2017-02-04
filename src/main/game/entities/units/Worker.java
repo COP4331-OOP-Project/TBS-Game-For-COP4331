@@ -3,6 +3,7 @@ package game.entities.units;
 
 import game.commands.Command;
 import game.entities.structures.Structure;
+import game.gameboard.Location;
 
 import java.util.UUID;
 
@@ -10,8 +11,7 @@ public class Worker extends Unit
 {
   public Worker(){}
 
-  public Worker(Structure base)
-  {
+  public Worker(Location loc, int ownerID) {
     this.setAttackDamage(1);
     this.setArmor(1);
     this.setHealth(10);
@@ -19,8 +19,8 @@ public class Worker extends Unit
     this.setSpeed(5);
     this.setUpkeep(1f);
     this.setBaseResourceCost(10);
-//    this.location = base.getLocation();
-//    this.owner = base.getOwner();
+    this.setLocation(loc);
+    this.setOwnerID(ownerID);
     this.setUnitType(5);
     this.setUuid(UUID.randomUUID());
   }
