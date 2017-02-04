@@ -53,9 +53,13 @@ public class Player {
 		structures = new ArrayList<Structure>();
 		bases = new ArrayList<Base>();
 		rallyPoints = new ArrayList<Object>();
-
 	}
-	
+
+	private void init()
+	{
+		
+	}
+
 	//accessors
 	public int getResourceCount()
 	{
