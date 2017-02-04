@@ -7,6 +7,8 @@ import game.gameboard.GameBoard;
 import java.awt.Graphics;
 import java.util.Random;
 
+import controls.ModeEnum;
+
 public class GamePanel extends Panel {
 	Game game;
 	private static final int TILE_PIXEL_SIZE = 100;
@@ -54,25 +56,38 @@ public class GamePanel extends Panel {
 		if (isCentering)
 			continueCentering();
 		drawTiles(g);
+		drawUnits(g);
+		drawBases(g);
+		drawSelectedItem(g);
 	}
 
+	private void drawSelectedItem(Graphics g) {
+		if (game.getCurrentMode() == ModeEnum.UNIT) {
+			//drawStaticElement(g, x, y, "UNIT_SELECTED");
+		}
+		if (game.getCurrentMode() == ModeEnum.STRUCTURE) {
+			//drawStaticElement(g, x, y, "BASE_SELECTED");
+		}
+	}
+
+	private void drawBases(Graphics g) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void drawUnits(Graphics g) {
+		// TODO Auto-generated method stub
+		
+	}
+	
 	/**
 	 * This function draws calls the functions
 	 * that draw all the tiles
 	 */
 	private void drawTiles(Graphics g) {
-		for (int i = 0; i < tiles.length; i++) {
-			for (int j = 0; j < tiles.length; j++) {
-				if (tiles[i][j] == 0) {
-					drawTile(g, i , j, 0);
-					drawBase(g, i, j, 1);
-					drawUnit(g, i, j, 1, 2);
-				} else if (tiles[i][j] == 1) {
-					drawTile(g, i, j, 1);
-					drawUnit(g, i, j, 3, 1);
-				} else if (tiles[i][j] == 2) {
-					drawTile(g, i, j, 2);
-				}
+		for (int i = 0; i < game.getGameBoard().gameMap.length; i++) {
+			for (int j = 0; j < game.getGameBoard().gameMap[i].length; j++) {
+				drawTile(g, i, j, game.getGameBoard().gameMap[i][j].getTileType());
 			}
 		}
 	}
