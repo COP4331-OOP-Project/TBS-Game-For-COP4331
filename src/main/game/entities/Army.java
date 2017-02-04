@@ -6,6 +6,7 @@ import game.entities.units.Unit;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.UUID;
 
 public class Army
 {
@@ -21,10 +22,10 @@ public class Army
 
     public Army(Unit u)
     {
-        this.owner = u.owner;
+        this.owner = u.getOwner();
         this.soldiers = new ArrayList<Unit>();
         soldiers.add(u);
-        this.uuid = UUID.randomUUID().toString();
+        this.uuid = UUID.randomUUID();
     }
 
     public void addSoldier(Unit u)

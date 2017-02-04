@@ -3,6 +3,8 @@ package game.entities.units;
 
 import game.entities.structures.Structure;
 
+import java.util.UUID;
+
 public class Colonist extends Unit
 {
   public Colonist(){}

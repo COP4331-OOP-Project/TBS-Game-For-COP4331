@@ -3,6 +3,8 @@ package game.entities.units;
 
 import game.entities.structures.Structure;
 
+import java.util.UUID;
+
 public class Explorer extends Unit
 {
   public Explorer(){}
