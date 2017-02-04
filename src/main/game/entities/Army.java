@@ -1,6 +1,4 @@
 package game.entities;
-
-
 import game.entities.units.Unit;
 
 import java.util.ArrayList;
