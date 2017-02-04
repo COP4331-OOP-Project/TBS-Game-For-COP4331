@@ -87,7 +87,7 @@ public class GamePanel extends Panel {
 	private void drawTiles(Graphics g) {
 		for (int i = 0; i < game.getGameBoard().gameMap.length; i++) {
 			for (int j = 0; j < game.getGameBoard().gameMap[i].length; j++) {
-				drawTile(g, i, j, game.getGameBoard().gameMap[j][i].getTileType());
+				drawTile(g, i, j, game.getGameBoard().gameMap[i][j].getTileType());
 			}
 		}
 	}

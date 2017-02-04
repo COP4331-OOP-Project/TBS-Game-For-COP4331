@@ -50,7 +50,7 @@ public class GameBoard {
 
 
         gameMap = new Tile[BOARD_SIZE][];
-      for (int i = 0; i<BOARD_SIZE;i++)
+      for (int i = 0; i< BOARD_SIZE; i++)
         {
             gameMap[i] = new Tile[BOARD_SIZE];
             for (int j = 0; j<BOARD_SIZE;j++)
