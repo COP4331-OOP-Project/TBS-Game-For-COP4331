@@ -14,9 +14,11 @@ public class Explorer extends Unit
     this.health = 10;
     this.orientation = 1;
     this.speed = 9;
-    this.upkeep = 0.2f;
+    this.upkeep = 1f;
+    this.baseResourceCost = 10;
 //    this.location = base.getLocation();
 //    this.owner = base.getOwner();
-    this.unitType = "Explorer";
+    this.unitType = 3;
+    this.uuid = UUID.randomUUID();
   }
 }

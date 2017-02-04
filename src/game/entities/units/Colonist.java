@@ -14,9 +14,11 @@ public class Colonist extends Unit
     this.health = 10;
     this.orientation = 1;
     this.speed = 5;
-    this.upkeep = 0.2f;
+    this.upkeep = 1f;
+    this.baseResourceCost = 10;
 //    this.location = base.getLocation();
 //    this.owner = base.getOwner();
-    this.unitType = "Colonist";
+    this.unitType = 4;
+    this.uuid = UUID.randomUUID();
   }
 }

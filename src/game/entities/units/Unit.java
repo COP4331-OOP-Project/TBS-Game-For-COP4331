@@ -4,17 +4,19 @@ import java.io.*;
 
 public abstract class Unit
 {
-  public int combatPower;
-  public int armor;
-  public int health;
-  public int orientation;
-  public int speed;
-  public float upkeep;
-  public Tile location;
-  public char owner;
-  public String unitType;
-  public int id;
-  
+  private int combatPower;
+  private int armor;
+  private int health;
+  private int orientation;
+  private int speed;
+  private float upkeep;
+  private int baseResourceCost;
+  private Tile location;
+  private char owner;
+  private int unitType;
+  private UUID uuid;
+
+
   public Unit(){}
 
   /* Accessors */
@@ -24,10 +26,14 @@ public abstract class Unit
   public int getOrientation(){ return this.orientation; }
   public int getSpeed(){ return this.speed; }
   public float getUpkeep(){ return this.upkeep; }
+  public int getBaseResourceCost() { return this.baseResourceCost; }
   public Tile getLocation(){ return this.location; }
   public char getOwner(){ return this.owner; }
-  public String getUnitType(){ return this.unitType; }
-  public int getId(){ return this.id; }
+  public int getUnitType(){ return this.unitType; }
+  public String getUuid(){ return this.uuid; }
+  public int getResourceCost() { return (int)(this.baseResourceCost * this.upkeep); }
+
+
 
   /* Mutators */
   public void setCombatPower(int cp){ this.combatPower = cp; }
@@ -36,12 +42,12 @@ public abstract class Unit
   public void setOrientation(int o){ this.orientation = o; }
   public void setSpeed(int s){ this.speed = s; }
   public void setUpkeep(float u){ this.upkeep = u; }
+  public void setBaseResourceCost(int cost) { this.baseResourceCost = cost; }
   public void setLocation(Tile t){ this.location = t; }
   public void setOwner(char o){ this.owner = o; }
   public void setUnitType(String u){ this.unitType = u; }
-  public void setId(int newId){ this.id = newId; }
 
-  
+
   public void printUnit()
   {
   	System.out.println("Unit type: " + this.getUnitType());
