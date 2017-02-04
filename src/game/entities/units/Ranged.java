@@ -18,6 +18,6 @@ public class Ranged extends Unit
 //    this.location = base.getLocation();
 //    this.owner = base.getOwner();
     this.unitType = 2;
-    this.uuid = UUID.randomUUID().toString();
+    this.uuid = UUID.randomUUID();
   }
 }

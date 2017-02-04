@@ -7,12 +7,12 @@ public class Army
 {
     public char owner;
     public ArrayList<Unit> soldiers;
-    public String uuid;
+    public UUID uuid;
 
     public Army()
     {
       soldiers = new ArrayList<Unit>();
-      this.uuid = UUID.randomUUID().toString();
+      this.uuid = UUID.randomUUID();
     }
 
     public Army(Unit u)

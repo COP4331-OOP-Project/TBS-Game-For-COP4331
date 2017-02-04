@@ -5,18 +5,18 @@ import java.io.*;
 
 public abstract class Unit
 {
-  protected int combatPower;
-  protected int armor;
-  protected int health;
-  protected int orientation;
-  protected int speed;
-  protected float upkeep;
-  protected Tile location;
-  protected char owner;
-  protected int unitType;
-  protected String uuid;
+  private int combatPower;
+  private int armor;
+  private int health;
+  private int orientation;
+  private int speed;
+  private float upkeep;
+  private Tile location;
+  private char owner;
+  private int unitType;
+  private UUID uuid;
 
-  
+
   public Unit(){}
 
   /* Accessors */
@@ -42,7 +42,7 @@ public abstract class Unit
   public void setOwner(char o){ this.owner = o; }
   public void setUnitType(String u){ this.unitType = u; }
 
-  
+
   public void printUnit()
   {
   	System.out.println("Unit type: " + this.getUnitType());
