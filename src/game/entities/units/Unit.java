@@ -3,9 +3,11 @@ import game.gameboard.Tile;
 
 import java.io.*;
 
-public abstract class Unit
+public abstract class Unit implements ICommandable
 {
-  private int combatPower;
+  private UUID uuid;
+  private int attackDamage;
+  private int defenseDamage;
   private int armor;
   private int health;
   private int orientation;
@@ -15,13 +17,12 @@ public abstract class Unit
   private Tile location;
   private char owner;
   private int unitType;
-  private UUID uuid;
-
 
   public Unit(){}
 
   /* Accessors */
-  public int getCombatPower(){ return this.combatPower; }
+  public int getAttackDamage(){ return this.attackDamage; }
+  public int getDefenseDamage(){ return this.defenseDamage; }
   public int getArmor(){ return this.armor; }
   public int getHealth(){ return this.health; }
   public int getOrientation(){ return this.orientation; }
@@ -37,7 +38,8 @@ public abstract class Unit
 
 
   /* Mutators */
-  public void setCombatPower(int cp){ this.combatPower = cp; }
+  public void setAttackDamage(int attackDamage) {this.attackDamage = attackDamage; }
+  public void setDefenseDamage(int defenseDamage) {this.defenseDamage = defenseDamage; }
   public void setArmor(int a){ this.armor = a; }
   public void setHealth(int h){ this.health = h; }
   public void setOrientation(int o){ this.orientation = o; }
@@ -47,7 +49,17 @@ public abstract class Unit
   public void setLocation(Tile t){ this.location = t; }
   public void setOwner(char o){ this.owner = o; }
   public void setUnitType(String u){ this.unitType = u; }
+  public void setUuid(UUID id){ this.uuid = id; }
 
+
+  protected void setUnitStats(int atk, int def, int armor, int hp, float upkeep, int resourceCost) {
+      this.setAttackDamage(atk);
+      this.setDefenseDamage(def);
+      this.setArmor(armor);
+      this.setHealth(hp);
+      this.setUpkeep(upkeep);
+      this.setBaseResourceCost(resourceCost);
+  }
 
   public void printUnit()
   {

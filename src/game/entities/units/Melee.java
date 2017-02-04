@@ -9,16 +9,16 @@ public class Melee extends Unit
 
  public Melee(Structure base)
  {
-  this.combatPower = 7;
-  this.armor = 7;
-  this.health = 10;
-  this.orientation = 1;
-  this.speed = 3;
-  this.upkeep = 1f;
-  this.baseResourceCost = 10;
-//  this.location = base.getLocation();
-//  this.owner = base.getOwner();
-  this.unitType = 1;
-  this.uuid = UUID.randomUUID();
-}
+   this.setAttackPower(7);
+   this.setArmor(7);
+   this.setHealth(10);
+   this.setOrientation(1);
+   this.setSpeed(3);
+   this.setUpkeep(1f);
+   this.setBaseResourceCost(10);
+//    this.location = base.getLocation();
+//    this.owner = base.getOwner();
+   this.setUnitType(1);
+   this.setUuid(UUID.randomUUID());
+ }
 }

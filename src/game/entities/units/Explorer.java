@@ -9,16 +9,16 @@ public class Explorer extends Unit
 
   public Explorer(Structure base)
   {
-    this.combatPower = 3;
-    this.armor = 3;
-    this.health = 10;
-    this.orientation = 1;
-    this.speed = 9;
-    this.upkeep = 1f;
-    this.baseResourceCost = 10;
+    this.setAttackPower(3);
+    this.setArmor(3);
+    this.setHealth(10);
+    this.setOrientation(1);
+    this.setSpeed(9);
+    this.setUpkeep(1f);
+    this.setBaseResourceCost(10);
 //    this.location = base.getLocation();
 //    this.owner = base.getOwner();
-    this.unitType = 3;
-    this.uuid = UUID.randomUUID();
+    this.setUnitType(3);
+    this.setUuid(UUID.randomUUID());
   }
 }
