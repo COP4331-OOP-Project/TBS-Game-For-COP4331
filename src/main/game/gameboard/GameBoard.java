@@ -7,6 +7,7 @@ import game.entities.units.Unit;
 import game.entities.RallyPoint;
 import game.entities.structures.Structure;
 
+import game.entities.structures.Structure;
 
 import java.util.ArrayList;
 /**
@@ -174,6 +175,7 @@ public class GameBoard {
             Tile targetTile = getAdjacentTile(actorTile, direction);
 
             if(targetTile.hasEnemyUnit(((Army)actor).getOwnerID()))
+
             {
                 //(Army)actor.nextCommand();
             }

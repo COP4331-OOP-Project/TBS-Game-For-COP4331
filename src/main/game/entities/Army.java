@@ -77,7 +77,6 @@ public class Army {
     public ArrayList<Unit> getReinforcements() { return reinforcements; }
     public RallyPoint getRallyPoint() {
 		return rp;
-
     }
 
     public void setArmyID(int armyID)
