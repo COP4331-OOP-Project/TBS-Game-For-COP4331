@@ -10,7 +10,7 @@ public abstract class Command {
 
     protected GameBoard gameBoard;         // GameBoard to handle interaction
     protected int duration;                // Time until activation
-    abstract void exec();                  // Basic execute signature for commands
+    public abstract void exec();                  // Basic execute signature for commands
 
     // Get time until activation
     public int getDuration() { return duration; }
