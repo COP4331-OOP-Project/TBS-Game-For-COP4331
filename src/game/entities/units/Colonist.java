@@ -9,16 +9,16 @@ public class Colonist extends Unit
 
   public Colonist(Structure base)
   {
-    this.combatPower = 1;
-    this.armor = 1;
-    this.health = 10;
-    this.orientation = 1;
-    this.speed = 5;
-    this.upkeep = 1f;
-    this.baseResourceCost = 10;
+    this.setAttackPower(1);
+    this.setArmor(1);
+    this.setHealth(10);
+    this.setOrientation(1);
+    this.setSpeed(5);
+    this.setUpkeep(1f);
+    this.setBaseResourceCost(10);
 //    this.location = base.getLocation();
 //    this.owner = base.getOwner();
-    this.unitType = 4;
-    this.uuid = UUID.randomUUID();
+    this.setUnitType(4);
+    this.setUuid(UUID.randomUUID());
   }
 }

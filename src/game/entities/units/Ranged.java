@@ -9,16 +9,16 @@ public class Ranged extends Unit
 
   public Ranged(Structure base)
   {
-    this.combatPower = 7;
-    this.armor = 5;
-    this.health = 10;
-    this.orientation = 1;
-    this.speed = 5;
-    this.upkeep = 1f;
-    this.baseResourceCost = 10;
+    this.setAttackPower(7);
+    this.setArmor(5);
+    this.setHealth(10);
+    this.setOrientation(1);
+    this.setSpeed(5);
+    this.setUpkeep(1f);
+    this.setBaseResourceCost(10);
 //    this.location = base.getLocation();
 //    this.owner = base.getOwner();
-    this.unitType = 2;
-    this.uuid = UUID.randomUUID();
+    this.setUnitType(2);
+    this.setUuid(UUID.randomUUID());
   }
 }
