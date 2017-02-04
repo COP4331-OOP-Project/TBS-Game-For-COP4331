@@ -19,6 +19,7 @@ public abstract class Unit implements ICommandable
   private Location location;
   private int ownerID;
   private int unitType;
+  private CommandQueue queue = new CommandQueue();
 
   public Unit(){}
 
@@ -36,6 +37,7 @@ public abstract class Unit implements ICommandable
   public int getUnitType(){ return this.unitType; }
   public UUID getUuid(){ return this.uuid; }
   public int getResourceCost() { return (int)(this.baseResourceCost * this.upkeep); }
+  public CommandQueue getQueue { return this.queue; }
 
   /* Mutators */
   public void setAttackDamage(int attackDamage) {this.attackDamage = attackDamage; }
