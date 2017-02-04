@@ -2,7 +2,9 @@ package game.gameboard;
 
 import game.Player;
 import game.entities.Army;
+import game.entities.factories.EntityFactory;
 import game.entities.units.Unit;
+import game.entities.RallyPoint;
 
 import java.util.ArrayList;
 /**
@@ -167,23 +169,10 @@ public class GameBoard {
     // Handle band army command
     public void handleBandArmyCmd(ArrayList<Unit> actors) {
 
-        // Get player
-        // Player player = players[actors[0].getPlayerId()];
-
-        // Get current location
-        // Tile actorTile = getTileWithLocation(actors[0].getLocation());
-
-        // Create rally point && new army
-        // RallyPoint rp = new RallyPoint();
-        // Army newArmy = new Army(actors, rp);
-
-        // Add army and rp to the actor tile
-        // actor.setRallyPoint(rp);
-        // actorTile.setArmy(newArmy);
-
-        // Set them on their player
-        // player.addArmy(army);
-        // player.addRallyPoint(rp);
+//    	Location location = actors.get(0).location.getlocation();
+//    	RallyPoint rp = new RallyPoint(location, this);
+//    	Army newArmy = EntityFactory.getArmy(location, actors.get(0).getOwner(), rp, actors);
+//    	players.get(actors.get(0).getOwner()).addArmy(newArmy);
 
     }
 
