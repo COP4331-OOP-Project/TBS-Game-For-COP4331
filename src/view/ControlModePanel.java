@@ -3,6 +3,10 @@ package view;
 import java.awt.Font;
 import java.awt.Graphics;
 
+import controls.ModeEnum;
+import controls.Army.ArmyEnum;
+import controls.Structure.StructureEnum;
+import controls.Unit.UnitEnum;
 import game.Assets;
 import game.Game;
 
@@ -20,8 +24,8 @@ public class ControlModePanel extends Panel{
 				{"Base", "", "", ""}, 
 				{"Explorer", "Colonist", "Melee", "Ranged"}, 
 				{"Entire Army", "Battle Group", "Reinforcement", ""}};
-	private int mode = 2;
-	private int submode = 3;
+	private int mode = 0;
+	private int submode = 0;
 	private Game game;
 	
 	public ControlModePanel(Game game) {
@@ -31,6 +35,7 @@ public class ControlModePanel extends Panel{
 	public void draw(Graphics g, int width, int height) {
 		this.width = width;
 		this.height = height;
+		updateModes();
 		drawModePanel(g);
 		drawSubmodePanel(g);
 
@@ -41,6 +46,38 @@ public class ControlModePanel extends Panel{
 		drawSubmodeStrings(g);
 	}
 	
+	private void updateModes() {
+		if (game.getCurrentMode() == ModeEnum.RALLY_POINT) {
+			mode = 0;
+			submode = 0;
+		} else if (game.getCurrentMode() == ModeEnum.STRUCTURE) {
+			mode = 1;
+			if (game.getCurrentType() == StructureEnum.BASE) {
+				submode = 0;
+			}
+		} else if (game.getCurrentMode() == ModeEnum.UNIT) {
+			mode = 2;
+				if (game.getCurrentType() == UnitEnum.EXPLORER)
+					submode = 0;
+				if (game.getCurrentType() == UnitEnum.COLONIST)
+					submode = 1;
+				if (game.getCurrentType() == UnitEnum.MELEE)
+					submode = 2;
+				if (game.getCurrentType() == UnitEnum.RANGED)
+					submode = 3;
+		} else if (game.getCurrentMode() == ModeEnum.ARMY) {
+			mode = 3;
+				if (game.getCurrentType() == ArmyEnum.ENTIRE_ARMY)
+					submode = 0;
+				if (game.getCurrentType() == ArmyEnum.BATTLE_GROUP)
+					submode = 1;
+				if (game.getCurrentType() == ArmyEnum.REINFORCEMENTS)
+					submode = 2;
+		}
+		
+			
+	}
+
 	private void drawModeStrings(Graphics g) {
 		g.drawString(modeString[0], 30, height/2 - PANEL_DISTANCE_TOP - 75);
 		g.drawString(modeString[1], 30, height/2 - PANEL_DISTANCE_TOP - 39);
@@ -71,9 +108,12 @@ public class ControlModePanel extends Panel{
 				g.drawImage(Assets.getInstance().getImage("GUI_MODE_SELECTED3"), PANEL_DISTANCE_FROM_LEFT
 						, height/2 - PANEL_DISTANCE_TOP - PANEL_HEIGHT, null);
 				break;
-			default:
+			case 3:
 				g.drawImage(Assets.getInstance().getImage("GUI_MODE_SELECTED4"), PANEL_DISTANCE_FROM_LEFT
 						, height/2 - PANEL_DISTANCE_TOP - PANEL_HEIGHT, null);
+				break;
+			default:
+				System.out.println("Invalid Mode to display");
 		}
 				
 	}

@@ -2,7 +2,7 @@ package view;
 
 import game.Assets;
 import game.Game;
-
+import game.Player;
 import java.awt.Graphics;
 import java.awt.Font;
 
