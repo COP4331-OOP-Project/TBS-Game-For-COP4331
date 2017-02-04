@@ -1,6 +1,9 @@
 package game.entities.units;
 
+import game.commands.Command;
 import game.entities.structures.Structure;
+
+import java.util.UUID;
 
 public class Ranged extends Unit
 {
@@ -8,7 +11,7 @@ public class Ranged extends Unit
 
   public Ranged(Structure base)
   {
-    this.setAttackPower(7);
+    this.setAttackDamage(7);
     this.setArmor(5);
     this.setHealth(10);
     this.setOrientation(1);
@@ -19,5 +22,39 @@ public class Ranged extends Unit
 //    this.owner = base.getOwner();
     this.setUnitType(2);
     this.setUuid(UUID.randomUUID());
+  }
+
+  public void addCommandToQueue(Command command) {
+
+  }
+
+  public void doTurn() {
+
+  }
+
+  public Command nextCommand() {
+    // TODO: fix me
+    return null;
+  }
+
+  public Command peekCommand() {
+    // TODO: fix me
+    return null;
+  }
+
+  public void cancelQueuedCommands() {
+
+  }
+
+  public void powerDown() {
+
+  }
+
+  public void powerUp() {
+
+  }
+
+  public void decommissionEntity() {
+
   }
 }

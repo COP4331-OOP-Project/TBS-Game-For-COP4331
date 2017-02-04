@@ -22,7 +22,7 @@ public class Army
 
     public Army(Unit u)
     {
-        this.owner = u.getOwner();
+        this.ownerID = u.getOwnerID();
         this.soldiers = new ArrayList<Unit>();
         soldiers.add(u);
         this.uuid = UUID.randomUUID();
@@ -37,7 +37,6 @@ public class Army
     {
         Unit temp;
         Iterator<? super Unit> i = this.soldiers.iterator();
-        System.out.println("Owner: " + this.owner);
         while(i.hasNext()){
             temp = (Unit)i.next();
             System.out.println("    Soldier: " + temp.getUnitType());

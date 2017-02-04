@@ -1,4 +1,5 @@
 package game.entities.units;
+import game.entities.ICommandable;
 import game.gameboard.Tile;
 import java.io.*;
 import java.util.UUID;
@@ -30,9 +31,9 @@ public abstract class Unit implements ICommandable
   public float getUpkeep(){ return this.upkeep; }
   public int getBaseResourceCost() { return this.baseResourceCost; }
   public Tile getLocation(){ return this.location; }
-  public set getOwnerID(){ return this.ownerID; }
+  public int getOwnerID(){ return this.ownerID; }
   public int getUnitType(){ return this.unitType; }
-  public String getUuid(){ return this.uuid; }
+  public UUID getUuid(){ return this.uuid; }
   public int getResourceCost() { return (int)(this.baseResourceCost * this.upkeep); }
 
   /* Mutators */
@@ -46,7 +47,7 @@ public abstract class Unit implements ICommandable
   public void setBaseResourceCost(int cost) { this.baseResourceCost = cost; }
   public void setLocation(Tile t){ this.location = t; }
   public void setOwnerID(int o){ this.ownerID = o; }
-  public void setUnitType(String u){ this.unitType = u; }
+  public void setUnitType(int u){ this.unitType = u; }
   public void setUuid(UUID id){ this.uuid = id; }
 
   protected void setUnitStats(int atk, int def, int armor, int hp, float upkeep, int resourceCost) {
@@ -61,13 +62,11 @@ public abstract class Unit implements ICommandable
   public void printUnit()
   {
   	System.out.println("Unit type: " + this.getUnitType());
-  	System.out.println("	Combat Power: " + this.getCombatPower());
   	System.out.println("	Armor: " + this.getArmor());
   	System.out.println("	Health: " + this.getHealth());
   	System.out.println("	Orientation: " + this.getOrientation());
   	System.out.println("	Speed: " + this.getSpeed());
   	System.out.println("	Upkeep: " + this.getUpkeep());
 //  	System.out.println("	Location: " + this.getLocation().getX() + ", " + this.getLocation().getY());
-  	System.out.println("	Owner: " + this.getOwner());
   }
 }

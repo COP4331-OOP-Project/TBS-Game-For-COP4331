@@ -19,8 +19,7 @@ repositories {
 dependencies {
     compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.8'
     compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.8'
-    testCompile 'org.jetbrains.spek:spek-junit-platform-engine:1.0.89'
-    testCompile "org.junit.jupiter:junit-jupiter-api:5.0.0-M2"
+    testCompile "junit:junit:4.11"
 }
 
 sourceSets {
@@ -33,5 +32,11 @@ sourceSets {
         java {
             srcDirs = ["src/test"]
         }
+    }
+}
+
+test {
+    testLogging {
+        events "PASSED", "STARTED", "FAILED", "SKIPPED"
     }
 }
