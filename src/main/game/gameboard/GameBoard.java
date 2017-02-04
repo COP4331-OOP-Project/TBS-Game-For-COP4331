@@ -29,7 +29,7 @@ public class GameBoard {
 
     // Setup the gameMap array with valid Tiles
     private void setupMap() {
-
+        /*
         int[][] map = new int[][] {
                 {0,1,1,2,1},
                 {1,1,1,2,0},
@@ -37,9 +37,18 @@ public class GameBoard {
                 {1,1,1,1,1},
                 {2,1,1,2,2}
         };
+        */
+
+        int [][] map = new int [][]{
+                {0,0,0,0,0},
+                {0,0,0,0,0},
+                {0,0,0,0,0},
+                {0,0,0,0,0},
+                {0,0,0,0,0}
+        };
 
 
-        gameMap = new Tile[5][];
+        gameMap = new Tile[map.length][];
         for (int i = 0; i<5;i++)
         {
             gameMap[i] = new Tile[5];
