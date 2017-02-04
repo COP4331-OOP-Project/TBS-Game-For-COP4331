@@ -1,6 +1,8 @@
 package game.entities.structures;
 
 import game.commands.Command;
+import game.entities.ICombatant;
+import game.entities.IMake;
 import game.entities.units.Unit;
 import game.gameboard.Location;
 
@@ -9,34 +11,22 @@ import java.util.LinkedList;
 /**
  * Created by David on 2/3/2017.
  */
-public class Base extends Structure{
-    private int productionRate;
+public class Base extends Structure implements IMake {
 
-    public Base( int prod, Location loc, int owner){
-        super(loc,owner);
-        this.setAttackDamage(10);
-        this.setDefenseDamage(5);
-        this.setArmor(5);
-        this.setHealth(50);
-        this.setUpkeep(2.0f);
-        this.productionRate=prod;
-    }
+    private int productionRate;         // Structure production rate
 
-    //TODO Handle Commands
-    public void ExecuteNextCommand(){
+    // Constructor
+    public Base(Location loc, int owner){
+
+        super(loc, owner);
+        setStructureStats(10, 5, 5, 20, 1.0f, 10);
+        this.productionRate=1;
 
     }
-    public void MakeUnit(Unit unit){
 
-    }
-    public void Decomission(){
-
-    }
-    public void PowerDown(){
-
-    }
-    public void PowerUp(){
-
+    // Make command
+    public Object makeEntity(String entityCode) {
+        return new Object();
     }
 
 }
