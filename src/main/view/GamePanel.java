@@ -5,6 +5,8 @@ import game.Game;
 import game.gameboard.GameBoard;
 
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.geom.AffineTransform;
 import java.util.Random;
 
 import controls.ModeEnum;
@@ -26,6 +28,8 @@ public class GamePanel extends Panel {
 	private int width = 0;
 	private int height = 0;
 	
+	Graphics2D g2d;
+	
 	//TEST ELEMENTS BELOW
 	Random rand = new Random(); 
 	
@@ -45,6 +49,7 @@ public class GamePanel extends Panel {
 	}
 	
 	public void draw(Graphics g, int width, int height) {
+		g2d = (Graphics2D)g;
 		this.width = width;
 		this.height = height;
 		/*
@@ -55,27 +60,28 @@ public class GamePanel extends Panel {
 		*/
 		if (isCentering)
 			continueCentering();
-		drawTiles(g);
-		drawUnits(g);
-		drawBases(g);
-		drawSelectedItem(g);
+		drawTiles();
+		drawUnits();
+		drawBases();
+		drawSelectedItem();
 	}
 
-	private void drawSelectedItem(Graphics g) {
+	private void drawSelectedItem() {
 		if (game.getCurrentMode() == ModeEnum.UNIT) {
 			//drawStaticElement(g, x, y, "UNIT_SELECTED");
 		}
 		if (game.getCurrentMode() == ModeEnum.STRUCTURE) {
 			//drawStaticElement(g, x, y, "BASE_SELECTED");
 		}
+		drawTiles();
 	}
 
-	private void drawBases(Graphics g) {
+	private void drawBases() {
 		// TODO Auto-generated method stub
 		
 	}
 
-	private void drawUnits(Graphics g) {
+	private void drawUnits() {
 		// TODO Auto-generated method stub
 		
 	}
@@ -84,105 +90,110 @@ public class GamePanel extends Panel {
 	 * This function draws calls the functions
 	 * that draw all the tiles
 	 */
-	private void drawTiles(Graphics g) {
+	private void drawTiles() {
 		for (int i = 0; i < game.getGameBoard().gameMap.length; i++) {
 			for (int j = 0; j < game.getGameBoard().gameMap[i].length; j++) {
-				drawTile(g, i, j, game.getGameBoard().gameMap[i][j].getTileType());
+				drawTile(i, j, game.getGameBoard().gameMap[i][j].getTileType());
+
 			}
 		}
 	}
 	
-	private void drawBase(Graphics g, int x, int y, int player) {
+	private void drawBase(int x, int y, int player, int rotation) {
 		switch(player) {
 			case 0:
-				drawStaticTileElement(g, x, y, "BASE_G");
+				drawStaticTileElement(x, y, "BASE_G");
 				break;
 			case 1:
-				drawStaticTileElement(g, x, y, "BASE_B");
+				drawStaticTileElement(x, y, "BASE_B");
 				break;
 			case 2:
-				drawStaticTileElement(g, x, y, "BASE_Y");
+				drawStaticTileElement(x, y, "BASE_Y");
 				break;
 			case 3:
-				drawStaticTileElement(g, x, y, "BASE_O");
+				drawStaticTileElement(x, y, "BASE_O");
 				break;
 			default:
 				System.out.println("Invalid player specific for drawing base");
 		}
+		AffineTransform currentRotation = g2d.getTransform();
+		rotateOnTile(x, y, rotation);
+		drawStaticTileElement(x, y, "BASE_ARROW");
+		g2d.setTransform(currentRotation);
 	}
 	
-	private void drawUnit(Graphics g, int x, int y, int type, int player) {
-		String typeString = "";
-		switch (type) {
-			case 0:
-				typeString = "MELEE";
-				break;
-			case 1:
-				typeString = "RANGED";
-				break;
-			case 2:
-				typeString = "EXPLORER";
-				break;
-			case 3:
-				typeString = "COLONIST";
-				break;
-			default:
-				System.out.println("Invalid Unit Type :" + type 
-						+ " cannot be drawn");
-		}
-		
-		String playerString = "";
+	private void drawUnit(int x, int y, int type, int player, 
+			int rotation) {
+		AffineTransform currentRotation = g2d.getTransform();
+		rotateOnTile(x, y, rotation);
 		switch (player) {
 			case 0:
-				playerString = "G"; //Green
+				drawStaticTileElement(x, y, "UNIT_G");
 				break;
 			case 1:
-				playerString = "B"; //Blue
+				drawStaticTileElement(x, y, "UNIT_B");
 				break;
 			case 2:
-				playerString = "Y"; //Yellow
+				drawStaticTileElement(x, y, "UNIT_Y");
 				break;
 			case 3:
-				playerString = "O"; //Orange
+				drawStaticTileElement(x, y, "UNIT_O");
 				break;
 			default:
 				System.out.println("Invalid Player :" + player
 						+ " cannot have units drawn");
 		}
-		String unitString = "UNIT_" + typeString + "_" + playerString;
-		drawStaticTileElement(g, x, y, unitString);
+		
+		switch (type) {
+		case 0:
+			drawStaticTileElement(x, y, "UNIT_MELEE");
+			break;
+		case 1:
+			drawStaticTileElement(x, y, "UNIT_RANGED");
+			break;
+		case 2:
+			drawStaticTileElement(x, y, "UNIT_EXPLORER");
+			break;
+		case 3:
+			drawStaticTileElement(x, y, "UNIT_COLONIST");
+			break;
+		default:
+			System.out.println("Invalid Unit Type :" + type 
+					+ " cannot be drawn");
+		}
+		g2d.setTransform(currentRotation);
 	}
 
-	private void drawTile(Graphics g, int x, int y, int type) {
+	private void drawTile(int x, int y, int type) {
 		switch(type) {
 			case 0:
-				drawStaticTileElement(g, x, y, "TERRAIN_GRASS");
+				drawStaticTileElement(x, y, "TERRAIN_GRASS");
 				break;
 			case 1:
-				drawStaticTileElement(g, x, y, "TERRAIN_SAND");
+				drawStaticTileElement(x, y, "TERRAIN_SAND");
 				break;
 			case 2:
-				drawAnimatedTileElement(g, x, y, "TERRAIN_WATER1", "TERRAIN_WATER2", "TERRAIN_WATER3");
+				drawAnimatedTileElement(x, y, "TERRAIN_WATER1", "TERRAIN_WATER2", "TERRAIN_WATER3");
 				break;
 		}
 	}
 	
-	private void drawStaticTileElement(Graphics g, int x, int y, String image) {
-		g.drawImage(Assets.getInstance().getImage(image), offX(tileLocation(x)), 
+	private void drawStaticTileElement(int x, int y, String image) {
+		g2d.drawImage(Assets.getInstance().getImage(image), offX(tileLocation(x)), 
 				offY(tileLocation(y)), null); 
 	}
 	
-	private void drawAnimatedTileElement(Graphics g, int x, int y, 
+	private void drawAnimatedTileElement(int x, int y, 
 			String image1, String image2, String image3) {
 		switch (getAnimationImage()) {
 		case 0:
-			g.drawImage(Assets.getInstance().getImage(image1), offX(tileLocation(x)), offY(tileLocation(y)), null);
+			g2d.drawImage(Assets.getInstance().getImage(image1), offX(tileLocation(x)), offY(tileLocation(y)), null);
 			break;
 		case 2:
-			g.drawImage(Assets.getInstance().getImage(image2), offX(tileLocation(x)), offY(tileLocation(y)), null);
+			g2d.drawImage(Assets.getInstance().getImage(image2), offX(tileLocation(x)), offY(tileLocation(y)), null);
 			break;
 		default:
-			g.drawImage(Assets.getInstance().getImage(image3), offX(tileLocation(x)), offY(tileLocation(y)), null);
+			g2d.drawImage(Assets.getInstance().getImage(image3), offX(tileLocation(x)), offY(tileLocation(y)), null);
 		}
 	}
 	
@@ -243,4 +254,8 @@ public class GamePanel extends Panel {
 		return y + offsetY;
 	}
 	
+	private void rotateOnTile(int x, int y, int degrees) {
+		g2d.rotate(Math.toRadians(degrees), 
+				tileLocation(x) + TILE_PIXEL_SIZE/2, tileLocation(y) + TILE_PIXEL_SIZE/2);
+	}
 }

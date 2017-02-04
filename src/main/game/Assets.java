@@ -11,6 +11,7 @@ public class Assets {
 	
 	private static final Assets INSTANCE = new Assets(); //This is the one instance of resources (singleton)
 	private Hashtable<String, Integer> assets = new Hashtable<String, Integer>();
+	
 	private static final String GUI_TOP_LEFT = "assets/gui/leftTop.png";
 	private static final String GUI_TOP_MIDDLE = "assets/gui/barMiddle.png";
 	private static final String GUI_TOP_RIGHT = "assets/gui/rightTop.png";
@@ -33,27 +34,18 @@ public class Assets {
 	
 	private static final String UNIT_SELECTED = "assets/units/selectedUnit.png";
 	
-	private static final String UNIT_MELEE_G = "assets/units/green/GreenMelee.png";
-	private static final String UNIT_RANGED_G = "assets/units/green/GreenRanged.png";
-	private static final String UNIT_EXPLORER_G = "assets/units/green/GreenExplorer.png";
-	private static final String UNIT_COLONIST_G = "assets/units/green/GreenColonist.png";
+	private static final String UNIT_G = "assets/units/green.png";
+	private static final String UNIT_B = "assets/units/blue.png";
+	private static final String UNIT_Y = "assets/units/yellow.png";
+	private static final String UNIT_O = "assets/units/orange.png";
 	
-	private static final String UNIT_MELEE_B = "assets/units/blue/BlueMelee.png";
-	private static final String UNIT_RANGED_B = "assets/units/blue/BlueRanged.png";
-	private static final String UNIT_EXPLORER_B = "assets/units/blue/BlueExplorer.png";
-	private static final String UNIT_COLONIST_B = "assets/units/blue/BlueColonist.png";
-	
-	private static final String UNIT_MELEE_Y = "assets/units/yellow/YellowMelee.png";
-	private static final String UNIT_RANGED_Y = "assets/units/yellow/YellowRanged.png";
-	private static final String UNIT_EXPLORER_Y = "assets/units/yellow/YellowExplorer.png";
-	private static final String UNIT_COLONIST_Y = "assets/units/yellow/YellowColonist.png";
-	
-	private static final String UNIT_MELEE_O = "assets/units/orange/OrangeMelee.png";
-	private static final String UNIT_RANGED_O = "assets/units/orange/OrangeRanged.png";
-	private static final String UNIT_EXPLORER_O = "assets/units/orange/OrangeExplorer.png";
-	private static final String UNIT_COLONIST_O = "assets/units/orange/OrangeColonist.png";
+	private static final String UNIT_MELEE = "assets/units/decal/Melee.png";
+	private static final String UNIT_RANGED = "assets/units/decal/Ranged.png";
+	private static final String UNIT_EXPLORER = "assets/units/decal/Explorer.png";
+	private static final String UNIT_COLONIST = "assets/units/decal/Colonist.png";
 	
 	private static final String BASE_SELECTED = "assets/structure/baseSelected.png";
+	private static final String BASE_ARROW = "assets/structure/baseArrow.png";
 	
 	private static final String BASE_G = "assets/structure/baseGreen.png";
 	private static final String BASE_B = "assets/structure/baseBlue.png";
@@ -89,27 +81,19 @@ public class Assets {
 		
 		loadItem("UNIT_SELECTED", UNIT_SELECTED);
 		
-		loadItem("UNIT_MELEE_G", UNIT_MELEE_G);
-		loadItem("UNIT_RANGED_G", UNIT_RANGED_G);
-		loadItem("UNIT_EXPLORER_G", UNIT_EXPLORER_G);
-		loadItem("UNIT_COLONIST_G", UNIT_COLONIST_G);
+		loadItem("UNIT_MELEE", UNIT_MELEE);
+		loadItem("UNIT_RANGED", UNIT_RANGED);
+		loadItem("UNIT_EXPLORER", UNIT_EXPLORER);
+		loadItem("UNIT_COLONIST", UNIT_COLONIST);
 			
-		loadItem("UNIT_MELEE_B", UNIT_MELEE_B);
-		loadItem("UNIT_RANGED_B", UNIT_RANGED_B);
-		loadItem("UNIT_EXPLORER_B", UNIT_EXPLORER_B);
-		loadItem("UNIT_COLONIST_B", UNIT_COLONIST_B);
-			
-		loadItem("UNIT_MELEE_Y", UNIT_MELEE_Y);
-		loadItem("UNIT_RANGED_Y", UNIT_RANGED_Y);
-		loadItem("UNIT_EXPLORER_Y", UNIT_EXPLORER_Y);
-		loadItem("UNIT_COLONIST_Y", UNIT_COLONIST_Y);
-			
-		loadItem("UNIT_MELEE_O", UNIT_MELEE_O);
-		loadItem("UNIT_RANGED_O", UNIT_RANGED_O);
-		loadItem("UNIT_EXPLORER_O", UNIT_EXPLORER_O);
-		loadItem("UNIT_COLONIST_O", UNIT_COLONIST_O);
+		loadItem("UNIT_G", UNIT_G);
+		loadItem("UNIT_B", UNIT_B);
+		loadItem("UNIT_Y", UNIT_Y);
+		loadItem("UNIT_O", UNIT_O);
 		
 		loadItem("BASE_SELECTED", BASE_SELECTED);
+		loadItem("BASE_ARROW", BASE_ARROW);
+		
 		loadItem("BASE_G", BASE_G);
 		loadItem("BASE_B", BASE_B);
 		loadItem("BASE_Y", BASE_Y);
