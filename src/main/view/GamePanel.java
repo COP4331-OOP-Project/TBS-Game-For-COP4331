@@ -71,7 +71,7 @@ public class GamePanel extends Panel {
 					drawTile(g, i, j, 1);
 					drawUnit(g, i, j, 3, 1);
 				} else if (tiles[i][j] == 2) {
-					drawTile(g, i, j, 2);	
+					drawTile(g, i, j, 2);
 				}
 			}
 		}
