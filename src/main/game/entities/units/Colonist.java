@@ -10,9 +10,7 @@ import java.util.UUID;
 
 public class Colonist extends Unit
 {
-  public Colonist(){}
-
-  public Colonist(Location loc, int ownerID) {
+  public Colonist(Location loc, int ownerID){
     this.setAttackDamage(1);
     this.setDefenseDamage(1);
     this.setArmor(1);
@@ -24,41 +22,31 @@ public class Colonist extends Unit
     this.setLocation(loc);
     this.setOwnerID(ownerID);
     this.setUnitType(4);
-    this.setUuid(UUID.randomUUID());
+    this.setPowerMode(1);
+    this.setDecomm(true);
   }
 
-  public void addCommandToQueue(Command command) {
-
+  public void addCommandToQueue(Command command){
+    this.queue.add(command);
   }
 
   public void doTurn() {
-
+      if(wait != 0){ this.wait--; }
   }
 
-  public Command nextCommand() {
-    // TODO: fix me
-    return null;
+  public Command nextCommand(){ return this.queue.poll(); }
+
+  public Command peekCommand(){ return this.queue.peek(); }
+
+  public void cancelQueuedCommands(){ this.queue.clear(); }
+
+  public void powerDown(){ this.setPowerMode(0); }
+
+  public void powerUp(){
+      this.setPowerMode(2);
+      this.wait = 2;
   }
 
-  public Command peekCommand() {
-    // TODO: fix me
-    return null;
-  }
-
-  public void cancelQueuedCommands() {
-
-  }
-
-  public void powerDown() {
-
-  }
-
-  public void powerUp() {
-
-  }
-
-  public void decommissionEntity() {
-
-  }
+  public void decommissionEntity(){ this.setDecomm(false); }
 
 }

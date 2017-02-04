@@ -5,7 +5,7 @@ import java.util.*;
 /**
  * A queue object to hold commands for entities.
  */
-public class CommandQueue implements Queue
+public class CommandQueue
 {
     private class Node
     {
@@ -23,39 +23,27 @@ public class CommandQueue implements Queue
 
     public CommandQueue(){}
 
-    public boolean add(Command comm) {
+    public boolean add(Command comm){
         Node cNode = new Node(comm, null);
 
-        if (isEmpty()) { head = cNode; }
-        else { tail.next = cNode; }
+        if (isEmpty()){ head = cNode; }
+        else{ tail.next = cNode; }
 
         tail = cNode;
         return true;
     }
 
-    public Command element() {
-        if (this.isEmpty) { throw new NoSuchElementException(); }
-        else { return head; }
+    public void clear(){
+        head = null;
+        tail = null;
     }
 
-    public boolean offer(Command comm) {
-        Node cNode = new Node(comm, null);
+    public Command peek(){ return head.command; }
 
-        if (isEmpty()) { head = cNode; }
-        else { tail.next = cNode; }
+    public Command poll(){
+        if (isEmpty()){ return null; }
 
-        tail = cNode;
-        return true;
-    }
-
-    public Command peek() {
-        return head.command;
-    }
-
-    public Command poll() {
-        if (isEmpty()) { return null; }
-
-        else {
+        else{
             Command comm = head.command;
             if (tail == head) { tail = null; }
 
@@ -64,19 +52,7 @@ public class CommandQueue implements Queue
         }
     }
 
-    public Command remove() {
-        if (isEmpty()) { throw new NoSuchElementException(); }
-
-        else {
-            Command comm = head.command;
-            if (tail == head) { tail = null; }
-
-            head = head.next;
-            return comm;
-        }
-    }
-
-    public int size() {
+    public int size(){
         int count = 0;
         for (Node node = head; node != null; node = node.next) {
             count++;
@@ -84,6 +60,6 @@ public class CommandQueue implements Queue
         return count;
     }
 
-    public boolean isEmpty() { return head == null; }
+    public boolean isEmpty(){ return head == null; }
 
 }

@@ -1,5 +1,7 @@
 package game.entities.units;
+
 import game.entities.ICommandable;
+import game.commands.CommandQueue;
 import game.gameboard.Location;
 import game.gameboard.Tile;
 import java.io.*;
@@ -7,7 +9,6 @@ import java.util.UUID;
 
 public abstract class Unit implements ICommandable
 {
-  private UUID uuid;
   private int attackDamage;
   private int defenseDamage;
   private int armor;
@@ -19,9 +20,19 @@ public abstract class Unit implements ICommandable
   private Location location;
   private int ownerID;
   private int unitType;
-  private CommandQueue queue = new CommandQueue();
+  private int powerMode;
+  private int unitID;
+  private boolean decomm;
+  /*
+    Power Modes:
+        0 - Powered Down
+        1 - Standby (When not part of an army)
+        2 - Powered up (When part of an army)
+        3 - Combat (Attacking/Defending)
+   */
 
-  public Unit(){}
+  protected CommandQueue queue = new CommandQueue();
+  protected int wait;
 
   /* Accessors */
   public int getAttackDamage(){ return this.attackDamage; }
@@ -35,9 +46,12 @@ public abstract class Unit implements ICommandable
   public Location getLocation(){ return this.location; }
   public int getOwnerID(){ return this.ownerID; }
   public int getUnitType(){ return this.unitType; }
-  public UUID getUuid(){ return this.uuid; }
-  public int getResourceCost() { return (int)(this.baseResourceCost * this.upkeep); }
-  public CommandQueue getQueue { return this.queue; }
+  public int getPowerMode(){ return this.powerMode; }
+  public int getUnitID(){ return this.unitID; }
+
+  public int getResourceCost(){ return (int)(this.baseResourceCost * this.upkeep); }
+  public CommandQueue getQueue(){ return this.queue; }
+  public boolean isDecomm(){ return this.decomm; }
 
   /* Mutators */
   public void setAttackDamage(int attackDamage) {this.attackDamage = attackDamage; }
@@ -51,7 +65,9 @@ public abstract class Unit implements ICommandable
   public void setLocation(Location loc){ this.location = loc; }
   public void setOwnerID(int o){ this.ownerID = o; }
   public void setUnitType(int u){ this.unitType = u; }
-  public void setUuid(UUID id){ this.uuid = id; }
+  public void setPowerMode(int p){ this.powerMode = p; }
+  public void setUnitID(int id){ this.unitID = id; }
+  public void setDecomm(boolean d){ this.decomm = d;}
 
   protected void setUnitStats(int atk, int def, int armor, int hp, float upkeep, int resourceCost) {
       this.setAttackDamage(atk);

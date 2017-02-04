@@ -9,8 +9,6 @@ import java.util.UUID;
 
 public class Explorer extends Unit
 {
-  public Explorer(){}
-
   public Explorer(Location loc, int ownerID) {
     this.setAttackDamage(3);
     this.setDefenseDamage(3);
@@ -23,40 +21,32 @@ public class Explorer extends Unit
     this.setLocation(loc);
     this.setOwnerID(ownerID);
     this.setUnitType(3);
-    this.setUuid(UUID.randomUUID());
+    this.setPowerMode(1);
+    this.setDecomm(true);
   }
 
-  public void addCommandToQueue(Command command) {
-
+  public void addCommandToQueue(Command command){
+    this.queue.add(command);
   }
 
   public void doTurn() {
-
+    if(wait != 0){ this.wait--; }
   }
 
-  public Command nextCommand() {
-    // TODO: fix me
-    return null;
+  public Command nextCommand(){ return this.queue.poll(); }
+
+  public Command peekCommand(){ return this.queue.peek(); }
+
+  public void cancelQueuedCommands(){ this.queue.clear(); }
+
+
+  public void powerDown(){ this.setPowerMode(0); }
+
+  public void powerUp(){
+    this.setPowerMode(2);
+    this.wait = 2;
   }
 
-  public Command peekCommand() {
-    // TODO: fix me
-    return null;
-  }
+  public void decommissionEntity(){ this.setDecomm(false); }
 
-  public void cancelQueuedCommands() {
-
-  }
-
-  public void powerDown() {
-
-  }
-
-  public void powerUp() {
-
-  }
-
-  public void decommissionEntity() {
-
-  }
 }
