@@ -12,6 +12,7 @@ public class Army
 {
     public int ownerID;
     public ArrayList<Unit> soldiers;
+    private RallyPoint rp;
     public UUID uuid;
 
     public Army()
@@ -37,9 +38,18 @@ public class Army
     {
         Unit temp;
         Iterator<? super Unit> i = this.soldiers.iterator();
+        System.out.println("Owner: " + this.ownerID);
         while(i.hasNext()){
             temp = (Unit)i.next();
             System.out.println("    Soldier: " + temp.getUnitType());
         }
+    }
+    
+    public void setRallyPoint(RallyPoint rp) {
+    	this.rp = rp;
+    }
+    
+    public RallyPoint getRallyPoint() {
+		return rp;
     }
 }
