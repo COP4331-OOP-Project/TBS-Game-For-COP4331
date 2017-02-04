@@ -11,6 +11,7 @@ public abstract class Unit
   private int orientation;
   private int speed;
   private float upkeep;
+  private int baseResourceCost;
   private Tile location;
   private char owner;
   private int unitType;
@@ -26,10 +27,14 @@ public abstract class Unit
   public int getOrientation(){ return this.orientation; }
   public int getSpeed(){ return this.speed; }
   public float getUpkeep(){ return this.upkeep; }
+  public int getBaseResourceCost() { return this.baseResourceCost; }
   public Tile getLocation(){ return this.location; }
   public char getOwner(){ return this.owner; }
   public int getUnitType(){ return this.unitType; }
   public String getUuid(){ return this.uuid; }
+  public int getResourceCost() { return (int)(this.baseResourceCost * this.upkeep); }
+
+
 
   /* Mutators */
   public void setCombatPower(int cp){ this.combatPower = cp; }
@@ -38,6 +43,7 @@ public abstract class Unit
   public void setOrientation(int o){ this.orientation = o; }
   public void setSpeed(int s){ this.speed = s; }
   public void setUpkeep(float u){ this.upkeep = u; }
+  public void setBaseResourceCost(int cost) { this.baseResourceCost = cost; }
   public void setLocation(Tile t){ this.location = t; }
   public void setOwner(char o){ this.owner = o; }
   public void setUnitType(String u){ this.unitType = u; }
