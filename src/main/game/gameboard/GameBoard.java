@@ -2,8 +2,8 @@ package game.gameboard;
 
 import game.Player;
 import game.entities.Army;
-import game.entities.RallyPoint;
 import game.entities.units.Unit;
+import main.game.entities.RallyPoint;
 
 import java.util.ArrayList;
 /**

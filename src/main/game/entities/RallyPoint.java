@@ -1,4 +1,4 @@
-package game.entities;
+package main.game.entities;
 import java.util.UUID;
 
 import game.gameboard.GameBoard;
