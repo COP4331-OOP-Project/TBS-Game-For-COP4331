@@ -33,8 +33,8 @@ public class GamePanel extends Panel {
 	
 	@Override
 	public void draw(Graphics g) {
-		for (int i = 0; i < 5; i++) {
-			for (int j = 0; j < 5; j++) {
+		for (int i = 0; i < gBoard.gameMap.length; i++) {
+			for (int j = 0; j < gBoard.gameMap[i].length; j++) {
 
 				if(gBoard.gameMap[i][j].getTileType()==0) {
 					g.drawImage(Assets.getInstance().getImage("TERRAIN_GRASS"), tileLocation(gBoard.gameMap[i][j].getlocation().xIndex),
