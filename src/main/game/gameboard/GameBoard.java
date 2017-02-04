@@ -7,7 +7,6 @@ import game.entities.units.Unit;
 import game.entities.RallyPoint;
 import game.entities.structures.Structure;
 
-import game.entities.structures.Structure;
 
 import java.util.ArrayList;
 /**
@@ -79,22 +78,24 @@ public class GameBoard {
     //Get the adjecent tile
     private Tile getAdjacentTile(Tile actorTile,int direction) {
         switch(direction) {
-            case 0:
+            case 0: //Move north
                 return gameMap[actorTile.getlocation().xIndex][actorTile.getlocation().yIndex - 1];
-            case 45:
+            case 45: //Move north-east
                 return gameMap[actorTile.getlocation().xIndex+1][actorTile.getlocation().yIndex - 1];
-            case 90:
+            case 90: //move east
                 return gameMap[actorTile.getlocation().xIndex + 1][actorTile.getlocation().yIndex];
-            case 135:
+            case 135: //move south east
                 return gameMap[actorTile.getlocation().xIndex+1][actorTile.getlocation().yIndex + 1];
-            case 180:
+            case 180: //move south
                 return gameMap[actorTile.getlocation().xIndex][actorTile.getlocation().yIndex + 1];
-            case 225:
+            case 225: //move south west
                 return gameMap[actorTile.getlocation().xIndex-1][actorTile.getlocation().yIndex + 1];
-            case 270:
+            case 270: //move west
                 return gameMap[actorTile.getlocation().xIndex - 1][actorTile.getlocation().yIndex];
-            case 315:
+            case 315: //move north west
                 return gameMap[actorTile.getlocation().xIndex-1][actorTile.getlocation().yIndex - 1];
+            case 360: //move north
+                return gameMap[actorTile.getlocation().xIndex][actorTile.getlocation().yIndex - 1];
             default:
                 return null;
         }
@@ -175,7 +176,6 @@ public class GameBoard {
             Tile targetTile = getAdjacentTile(actorTile, direction);
 
             if(targetTile.hasEnemyUnit(((Army)actor).getOwnerID()))
-
             {
                 //(Army)actor.nextCommand();
             }
@@ -189,12 +189,13 @@ public class GameBoard {
         {
             Tile actorTile = getTileWithLocation(((Unit)actor).getLocation());
             Tile targetTile = getAdjacentTile(actorTile, direction);
+
             if(targetTile.hasEnemyUnit(((Unit) actor).getOwnerID()))
             {
                 ((Unit) actor).nextCommand();
             }
             else {
-                actorTile.removeUnit((Unit) actor.getUnitID());
+                actorTile.removeUnit(((Unit) actor).getUnitID());
                 targetTile.addUnit((Unit) actor);
             }
         }
