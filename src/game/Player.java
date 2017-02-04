@@ -128,4 +128,6 @@ public class Player {
 	{
 		this.resourceCount = this.resourceCount+resource;
 	}
+
+	
 }
