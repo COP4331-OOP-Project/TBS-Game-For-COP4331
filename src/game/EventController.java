@@ -64,7 +64,6 @@ public class EventController implements KeyListener{
 		normalKeyPressActions(e);
 	}
 
-
 	@Override
 	public void keyPressed(KeyEvent e) {
 	}
