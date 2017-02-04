@@ -10,43 +10,42 @@ import java.util.UUID;
 public class Melee extends Unit
 {
     public Melee(Location loc, int ownerID) {
-       this.setAttackDamage(7);
-       this.setDefenseDamage(7);
-       this.setArmor(7);
-       this.setHealth(10);
-       this.setOrientation(1);
-       this.setSpeed(3);
-       this.setUpkeep(1f);
-       this.setBaseResourceCost(10);
-       this.setLocation(loc);
-       this.setOwnerID(ownerID);
-       this.setUnitType(1);
-       this.setPowerMode(1);
-       this.setDecomm(true);
+       setAttackDamage(7);
+       setDefenseDamage(7);
+       setArmor(7);
+       setHealth(10);
+       setOrientation(1);
+       setSpeed(3);
+       setUpkeep(1f);
+       setBaseResourceCost(10);
+       setLocation(loc);
+       setOwnerID(ownerID);
+       setUnitType(1);
+       setPowerMode(1);
+       setDecomm(true);
     }
 
     public void addCommandToQueue(Command command){
-        this.queue.add(command);
+        queue.offer(command);
     }
 
     public void doTurn() {
-        if(wait != 0){ this.wait--; }
+        if(wait != 0){ wait--; }
     }
 
-    public Command nextCommand(){ return this.queue.poll(); }
+    public Command nextCommand(){ return queue.poll(); }
 
-    public Command peekCommand(){ return this.queue.peek(); }
+    public Command peekCommand(){ return queue.peek(); }
 
-    public void cancelQueuedCommands(){ this.queue.clear(); }
+    public void cancelQueuedCommands(){ queue.clear(); }
 
-
-    public void powerDown(){ this.setPowerMode(0); }
+    public void powerDown(){ setPowerMode(0); }
 
     public void powerUp(){
         this.setPowerMode(2);
         this.wait = 2;
     }
 
-    public void decommissionEntity(){ this.setDecomm(false); }
+    public void decommissionEntity(){ setDecomm(false); }
 
 }

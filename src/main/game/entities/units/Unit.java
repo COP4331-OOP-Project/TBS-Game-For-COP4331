@@ -1,11 +1,11 @@
 package game.entities.units;
 
 import game.entities.ICommandable;
-import game.commands.CommandQueue;
 import game.gameboard.Location;
 import game.gameboard.Tile;
+import game.commands.Command;
 import java.io.*;
-import java.util.UUID;
+import java.util.*;
 
 public abstract class Unit implements ICommandable
 {
@@ -31,27 +31,27 @@ public abstract class Unit implements ICommandable
         3 - Combat (Attacking/Defending)
    */
 
-  protected CommandQueue queue = new CommandQueue();
+  protected Queue<Command> queue = new LinkedList<Command>();
   protected int wait;
 
   /* Accessors */
-  public int getAttackDamage(){ return this.attackDamage; }
-  public int getDefenseDamage(){ return this.defenseDamage; }
-  public int getArmor(){ return this.armor; }
-  public int getHealth(){ return this.health; }
-  public int getOrientation(){ return this.orientation; }
-  public int getSpeed(){ return this.speed; }
-  public float getUpkeep(){ return this.upkeep; }
-  public int getBaseResourceCost() { return this.baseResourceCost; }
-  public Location getLocation(){ return this.location; }
-  public int getOwnerID(){ return this.ownerID; }
-  public int getUnitType(){ return this.unitType; }
-  public int getPowerMode(){ return this.powerMode; }
-  public int getUnitID(){ return this.unitID; }
+  public int getAttackDamage(){ return attackDamage; }
+  public int getDefenseDamage(){ return defenseDamage; }
+  public int getArmor(){ return armor; }
+  public int getHealth(){ return health; }
+  public int getOrientation(){ return orientation; }
+  public int getSpeed(){ return speed; }
+  public float getUpkeep(){ return upkeep; }
+  public int getBaseResourceCost() { return baseResourceCost; }
+  public Location getLocation(){ return location; }
+  public int getOwnerID(){ return ownerID; }
+  public int getUnitType(){ return unitType; }
+  public int getPowerMode(){ return powerMode; }
+  public int getUnitID(){ return unitID; }
 
-  public int getResourceCost(){ return (int)(this.baseResourceCost * this.upkeep); }
-  public CommandQueue getQueue(){ return this.queue; }
-  public boolean isDecomm(){ return this.decomm; }
+  public int getResourceCost(){ return (int)(baseResourceCost * upkeep); }
+  public Queue<Command> getQueue(){ return queue; }
+  public boolean isDecomm(){ return decomm; }
 
 
   /* Mutators */
@@ -81,12 +81,12 @@ public abstract class Unit implements ICommandable
 
   public void printUnit()
   {
-  	System.out.println("    Unit type: " + this.getUnitType());
-  	System.out.println("	Armor: " + this.getArmor());
-  	System.out.println("	Health: " + this.getHealth());
-  	System.out.println("	Orientation: " + this.getOrientation());
-  	System.out.println("	Speed: " + this.getSpeed());
-  	System.out.println("	Upkeep: " + this.getUpkeep());
+  	System.out.println("    Unit type: " + getUnitType());
+  	System.out.println("	Armor: " + getArmor());
+  	System.out.println("	Health: " + getHealth());
+  	System.out.println("	Orientation: " + getOrientation());
+  	System.out.println("	Speed: " + getSpeed());
+  	System.out.println("	Upkeep: " + getUpkeep());
 //  	System.out.println("	Location: " + this.getLocation().getX() + ", " + this.getLocation().getY());
   }
 }
