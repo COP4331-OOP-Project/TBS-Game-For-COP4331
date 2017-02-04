@@ -12,6 +12,7 @@ public class Ranged extends Unit
   public Ranged(Structure base)
   {
     this.setAttackDamage(7);
+    this.setDefenseDamage(7);
     this.setArmor(5);
     this.setHealth(10);
     this.setOrientation(1);

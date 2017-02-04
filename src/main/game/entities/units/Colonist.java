@@ -14,6 +14,7 @@ public class Colonist extends Unit
   public Colonist(Structure base)
   {
     this.setAttackDamage(1);
+    this.setDefenseDamage(1);
     this.setArmor(1);
     this.setHealth(10);
     this.setOrientation(1);

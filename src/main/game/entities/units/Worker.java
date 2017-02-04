@@ -13,6 +13,7 @@ public class Worker extends Unit
   public Worker(Structure base)
   {
     this.setAttackDamage(1);
+    this.setDefenseDamage(1);
     this.setArmor(1);
     this.setHealth(10);
     this.setOrientation(1);

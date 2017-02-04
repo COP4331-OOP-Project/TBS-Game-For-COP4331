@@ -13,6 +13,7 @@ public class Explorer extends Unit
   public Explorer(Structure base)
   {
     this.setAttackDamage(3);
+    this.setDefenseDamage(3);
     this.setArmor(3);
     this.setHealth(10);
     this.setOrientation(1);
