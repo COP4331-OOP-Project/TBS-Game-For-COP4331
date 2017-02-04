@@ -1,8 +1,12 @@
 package game.entities.factories;
 
+import game.entities.Army;
+import game.entities.RallyPoint;
 import game.entities.structures.*;
 import game.entities.units.*;
 import game.gameboard.Location;
+
+import java.util.ArrayList;
 
 
 /**
@@ -40,8 +44,9 @@ public class EntityFactory {
         return entity;  // Return entity
     }
 
-//    public static Army getArmy(Location location, int playerId, RallyPoint rp,  ArrayList<Unit> units) {
-//        return new Army(location, playerId, rp, units);
-//    }
+    // Create army given the location, the player id, the rally point for the army, and the list of units included
+    public static Army getArmy(Location location, int playerId, RallyPoint rp, ArrayList<Unit> units) {
+        return new Army(location, playerId, rp, units);
+    }
 
 }

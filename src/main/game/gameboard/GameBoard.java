@@ -2,8 +2,9 @@ package game.gameboard;
 
 import game.Player;
 import game.entities.Army;
+import game.entities.factories.EntityFactory;
 import game.entities.units.Unit;
-import main.game.entities.RallyPoint;
+import game.entities.RallyPoint;
 
 import java.util.ArrayList;
 /**
@@ -167,10 +168,12 @@ public class GameBoard {
 
     // Handle band army command
     public void handleBandArmyCmd(ArrayList<Unit> actors) {
-    	Location location = actors.get(0).location.getlocation();
-    	RallyPoint rp = new RallyPoint(location, this);
-    	Army newArmy = EntityFactory.getArmy(location, actors.get(0).getOwner(), rp, actors);
-    	players.get(actors.get(0).getOwner()).addArmy(newArmy);
+
+//    	Location location = actors.get(0).location.getlocation();
+//    	RallyPoint rp = new RallyPoint(location, this);
+//    	Army newArmy = EntityFactory.getArmy(location, actors.get(0).getOwner(), rp, actors);
+//    	players.get(actors.get(0).getOwner()).addArmy(newArmy);
+
     }
 
 }

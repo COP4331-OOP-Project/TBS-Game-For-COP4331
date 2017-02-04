@@ -1,6 +1,6 @@
-package main.game.entities;
-import java.util.UUID;
+package game.entities;
 
+import java.util.UUID;
 import game.gameboard.GameBoard;
 import game.gameboard.Location;
 
