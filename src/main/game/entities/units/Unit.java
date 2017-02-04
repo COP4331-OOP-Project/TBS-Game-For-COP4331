@@ -19,6 +19,7 @@ public abstract class Unit implements ICommandable
   private Location location;
   private int ownerID;
   private int unitType;
+  private int unitID;
 
   public Unit(){}
 
@@ -36,6 +37,7 @@ public abstract class Unit implements ICommandable
   public int getUnitType(){ return this.unitType; }
   public UUID getUuid(){ return this.uuid; }
   public int getResourceCost() { return (int)(this.baseResourceCost * this.upkeep); }
+  public int getUnitID() { return unitID;}
 
   /* Mutators */
   public void setAttackDamage(int attackDamage) {this.attackDamage = attackDamage; }
@@ -50,6 +52,7 @@ public abstract class Unit implements ICommandable
   public void setOwnerID(int o){ this.ownerID = o; }
   public void setUnitType(int u){ this.unitType = u; }
   public void setUuid(UUID id){ this.uuid = id; }
+  public void setUnitID(int unitID) {this.unitID = unitID;}
 
   protected void setUnitStats(int atk, int def, int armor, int hp, float upkeep, int resourceCost) {
       this.setAttackDamage(atk);
