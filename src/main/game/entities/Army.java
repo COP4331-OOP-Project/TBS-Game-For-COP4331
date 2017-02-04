@@ -2,6 +2,7 @@ package game.entities;
 
 
 import game.entities.units.Unit;
+import game.gameboard.Location;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -12,12 +13,11 @@ public class Army
 {
     public int ownerID;
     public ArrayList<Unit> soldiers;
-    public UUID uuid;
+    private int armyID;
 
     public Army()
     {
       this.soldiers = new ArrayList<Unit>();
-      this.uuid = UUID.randomUUID();
     }
 
     public Army(Unit u)
@@ -25,7 +25,6 @@ public class Army
         this.ownerID = u.getOwnerID();
         this.soldiers = new ArrayList<Unit>();
         soldiers.add(u);
-        this.uuid = UUID.randomUUID();
     }
 
     public void addSoldier(Unit u)
@@ -42,4 +41,20 @@ public class Army
             System.out.println("    Soldier: " + temp.getUnitType());
         }
     }
+
+    public Location getLocation()
+    {
+        return soldiers.get(0).getLocation();
+    }
+
+    public void setArmyID(int armyID)
+    {
+        this.armyID = armyID;
+    }
+
+    public int getArmyID()
+    {
+        return this.armyID;
+    }
+
 }

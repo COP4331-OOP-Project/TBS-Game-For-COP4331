@@ -3,6 +3,7 @@ package game.gameboard;
 import game.Player;
 import game.entities.Army;
 import game.entities.units.Unit;
+import game.entities.structures.Structure;
 
 import java.util.ArrayList;
 /**
@@ -68,7 +69,31 @@ public class GameBoard {
 
     // Get specific tile with actor location
     private Tile getTileWithLocation(Location l) {
-        return null;
+        return gameMap[l.xIndex][l.yIndex];
+    }
+
+    //Get the adjecent tile
+    private Tile getAdjacentTile(Tile actorTile,int direction) {
+        switch(direction) {
+            case 0:
+                return gameMap[actorTile.getlocation().xIndex][actorTile.getlocation().yIndex - 1];
+            case 45:
+                return gameMap[actorTile.getlocation().xIndex+1][actorTile.getlocation().yIndex - 1];
+            case 90:
+                return gameMap[actorTile.getlocation().xIndex + 1][actorTile.getlocation().yIndex];
+            case 135:
+                return gameMap[actorTile.getlocation().xIndex+1][actorTile.getlocation().yIndex + 1];
+            case 180:
+                return gameMap[actorTile.getlocation().xIndex][actorTile.getlocation().yIndex + 1];
+            case 225:
+                return gameMap[actorTile.getlocation().xIndex-1][actorTile.getlocation().yIndex + 1];
+            case 270:
+                return gameMap[actorTile.getlocation().xIndex - 1][actorTile.getlocation().yIndex];
+            case 315:
+                return gameMap[actorTile.getlocation().xIndex-1][actorTile.getlocation().yIndex - 1];
+            default:
+                return null;
+        }
     }
 
     // Get entity with given player's entity id
@@ -131,10 +156,46 @@ public class GameBoard {
     }
 
     // Handle move command
-    public <T> void handleMoveCmd(T actor, int direction) {
+    public <T> void handleMoveCmd(Object actor, int direction) {
 
         // Tile actorTile = getTileWithLoction(actor.getLocation());
         // Tile targetTile = getAdjacentTile(actorTile, direction);
+
+        boolean isArmy = actor instanceof Army;
+        boolean isUnit = actor instanceof Unit;
+        boolean isStructure = actor instanceof Structure;
+
+        if(isArmy)
+        {
+            Tile actorTile = getTileWithLocation(((Army)actor).getLocation());
+            Tile targetTile = getAdjacentTile(actorTile, direction);
+
+            if(targetTile.hasEnemyUnit(((Army)actor).ownerID))
+            {
+                //(Army)actor.nextCommand();
+            }
+            else
+            {
+                actorTile.removeArmy(((Army) actor).getArmyID());
+                targetTile.addArmy((Army)actor);
+            }
+        }
+        else if(isUnit)
+        {
+            Tile actorTile = getTileWithLocation(((Unit)actor).getLocation());
+            Tile targetTile = getAdjacentTile(actorTile, direction);
+            if(targetTile.hasEnemyUnit(((Unit) actor).getOwnerID()))
+            {
+                ((Unit) actor).nextCommand();
+            }
+            else {
+                actorTile.removeUnit((Unit) actor.getUnitID());
+                targetTile.addUnit((Unit) actor);
+            }
+        }
+
+
+
 
         // Check if we can move to the spot without enemy units on it
         // if !(targetTile.hasEnemyUnits(actor.getPlayerId()) {
@@ -151,6 +212,7 @@ public class GameBoard {
     public <T> void handleHealCmd(T actor, int direction) {
 
         // Tile actorTile = getTileWithLocation(actor.getLocation());
+
         // Tile targetTile = getAdjacentTile(actorTile, direction);
         // targetTile.heal(actor.getHealValue());
 
