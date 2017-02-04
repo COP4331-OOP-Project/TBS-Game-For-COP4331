@@ -20,5 +20,4 @@ public class CancelQueueCommand<T> extends Command {
     public void exec() {
        gameBoard.handleCancelQueueCmd(actor);
     }
-
 }

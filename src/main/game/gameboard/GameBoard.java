@@ -19,13 +19,13 @@ public class GameBoard {
     private ArrayList<Player> players;              // Players for game
     private static final int BOARD_SIZE = 15;
     // Constructor
-    //Test constructorc
-
+/*
+    Remove old constructor
     public GameBoard(int players) {
         //this.players = players;                     // Set players
         setupMap();                                 // Setup gameMap
     }
-
+*/
     public GameBoard(ArrayList<Player> players) {
     	
         this.players = players;                     // Set players
@@ -104,15 +104,23 @@ public class GameBoard {
 
     // Get entity with given player's entity id
     private <T> T getEntityWithID() {
+       //Returns the entity base on the iD, may not be implemented - Shen
         return null;
     }
 
     // Get tile of given actor
-    private <T> Tile getTileOfEntity(T entity) {
-        return null;
-    }
+    private <T> Tile getTileOfEntity(Object entity) {
+        boolean isArmy = entity instanceof Army;
+        boolean isUnit = entity instanceof Unit;
+        boolean isStructure = entity instanceof Structure;
 
-    private Tile getAdjacentTileWithDirection(Tile tile, int direction) {
+        if(isArmy)
+            return gameMap[((Army)entity).getLocation().xIndex][((Army)entity).getLocation().yIndex];
+        else if(isUnit)
+            return gameMap[((Unit)entity).getLocation().xIndex][((Unit)entity).getLocation().yIndex];
+        else if(isStructure)
+            return gameMap[((Structure)entity).getLocation().xIndex][((Structure)entity).getLocation().yIndex];
+
         return null;
     }
 
@@ -124,22 +132,80 @@ public class GameBoard {
         // Tile actorTile = getTileWithLocation(actor.location);  Remove from Tile
         // actorTile.removeEntity(actor.id);
 
+        boolean isArmy = actor instanceof Army;
+        boolean isUnit = actor instanceof Unit;
+        boolean isStructure = actor instanceof Structure;
 
+        if(isArmy){
+            //Removes the entity from player
+            //players[(Army)actor.getOwnerID()].removeArmy(actor.id);
+            Tile actorTile = getTileWithLocation(((Army)actor).getLocation());
+            actorTile.removeArmy(((Army) actor).getArmyID());
+        }
+        else if(isUnit){
+            //players.get(((Unit)actor).getOwnerID()).removeUnit(actor.id);
+            Tile actorTile = getTileWithLocation(((Unit)actor).getLocation());
+            actorTile.removeUnit(((Unit) actor).getUnitID());
+        }
+        else if(isStructure){
+            //players.get(((Structure)actor).getOwnerID()).removeStructure(actor.id);
+            Tile actorTile = getTileWithLocation(((Structure)actor).getLocation());
+            actorTile.removeStructure();
+        }
     }
 
     // Handle power up command
     public <T> void handlePowerUpCmd(T actor) {
 //        actor.powerUp();
+        boolean isArmy = actor instanceof Army;
+        boolean isUnit = actor instanceof Unit;
+        boolean isStructure = actor instanceof Structure;
+
+        if(isArmy){
+           // (Army)actor.powerUp();
+        }
+        else if(isUnit){
+           // (Unit)actor.powerUp();
+        }
+        else if(isStructure){
+           // (Structure)actor.powerUp();
+        }
     }
 
     // Handle power down command
     public <T> void handlePowerDownCmd(T actor) {
 //        actor.powerDown();
+        boolean isArmy = actor instanceof Army;
+        boolean isUnit = actor instanceof Unit;
+        boolean isStructure = actor instanceof Structure;
+
+        if(isArmy){
+            // (Army)actor.powerDown();
+        }
+        else if(isUnit){
+            // (Unit)actor.powerDown();
+        }
+        else if(isStructure){
+            // (Structure)actor.powerDown();
+        }
     }
 
     // Handle cancel queue command
     public <T> void handleCancelQueueCmd(T actor) {
 //        actor.cancelCommandQueue();
+        boolean isArmy = actor instanceof Army;
+        boolean isUnit = actor instanceof Unit;
+        boolean isStructure = actor instanceof Structure;
+
+        if(isArmy){
+           // ((Army)actor).cancelCommandQueue();
+        }
+        else if(isUnit){
+            ((Unit)actor).cancelQueuedCommands();
+        }
+        else if(isStructure){
+            ((Structure)actor).cancelQueuedCommands();
+        }
     }
 
     // Handle attack command
@@ -150,6 +216,24 @@ public class GameBoard {
         // targetTile.dealDamage(actor.getCombatPower());
         // if (actor.isCommandQueueEmpty()) { Build new command of attack for same area && place it actor queue }
 
+        boolean isArmy = actor instanceof Army;
+        boolean isUnit = actor instanceof Unit;
+        boolean isStructure = actor instanceof Structure;
+
+        if(isArmy) {
+            Tile actorTile = getTileWithLocation(((Army)actor).getLocation());
+            Tile targetTile = getAdjacentTile(actorTile, direction);
+
+            targetTile.attackOccupants();
+            /*
+            if ((Army)actor.isCommandQueueEmpty()) {
+                attack again;
+            }*/
+        }
+        else if(isUnit) {
+            System.out.println("Unit can't attack");
+        }
+
     }
 
     // Handle defend command
@@ -158,21 +242,41 @@ public class GameBoard {
         // Tile actorTile = getTileWithLocation(actor.getLocation());
         // actorTile must be aware of actor defending direction
         // if (actor.isCommandQueueEmpty()) { Build new command of defend for same area && place it actor queue }
+        boolean isArmy = actor instanceof Army;
+        boolean isUnit = actor instanceof Unit;
+        boolean isStructure = actor instanceof Structure;
 
+        if(isArmy) {
+            Tile actorTile = getTileWithLocation(((Army)actor).getLocation());
+            Tile targetTile = getAdjacentTile(actorTile, direction);
+
+            //actorTile.setDefendDirection();
+        }
+        else if(isUnit) {
+            //Just get rekt
+        }
     }
 
     // Handle move command
     public <T> void handleMoveCmd(Object actor, int direction) {
 
-        // Tile actorTile = getTileWithLoction(actor.getLocation());
+        // Tile actorTile = getTileWithLocation(actor.getLocation());
         // Tile targetTile = getAdjacentTile(actorTile, direction);
+
+        // Check if we can move to the spot without enemy units on it
+        // if !(targetTile.hasEnemyUnits(actor.getPlayerId()) {
+        //      actorTile.removeEntity(actor.getId());
+        //      targetTile.setEntity(actor.getId());
+        // }
+        // else { // Enemy has the tile, cannot move there, do next command instead
+        //      actor.nextCommand();
+        // }
 
         boolean isArmy = actor instanceof Army;
         boolean isUnit = actor instanceof Unit;
         boolean isStructure = actor instanceof Structure;
 
-        if(isArmy)
-        {
+        if(isArmy) {
             Tile actorTile = getTileWithLocation(((Army)actor).getLocation());
             Tile targetTile = getAdjacentTile(actorTile, direction);
 
@@ -186,8 +290,7 @@ public class GameBoard {
                 targetTile.addArmy((Army)actor);
             }
         }
-        else if(isUnit)
-        {
+        else if(isUnit) {
             Tile actorTile = getTileWithLocation(((Unit)actor).getLocation());
             Tile targetTile = getAdjacentTile(actorTile, direction);
 
@@ -200,19 +303,6 @@ public class GameBoard {
                 targetTile.addUnit((Unit) actor);
             }
         }
-
-
-
-
-        // Check if we can move to the spot without enemy units on it
-        // if !(targetTile.hasEnemyUnits(actor.getPlayerId()) {
-        //      actorTile.removeEntity(actor.getId());
-        //      targetTile.setEntity(actor.getId());
-        // }
-        // else { // Enemy has the tile, cannot move there, do next command instead
-        //      actor.nextCommand();
-        // }
-
     }
 
     // Handle heal command
@@ -223,6 +313,29 @@ public class GameBoard {
         // Tile targetTile = getAdjacentTile(actorTile, direction);
         // targetTile.heal(actor.getHealValue());
 
+        boolean isArmy = actor instanceof Army;
+        boolean isUnit = actor instanceof Unit;
+        boolean isStructure = actor instanceof Structure;
+
+        if(isArmy) {
+            Tile actorTile = getTileWithLocation(((Army)actor).getLocation());
+            Tile targetTile = getAdjacentTile(actorTile, direction);
+
+            targetTile.healOccupants();
+        }
+        else if(isUnit) {
+            Tile actorTile = getTileWithLocation(((Unit)actor).getLocation());
+            Tile targetTile = getAdjacentTile(actorTile, direction);
+
+            targetTile.healOccupants();
+        }
+        else if (isStructure) {
+            Tile actorTile = getTileWithLocation(((Structure)actor).getLocation());
+            Tile targetTile = getAdjacentTile(actorTile, direction);
+
+            targetTile.healOccupants();
+        }
+
     }
 
     // Handle make command w/ direction
@@ -231,6 +344,7 @@ public class GameBoard {
     // Handle disband army command
     public void handleDisbandArmyCmd(Army actor) {
 //        actor.disband();
+       // actor.disbandArmy();
     }
 
     // Handle band army command
@@ -241,6 +355,10 @@ public class GameBoard {
 //    	Army newArmy = EntityFactory.getArmy(location, actors.get(0).getOwner(), rp, actors);
 //    	players.get(actors.get(0).getOwner()).addArmy(newArmy);
 
+        Location location = actors.get(0).getLocation();
+        RallyPoint rp = new RallyPoint(location, this);
+        Army newArmy = EntityFactory.getArmy(location, actors.get(0).getOwnerID(),rp, actors);
+        players.get(actors.get(0).getOwnerID()).addArmy(newArmy);
     }
 
 }
