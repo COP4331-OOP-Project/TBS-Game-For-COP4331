@@ -15,12 +15,13 @@ public class Game {
 
 	Game() {
 		//TODO: initialize game with players
-		this.currentModeController = new ModeController();
-		players = new ArrayList<Player>();
+		this.players = new ArrayList<Player>();
 		Player player0 = new Player(0);
 		Player player1 = new Player(1);
 		players.add(player0);
 		players.add(player1);
+		this.currentPlayer = player0;
+		this.currentModeController = new ModeController(this.currentPlayer);
 		gBoard = new GameBoard(players);
 	}
 
@@ -74,11 +75,11 @@ public class Game {
 	}
 
 	protected void cycleTypeForward() {
-		this.currentModeController.getTypeController().cycleForward(this.currentModeController.getMode());
+		this.currentModeController.getTypeController().cycleForward();
 	}
 
 	protected void cycleTypeBackward() {
-		this.currentModeController.getTypeController().cycleBackward(this.currentModeController.getMode());
+		this.currentModeController.getTypeController().cycleBackward();
 	}
 
 	protected void cycleCommandForward() {
