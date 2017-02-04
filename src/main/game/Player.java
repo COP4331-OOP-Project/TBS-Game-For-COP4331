@@ -107,6 +107,7 @@ public class Player {
 				break;
 
 		}
+		totalUnits.add(unit);
 	}
 	
 	public void addStructure(Structure structure)
