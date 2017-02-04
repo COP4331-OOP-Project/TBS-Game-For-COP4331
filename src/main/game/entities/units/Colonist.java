@@ -4,6 +4,7 @@ package game.entities.units;
 import game.commands.AttackCommand;
 import game.commands.Command;
 import game.entities.structures.Structure;
+import game.gameboard.Location;
 
 import java.util.UUID;
 
@@ -11,8 +12,7 @@ public class Colonist extends Unit
 {
   public Colonist(){}
 
-  public Colonist(Structure base)
-  {
+  public Colonist(Location loc, int ownerID) {
     this.setAttackDamage(1);
     this.setArmor(1);
     this.setHealth(10);
@@ -20,8 +20,8 @@ public class Colonist extends Unit
     this.setSpeed(5);
     this.setUpkeep(1f);
     this.setBaseResourceCost(10);
-//    this.location = base.getLocation();
-//    this.owner = base.getOwner();
+    this.setLocation(loc);
+    this.setOwnerID(ownerID);
     this.setUnitType(4);
     this.setUuid(UUID.randomUUID());
   }
