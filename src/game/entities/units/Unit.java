@@ -14,7 +14,7 @@ public abstract class Unit implements ICommandable
   private float upkeep;
   private int baseResourceCost;
   private Tile location;
-  private char owner;
+  private int ownerID;
   private int unitType;
 
   public Unit(){}
@@ -34,8 +34,6 @@ public abstract class Unit implements ICommandable
   public String getUuid(){ return this.uuid; }
   public int getResourceCost() { return (int)(this.baseResourceCost * this.upkeep); }
 
-
-
   /* Mutators */
   public void setAttackDamage(int attackDamage) {this.attackDamage = attackDamage; }
   public void setDefenseDamage(int defenseDamage) {this.defenseDamage = defenseDamage; }
@@ -49,7 +47,6 @@ public abstract class Unit implements ICommandable
   public void setOwner(char o){ this.owner = o; }
   public void setUnitType(String u){ this.unitType = u; }
   public void setUuid(UUID id){ this.uuid = id; }
-
 
   protected void setUnitStats(int atk, int def, int armor, int hp, float upkeep, int resourceCost) {
       this.setAttackDamage(atk);

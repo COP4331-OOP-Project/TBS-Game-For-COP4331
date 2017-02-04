@@ -5,7 +5,7 @@ import java.util.*;
 
 public class Army
 {
-    public char owner;
+    public int ownerID;
     public ArrayList<Unit> soldiers;
     public UUID uuid;
 
