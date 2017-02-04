@@ -1,5 +1,6 @@
 package game.entities;
 
+import game.commands.Command;
 import game.entities.units.Unit;
 import game.gameboard.Location;
 
@@ -17,6 +18,8 @@ public class Army {
     private ArrayList<Unit> battleGroup;                // Active battlegroup units
     private ArrayList<Unit> reinforcements;             // Reinforcing units
 
+    private ArrayList<Command> commands;                // Army commands
+
     // Constructor
     public Army(Location loc, int playerId, RallyPoint rp, ArrayList<Unit> units) {
 
@@ -29,6 +32,10 @@ public class Army {
         this.reinforcements = new ArrayList<Unit>();    // Initialize reinforcements
 
     }
+
+    // TODO: Setup function to filter all received commands to all units
+
+    // TODO: Setup function to disband the army
 
     // Add one new unit to the reinforcements array
     public void addSingleReinforcement(Unit reinforcement) {
