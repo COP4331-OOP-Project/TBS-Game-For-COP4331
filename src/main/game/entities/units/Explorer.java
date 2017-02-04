@@ -3,6 +3,7 @@ package game.entities.units;
 
 import game.commands.Command;
 import game.entities.structures.Structure;
+import game.gameboard.Location;
 
 import java.util.UUID;
 
@@ -10,8 +11,7 @@ public class Explorer extends Unit
 {
   public Explorer(){}
 
-  public Explorer(Structure base)
-  {
+  public Explorer(Location loc, int ownerID) {
     this.setAttackDamage(3);
     this.setDefenseDamage(3);
     this.setArmor(3);
@@ -20,8 +20,8 @@ public class Explorer extends Unit
     this.setSpeed(9);
     this.setUpkeep(1f);
     this.setBaseResourceCost(10);
-//    this.location = base.getLocation();
-//    this.owner = base.getOwner();
+    this.setLocation(loc);
+    this.setOwnerID(ownerID);
     this.setUnitType(3);
     this.setUuid(UUID.randomUUID());
   }

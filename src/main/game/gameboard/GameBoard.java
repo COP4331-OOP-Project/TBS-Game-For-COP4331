@@ -10,26 +10,26 @@ import java.util.ArrayList;
  * */
 public class GameBoard {
 
-    public Tile[][] GameMap;     // Map for game tiles
+    public Tile[][] gameMap;     // Map for game tiles
                                  // 0 is grass, 1 is sand, 2 is water
     private ArrayList<Player> players;              // Players for game
 
     // Constructor
-    //Test constructor
+    //Test constructorc
 
     public GameBoard(int players) {
         //this.players = players;                     // Set players
-        setupMap();                                 // Setup GameMap
+        setupMap();                                 // Setup gameMap
     }
 
     public GameBoard(ArrayList<Player> players) {
         this.players = players;                     // Set players
-        setupMap();                                 // Setup GameMap
+        setupMap();                                 // Setup gameMap
     }
 
-    // Setup the GameMap array with valid Tiles
+    // Setup the gameMap array with valid Tiles
     private void setupMap() {
-
+        /*
         int[][] map = new int[][] {
                 {0,1,1,2,1},
                 {1,1,1,2,0},
@@ -37,21 +37,30 @@ public class GameBoard {
                 {1,1,1,1,1},
                 {2,1,1,2,2}
         };
+        */
+
+        int [][] map = new int [][]{
+                {0,0,0,0,0},
+                {0,0,0,0,0},
+                {0,0,0,0,0},
+                {0,0,0,0,0},
+                {0,0,0,0,0}
+        };
 
 
-        GameMap = new Tile[5][];
-        for (int i = 0; i<5;i++)
+        gameMap = new Tile[5][];
+      for (int i = 0; i<5;i++)
         {
-            GameMap[i] = new Tile[5];
+            gameMap[i] = new Tile[5];
             for (int j = 0; j<5;j++)
             {
                 Location l = new Location(i,j);
                 if(map[i][j] == 0)
-                    GameMap[i][j] = new Tile(0,l);
+                    gameMap[i][j] = new Tile(0,l);
                 if(map[i][j] == 1)
-                    GameMap[i][j] = new Tile(1,l);
+                    gameMap[i][j] = new Tile(1,l);
                 if(map[i][j] == 2)
-                    GameMap[i][j] = new Tile(2,l);
+                    gameMap[i][j] = new Tile(2,l);
             }
         }
     }
