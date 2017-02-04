@@ -85,7 +85,7 @@ public abstract class Structure implements ICommandable {
 
     public Command nextCommand() { return commands.poll(); }                    // Look at next command
     public Command peekCommand() { return commands.peek(); }                    // Pop off next command
-    public boolean emptyQueue(){return commands.isEmpty();}
+    public boolean isQueueEmpty(){return commands.isEmpty();}
     public void addCommandToQueue(Command command){
         commands.add(command);
     }   // Add next cmd to queue

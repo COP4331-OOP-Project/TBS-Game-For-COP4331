@@ -109,7 +109,7 @@ public abstract class Unit implements ICommandable
 
   public Command nextCommand() { return commands.poll(); }                    // Look at next command
   public Command peekCommand() { return commands.peek(); }                    // Pop off next command
-  public boolean emptyQueue() { return commands.isEmpty(); }                  // Pop off next command
+  public boolean isQueueEmpty() { return commands.isEmpty(); }                  // Pop off next command
   public void addCommandToQueue(Command command){
     commands.add(command);
   }   // Add next cmd to queue
