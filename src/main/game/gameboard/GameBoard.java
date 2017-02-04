@@ -19,13 +19,13 @@ public class GameBoard {
     private ArrayList<Player> players;              // Players for game
     private static final int BOARD_SIZE = 15;
     // Constructor
-    //Test constructorc
-
+/*
+    Remove old constructor
     public GameBoard(int players) {
         //this.players = players;                     // Set players
         setupMap();                                 // Setup gameMap
     }
-
+*/
     public GameBoard(ArrayList<Player> players) {
     	
         this.players = players;                     // Set players
@@ -104,6 +104,7 @@ public class GameBoard {
 
     // Get entity with given player's entity id
     private <T> T getEntityWithID() {
+       //Returns the entity base on the iD, may not be implemented - Shen
         return null;
     }
 
@@ -119,11 +120,7 @@ public class GameBoard {
             return gameMap[((Unit)entity).getLocation().xIndex][((Unit)entity).getLocation().yIndex];
         else if(isStructure)
             return gameMap[((Structure)entity).getLocation().xIndex][((Structure)entity).getLocation().yIndex];
-        
-        return null;
-    }
 
-    private Tile getAdjacentTileWithDirection(Tile tile, int direction) {
         return null;
     }
 
@@ -135,12 +132,44 @@ public class GameBoard {
         // Tile actorTile = getTileWithLocation(actor.location);  Remove from Tile
         // actorTile.removeEntity(actor.id);
 
+        boolean isArmy = actor instanceof Army;
+        boolean isUnit = actor instanceof Unit;
+        boolean isStructure = actor instanceof Structure;
 
+        if(isArmy){
+            //Removes the entity from player
+            //players[(Army)actor.getOwnerID()].removeArmy(actor.id);
+            Tile actorTile = getTileWithLocation(((Army)actor).getLocation());
+            actorTile.removeArmy(((Army) actor).getArmyID());
+        }
+        else if(isUnit){
+            //players.get(((Unit)actor).getOwnerID()).removeUnit(actor.id);
+            Tile actorTile = getTileWithLocation(((Unit)actor).getLocation());
+            actorTile.removeUnit(((Unit) actor).getUnitID());
+        }
+        else if(isStructure){
+            //players.get(((Structure)actor).getOwnerID()).removeStructure(actor.id);
+            Tile actorTile = getTileWithLocation(((Structure)actor).getLocation());
+            actorTile.removeStructure();
+        }
     }
 
     // Handle power up command
     public <T> void handlePowerUpCmd(T actor) {
 //        actor.powerUp();
+        boolean isArmy = actor instanceof Army;
+        boolean isUnit = actor instanceof Unit;
+        boolean isStructure = actor instanceof Structure;
+
+        if(isArmy){
+           // (Army)actor.powerUp();
+        }
+        else if(isUnit){
+           // (Unit)actor.powerUp();
+        }
+        else if(isStructure){
+
+        }
     }
 
     // Handle power down command
