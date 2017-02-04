@@ -1,13 +1,14 @@
 package game.entities.units;
+
 import game.entities.ICommandable;
 import game.gameboard.Location;
 import game.gameboard.Tile;
+import game.commands.Command;
 import java.io.*;
-import java.util.UUID;
+import java.util.*;
 
 public abstract class Unit implements ICommandable
 {
-  private UUID uuid;
   private int attackDamage;
   private int defenseDamage;
   private int armor;
@@ -19,25 +20,39 @@ public abstract class Unit implements ICommandable
   private Location location;
   private int ownerID;
   private int unitType;
+  private int powerMode;
   private int unitID;
+  private boolean decomm;
+  /*
+    Power Modes:
+        0 - Powered Down
+        1 - Standby (When not part of an army)
+        2 - Powered up (When part of an army)
+        3 - Combat (Attacking/Defending)
+   */
 
-  public Unit(){}
+  protected Queue<Command> queue = new LinkedList<Command>();
+  protected int wait;
 
   /* Accessors */
-  public int getAttackDamage(){ return this.attackDamage; }
-  public int getDefenseDamage(){ return this.defenseDamage; }
-  public int getArmor(){ return this.armor; }
-  public int getHealth(){ return this.health; }
-  public int getOrientation(){ return this.orientation; }
-  public int getSpeed(){ return this.speed; }
-  public float getUpkeep(){ return this.upkeep; }
-  public int getBaseResourceCost() { return this.baseResourceCost; }
-  public Location getLocation(){ return this.location; }
-  public int getOwnerID(){ return this.ownerID; }
-  public int getUnitType(){ return this.unitType; }
-  public UUID getUuid(){ return this.uuid; }
-  public int getResourceCost() { return (int)(this.baseResourceCost * this.upkeep); }
-  public int getUnitID() { return unitID;}
+  public int getAttackDamage(){ return attackDamage; }
+  public int getDefenseDamage(){ return defenseDamage; }
+  public int getArmor(){ return armor; }
+  public int getHealth(){ return health; }
+  public int getOrientation(){ return orientation; }
+  public int getSpeed(){ return speed; }
+  public float getUpkeep(){ return upkeep; }
+  public int getBaseResourceCost() { return baseResourceCost; }
+  public Location getLocation(){ return location; }
+  public int getOwnerID(){ return ownerID; }
+  public int getUnitType(){ return unitType; }
+  public int getPowerMode(){ return powerMode; }
+  public int getUnitID(){ return unitID; }
+
+  public int getResourceCost(){ return (int)(baseResourceCost * upkeep); }
+  public Queue<Command> getQueue(){ return queue; }
+  public boolean isDecomm(){ return decomm; }
+
 
   /* Mutators */
   public void setAttackDamage(int attackDamage) {this.attackDamage = attackDamage; }
@@ -51,8 +66,9 @@ public abstract class Unit implements ICommandable
   public void setLocation(Location loc){ this.location = loc; }
   public void setOwnerID(int o){ this.ownerID = o; }
   public void setUnitType(int u){ this.unitType = u; }
-  public void setUuid(UUID id){ this.uuid = id; }
-  public void setUnitID(int unitID) {this.unitID = unitID;}
+  public void setPowerMode(int p){ this.powerMode = p; }
+  public void setUnitID(int id){ this.unitID = id; }
+  public void setDecomm(boolean d){ this.decomm = d;}
 
   protected void setUnitStats(int atk, int def, int armor, int hp, float upkeep, int resourceCost) {
       this.setAttackDamage(atk);
@@ -65,12 +81,12 @@ public abstract class Unit implements ICommandable
 
   public void printUnit()
   {
-  	System.out.println("    Unit type: " + this.getUnitType());
-  	System.out.println("	Armor: " + this.getArmor());
-  	System.out.println("	Health: " + this.getHealth());
-  	System.out.println("	Orientation: " + this.getOrientation());
-  	System.out.println("	Speed: " + this.getSpeed());
-  	System.out.println("	Upkeep: " + this.getUpkeep());
+  	System.out.println("    Unit type: " + getUnitType());
+  	System.out.println("	Armor: " + getArmor());
+  	System.out.println("	Health: " + getHealth());
+  	System.out.println("	Orientation: " + getOrientation());
+  	System.out.println("	Speed: " + getSpeed());
+  	System.out.println("	Upkeep: " + getUpkeep());
 //  	System.out.println("	Location: " + this.getLocation().getX() + ", " + this.getLocation().getY());
   }
 }

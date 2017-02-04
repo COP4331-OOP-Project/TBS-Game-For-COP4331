@@ -24,15 +24,15 @@ public class EntityFactory {
             case "base":
                 entity = new Base(location, playerId);
             case "melee":
-                entity = new Melee();
+                entity = new Melee(location, playerId);
             case "ranged":
-                entity = new Ranged();
+                entity = new Ranged(location, playerId);
             case "worker":
-                entity = new Worker();
+                entity = new Worker(location, playerId);
             case "explorer":
-                entity = new Explorer();
+                entity = new Explorer(location, playerId);
             case "colonist":
-                entity = new Colonist();
+                entity = new Colonist(location, playerId);
 //            case "rallyPoint":
 //                entity = new RallyPoint();
             default:
