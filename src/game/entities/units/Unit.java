@@ -42,10 +42,11 @@ public abstract class Unit
   public void setUnitType(String u){ this.unitType = u; }
   public void setId(int newId){ this.id = newId; }
 
-  
+
+
   public void printUnit()
   {
-  	System.out.println("Unit type: " + this.getUnitType());
+  	System.out.println("    Unit type: " + this.getUnitType());
   	System.out.println("	Combat Power: " + this.getCombatPower());
   	System.out.println("	Armor: " + this.getArmor());
   	System.out.println("	Health: " + this.getHealth());
