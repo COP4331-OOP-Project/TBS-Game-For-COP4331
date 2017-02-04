@@ -1,6 +1,5 @@
 package game.entities.units;
 import game.gameboard.Tile;
-
 import java.io.*;
 
 public abstract class Unit implements ICommandable
