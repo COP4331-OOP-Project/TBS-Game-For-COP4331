@@ -11,6 +11,7 @@ public interface ICommandable {
     void doTurn();                              // Iterate turn
     Command nextCommand();                      // Next queue for new command or decrement turn count
     Command peekCommand();                      // Peek at next command
+    boolean isQueueEmpty();                       // Return if queue is empty
     void cancelQueuedCommands();                // Clear command queue
     void powerDown();                           // Set power down state
     void powerUp();                             // Set power up state
