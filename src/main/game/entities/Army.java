@@ -10,6 +10,7 @@ import java.util.UUID;
 
 public class Army {
 
+    private int armyID;
     private UUID id;                                    // Army unique id
     private int ownerID;                                // Player id
     private Location location;                          // Army location
@@ -76,6 +77,17 @@ public class Army {
     public ArrayList<Unit> getReinforcements() { return reinforcements; }
     public RallyPoint getRallyPoint() {
 		return rp;
+
+    }
+
+    public void setArmyID(int armyID)
+    {
+        this.armyID = armyID;
+    }
+
+    public int getArmyID()
+    {
+        return this.armyID;
     }
 
 }

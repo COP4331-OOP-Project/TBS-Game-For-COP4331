@@ -21,6 +21,8 @@ public class Tile {
     public boolean containsRallyPoint;
     public boolean containsStructure;
 
+    private int ownerID;
+
     //Constructors
     Tile(int tileType, Location location){
         Terrain=tileType;
@@ -99,4 +101,26 @@ public class Tile {
 
     }
 
+    //Set and get the owner id of the tile
+    public void setOwnerID(int playerID)
+    {
+        this.ownerID = playerID;
+    }
+    public int getOwnerID()
+    {
+        return this.ownerID;
+    }
+
+    //Check whether this tile is occupied by enemy unit
+    public boolean hasEnemyUnit(int playerID)
+    {
+        if (playerID!= this.ownerID)
+            return true;
+        else if (playerID==this.ownerID)
+        {
+            return false;
+        }
+
+        return false;
+    }
 }
