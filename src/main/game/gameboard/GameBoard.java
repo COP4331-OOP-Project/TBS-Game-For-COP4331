@@ -108,7 +108,18 @@ public class GameBoard {
     }
 
     // Get tile of given actor
-    private <T> Tile getTileOfEntity(T entity) {
+    private <T> Tile getTileOfEntity(Object entity) {
+        boolean isArmy = entity instanceof Army;
+        boolean isUnit = entity instanceof Unit;
+        boolean isStructure = entity instanceof Structure;
+
+        if(isArmy)
+            return gameMap[((Army)entity).getLocation().xIndex][((Army)entity).getLocation().yIndex];
+        else if(isUnit)
+            return gameMap[((Unit)entity).getLocation().xIndex][((Unit)entity).getLocation().yIndex];
+        else if(isStructure)
+            return gameMap[((Structure)entity).getLocation().xIndex][((Structure)entity).getLocation().yIndex];
+        
         return null;
     }
 
