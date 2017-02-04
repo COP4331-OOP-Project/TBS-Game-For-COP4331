@@ -1,5 +1,6 @@
 package game;
 import game.entities.Army;
+import game.entities.structures.Base;
 import game.entities.units.Unit;
 import game.entities.units.Melee;
 import game.entities.units.Ranged;
@@ -32,6 +33,7 @@ public class Player {
 	private ArrayList<Colonist> colonists;
 	private ArrayList<Worker> workers;
 	private ArrayList<Structure> structures;
+	private ArrayList<Base> bases;
 	private ArrayList<Object> rallyPoints;
 	
 	private ArrayList<Unit> totalUnits;
@@ -39,6 +41,16 @@ public class Player {
 	//Constructor
 	public Player(int id){
 		this.playerID = id;
+		armies = new ArrayList<Army>();
+		melees = new ArrayList<Melee>();
+		ranges = new ArrayList<Ranged>();
+		explorers = new ArrayList<Explorer>();
+		colonists = new ArrayList<Colonist>();
+		workers = new ArrayList<Worker>();
+		structures = new ArrayList<Structure>();
+		bases = new ArrayList<Base>();
+		rallyPoints = new ArrayList<Object>();
+
 	}
 	
 	//accessors
@@ -58,6 +70,11 @@ public class Player {
 		default: return 0;
 		}
 	}
+
+	public int getBaseCount(){
+		return bases.size();
+	}
+
 	public int getStructureCount()
 	{
 		return structures.size();
@@ -109,10 +126,11 @@ public class Player {
 		}
 		totalUnits.add(unit);
 	}
-	
+
 	public void addStructure(Structure structure)
 	{
 		//structures.add(1);
+		bases.add((Base)structure);
 		structures.add(structure);
 	}
 	
