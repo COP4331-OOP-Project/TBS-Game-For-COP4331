@@ -143,7 +143,6 @@ public class GamePanel extends Panel {
 					player1Units.get(i).getOwnerID(),
 					0);
 		}
-		System.out.println(unitSelected +  " " + game.getCurrentMode());
 		if (game.getCurrentMode() == ModeEnum.UNIT && unitSelected != -1) {
 			drawUnit(player1Units.get(unitSelected).getLocation().getX(),
 				player1Units.get(unitSelected).getLocation().getY(),
