@@ -74,7 +74,7 @@ public abstract class Structure implements ICommandable {
     // Command interface handlers
 
     // Set value of powerState for unit
-    private void setPowerState(PowerState state) {
+    public void setPowerState(PowerState state) {
 
         this.powerState = state;            // Set state
         this.upkeep = state.getUpkeep();    // Set value of state upkeep

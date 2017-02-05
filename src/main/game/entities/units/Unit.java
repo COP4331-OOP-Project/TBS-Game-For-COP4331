@@ -57,8 +57,6 @@ public abstract class Unit implements ICommandable
   public int getSpeed(){ return speed; }
   public float getUpkeep(){ return upkeep; }
   public int getBaseResourceCost() { return baseResourceCost; }
-  public Location getLocation(){ return location; }
-  public int getOwnerID(){ return ownerID; }
   public int getUnitType(){ return unitType; }
   public PowerState getPowerState(){ return powerState; }
   public int getUnitID(){ return unitID; }
@@ -94,7 +92,7 @@ public abstract class Unit implements ICommandable
   // Command interface handlers
 
   // Set value of powerState for unit
-  private void setPowerState(PowerState state) {
+  public void setPowerState(PowerState state) {
 
     this.powerState = state;            // Set state
     this.upkeep = state.getUpkeep();    // Set value of state upkeep
@@ -123,8 +121,10 @@ public abstract class Unit implements ICommandable
   public void cancelQueuedCommands() { queue.clear(); }                     // Clear queue
   public void powerUp() { setPowerState(PowerState.POWERED_UP); }           // Power down state
   public void powerDown() { setPowerState(PowerState.POWERED_DOWN); }       // Power up state
-  public void combatState() { setPowerState(PowerState.COMBAT); }
-  public void standby() { setPowerState(PowerState.STANDBY); }
+  public void combatState() { setPowerState(PowerState.COMBAT); }           // Combat state
+  public void standby() { setPowerState(PowerState.STANDBY); }              // Standby state
+  public int getOwnerID(){ return ownerID; }                                // Get owner id
+  public Location getLocation(){ return location; }                         // Get location
 
   // TODO: Setup decommission entity
   public void decommissionEntity() {}                                       // Destroy struct & remove refs
