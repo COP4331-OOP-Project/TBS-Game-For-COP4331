@@ -19,7 +19,7 @@ public class RallyPointTest {
     public GameBoard gBoard;
     public MoveCommand command;
 
-    @Before
+    /*@Before
     public void setUp(){
         gBoard = new GameBoard(null);
     }
@@ -70,5 +70,6 @@ public class RallyPointTest {
         command=rp.pathAlgorithm(from,rp.getLocation(), null);
         Assert.assertEquals(command,null);
     }
+    */
 
 }
