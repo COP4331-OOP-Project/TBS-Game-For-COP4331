@@ -35,4 +35,14 @@ public interface ICommandable {
     void setLocation(Location location);        // Set location
     void setPowerState(PowerState state);       // Set power state
 
+    boolean canMake();
+    boolean canHeal();
+    boolean canAttack();
+    boolean canDefend();
+    boolean canPowerUp();
+    boolean canPowerDown();
+    boolean canCancelCommandQueue();
+    boolean canDecomission();
+    boolean canMove();
+
 }

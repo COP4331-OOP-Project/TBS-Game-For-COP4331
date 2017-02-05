@@ -1,20 +1,20 @@
 package controls.TypeInstance;
 
-import game.entities.TileOccupant;
+import game.entities.ICommandable;
 
 /**
  * Created by gavin on 2/4/17.
  */
 class ItemWithIndex {
-    private TileOccupant item;
+    private ICommandable item;
     private Integer index;
 
-    ItemWithIndex(TileOccupant item, Integer index) {
+    ItemWithIndex(ICommandable item, Integer index) {
         this.item = item;
         this.index = index;
     }
 
-    TileOccupant getItem() {
+    ICommandable getItem() {
         return item;
     }
 

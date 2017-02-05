@@ -1,13 +1,14 @@
 package controls.TypeInstance;
 
 import controls.Army.ArmyEnum;
+import controls.CommandController;
 import controls.RallyPoint.RallyPointEnum;
 import controls.Structure.StructureEnum;
 import controls.Unit.UnitEnum;
 import game.Player;
 import game.entities.Army;
+import game.entities.ICommandable;
 import game.entities.RallyPoint;
-import game.entities.TileOccupant;
 import game.entities.structures.Base;
 import game.entities.structures.Structure;
 import game.entities.units.*;
@@ -22,7 +23,7 @@ import java.util.ArrayList;
 public class TypeInstanceController {
     private final static Logger log = LogManager.getLogger(TypeInstanceController.class);
 
-    private TileOccupant currentTypeInstance;
+    private ICommandable currentTypeInstance;
     private Player currentPlayer;
     private Army currentArmy;
     private ArrayList<Unit> currentArmyUnits;
@@ -43,6 +44,8 @@ public class TypeInstanceController {
     private Integer currentBase;
     private ArrayList<RallyPoint> rallyPoints;
     private Integer currentRallyPoint;
+
+    private CommandController commandController;
 
 
     public TypeInstanceController(Player p, Enum currentType) {
@@ -77,11 +80,17 @@ public class TypeInstanceController {
         this.currentArmyReinforcement = -1;
     }
 
-    public TileOccupant getTypeInstance() {
+    public ICommandable getTypeInstance() {
         return this.currentTypeInstance;
     }
 
-    public TileOccupant cycleForward(Enum currentType) {
+    // This is private on purpose!
+    private void setCurrentTypeInstance(ICommandable commandable) {
+        this.currentTypeInstance = commandable;
+        this.commandController = new CommandController(this.currentTypeInstance);
+    }
+
+    public ICommandable cycleForward(Enum currentType) {
         if (currentType instanceof UnitEnum) {
             UnitEnum unitEnum = (UnitEnum) currentType;
             return cycleUnitEnum(unitEnum, true);
@@ -98,7 +107,7 @@ public class TypeInstanceController {
         return null;
     }
 
-    public TileOccupant cycleBackward(Enum currentType) {
+    public ICommandable cycleBackward(Enum currentType) {
         if (currentType instanceof UnitEnum) {
             UnitEnum unitEnum = (UnitEnum) currentType;
             return cycleUnitEnum(unitEnum, false);
@@ -116,7 +125,7 @@ public class TypeInstanceController {
     }
 
     private ItemWithIndex getNextInArrayList(ListWithIndex listWithIndex) {
-        ArrayList<? extends TileOccupant> list = listWithIndex.getList();
+        ArrayList<? extends ICommandable> list = listWithIndex.getList();
         if (list == null) return null;
         Integer index = listWithIndex.getIndex();
         if (list.isEmpty()) return null;
@@ -128,7 +137,7 @@ public class TypeInstanceController {
     }
 
     private ItemWithIndex getPreviousInArrayList(ListWithIndex itemWithIndex) {
-        ArrayList<? extends TileOccupant> list = itemWithIndex.getList();
+        ArrayList<? extends ICommandable> list = itemWithIndex.getList();
         if (list == null) return null;
         Integer index = itemWithIndex.getIndex();
         if (list.isEmpty()) return null;

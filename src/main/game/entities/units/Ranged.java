@@ -10,4 +10,8 @@ public class Ranged extends Unit {
   super(loc, ownerID, 1);  // Call super constructor
     setStats(7, 7, 5, 10, 1, 5, 10);
   }
+
+  public boolean canMake() {
+    return false;
+  }
 }

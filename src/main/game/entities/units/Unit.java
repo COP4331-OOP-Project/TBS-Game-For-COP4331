@@ -9,7 +9,7 @@ import game.gameboard.Location;
 import java.util.LinkedList;
 import java.util.Queue;
 
-public abstract class Unit extends TileOccupant implements ICommandable
+public abstract class Unit implements ICommandable
 {
 
   private int unitID;               // Unit id (0 - 9 of instance type)
@@ -127,6 +127,18 @@ public abstract class Unit extends TileOccupant implements ICommandable
   public void standby() { setPowerState(PowerState.STANDBY); }              // Standby state
   public int getOwnerID(){ return ownerID; }                                // Get owner id
   public Location getLocation(){ return location; }                         // Get location
+
+  public abstract boolean canMake();
+  public boolean canHeal() { return false; }
+  public boolean canAttack() { return true; }
+  public boolean canDefend() { return true; }
+  public boolean canPowerUp() { return true; }
+  public boolean canPowerDown() { return true; }
+  public boolean canCancelCommandQueue() { return true; }
+  public boolean canDecomission() { return true; }
+  public boolean canMove() { return true; }
+
+
 
   // TODO: Setup decommission entity
   public void decommissionEntity() {}                                       // Destroy struct & remove refs

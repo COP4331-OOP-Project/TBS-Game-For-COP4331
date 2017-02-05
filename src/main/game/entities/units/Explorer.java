@@ -10,4 +10,8 @@ public class Explorer extends Unit {
     super(loc, ownerID, 2);  // Call super constructor & set stats
     setStats(3, 3, 3, 10, 1, 9, 10);
   }
+
+  public boolean canMake() {
+    return false;
+  }
 }

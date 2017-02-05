@@ -9,7 +9,7 @@ import game.entities.units.Unit;
 import game.gameboard.GameBoard;
 import game.gameboard.Location;
 
-public class RallyPoint extends TileOccupant {
+public class RallyPoint implements ICommandable {
 	private int rallyID;
 	private int ownerID;
 	private Location location;
@@ -184,4 +184,59 @@ public class RallyPoint extends TileOccupant {
 	public Location getLocation() {
 		return location;
 	}
+
+
+	// TODO: implement ICommandable functions for RallyPoint
+	public void addCommandToQueue(Command command) {
+
+	}
+	public void doTurn() {
+
+	}
+	public Command nextCommand() {
+		return null;
+	}
+	public Command peekCommand() {
+		return null;
+	}
+	public boolean isQueueEmpty() {
+		return false;
+	}
+	public void cancelQueuedCommands() {
+
+	}
+	public void powerDown() {
+
+	}
+	public void powerUp() {
+
+	}
+	public void combatState() {
+
+	}
+	public void standby() {
+
+	}
+	public void decommissionEntity() {
+
+	}
+	public int getOwnerID() {
+		return -1;
+	}
+	public PowerState getPowerState() {
+		return null;
+	}
+	public void setPowerState(PowerState state) {
+
+	}
+
+	public boolean canMake() { return false; }
+	public boolean canHeal() { return false; }
+	public boolean canAttack() { return false; }
+	public boolean canDefend() { return false; }
+	public boolean canPowerUp() { return false; }
+	public boolean canPowerDown() { return false; }
+	public boolean canCancelCommandQueue() { return false; }
+	public boolean canDecomission() { return false; }
+	public boolean canMove() { return true; }
 }
