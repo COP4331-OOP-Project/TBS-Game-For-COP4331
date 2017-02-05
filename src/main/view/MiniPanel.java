@@ -30,7 +30,7 @@ public class MiniPanel extends Panel{
 			drawLeftOutline(g, 0, i);
 			for (int j = 0; j < game.getGameBoard().gameMap[i].length; j++) {
 				
-				drawSmallTile(g, i, j, game.getGameBoard().gameMap[j][i].getTileType());
+				drawSmallTile(g, i, j, game.getGameBoard().gameMap[i][j].getTileType());
 				
 			}
 			drawRightOutline(g, game.getGameBoard().gameMap.length - 1, i);

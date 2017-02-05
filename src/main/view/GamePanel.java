@@ -172,7 +172,7 @@ public class GamePanel extends Panel {
 	private void drawTiles() {
 		for (int i = 0; i < game.getGameBoard().gameMap.length; i++) {
 			for (int j = 0; j < game.getGameBoard().gameMap[i].length; j++) {
-				drawTile(i, j, game.getGameBoard().gameMap[j][i].getTileType());
+				drawTile(i, j, game.getGameBoard().gameMap[i][j].getTileType());
 				//if (game.getGameBoard().gameMap[j][i].getUnits().size() > 1) {
 				//	g2d.drawString("" + game.getGameBoard().gameMap[j][i].getUnits().size()
 				//			, offX(tileLocation(i)), offY(tileLocation(j)));
