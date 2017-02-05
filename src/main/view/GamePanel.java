@@ -2,19 +2,25 @@ package view;
 
 import game.Assets;
 import game.Game;
-import game.gameboard.GameBoard;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 import java.util.Random;
-
 import controls.ModeEnum;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+
 public class GamePanel extends Panel {
+
 	Game game;
 	private static final int TILE_PIXEL_SIZE = 100;
 	private static final int TIME_TO_CENTER = 50;
+	private final static Logger log = LogManager.getLogger(GamePanel.class);
 	
 	private int offsetX = 0;
 	private int offsetY = 0;
@@ -32,40 +38,38 @@ public class GamePanel extends Panel {
 	
 	//TEST ELEMENTS BELOW
 	Random rand = new Random(); 
-	
+	Font armyFont = new Font("Lucida Sans", Font.BOLD, 40);
 	private static final int NUM_TILES = 20; 
 	int[][] tiles = new int[NUM_TILES][NUM_TILES];
 	//END TEST ELEMENTS
 	
 	
 	public GamePanel(Game game) {
-
 		this.game = game;
-		for (int i = 0; i < NUM_TILES; i++) {
-			for(int j = 0; j < NUM_TILES; j++){
-				tiles[i][j] = rand.nextInt(3);
-			}
-		}
 	}
 	
 	public void draw(Graphics g, int width, int height) {
 		g2d = (Graphics2D)g;
 		this.width = width;
 		this.height = height;
-		/*
-		if (centeringOffsetX(game.selectedThingX) != centerToX || 
-				centeringOffsetY(game.selectedThingY) != centerToY) {
-			centerOnTile(game.selectedThingX, game.selectedThingY);
-		}
-		*/
+		//checkCentering(x, y);
 		if (isCentering)
 			continueCentering();
 		drawTiles();
-		drawUnits();
 		drawBases();
+		drawUnits();
+		drawArmies();
 		drawSelectedItem();
 	}
 
+	private void checkCentering(int x, int y) {
+		if (centeringOffsetX(x) != centerToX || 
+				centeringOffsetY(y) != centerToY) {
+			centerOnTile(x, y);
+		}
+		
+	}
+	
 	private void drawSelectedItem() {
 		if (game.getCurrentMode() == ModeEnum.UNIT) {
 			//drawStaticElement(g, x, y, "UNIT_SELECTED");
@@ -73,7 +77,6 @@ public class GamePanel extends Panel {
 		if (game.getCurrentMode() == ModeEnum.STRUCTURE) {
 			//drawStaticElement(g, x, y, "BASE_SELECTED");
 		}
-		drawTiles();
 	}
 
 	private void drawBases() {
@@ -82,8 +85,17 @@ public class GamePanel extends Panel {
 	}
 
 	private void drawUnits() {
-		// TODO Auto-generated method stub
-		
+		/*
+		drawUnit(game.getGameBoard().testUnit.getLocation().xIndex, 
+				game.getGameBoard().testUnit.getLocation().yIndex,
+				game.getGameBoard().testUnit.getUnitType(),
+				game.getGameBoard().testUnit.getOwnerID(),
+				0);
+	*/
+		/*
+		centerOnTile(game.getGameBoard().testUnit.getLocation().xIndex, 
+				game.getGameBoard().testUnit.getLocation().yIndex);
+		*/
 	}
 	
 	/**
@@ -93,10 +105,60 @@ public class GamePanel extends Panel {
 	private void drawTiles() {
 		for (int i = 0; i < game.getGameBoard().gameMap.length; i++) {
 			for (int j = 0; j < game.getGameBoard().gameMap[i].length; j++) {
-				drawTile(i, j, game.getGameBoard().gameMap[i][j].getTileType());
-
+				drawTile(i, j, game.getGameBoard().gameMap[j][i].getTileType());
 			}
 		}
+	}
+	
+	private void drawArmies() {
+		drawArmy(3,3,1,180,34);
+	}
+	
+	private void drawArmy(int x, int y, int player, int rotation, 
+			int numOfUnits) {
+		AffineTransform currentRotation = g2d.getTransform();
+		rotateOnTile(x, y, rotation);
+			switch (player) {
+			case 0:
+				drawStaticTileElement(x, y, "ARMY_G");
+				break;
+			case 1:
+				drawStaticTileElement(x, y, "ARMY_B");
+				break;
+			case 2:
+				drawStaticTileElement(x, y, "ARMY_Y");
+				break;
+			case 3:
+				drawStaticTileElement(x, y, "ARMY_O");
+				break;
+			default:
+				log.warn("Invalid Player :" + player
+						+ " cannot have units drawn");
+		}
+		g2d.setTransform(currentRotation);
+		g2d.setFont(armyFont);
+		Color original = g2d.getColor();
+		
+		if (numOfUnits < 10) {
+			g2d.setColor(Color.BLACK);
+			g2d.drawString("" + numOfUnits, tileLocation(x) + 
+					TILE_PIXEL_SIZE/2 - 15, tileLocation(y) + 
+					TILE_PIXEL_SIZE/2 + 18);
+			g2d.setColor(Color.WHITE);
+			g2d.drawString("" + numOfUnits, tileLocation(x) + 
+					TILE_PIXEL_SIZE/2 - 17, tileLocation(y) + 
+					TILE_PIXEL_SIZE/2 + 17);
+		} else {
+			g2d.setColor(Color.BLACK);
+			g2d.drawString("" + numOfUnits, tileLocation(x) + 
+					TILE_PIXEL_SIZE/2 - 23, tileLocation(y) + 
+					TILE_PIXEL_SIZE/2 + 18);
+			g2d.setColor(Color.WHITE);
+			g2d.drawString("" + numOfUnits, tileLocation(x) + 
+					TILE_PIXEL_SIZE/2 - 25, tileLocation(y) + 
+					TILE_PIXEL_SIZE/2 + 17);
+		}
+		g2d.setColor(original);
 	}
 	
 	private void drawBase(int x, int y, int player, int rotation) {
@@ -114,7 +176,7 @@ public class GamePanel extends Panel {
 				drawStaticTileElement(x, y, "BASE_O");
 				break;
 			default:
-				System.out.println("Invalid player specific for drawing base");
+				log.warn("Invalid player specific for drawing base");
 		}
 		AffineTransform currentRotation = g2d.getTransform();
 		rotateOnTile(x, y, rotation);
@@ -140,7 +202,7 @@ public class GamePanel extends Panel {
 				drawStaticTileElement(x, y, "UNIT_O");
 				break;
 			default:
-				System.out.println("Invalid Player :" + player
+				log.warn("Invalid Player :" + player
 						+ " cannot have units drawn");
 		}
 		
@@ -158,12 +220,14 @@ public class GamePanel extends Panel {
 			drawStaticTileElement(x, y, "UNIT_COLONIST");
 			break;
 		default:
-			System.out.println("Invalid Unit Type :" + type 
+			log.warn("Invalid Unit Type :" + type 
 					+ " cannot be drawn");
 		}
 		g2d.setTransform(currentRotation);
 	}
 
+	
+	
 	private void drawTile(int x, int y, int type) {
 		switch(type) {
 			case 0:
