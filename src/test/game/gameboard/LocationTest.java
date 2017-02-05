@@ -37,17 +37,16 @@ public class LocationTest {
     }
 
     @Test
-        public void TestHashCodeHashMap(){
-            hashMap.put(new Location(0,0),2);
-            hashMap.put(new Location(3,0),2);
-            hashMap.put(new Location(0,0),1);
-            hashMap.put(new Location(0,0),2);
-            hashMap.put(new Location(0,0),3);
-
-            Assert.assertEquals(hashMap.size(),2);
-            Assert.assertEquals(hashMap.containsKey(new Location(0,0)),true);
-            Assert.assertEquals(hashMap.containsKey(new Location(1,1)),false);
-            Assert.assertEquals((int)hashMap.get(new Location(0,0)),3);
+     public void TestHashCodeHashMap(){
+        hashMap.put(new Location(0,0),2);
+        hashMap.put(new Location(3,0),2);
+        hashMap.put(new Location(0,0),1);
+        hashMap.put(new Location(0,0),2);
+        hashMap.put(new Location(0,0),3);
+        Assert.assertEquals(hashMap.size(),2);
+        Assert.assertEquals(hashMap.containsKey(new Location(0,0)),true);
+        Assert.assertEquals(hashMap.containsKey(new Location(1,1)),false);
+        Assert.assertEquals((int)hashMap.get(new Location(0,0)),3);
     }
 
 }
