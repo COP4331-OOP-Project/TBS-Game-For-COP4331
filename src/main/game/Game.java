@@ -4,6 +4,7 @@ import controls.ModeController;
 import controls.Type;
 import controls.TypeController;
 import controls.TypeInstance.TypeInstanceController;
+import game.entities.ICommandable;
 import game.entities.RallyPoint;
 import game.entities.TileOccupant;
 import game.gameboard.GameBoard;
@@ -109,7 +110,7 @@ public class Game {
 	private void centerOnCurrentTypeInstance() {
         TypeController typeController = this.currentModeController.getTypeController();
         TypeInstanceController typeInstanceController = typeController.getTypeInstanceController();
-        TileOccupant selectedEntity = typeInstanceController.getTypeInstance();
+        ICommandable selectedEntity = typeInstanceController.getTypeInstance();
         Location newLocation = selectedEntity.getLocation();
         this.changeCenterCoordinates(newLocation);
     }
@@ -146,7 +147,7 @@ public class Game {
 	    TypeController typeController = this.currentModeController.getTypeController();
         TypeInstanceController typeInstanceController = typeController.getTypeInstanceController();
         Enum currentType = typeController.getType();
-        TileOccupant selectedEntity = typeInstanceController.cycleForward(currentType);
+        ICommandable selectedEntity = typeInstanceController.cycleForward(currentType);
         Location newLocation = selectedEntity.getLocation();
 	    this.changeCenterCoordinates(newLocation);
 	}
@@ -155,7 +156,7 @@ public class Game {
         TypeController typeController = this.currentModeController.getTypeController();
         TypeInstanceController typeInstanceController = typeController.getTypeInstanceController();
         Enum currentType = typeController.getType();
-        TileOccupant selectedEntity = typeInstanceController.cycleBackward(currentType);
+        ICommandable selectedEntity = typeInstanceController.cycleBackward(currentType);
         Location newLocation = selectedEntity.getLocation();
         this.changeCenterCoordinates(newLocation);
 	}

@@ -11,7 +11,7 @@ import java.util.Queue;
 /**
  * Created by David on 2/1/2017.
  */
-public abstract class Structure extends TileOccupant implements ICommandable {
+public abstract class Structure implements ICommandable {
 
     private int structureID;                            // Unique structure id (0-9)
     private int ownerID;                                // Player ownder id for structure
@@ -112,4 +112,13 @@ public abstract class Structure extends TileOccupant implements ICommandable {
     public void decommissionEntity() {}                                       // Destroy struct & remove refs
 
 
+    public boolean canMake() { return true; };
+    public boolean canHeal() { return false; }
+    public boolean canAttack() { return true; }
+    public boolean canDefend() { return true; }
+    public boolean canPowerUp() { return true; }
+    public boolean canPowerDown() { return true; }
+    public boolean canCancelCommandQueue() { return true; }
+    public boolean canDecomission() { return true; }
+    public boolean canMove() { return false; }
 }
