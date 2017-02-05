@@ -26,11 +26,11 @@ public class RallyPoint extends TileOccupant {
 	public void PathToRallyPoint(){
 		Location reference;
 		//For all units
-		for(int i = 0; i<army.getAllUnits().size(); i++){
+		for(int i = 0; i<army.getReinforcements().size(); i++){
 			//Not at rallypoint. Give next path command to rally point
-			if(!army.getAllUnits().get(i).getLocation().equals(location)){
-				MoveCommand nextMove = pathAlgorithm(army.getAllUnits().get(i).getLocation(),location, army.getAllUnits().get(i));
-				army.passCommandToUnit(nextMove, army.getAllUnits().get(i));
+			if(!army.getReinforcements().get(i).getLocation().equals(location)){
+				MoveCommand nextMove = pathAlgorithm(army.getReinforcements().get(i).getLocation(),location, army.getAllUnits().get(i));
+				army.passCommandToUnit(nextMove, army.getReinforcements().get(i));
 			}
 		}
 	}
