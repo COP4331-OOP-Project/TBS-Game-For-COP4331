@@ -15,7 +15,6 @@ import game.gameboard.Location;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import sun.management.ExtendedPlatformComponent;
 
 import java.util.ArrayList;
 
