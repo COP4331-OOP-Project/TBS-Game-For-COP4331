@@ -1,6 +1,11 @@
 package game;
 
 import controls.ModeController;
+import controls.Type;
+import controls.TypeController;
+import controls.TypeInstance.TypeInstanceController;
+import game.entities.RallyPoint;
+import game.entities.TileOccupant;
 import game.gameboard.GameBoard;
 import game.gameboard.Location;
 
@@ -18,6 +23,9 @@ public class Game {
 
 
 
+    private Location centerCoordinates;
+	private boolean centerCoordinatesUpdated;
+
 	Game() {
 		//TODO: initialize game with players
 		this.players = new ArrayList<Player>();
@@ -28,12 +36,15 @@ public class Game {
 		Player player1 = new Player(1,initLocation2);
 		players.add(player0);
 		players.add(player1);
-		this.currentPlayer = players.get(0);
+
 		this.nextPlayer = players.get(1);
-		this.currentModeController = new ModeController(this.currentPlayer);
-		gBoard = new GameBoard(players);
 
 		turnNum = 0;
+		this.currentPlayer = player0;
+		gBoard = new GameBoard(players);
+		gBoard.getPlayer(0).addRallyPoint(new RallyPoint(new Location(1,1), this.gBoard, player0.getPlayerID()));
+        this.currentModeController = new ModeController(gBoard.getPlayer(0));
+        this.centerCoordinatesUpdated = false;
 	}
 
 	public void updateGame() { //This is called 20 times per second
@@ -117,10 +128,32 @@ public class Game {
 	}
 
 	protected void cycleTypeInstanceForward() {
-
+	    TypeController typeController = this.currentModeController.getTypeController();
+        TypeInstanceController typeInstanceController = typeController.getTypeInstanceController();
+        Enum currentType = typeController.getType();
+        TileOccupant selectedEntity = typeInstanceController.cycleForward(currentType);
+        Location newLocation = selectedEntity.getLocation();
+	    this.changeCenterCoordinates(newLocation);
 	}
 
 	protected void cycleTypeInstanceBackward() {
-
+        this.currentModeController.getTypeController().getTypeInstanceController().cycleBackward(this.currentModeController.getTypeController().getType());
 	}
+
+	protected void changeCenterCoordinates(Location loc) {
+	    this.centerCoordinates = loc;
+	    this.centerCoordinatesUpdated = true;
+    }
+
+    public Location getCenterCoordinates() {
+        return centerCoordinates;
+    }
+
+    public boolean isCenterCoordinatesUpdated() {
+        return centerCoordinatesUpdated;
+    }
+
+    public void setCenterCoordinatesUpdated(boolean updated) {
+	    this.centerCoordinatesUpdated = updated;
+    }
 }

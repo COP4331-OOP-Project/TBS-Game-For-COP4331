@@ -23,8 +23,8 @@ public class StructureEntityTest {
     @Test
     public void testGetLocation() {
 
-        assertEquals(0, base.getLocation().xIndex);
-        assertEquals(1, base.getLocation().yIndex);
+        assertEquals(0, base.getLocation().getX());
+        assertEquals(1, base.getLocation().getY());
 
     }
 

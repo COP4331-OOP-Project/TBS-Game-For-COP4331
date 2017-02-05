@@ -3,12 +3,13 @@ package game.entities.units;
 import game.commands.Command;
 import game.entities.ICommandable;
 import game.entities.PowerState;
+import game.entities.TileOccupant;
 import game.gameboard.Location;
 
 import java.util.LinkedList;
 import java.util.Queue;
 
-public abstract class Unit implements ICommandable
+public abstract class Unit extends TileOccupant implements ICommandable
 {
 
   private int unitID;               // Unit id (0 - 9 of instance type)

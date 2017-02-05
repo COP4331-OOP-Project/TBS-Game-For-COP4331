@@ -36,7 +36,7 @@ public class Army {
 
         for(int i=0;i<units.size();i++){
             //If unit is at rallypoint, they are in battlegroup, if not they are reinforcements. All will still be put into allUnits arraylist
-            if(units.get(i).getLocation().xIndex==this.rp.getLocation().xIndex && units.get(i).getLocation().yIndex==this.rp.getLocation().yIndex){
+            if(units.get(i).getLocation().getX()==this.rp.getLocation().getX() && units.get(i).getLocation().getY()==this.rp.getLocation().getY()){
                 battleGroup.add(units.get(i));
             }
             else{

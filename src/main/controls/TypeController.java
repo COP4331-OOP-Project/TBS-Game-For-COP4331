@@ -1,7 +1,11 @@
 package controls;
 
 
+import controls.Army.ArmyEnum;
 import controls.Army.ArmyType;
+import controls.RallyPoint.RallyPointEnum;
+import controls.RallyPoint.RallyPointType;
+import controls.Structure.StructureEnum;
 import controls.Structure.StructureType;
 import controls.TypeInstance.TypeInstanceController;
 import controls.Unit.UnitEnum;
@@ -27,11 +31,31 @@ public class TypeController {
         this.setMode(this.mode);
         // TODO: change start type to actual
         this.typeInstanceController = new TypeInstanceController(p, UnitEnum.MELEE);
+        switch(mode) {
+            case STRUCTURE:
+                this.typeInstanceController = new TypeInstanceController(p, StructureEnum.BASE);
+                break;
+            case UNIT:
+                this.typeInstanceController = new TypeInstanceController(p, UnitEnum.EXPLORER);
+                break;
+            case ARMY:
+                this.typeInstanceController = new TypeInstanceController(p, ArmyEnum.ENTIRE_ARMY);
+                break;
+            case RALLY_POINT:
+                this.typeInstanceController = new TypeInstanceController(p, RallyPointEnum.RALLY_POINT);
+                break;
+            default:
+                throw new RuntimeException("Cannot instantiate TypeController with mode: " + mode);
+        }
     }
 
     public Enum getType() {
         if (this.currentType == null) return null;
         return this.currentType.getType();
+    }
+
+    public TypeInstanceController getTypeInstanceController() {
+        return this.typeInstanceController;
     }
 
     protected void setMode(ModeEnum mode) {
@@ -46,7 +70,7 @@ public class TypeController {
                 this.currentType = new ArmyType();
                 break;
             case RALLY_POINT:
-                this.currentType = null;
+                this.currentType = new RallyPointType();
                 break;
             default:
                 throw new RuntimeException("Cannot switch to mode: " + mode);
