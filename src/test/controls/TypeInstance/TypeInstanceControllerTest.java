@@ -7,6 +7,7 @@ import controls.Unit.UnitEnum;
 import game.Player;
 import game.entities.Army;
 import game.entities.RallyPoint;
+import game.entities.factories.EntityFactory;
 import game.entities.structures.Base;
 import game.entities.structures.Structure;
 import game.entities.units.*;
@@ -60,7 +61,7 @@ public class TypeInstanceControllerTest {
         this.players.add(this.player);
         this.players.add(this.player2);
         GameBoard gameBoard = new GameBoard(this.players);
-        this.rallyPoint = new RallyPoint(loc, gameBoard);
+        this.rallyPoint = EntityFactory.getRallyPoint(loc, gameBoard, player.getPlayerID());
 
 
         this.m1 = new Melee(loc, this.player.getPlayerID());

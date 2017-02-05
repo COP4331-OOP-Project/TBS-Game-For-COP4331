@@ -11,6 +11,7 @@ import game.entities.RallyPoint;
 import game.entities.structures.Structure;
 
 
+import javax.swing.text.html.parser.Entity;
 import java.sql.Struct;
 import java.util.ArrayList;
 /**
@@ -394,9 +395,11 @@ public class GameBoard {
 //    	players.get(actors.get(0).getOwner()).addArmy(newArmy);
 
         Location location = actors.get(0).getLocation();
-        RallyPoint rp = new RallyPoint(location, this);
+        RallyPoint rp = EntityFactory.getRallyPoint(location, this, actors.get(0).getOwnerID());
         Army newArmy = EntityFactory.getArmy(location, actors.get(0).getOwnerID(),rp, actors);
         players.get(actors.get(0).getOwnerID()).addArmy(newArmy);
+
+
     }
 
 }
