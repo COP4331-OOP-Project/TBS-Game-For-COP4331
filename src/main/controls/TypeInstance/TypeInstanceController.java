@@ -44,11 +44,6 @@ public class TypeInstanceController {
 
 
     public TypeInstanceController(Player p, Enum currentType) {
-        if (!p.getArmies().isEmpty()) {
-            this.currentArmy = p.getArmies().get(0);
-            this.currentArmyReinforcements = this.currentArmy.getReinforcements();
-            this.currentArmyBattleGroups = this.currentArmy.getBattleGroup();
-        }
         this.currentArmyUnit = -1;
         this.currentArmyBattleGroup = -1;
         this.currentArmyReinforcement = -1;
@@ -72,6 +67,8 @@ public class TypeInstanceController {
         this.currentArmy = army;
         this.currentArmyReinforcements = this.currentArmy.getReinforcements();
         this.currentArmyBattleGroups = this.currentArmy.getBattleGroup();
+        this.currentArmyUnits = new ArrayList<Unit>(this.currentArmyBattleGroups);
+        this.currentArmyUnits.addAll(this.currentArmyReinforcements);
 
         this.currentArmyUnit = -1;
         this.currentArmyBattleGroup = -1;
@@ -211,14 +208,38 @@ public class TypeInstanceController {
             case ENTIRE_ARMY: {
                 ItemWithIndex item;
                 if (forward) {
-                    item = getNextInArrayList(new ListWithIndex(melees, currentMelee));
+                    item = getNextInArrayList(new ListWithIndex(currentArmyUnits, currentArmyUnit));
                 } else {
-                    item = getPreviousInArrayList(new ListWithIndex(melees, currentMelee));
+                    item = getPreviousInArrayList(new ListWithIndex(currentArmyUnits, currentArmyUnit));
                 }
                 if (item == null) return null;
-                this.currentMelee = item.getIndex();
+                this.currentArmyUnit = item.getIndex();
                 this.currentTypeInstance = item.getItem();
-                return (Melee) this.currentTypeInstance;
+                return (Unit) this.currentTypeInstance;
+            }
+            case BATTLE_GROUP: {
+                ItemWithIndex item;
+                if (forward) {
+                    item = getNextInArrayList(new ListWithIndex(currentArmyBattleGroups, currentArmyBattleGroup));
+                } else {
+                    item = getPreviousInArrayList(new ListWithIndex(currentArmyBattleGroups, currentArmyBattleGroup));
+                }
+                if (item == null) return null;
+                this.currentArmyBattleGroup = item.getIndex();
+                this.currentTypeInstance = item.getItem();
+                return (Unit) this.currentTypeInstance;
+            }
+            case REINFORCEMENTS: {
+                ItemWithIndex item;
+                if (forward) {
+                    item = getNextInArrayList(new ListWithIndex(currentArmyReinforcements, currentArmyReinforcement));
+                } else {
+                    item = getPreviousInArrayList(new ListWithIndex(currentArmyReinforcements, currentArmyReinforcement));
+                }
+                if (item == null) return null;
+                this.currentArmyReinforcement = item.getIndex();
+                this.currentTypeInstance = item.getItem();
+                return (Unit) this.currentTypeInstance;
             }
         }
         return null;
