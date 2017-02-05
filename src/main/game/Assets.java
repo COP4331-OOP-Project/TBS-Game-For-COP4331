@@ -64,6 +64,9 @@ public class Assets {
 	private static final String ARMY_Y = "assets/army/YellowArmy.png";
 	private static final String ARMY_O = "assets/army/OrangeArmy.png";
 	
+	private static final String ICON_O = "assets/icon/orange.png";
+	private static final String ICON_B = "assets/icon/blue.png";
+	
 	private static final String RALLY_POINT_SELECTED = "assets/rallyPoint/selectedRallyPoint.png";
 	
 	private ArrayList<BufferedImage> gameImages;
@@ -122,6 +125,9 @@ public class Assets {
 		loadItem("ARMY_B", ARMY_B);
 		loadItem("ARMY_Y", ARMY_Y);
 		loadItem("ARMY_O", ARMY_O);
+		
+		loadItem("ICON_O", ICON_O);
+		loadItem("ICON_B", ICON_B);
 		
 		loadItem("RALLY_POINT_SELECTED", RALLY_POINT_SELECTED);
 		
