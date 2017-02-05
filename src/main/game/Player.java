@@ -1,6 +1,7 @@
 package game;
 import game.entities.Army;
 import game.entities.RallyPoint;
+import game.entities.factories.EntityFactory;
 import game.entities.structures.Base;
 
 import game.entities.units.Unit;
@@ -14,6 +15,7 @@ import game.gameboard.Location;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import javax.swing.text.html.parser.Entity;
 import java.awt.font.NumericShaper;
 import java.util.ArrayList;
 
@@ -71,12 +73,11 @@ public class Player {
 		this.playerID = id;
 
 		//Creates initial units
-		initColonist = new Colonist(loc, this.playerID);
+		initColonist = (Colonist) EntityFactory.getEntity(loc, this.playerID, "colonist");
 		Location explorer1Location = new Location(loc.getX()+1, loc.getY());
-		initExplorer1 = new Explorer(explorer1Location, this.playerID);
-		Location explorer2Location = new Location(loc.getX(), loc.getY()+1);
-		initExplorer2 = new Explorer(explorer2Location, this.playerID);
-
+		initExplorer1 = (Explorer)EntityFactory.getEntity(explorer1Location, this.playerID,"explorer");
+		Location explorer2Location = new Location(loc.getX(), loc.getY());
+		initExplorer2 = (Explorer)EntityFactory.getEntity(explorer2Location, this.playerID,"explorer");
 		init();
 	}
 
