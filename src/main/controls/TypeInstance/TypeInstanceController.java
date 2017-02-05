@@ -1,6 +1,7 @@
 package controls.TypeInstance;
 
 import controls.Army.ArmyEnum;
+import controls.CommandController;
 import controls.RallyPoint.RallyPointEnum;
 import controls.Structure.StructureEnum;
 import controls.Unit.UnitEnum;
@@ -44,6 +45,8 @@ public class TypeInstanceController {
     private ArrayList<RallyPoint> rallyPoints;
     private Integer currentRallyPoint;
 
+    private CommandController commandController;
+
 
     public TypeInstanceController(Player p, Enum currentType) {
         this.currentArmyUnit = -1;
@@ -84,6 +87,7 @@ public class TypeInstanceController {
     // This is private on purpose!
     private void setCurrentTypeInstance(ICommandable commandable) {
         this.currentTypeInstance = commandable;
+        this.commandController = new CommandController(this.currentTypeInstance);
     }
 
     public ICommandable cycleForward(Enum currentType) {

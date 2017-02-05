@@ -11,7 +11,19 @@ public class CommandController {
     private Command currentCommand;
     private ICommandable commandable;
 
-    CommandController(ICommandable commandable) {
+    public CommandController(ICommandable commandable) {
         this.commandable = commandable;
+    }
+
+    public Command getCurrentCommand() {
+        return this.currentCommand;
+    }
+
+    public void cycleForward() {
+
+    }
+
+    public void cycleBackward() {
+
     }
 }

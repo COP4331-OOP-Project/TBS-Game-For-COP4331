@@ -27,6 +27,8 @@ public class Game {
     private Location centerCoordinates;
 	private boolean centerCoordinatesUpdated;
 
+	private ICommandable currentSelectedEntity;
+
 	Game() {
 		//TODO: initialize game with players
 		this.players = new ArrayList<Player>();
@@ -136,7 +138,7 @@ public class Game {
     }
 
 	protected void cycleCommandForward() {
-
+        
 	}
 
 	protected void cycleCommandBackward() {
@@ -148,6 +150,7 @@ public class Game {
         TypeInstanceController typeInstanceController = typeController.getTypeInstanceController();
         Enum currentType = typeController.getType();
         ICommandable selectedEntity = typeInstanceController.cycleForward(currentType);
+        this.currentSelectedEntity = selectedEntity;
         Location newLocation = selectedEntity.getLocation();
 	    this.changeCenterCoordinates(newLocation);
 	}
@@ -157,6 +160,7 @@ public class Game {
         TypeInstanceController typeInstanceController = typeController.getTypeInstanceController();
         Enum currentType = typeController.getType();
         ICommandable selectedEntity = typeInstanceController.cycleBackward(currentType);
+        this.currentSelectedEntity = selectedEntity;
         Location newLocation = selectedEntity.getLocation();
         this.changeCenterCoordinates(newLocation);
 	}
