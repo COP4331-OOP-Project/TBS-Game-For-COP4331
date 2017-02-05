@@ -15,7 +15,7 @@ public abstract class Unit implements ICommandable
   private int ownerID;              // Player's id
   private Location location;        // Unit location
   private PowerState powerState;    // Unit power state
-  private int unitType;             // Unit's type
+  private UnitType type;             // Unit's type
 
   // Unit stats
   private int attackDamage;
@@ -30,10 +30,10 @@ public abstract class Unit implements ICommandable
   protected Queue<Command> queue = new LinkedList<Command>(); // Unit command queue
 
   // Constructor
-  public Unit(Location loc, int ownerID, int unitType) {
+  public Unit(Location loc, int ownerID, UnitType type) {
     this.location = loc;
     this.ownerID = ownerID;
-    this.unitType = unitType;
+    this.type = type;
     setPowerState(PowerState.POWERED_UP);
   }
 
@@ -57,7 +57,7 @@ public abstract class Unit implements ICommandable
   public int getSpeed(){ return speed; }
   public float getUpkeep(){ return upkeep; }
   public int getBaseResourceCost() { return baseResourceCost; }
-  public int getUnitType(){ return unitType; }
+  public UnitType getUnitType(){ return type; }
   public PowerState getPowerState(){ return powerState; }
   public int getUnitID(){ return unitID; }
   public float getResourceCost(){ return (baseResourceCost * upkeep); }
@@ -75,21 +75,10 @@ public abstract class Unit implements ICommandable
   public void setBaseResourceCost(int cost) { this.baseResourceCost = cost; }
   public void setLocation(Location loc){ this.location = loc; }
   public void setOwnerID(int o){ this.ownerID = o; }
-  public void setUnitType(int u){ this.unitType = u; }
+  public void setUnitType(UnitType type){ this.type = type; }
   public void setUnitID(int id){ this.unitID = id; }
 
-  public void printUnit()
-  {
-    System.out.println("    Unit type: " + getUnitType());
-    System.out.println("	Armor: " + getArmor());
-    System.out.println("	Health: " + getHealth());
-    System.out.println("	Orientation: " + getOrientation());
-    System.out.println("	Speed: " + getSpeed());
-    System.out.println("	Upkeep: " + getUpkeep());
-//  	System.out.println("	Location: " + this.getLocation().getX() + ", " + this.getLocation().getY());
-  }
-
-  // Command interface handlers
+  /* Command interface handlers */
 
   // Set value of powerState for unit
   public void setPowerState(PowerState state) {

@@ -120,7 +120,7 @@ public class GamePanel extends Panel {
 		{
 			drawUnit(colonists.get(i).getLocation().xIndex,
 					colonists.get(i).getLocation().yIndex,
-					colonists.get(i).getUnitType(),
+					colonists.get(i).getUnitType().type(),
 					colonists.get(i).getOwnerID(),
 					0);
 		}
@@ -129,7 +129,7 @@ public class GamePanel extends Panel {
 		{
 			drawUnit(explorers.get(i).getLocation().xIndex,
 					explorers.get(i).getLocation().yIndex,
-					explorers.get(i).getUnitType(),
+					explorers.get(i).getUnitType().type(),
 					explorers.get(i).getOwnerID(),
 					0);
 		}
@@ -139,7 +139,7 @@ public class GamePanel extends Panel {
 		{
 			drawUnit(colonists1.get(i).getLocation().xIndex,
 					colonists1.get(i).getLocation().yIndex,
-					colonists1.get(i).getUnitType(),
+					colonists1.get(i).getUnitType().type(),
 					colonists1.get(i).getOwnerID(),
 					0);
 		}
@@ -148,7 +148,7 @@ public class GamePanel extends Panel {
 		{
 			drawUnit(explorers1.get(i).getLocation().xIndex,
 					explorers1.get(i).getLocation().yIndex,
-					explorers1.get(i).getUnitType(),
+					explorers1.get(i).getUnitType().type(),
 					explorers1.get(i).getOwnerID(),
 					0);
 		}

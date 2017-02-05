@@ -14,8 +14,8 @@ public enum UnitType
 
     private int type;   // Set value for enum type
 
-    // Accessor
-    public int getType(){ return type; }
+    // Returns unit type
+    public int type(){ return type; }
 
     // Constructor
     UnitType(int type){ this.type = type; }
