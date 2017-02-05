@@ -46,6 +46,7 @@ public class GamePanel extends Panel {
 
 	//ArrayList of each player's unit
 	private ArrayList<Unit> player1Units;
+	private ArrayList<Unit> player2Units;
 
 	Graphics2D g2d;
 	
@@ -120,22 +121,22 @@ public class GamePanel extends Panel {
 	private void drawUnits() {
 		int unitSelected = -1;
 		player1Units = game.getPlayer(0).getAllUnit();
-		for(int i = 0;i<player1Units.size();i++){
+		for (int i = 0; i < player1Units.size(); i++) {
 			if (player1Units.get(i).getLocation().getX() == selectedX
 					&& player1Units.get(i).getLocation().getY() == selectedY
 					&& selectedX != -1 && selectedY != -1) {
-				if (player1Units.get(i).getUnitType() == 0 && 
-					game.getCurrentType() == UnitEnum.MELEE)
-				unitSelected = i;
-				if (player1Units.get(i).getUnitType() == 1 && 
-					game.getCurrentType() == UnitEnum.RANGED)
-				unitSelected = i;
-				if (player1Units.get(i).getUnitType() == 2 && 
-					game.getCurrentType() == UnitEnum.EXPLORER)
-				unitSelected = i;
-				if (player1Units.get(i).getUnitType() == 3 && 
-					game.getCurrentType() == UnitEnum.COLONIST)
-				unitSelected = i;
+				if (player1Units.get(i).getUnitType() == 0 &&
+						game.getCurrentType() == UnitEnum.MELEE)
+					unitSelected = i;
+				if (player1Units.get(i).getUnitType() == 1 &&
+						game.getCurrentType() == UnitEnum.RANGED)
+					unitSelected = i;
+				if (player1Units.get(i).getUnitType() == 2 &&
+						game.getCurrentType() == UnitEnum.EXPLORER)
+					unitSelected = i;
+				if (player1Units.get(i).getUnitType() == 3 &&
+						game.getCurrentType() == UnitEnum.COLONIST)
+					unitSelected = i;
 			}
 			drawUnit(player1Units.get(i).getLocation().getX(),
 					player1Units.get(i).getLocation().getY(),
@@ -145,12 +146,20 @@ public class GamePanel extends Panel {
 		}
 		if (game.getCurrentMode() == ModeEnum.UNIT && unitSelected != -1) {
 			drawUnit(player1Units.get(unitSelected).getLocation().getX(),
-				player1Units.get(unitSelected).getLocation().getY(),
-				player1Units.get(unitSelected).getUnitType(),
-				player1Units.get(unitSelected).getOwnerID(),
-				0);
+					player1Units.get(unitSelected).getLocation().getY(),
+					player1Units.get(unitSelected).getUnitType(),
+					player1Units.get(unitSelected).getOwnerID(),
+					0);
 		} else {
 			unitSelected = -1;
+			player2Units = game.getPlayer(1).getAllUnit();
+			for (int i = 0; i < player2Units.size(); i++) {
+				drawUnit(player2Units.get(i).getLocation().getX(),
+						player2Units.get(i).getLocation().getY(),
+						player2Units.get(i).getUnitType(),
+						player2Units.get(i).getOwnerID(),
+						0);
+			}
 		}
 	}
 	

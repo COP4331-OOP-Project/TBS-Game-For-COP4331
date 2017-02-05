@@ -40,6 +40,7 @@ public class Tile implements ITileAccessors {
         containsArmy=false;
         structure=null;
         this.location=location;
+        this.setOwnerID(-1);
     }
 
     // Get Tile Location
@@ -50,6 +51,7 @@ public class Tile implements ITileAccessors {
     // Add unit to Tile
     public void addUnit(Unit unit){
         units.add(unit);
+        unit.setLocation(this.location);
         containsUnit=true;
     }
 
@@ -66,7 +68,14 @@ public class Tile implements ITileAccessors {
 
     // Remove unit from tile by ID
     public void removeUnit(int unitID){
-        units.remove(unitID);
+        for(int i = 0;i<units.size();i++)
+        {
+            if(units.get(i).getUnitID()==unitID)
+            {
+                units.remove(i);
+            }
+        }
+
         if(units.isEmpty()){
             containsUnit=false;
         }
@@ -195,12 +204,14 @@ public class Tile implements ITileAccessors {
     // Check whether this tile is occupied by enemy unit
     public boolean hasEnemyUnit(int playerID)
     {
-        if (playerID != this.ownerID) {
-            return true;
-        }
-        else if (playerID == this.ownerID)
-        {
+        if(this.ownerID== playerID)
             return false;
+        else if (this.ownerID == -1) {
+            return false;
+        }
+        else if (playerID!=this.ownerID&&this.ownerID!=-1)
+        {
+            return true;
         }
 
         return false;
