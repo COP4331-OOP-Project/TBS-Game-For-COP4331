@@ -22,7 +22,7 @@ import java.util.ArrayList;
 public class TypeInstanceController {
     private final static Logger log = LogManager.getLogger(TypeInstanceController.class);
 
-    private Object currentTypeInstance;
+    private TileOccupant currentTypeInstance;
     private Player currentPlayer;
     private Army currentArmy;
     private ArrayList<Unit> currentArmyUnits;
@@ -77,7 +77,7 @@ public class TypeInstanceController {
         this.currentArmyReinforcement = -1;
     }
 
-    public Object getTypeInstance() {
+    public TileOccupant getTypeInstance() {
         return this.currentTypeInstance;
     }
 
@@ -116,7 +116,7 @@ public class TypeInstanceController {
     }
 
     private ItemWithIndex getNextInArrayList(ListWithIndex itemWithIndex) {
-        ArrayList<?> list = itemWithIndex.getList();
+        ArrayList<? extends TileOccupant> list = itemWithIndex.getList();
         Integer index = itemWithIndex.getIndex();
         if (list.isEmpty()) return null;
         Integer newIndex = index + 1;
@@ -127,7 +127,7 @@ public class TypeInstanceController {
     }
 
     private ItemWithIndex getPreviousInArrayList(ListWithIndex itemWithIndex) {
-        ArrayList<?> list = itemWithIndex.getList();
+        ArrayList<? extends TileOccupant> list = itemWithIndex.getList();
         Integer index = itemWithIndex.getIndex();
         if (list.isEmpty()) return null;
         Integer newIndex = index - 1;
