@@ -12,6 +12,7 @@ public class Army {
 
     private int armyID;                                 // Army unique id
     private int ownerID;                                // Player id
+    private int rotation = 0;
     private Location location;                          // Army location
     private RallyPoint rp;                              // Army Rally Point
     private PowerState powerState;                      // Army power state
@@ -169,6 +170,13 @@ public class Army {
         return this.armyID;
     }
 
+    public int getRotation() {
+    	return rotation;
+    }
+    
+    public void setRotation(int rotation) {
+    	this.rotation = rotation;
+    }
 
     // Print all units in an army
     public void printArmy(){
