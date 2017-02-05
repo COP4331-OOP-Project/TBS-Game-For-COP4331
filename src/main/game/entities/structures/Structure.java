@@ -12,7 +12,7 @@ import java.util.UUID;
  */
 public abstract class Structure implements ICommandable {
 
-    private UUID id;
+    private int structureID;
     private int attackDamage;
     private int defenseDamage;
     private int armor;
@@ -26,7 +26,6 @@ public abstract class Structure implements ICommandable {
 
     // Constructor
     public Structure(Location loc, int ownerID) {
-        this.id = UUID.randomUUID();
         this.location=loc;
         this.ownerID=ownerID;
         commands= new LinkedList<Command>();
@@ -59,6 +58,7 @@ public abstract class Structure implements ICommandable {
     public int getPoweredState() { return poweredState; }
     public int getBaseResourceCost() { return baseResourceCost; }
     public int getResourceCost() { return (int) (baseResourceCost * upkeep); }
+    public int getStructureID() {return structureID;}
 
     //Setters
     public void setAttackDamage(int attackDamage) {this.attackDamage = attackDamage;}
@@ -69,6 +69,7 @@ public abstract class Structure implements ICommandable {
     public void setOwnerID(int ownerID) {this.ownerID = ownerID;}
     public void setLocation(Location location) {this.location = location;}
     public void setBaseResourceCost(int cost) { this.baseResourceCost = cost; }
+    public void setStructureID(int structureID){this.structureID = structureID;}
     private void setPoweredState(int poweredState) {
         this.poweredState = poweredState;
         this.upkeep = ((poweredState == 1) ? 1.0f : 0.25f);
