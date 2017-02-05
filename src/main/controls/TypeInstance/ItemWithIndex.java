@@ -1,18 +1,20 @@
 package controls.TypeInstance;
 
+import game.entities.TileOccupant;
+
 /**
  * Created by gavin on 2/4/17.
  */
 class ItemWithIndex {
-    private Object item;
+    private TileOccupant item;
     private Integer index;
 
-    ItemWithIndex(Object item, Integer index) {
+    ItemWithIndex(TileOccupant item, Integer index) {
         this.item = item;
         this.index = index;
     }
 
-    Object getItem() {
+    TileOccupant getItem() {
         return item;
     }
 
