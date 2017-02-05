@@ -115,9 +115,10 @@ public class TypeInstanceController {
         return null;
     }
 
-    private ItemWithIndex getNextInArrayList(ListWithIndex itemWithIndex) {
-        ArrayList<? extends TileOccupant> list = itemWithIndex.getList();
-        Integer index = itemWithIndex.getIndex();
+    private ItemWithIndex getNextInArrayList(ListWithIndex listWithIndex) {
+        ArrayList<? extends TileOccupant> list = listWithIndex.getList();
+        if (list == null) return null;
+        Integer index = listWithIndex.getIndex();
         if (list.isEmpty()) return null;
         Integer newIndex = index + 1;
         if (newIndex > list.size() - 1) {
@@ -128,6 +129,7 @@ public class TypeInstanceController {
 
     private ItemWithIndex getPreviousInArrayList(ListWithIndex itemWithIndex) {
         ArrayList<? extends TileOccupant> list = itemWithIndex.getList();
+        if (list == null) return null;
         Integer index = itemWithIndex.getIndex();
         if (list.isEmpty()) return null;
         Integer newIndex = index - 1;
