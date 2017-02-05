@@ -12,6 +12,7 @@ public class View {
 	UnitOverviewPanel unitOverviewPanel;
 	StructureDetailsPanel structureDetailsPanel;
 	UnitDetailsPanel unitDetailsPanel;
+	MiniPanel	miniPanel;
 	
 	public View(Game game) {
 		this.game = game;
@@ -22,6 +23,7 @@ public class View {
 		unitOverviewPanel = new UnitOverviewPanel(game);
 		unitDetailsPanel = new UnitDetailsPanel(game);
 		structureDetailsPanel = new StructureDetailsPanel(game);
+		miniPanel = new MiniPanel(game);
 	}
 	
 	public void drawVisiblePanels(Graphics g, int width, int height) {
@@ -30,6 +32,7 @@ public class View {
 		civPanel.draw(g, width, height);
 		modePanel.draw(g, width, height);
 		unitDetailsPanel.draw(g, width, height);
+		miniPanel.draw(g, width, height);
 	}
 
 	public void updateAnimationTime() {

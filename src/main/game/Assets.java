@@ -7,8 +7,11 @@ import java.util.Hashtable;
 
 import javax.imageio.ImageIO;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 public class Assets {
-	
+	private final static Logger log = LogManager.getLogger(Assets.class);
 	private static final Assets INSTANCE = new Assets(); //This is the one instance of resources (singleton)
 	private Hashtable<String, Integer> assets = new Hashtable<String, Integer>();
 	
@@ -32,6 +35,12 @@ public class Assets {
 	private static final String TERRAIN_WATER2 = "assets/terrain/water2.jpg";
 	private static final String TERRAIN_WATER3 = "assets/terrain/water3.jpg";
 	
+
+	private static final String OUTLINE_MINI = "assets/small/outline.jpg";
+	private static final String GRASS_MINI = "assets/small/grassmini.jpg";
+	private static final String SAND_MINI = "assets/small/sandmini.jpg";
+	private static final String WATER_MINI = "assets/small/watermini.jpg";
+	
 	private static final String UNIT_SELECTED = "assets/units/selectedUnit.png";
 	
 	private static final String UNIT_G = "assets/units/green.png";
@@ -51,6 +60,15 @@ public class Assets {
 	private static final String BASE_B = "assets/structure/baseBlue.png";
 	private static final String BASE_Y = "assets/structure/baseYellow.png";
 	private static final String BASE_O = "assets/structure/baseOrange.png";
+	
+
+	private static final String ARMY_SELECTED = "assets/army/selectedArmy.png";
+	
+	private static final String ARMY_G = "assets/army/GreenArmy.png";
+	private static final String ARMY_B = "assets/army/BlueArmy.png";
+	private static final String ARMY_Y = "assets/army/YellowArmy.png";
+	private static final String ARMY_O = "assets/army/OrangeArmy.png";
+	
 	
 	private ArrayList<BufferedImage> gameImages;
 	private int lastItemLoaded = 0;
@@ -79,8 +97,13 @@ public class Assets {
 		loadItem("TERRAIN_WATER2", TERRAIN_WATER2);
 		loadItem("TERRAIN_WATER3", TERRAIN_WATER3);
 		
-		loadItem("UNIT_SELECTED", UNIT_SELECTED);
+
+		loadItem("OUTLINE_MINI", OUTLINE_MINI);
+		loadItem("GRASS_MINI", GRASS_MINI);
+		loadItem("SAND_MINI", SAND_MINI);
+		loadItem("WATER_MINI", WATER_MINI);
 		
+		loadItem("UNIT_SELECTED", UNIT_SELECTED);
 		loadItem("UNIT_MELEE", UNIT_MELEE);
 		loadItem("UNIT_RANGED", UNIT_RANGED);
 		loadItem("UNIT_EXPLORER", UNIT_EXPLORER);
@@ -93,21 +116,27 @@ public class Assets {
 		
 		loadItem("BASE_SELECTED", BASE_SELECTED);
 		loadItem("BASE_ARROW", BASE_ARROW);
-		
 		loadItem("BASE_G", BASE_G);
 		loadItem("BASE_B", BASE_B);
 		loadItem("BASE_Y", BASE_Y);
 		loadItem("BASE_O", BASE_O);
+		
+		loadItem("ARMY_SELECTED", ARMY_SELECTED);
+		loadItem("ARMY_G", ARMY_G);
+		loadItem("ARMY_B", ARMY_B);
+		loadItem("ARMY_Y", ARMY_Y);
+		loadItem("ARMY_O", ARMY_O);
 	}
 	
 	private void loadItem(String name, String path) {
 		try {
 			gameImages.add(ImageIO.read(new File(path)));
 			assets.put(name, lastItemLoaded);
-			System.out.println("File Loaded: " + path); 
+			log.debug("File Loaded: " + path);
+			
 			lastItemLoaded++;
 		} catch (IOException e) {
-			System.out.println("File Not Found: " + path);
+			log.warn("File Not Found: " + path);
 			e.printStackTrace();
 		}
 	}

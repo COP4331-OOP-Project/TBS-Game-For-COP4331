@@ -10,7 +10,11 @@ import controls.Unit.UnitEnum;
 import game.Assets;
 import game.Game;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 public class ControlModePanel extends Panel{
+	private final static Logger log = LogManager.getLogger(ControlModePanel.class);
 	private static final int PANEL_HEIGHT = 114;
 	private static final int PANEL_DISTANCE_TOP = 70;
 	private static final int PANEL_DISTANCE_BOTTOM = 10;
@@ -113,7 +117,7 @@ public class ControlModePanel extends Panel{
 						, height/2 - PANEL_DISTANCE_TOP - PANEL_HEIGHT, null);
 				break;
 			default:
-				System.out.println("Invalid Mode to display");
+				log.warn("Invalid Mode to display");
 		}
 				
 	}
@@ -135,9 +139,11 @@ public class ControlModePanel extends Panel{
 				g.drawImage(Assets.getInstance().getImage("GUI_MODE_SELECTED3"), PANEL_DISTANCE_FROM_LEFT
 						, height/2 + PANEL_DISTANCE_BOTTOM, null);
 				break;
-			default:
+			case 3:
 				g.drawImage(Assets.getInstance().getImage("GUI_MODE_SELECTED4"), PANEL_DISTANCE_FROM_LEFT
 						, height/2 + PANEL_DISTANCE_BOTTOM, null);
+			default:
+				log.warn("Invalid Submode to display");
 			}
 		}
 	}
