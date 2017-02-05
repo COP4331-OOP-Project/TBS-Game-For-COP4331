@@ -3,6 +3,8 @@ import game.Game;
 
 import java.awt.Graphics;
 
+import controls.ModeEnum;
+
 public class View {
 	Game game;
 	CivilizationPanel civPanel;
@@ -31,7 +33,10 @@ public class View {
 		gamePanel.draw(g, width, height);
 		civPanel.draw(g, width, height);
 		modePanel.draw(g, width, height);
-		unitDetailsPanel.draw(g, width, height);
+		if (game.getCurrentMode() == ModeEnum.UNIT)
+			unitDetailsPanel.draw(g, width, height);
+		if (game.getCurrentMode() == ModeEnum.STRUCTURE)
+			structureDetailsPanel.draw(g, width, height);
 		miniPanel.draw(g, width, height);
 	}
 

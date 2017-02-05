@@ -53,6 +53,7 @@ public class GamePanel extends Panel {
 	//TEST ELEMENTS BELOW
 	Random rand = new Random(); 
 	Font armyFont = new Font("Lucida Sans", Font.BOLD, 40);
+	Font tileFont = new Font("Lucida Sans", Font.PLAIN, 20);
 	private static final int NUM_TILES = 20; 
 	int[][] tiles = new int[NUM_TILES][NUM_TILES];
 	//END TEST ELEMENTS
@@ -73,7 +74,7 @@ public class GamePanel extends Panel {
 		drawBases();
 		drawUnits();
 		drawArmies();
-		drawSelectedItem();
+		//drawSelectedItem();
 	}
 
 	private void checkCenteringCoordinates() {
@@ -146,10 +147,11 @@ public class GamePanel extends Panel {
 		}
 		if (game.getCurrentMode() == ModeEnum.UNIT && unitSelected != -1) {
 			drawUnit(player1Units.get(unitSelected).getLocation().getX(),
-					player1Units.get(unitSelected).getLocation().getY(),
-					player1Units.get(unitSelected).getUnitType(),
-					player1Units.get(unitSelected).getOwnerID(),
-					0);
+				player1Units.get(unitSelected).getLocation().getY(),
+				player1Units.get(unitSelected).getUnitType(),
+				player1Units.get(unitSelected).getOwnerID(),
+				0);
+			drawSelectedItem();
 		} else {
 			unitSelected = -1;
 			player2Units = game.getPlayer(1).getAllUnit();
@@ -170,7 +172,12 @@ public class GamePanel extends Panel {
 	private void drawTiles() {
 		for (int i = 0; i < game.getGameBoard().gameMap.length; i++) {
 			for (int j = 0; j < game.getGameBoard().gameMap[i].length; j++) {
-				drawTile(i, j, game.getGameBoard().gameMap[j][i].getTileType());
+				drawTile(i, j, game.getGameBoard().gameMap[i][j].getTileType());
+				//if (game.getGameBoard().gameMap[j][i].getUnits().size() > 1) {
+				//	g2d.drawString("" + game.getGameBoard().gameMap[j][i].getUnits().size()
+				//			, offX(tileLocation(i)), offY(tileLocation(j)));
+				//}
+					
 			}
 		}
 	}
