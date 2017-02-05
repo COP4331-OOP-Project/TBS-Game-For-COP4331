@@ -35,14 +35,12 @@ public class Assets {
 	private static final String TERRAIN_WATER2 = "assets/terrain/water2.jpg";
 	private static final String TERRAIN_WATER3 = "assets/terrain/water3.jpg";
 	
-
 	private static final String OUTLINE_MINI = "assets/small/outline.jpg";
 	private static final String GRASS_MINI = "assets/small/grassmini.jpg";
 	private static final String SAND_MINI = "assets/small/sandmini.jpg";
 	private static final String WATER_MINI = "assets/small/watermini.jpg";
 	
 	private static final String UNIT_SELECTED = "assets/units/selectedUnit.png";
-	
 	private static final String UNIT_G = "assets/units/green.png";
 	private static final String UNIT_B = "assets/units/blue.png";
 	private static final String UNIT_Y = "assets/units/yellow.png";
@@ -55,20 +53,18 @@ public class Assets {
 	
 	private static final String BASE_SELECTED = "assets/structure/baseSelected.png";
 	private static final String BASE_ARROW = "assets/structure/baseArrow.png";
-	
 	private static final String BASE_G = "assets/structure/baseGreen.png";
 	private static final String BASE_B = "assets/structure/baseBlue.png";
 	private static final String BASE_Y = "assets/structure/baseYellow.png";
 	private static final String BASE_O = "assets/structure/baseOrange.png";
 	
-
 	private static final String ARMY_SELECTED = "assets/army/selectedArmy.png";
-	
 	private static final String ARMY_G = "assets/army/GreenArmy.png";
 	private static final String ARMY_B = "assets/army/BlueArmy.png";
 	private static final String ARMY_Y = "assets/army/YellowArmy.png";
 	private static final String ARMY_O = "assets/army/OrangeArmy.png";
 	
+	private static final String RALLY_POINT_SELECTED = "assets/rallyPoint/selectedRallyPoint.png";
 	
 	private ArrayList<BufferedImage> gameImages;
 	private int lastItemLoaded = 0;
@@ -126,6 +122,9 @@ public class Assets {
 		loadItem("ARMY_B", ARMY_B);
 		loadItem("ARMY_Y", ARMY_Y);
 		loadItem("ARMY_O", ARMY_O);
+		
+		loadItem("RALLY_POINT_SELECTED", RALLY_POINT_SELECTED);
+		
 	}
 	
 	private void loadItem(String name, String path) {
