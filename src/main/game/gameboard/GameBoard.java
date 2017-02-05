@@ -193,7 +193,7 @@ public class GameBoard {
             // (Army)actor.powerDown();
         }
         else if(isUnit){
-            // (Unit)actor.powerDown();
+            ((Unit) actor).powerDown();
         }
         else if(isStructure){
             // (Structure)actor.powerDown();
