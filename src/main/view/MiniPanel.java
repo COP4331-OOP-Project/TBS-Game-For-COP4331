@@ -5,10 +5,15 @@ import java.awt.Graphics;
 import game.Assets;
 import game.Game;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 public class MiniPanel extends Panel{
 	Game game;
 	private static final int TILE_SIZE = 6;
 	private static final int DISTANCE_FROM_RIGHT = 170;
+	private final static Logger log = LogManager.getLogger(MiniPanel.class);
+	
 	private int width;
 	private int height;
 	
@@ -82,7 +87,7 @@ public class MiniPanel extends Panel{
 						offX(x), offY(y), null); 
 				break;
 			default:
-				System.out.println("Invalid tile type");
+				log.warn("Invalid tile type");
 		}
 	}
 	

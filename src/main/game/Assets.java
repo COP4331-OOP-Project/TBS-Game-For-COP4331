@@ -7,8 +7,11 @@ import java.util.Hashtable;
 
 import javax.imageio.ImageIO;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 public class Assets {
-	
+	private final static Logger log = LogManager.getLogger(Assets.class);
 	private static final Assets INSTANCE = new Assets(); //This is the one instance of resources (singleton)
 	private Hashtable<String, Integer> assets = new Hashtable<String, Integer>();
 	
@@ -129,10 +132,11 @@ public class Assets {
 		try {
 			gameImages.add(ImageIO.read(new File(path)));
 			assets.put(name, lastItemLoaded);
-			System.out.println("File Loaded: " + path); 
+			log.debug("File Loaded: " + path);
+			
 			lastItemLoaded++;
 		} catch (IOException e) {
-			System.out.println("File Not Found: " + path);
+			log.warn("File Not Found: " + path);
 			e.printStackTrace();
 		}
 	}

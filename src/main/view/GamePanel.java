@@ -2,7 +2,6 @@ package view;
 
 import game.Assets;
 import game.Game;
-import game.gameboard.GameBoard;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -10,13 +9,18 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 import java.util.Random;
-
 import controls.ModeEnum;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+
 public class GamePanel extends Panel {
+
 	Game game;
 	private static final int TILE_PIXEL_SIZE = 100;
 	private static final int TIME_TO_CENTER = 50;
+	private final static Logger log = LogManager.getLogger(GamePanel.class);
 	
 	private int offsetX = 0;
 	private int offsetY = 0;
@@ -128,7 +132,7 @@ public class GamePanel extends Panel {
 				drawStaticTileElement(x, y, "ARMY_O");
 				break;
 			default:
-				System.out.println("Invalid Player :" + player
+				log.warn("Invalid Player :" + player
 						+ " cannot have units drawn");
 		}
 		g2d.setTransform(currentRotation);
@@ -172,7 +176,7 @@ public class GamePanel extends Panel {
 				drawStaticTileElement(x, y, "BASE_O");
 				break;
 			default:
-				System.out.println("Invalid player specific for drawing base");
+				log.warn("Invalid player specific for drawing base");
 		}
 		AffineTransform currentRotation = g2d.getTransform();
 		rotateOnTile(x, y, rotation);
@@ -198,7 +202,7 @@ public class GamePanel extends Panel {
 				drawStaticTileElement(x, y, "UNIT_O");
 				break;
 			default:
-				System.out.println("Invalid Player :" + player
+				log.warn("Invalid Player :" + player
 						+ " cannot have units drawn");
 		}
 		
@@ -216,7 +220,7 @@ public class GamePanel extends Panel {
 			drawStaticTileElement(x, y, "UNIT_COLONIST");
 			break;
 		default:
-			System.out.println("Invalid Unit Type :" + type 
+			log.warn("Invalid Unit Type :" + type 
 					+ " cannot be drawn");
 		}
 		g2d.setTransform(currentRotation);
