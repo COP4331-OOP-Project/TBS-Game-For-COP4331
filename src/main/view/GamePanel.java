@@ -11,6 +11,7 @@ import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
 import java.util.Random;
 import controls.ModeEnum;
+import controls.Unit.UnitEnum;
 import game.entities.units.Unit;
 import game.gameboard.Location;
 
@@ -64,7 +65,6 @@ public class GamePanel extends Panel {
 		g2d = (Graphics2D)g;
 		this.width = width;
 		this.height = height;
-		//checkCentering(x, y);
 		if (isCentering)
 			continueCentering();
 		checkCenteringCoordinates();
@@ -80,7 +80,7 @@ public class GamePanel extends Panel {
 			Location loc = this.game.getCenterCoordinates();
 			selectedX = loc.getX();
 			selectedY = loc.getY();
-			this.centerOnTile(selectedX, selectedY);
+			this.checkCentering(selectedX, selectedY);
 			this.game.setCenterCoordinatesUpdated(false);
 		}
 	}
@@ -118,24 +118,40 @@ public class GamePanel extends Panel {
 	}
 
 	private void drawUnits() {
-		/*
-		drawUnit(game.getGameBoard().testUnit.getLocation().getX(),
-				game.getGameBoard().testUnit.getLocation().getY(),
-				game.getGameBoard().testUnit.getUnitType(),
-				game.getGameBoard().testUnit.getOwnerID(),
-				0);
-	*/
-		/*
-		centerOnTile(game.getGameBoard().testUnit.getLocation().getX(),
-				game.getGameBoard().testUnit.getLocation().getY());
-		*/
+		int unitSelected = -1;
 		player1Units = game.getPlayer(0).getAllUnit();
 		for(int i = 0;i<player1Units.size();i++){
+			if (player1Units.get(i).getLocation().getX() == selectedX
+					&& player1Units.get(i).getLocation().getY() == selectedY
+					&& selectedX != -1 && selectedY != -1) {
+				if (player1Units.get(i).getUnitType() == 0 && 
+					game.getCurrentType() == UnitEnum.MELEE)
+				unitSelected = i;
+				if (player1Units.get(i).getUnitType() == 1 && 
+					game.getCurrentType() == UnitEnum.RANGED)
+				unitSelected = i;
+				if (player1Units.get(i).getUnitType() == 2 && 
+					game.getCurrentType() == UnitEnum.EXPLORER)
+				unitSelected = i;
+				if (player1Units.get(i).getUnitType() == 3 && 
+					game.getCurrentType() == UnitEnum.COLONIST)
+				unitSelected = i;
+			}
 			drawUnit(player1Units.get(i).getLocation().getX(),
 					player1Units.get(i).getLocation().getY(),
 					player1Units.get(i).getUnitType(),
 					player1Units.get(i).getOwnerID(),
 					0);
+		}
+		System.out.println(unitSelected +  " " + game.getCurrentMode());
+		if (game.getCurrentMode() == ModeEnum.UNIT && unitSelected != -1) {
+			drawUnit(player1Units.get(unitSelected).getLocation().getX(),
+				player1Units.get(unitSelected).getLocation().getY(),
+				player1Units.get(unitSelected).getUnitType(),
+				player1Units.get(unitSelected).getOwnerID(),
+				0);
+		} else {
+			unitSelected = -1;
 		}
 	}
 	
