@@ -5,11 +5,13 @@ import game.entities.structures.Structure;
 import game.entities.units.Unit;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 /**
  * Created by David on 2/1/2017.
  */
 public class Tile {
+    //0 Grass, 1 Sand, 2 Rivers(Impassable)
     private int Terrain;
     //Leave out AreaOfEffect, Resources, Item for iteration 1
     private ArrayList<Unit> units;
@@ -67,8 +69,14 @@ public class Tile {
         containsArmy=true;
     }
 
+    //TODO Fix unique ID for armies
     public void removeArmy(int armyID){
-        armies.remove(armyID);
+        for(int i = 0; i<armies.size(); i++){
+            if(armies.get(i).getArmyID()==armyID){
+                armies.remove(i);
+                break;
+            }
+        }
         if(armies.isEmpty()){
             containsArmy=false;
         }
