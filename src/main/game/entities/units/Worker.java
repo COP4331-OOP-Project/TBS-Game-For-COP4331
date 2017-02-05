@@ -5,7 +5,6 @@ import game.gameboard.Location;
 
 public class Worker extends Unit
 {
-
   // Constructor
   public Worker(Location loc, int ownerID) {
 
