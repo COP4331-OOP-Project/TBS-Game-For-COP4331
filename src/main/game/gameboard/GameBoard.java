@@ -156,9 +156,11 @@ public class GameBoard {
             ((Army) actor).getBattleGroup().clear();
             ((Army) actor).getReinforcements().clear();
             ((Army) actor).groupDecomission(this);
+            ((Army) actor).getAllUnits().clear();
             handleDisbandArmyCmd(((Army) actor));
         }
         else if(actor instanceof Unit){
+            players.get(((Unit) actor).getOwnerID()).removeUnit(((Unit)actor));
             Tile actorTile = getTileWithLocation( ( (Unit) actor ).getLocation());
             actorTile.removeUnit( ( (Unit) actor ).getUnitID());
         }
