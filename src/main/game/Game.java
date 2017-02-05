@@ -1,7 +1,11 @@
 package game;
 
 import controls.ModeController;
+import controls.Type;
+import controls.TypeController;
+import controls.TypeInstance.TypeInstanceController;
 import game.entities.RallyPoint;
+import game.entities.TileOccupant;
 import game.gameboard.GameBoard;
 import game.gameboard.Location;
 
@@ -124,7 +128,11 @@ public class Game {
 	}
 
 	protected void cycleTypeInstanceForward() {
-        Location newLocation = this.currentModeController.getTypeController().getTypeInstanceController().cycleForward(this.currentModeController.getTypeController().getType()).getLocation();
+	    TypeController typeController = this.currentModeController.getTypeController();
+        TypeInstanceController typeInstanceController = typeController.getTypeInstanceController();
+        Enum currentType = typeController.getType();
+        TileOccupant selectedEntity = typeInstanceController.cycleForward(currentType);
+        Location newLocation = selectedEntity.getLocation();
 	    this.changeCenterCoordinates(newLocation);
 	}
 

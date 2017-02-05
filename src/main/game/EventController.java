@@ -36,7 +36,7 @@ public class EventController implements KeyListener{
 				this.game.cycleTypeBackward();
 				break;
 			default:
-				System.out.println("Invalid control");
+				log.info("Invalid command");
 				break;
 		}
 	}
@@ -90,8 +90,11 @@ public class EventController implements KeyListener{
 			case KeyEvent.VK_ENTER:
 				log.debug("Enter pressed");
 				break;
+			case KeyEvent.VK_ESCAPE:
+				log.debug("Escape pressed");
+				break;
 			default:
-				System.out.println("Invalid control");
+				log.info("Invalid command");
 				break;
 		}
 	}
