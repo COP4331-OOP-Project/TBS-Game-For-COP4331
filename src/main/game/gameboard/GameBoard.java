@@ -108,23 +108,23 @@ public class GameBoard {
     private Tile getAdjacentTile(Tile actorTile,int direction) {
         switch(direction) {
             case 0: //Move north
-                return gameMap[actorTile.getlocation().getX()][actorTile.getlocation().getY() - 1];
+                return gameMap[actorTile.getLocation().getX()][actorTile.getLocation().getY() - 1];
             case 45: //Move north-east
-                return gameMap[actorTile.getlocation().getX()+1][actorTile.getlocation().getY() - 1];
+                return gameMap[actorTile.getLocation().getX()+1][actorTile.getLocation().getY() - 1];
             case 90: //move east
-                return gameMap[actorTile.getlocation().getX() + 1][actorTile.getlocation().getY()];
+                return gameMap[actorTile.getLocation().getX() + 1][actorTile.getLocation().getY()];
             case 135: //move south east
-                return gameMap[actorTile.getlocation().getX()+1][actorTile.getlocation().getY() + 1];
+                return gameMap[actorTile.getLocation().getX()+1][actorTile.getLocation().getY() + 1];
             case 180: //move south
-                return gameMap[actorTile.getlocation().getX()][actorTile.getlocation().getY() + 1];
+                return gameMap[actorTile.getLocation().getX()][actorTile.getLocation().getY() + 1];
             case 225: //move south west
-                return gameMap[actorTile.getlocation().getX()-1][actorTile.getlocation().getY() + 1];
+                return gameMap[actorTile.getLocation().getX()-1][actorTile.getLocation().getY() + 1];
             case 270: //move west
-                return gameMap[actorTile.getlocation().getX() - 1][actorTile.getlocation().getY()];
+                return gameMap[actorTile.getLocation().getX() - 1][actorTile.getLocation().getY()];
             case 315: //move north west
-                return gameMap[actorTile.getlocation().getX()-1][actorTile.getlocation().getY() - 1];
+                return gameMap[actorTile.getLocation().getX()-1][actorTile.getLocation().getY() - 1];
             case 360: //move north
-                return gameMap[actorTile.getlocation().getX()][actorTile.getlocation().getY() - 1];
+                return gameMap[actorTile.getLocation().getX()][actorTile.getLocation().getY() - 1];
             default:
                 return null;
         }
@@ -226,7 +226,7 @@ public class GameBoard {
 
             Tile actorTile = getTileWithLocation( army.getLocation() );
             Tile targetTile = getAdjacentTile(actorTile, direction);
-            targetTile.attackOccupants();
+//            targetTile.attackOccupants();
 
 //            // If queue is empty, pass another attack command for next turn
 //            if (army.isQueueEmpty()) {
@@ -241,7 +241,7 @@ public class GameBoard {
 
             Tile actorTile = getTileWithLocation(struct.getLocation());
             Tile targetTile = getAdjacentTile(actorTile, direction);
-            targetTile.attackOccupants();
+            targetTile.attackOccupants(((Structure) actor).getAttackDamage());
 
             // If queue is empty, pass another attack command for next turn
             if (struct.isQueueEmpty()) {
@@ -334,7 +334,8 @@ public class GameBoard {
             Tile actorTile = getTileWithLocation(army.getLocation());
             Tile targetTile = getAdjacentTile(actorTile, direction);
 
-            targetTile.healOccupants();     // Heal occupants of tile
+            // Todo: Find amount to heal by
+            targetTile.healOccupants(10);     // Heal occupants of tile
 
         }
         else if(actor instanceof Unit) {
@@ -345,7 +346,8 @@ public class GameBoard {
             Tile actorTile = getTileWithLocation(unit.getLocation());
             Tile targetTile = getAdjacentTile(actorTile, direction);
 
-            targetTile.healOccupants();         // Heal occupants of tile
+            // Todo: Find amount to heal by
+            targetTile.healOccupants(10);         // Heal occupants of tile
 
         }
         else if (actor instanceof Structure) {
@@ -356,7 +358,8 @@ public class GameBoard {
             Tile actorTile = getTileWithLocation(struct.getLocation());
             Tile targetTile = getAdjacentTile(actorTile, direction);
 
-            targetTile.healOccupants();             // Heal occupants of tile
+            // Todo: Find amount to heal by
+            targetTile.healOccupants(10);             // Heal occupants of tile
         }
 
     }

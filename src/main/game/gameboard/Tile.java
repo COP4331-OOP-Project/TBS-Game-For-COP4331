@@ -10,7 +10,8 @@ import java.util.UUID;
 /**
  * Created by David on 2/1/2017.
  */
-public class Tile {
+public class Tile implements ITileAccessors {
+
     //0 Grass, 1 Sand, 2 Rivers(Impassable)
     private int Terrain;
     //Leave out AreaOfEffect, Resources, Item for iteration 1
@@ -38,21 +39,29 @@ public class Tile {
         this.location=location;
     }
 
-    //Setters, getters, removers
-    public Location getlocation(){
+    // Get Tile Location
+    public Location getLocation(){
         return location;
     }
 
+    // Add unit to Tile
     public void addUnit(Unit unit){
         units.add(unit);
         containsUnit=true;
     }
 
+    // Test if terrain is impassable
+    public boolean isImpassable() {
+        return (Terrain == 2) ? true : false;
+    }
+
+    // Get Tile terrain type
     public int getTileType()
     {
         return Terrain;
     }
 
+    // Remove unit from tile by ID
     public void removeUnit(int unitID){
         units.remove(unitID);
         if(units.isEmpty()){
@@ -60,10 +69,12 @@ public class Tile {
         }
     }
 
+    // Get all units from Tile
     public ArrayList<Unit> getUnits(){
         return units;
     }
 
+    // Add army to Tile
     public void addArmy(Army army){
         armies.add(army);
         containsArmy=true;
@@ -77,39 +88,38 @@ public class Tile {
                 break;
             }
         }
-        if(armies.isEmpty()){
+        if(armies.isEmpty()) {
             containsArmy=false;
         }
     }
 
+    // Get all armies from Tile
     public ArrayList<Army> getArmies(){
         return armies;
     }
 
+    // Set structure on tile
     public void setStructure(Structure structure){
         this.structure=structure;
         containsStructure=true;
     }
 
-    public void removeStructure(){
+    // Remove structure from tile
+    public void removeStructure() {
         this.structure=null;
         containsStructure=false;
     }
 
+    // Get structure instance from Tile
     public Structure getStructure(){
         return structure;
     }
 
     //TODO Command Handling
-    public void attackOccupants(){
+    public void attackOccupants(int damage) {}
+    public void healOccupants(int value) {}
 
-    }
-
-    public void healOccupants(){
-
-    }
-
-    //Set and get the owner id of the tile
+    // OwnerID Accessor
     public void setOwnerID(int playerID)
     {
         this.ownerID = playerID;
@@ -119,13 +129,33 @@ public class Tile {
         return this.ownerID;
     }
 
-    //Check whether this tile is occupied by enemy unit
+    // Return unit of given id
+    public Unit getUnitById(int id) throws EntityNotFoundException {
+        for (Unit u : units) {
+            if (u.getUnitID() == id) return u;
+        }
+
+        throw new EntityNotFoundException("Unit of id " + id + " " +
+                "not found on Tile " + location.getX() + ", " + location.getY() );
+    }
+
+    // Return army of given id
+    public Army getArmyById(int id) throws EntityNotFoundException {
+        for (Army a : armies) {
+            if (a.getArmyID() == id) return a;
+        }
+
+        throw new EntityNotFoundException("Army of id " + id + " " +
+                "not found on Tile " + location.getX() + ", " + location.getY() );
+    }
+
+    // Check whether this tile is occupied by enemy unit
     public boolean hasEnemyUnit(int playerID)
     {
-        if (playerID!= this.ownerID) {
+        if (playerID != this.ownerID) {
             return true;
         }
-        else if (playerID==this.ownerID)
+        else if (playerID == this.ownerID)
         {
             return false;
         }
