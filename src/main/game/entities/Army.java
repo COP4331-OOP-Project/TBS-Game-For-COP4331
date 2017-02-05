@@ -1,28 +1,28 @@
 package game.entities;
 
+import game.commands.AttackCommand;
 import game.commands.Command;
+import game.commands.DefendCommand;
 import game.entities.units.Unit;
+import game.gameboard.GameBoard;
 import game.gameboard.Location;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.UUID;
+import java.util.*;
 
-public class Army {
+public class Army{
 
-    private int armyID;                                 // army unique id
+    private int armyID;                                 // Army unique id
     private int ownerID;                                // Player id
     private int rotation = 0;
-    private Location location;                          // army location
-    private RallyPoint rp;                              // army Rally Point
-    private PowerState powerState;                      // army power state
-
-    private float resourceCost;                           // Total army resource cost
+    private Location location;                          // Army location
+    private RallyPoint rp;                              // Army Rally Point
+    private PowerState powerState;                      // Army power state
+    private float resourceCost;                         // Total army resource cost
 
     private ArrayList<Unit> battleGroup;                // Active battlegroup units
     private ArrayList<Unit> reinforcements;             // Reinforcing units
     private ArrayList<Unit> allUnits;                   // All Units in the army
-    private ArrayList<Command> commands;                // army commands
+    private Queue<Command> commands;                // Army commands
 
     // Constructor
     public Army(Location loc, int playerId, RallyPoint rp, ArrayList<Unit> units) {
@@ -30,7 +30,7 @@ public class Army {
         this.location = loc;                            // Set army location
         this.ownerID = playerId;                        // Set player id
         this.rp = rp;                                   // Set rally point
-
+        this.commands = new LinkedList<>();
         this.battleGroup = new ArrayList<Unit>();       // Initialize battleGroup
         this.reinforcements = new ArrayList<Unit>();    // Initialize reinforcements
         this.allUnits = new ArrayList<Unit>();          // Initialize allUnits
@@ -59,9 +59,9 @@ public class Army {
                 allUnits.get(i).addCommandToQueue(command);
             }
         }
+
     }
 
-    // TODO: Setup function to disband the army
     public void disbandArmy(){
         setPowerState(PowerState.STANDBY);
     }
@@ -151,6 +151,70 @@ public class Army {
         this.rp = rp;
         this.location = this.rp.getLocation();
     }
+
+    //Command Handling
+    public void battlegroupAttack(GameBoard gameBoard, int direction) {
+
+        // Filter army command down to each unit in battlegroup
+        setPowerState(PowerState.COMBAT);
+        for (Unit u : battleGroup) {
+            u.cancelQueuedCommands();
+            AttackCommand<Unit> bgAttackCmd = new AttackCommand<Unit>(gameBoard, u, direction, 0);
+            u.addCommandToQueue(bgAttackCmd);
+            u.doTurn();
+        }
+
+    }
+
+    public void battlegroupDefend(GameBoard gameBoard, int direction){
+        //Filter army commands down to each unit in battlegroup
+        setPowerState(PowerState.COMBAT);
+        for(Unit u : battleGroup){
+            u.cancelQueuedCommands();
+            DefendCommand<Unit> bgDefendCmd = new DefendCommand<Unit>(gameBoard, u, direction, 0);
+            u.addCommandToQueue(bgDefendCmd);
+            u.doTurn();
+        }
+    }
+
+    public void powerUp(){
+        setPowerState(PowerState.POWERED_UP);
+    }
+
+    public void powerDown(){
+        setPowerState(PowerState.POWERED_DOWN);
+    }
+
+
+    public void doTurn() {
+
+        updateArmy();
+        //Make sure has commands and powered state is not powered down
+        if (!commands.isEmpty()&&powerState.getUpkeep()!=0.25f) {
+            if (peekCommand().getDuration() == 0) {                               // Test if next cmd can fire
+                nextCommand().exec();                                      // Send commands to units
+            }
+            else peekCommand().iterateDuration();
+        }
+
+        getRp().PathToRallyPoint();
+
+        for(int i = 0; i < reinforcements.size(); i++){
+            reinforcements.get(i).doTurn();
+        }
+
+        updateArmy();
+
+
+    }
+
+    public Command nextCommand() { return commands.poll(); }                     // Pop off next command
+    public Command peekCommand() { return commands.peek(); }                     // Look next command
+    public boolean isQueueEmpty() { return commands.isEmpty(); }                 // check if empty
+    public void addCommandToQueue(Command command){ commands.add(command); }     // Add next cmd to queue
+    public void cancelQueuedCommands() { commands.clear(); }                     // Clear queue
+
+
 
     // Getters
     public int getOwnerID() { return ownerID; }
