@@ -93,11 +93,11 @@ public class MiniPanel extends Panel{
 	
 	private int offX(int x) {
 		return this.width + (TILE_SIZE * x) - 
-				DISTANCE_FROM_RIGHT ;
+				DISTANCE_FROM_RIGHT;
 	}
 	
 	private int offY(int y) {
-		return (this.height / 2) + (y * TILE_SIZE);
+		return (y * TILE_SIZE) + this.height - 265;
 	}
 
 }
