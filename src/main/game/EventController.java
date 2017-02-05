@@ -92,6 +92,7 @@ public class EventController implements KeyListener{
 				break;
 			case KeyEvent.VK_ESCAPE:
 				log.debug("Escape pressed");
+				this.game.endTurn();
 				break;
 			default:
 				log.info("Invalid command");

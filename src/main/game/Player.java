@@ -72,9 +72,9 @@ public class Player {
 
 		//Creates initial units
 		initColonist = new Colonist(loc, this.playerID);
-		Location explorer1Location = new Location(loc.xIndex+1, loc.yIndex);
+		Location explorer1Location = new Location(loc.getX()+1, loc.getY());
 		initExplorer1 = new Explorer(explorer1Location, this.playerID);
-		Location explorer2Location = new Location(loc.xIndex, loc.yIndex+1);
+		Location explorer2Location = new Location(loc.getX(), loc.getY()+1);
 		initExplorer2 = new Explorer(explorer2Location, this.playerID);
 
 		init();

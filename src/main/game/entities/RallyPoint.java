@@ -9,12 +9,7 @@ import game.entities.units.Unit;
 import game.gameboard.GameBoard;
 import game.gameboard.Location;
 
-<<<<<<< HEAD
-public class RallyPoint {
-
-=======
 public class RallyPoint extends TileOccupant {
->>>>>>> Gavin - got move to rally point working
 	private UUID rallyID;
 	private int ownerID;
 	private Location location;
