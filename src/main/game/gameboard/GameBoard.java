@@ -1,22 +1,18 @@
 package game.gameboard;
 
 import controls.ModeController;
-import game.Game;
 import game.Player;
 import game.commands.AttackCommand;
 import game.entities.Army;
 import game.entities.ICommandable;
+import game.entities.RallyPoint;
 import game.entities.factories.EntityFactory;
 import game.entities.factories.UnknownEntityCodeException;
-import game.entities.units.Unit;
-import game.entities.RallyPoint;
 import game.entities.structures.Structure;
+import game.entities.units.Unit;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-
-import javax.swing.text.html.parser.Entity;
-import java.sql.Struct;
 import java.util.ArrayList;
 /**
  * Gameboard class containing 2D Tile array for board and interaction handler functions
@@ -297,6 +293,10 @@ public class GameBoard {
             if(targetTile.hasEnemyUnit(army.getOwnerID())) {
                 //(Army)actor.nextCommand();
             }
+            else if (targetTile.isImpassable()) {
+                log.error("Cannot move to tile, it is impassable!");
+                // Clear army commands
+            }
             else  {
                 actorTile.removeArmy(army.getArmyID());
                 targetTile.addArmy(army);
@@ -311,6 +311,9 @@ public class GameBoard {
 
             if(targetTile.hasEnemyUnit(unit.getOwnerID())) {
                 unit.nextCommand();
+            } else if (targetTile.isImpassable()) {
+                log.error("Cannot move to tile, it is impassable!");
+                unit.cancelQueuedCommands();
             }
             else {
                 actorTile.removeUnit(unit.getUnitID());

@@ -5,7 +5,6 @@ import game.entities.structures.Structure;
 import game.entities.units.Unit;
 
 import java.util.ArrayList;
-import java.util.UUID;
 
 /**
  * Created by David on 2/1/2017.
@@ -115,9 +114,31 @@ public class Tile implements ITileAccessors {
         return structure;
     }
 
-    //TODO Command Handling
-    public void attackOccupants(int damage) {}
-    public void healOccupants(int value) {}
+    // Damage all units and structure on tile
+    public void attackOccupants(int damage) {
+
+        // Damage all units
+        for (Unit u : units) {
+            u.setHealth(u.getHealth() - damage);
+        }
+
+        // Damage structure
+        structure.setHealth(structure.getHealth() - damage);
+
+    }
+
+    // Heal all units and structure on tile
+    public void healOccupants(int value) {
+
+        // Heal all units
+        for (Unit u : units) {
+            u.setHealth(u.getHealth() + value);
+        }
+
+        // Heal structure
+        structure.setHealth(structure.getHealth() + value);
+
+    }
 
     // OwnerID Accessor
     public void setOwnerID(int playerID)
