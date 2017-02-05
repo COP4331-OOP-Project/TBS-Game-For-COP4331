@@ -134,6 +134,7 @@ public class RallyPoint {
 		}
 
 		//Check if location was found
+
 		if(directionMap.containsKey(to)){
 			//Found
 			//Back track to the first

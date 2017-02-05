@@ -26,14 +26,14 @@ public class RallyPointTest {
 
     @Test
     public void TestPathAlgorithm1(){
-        Location from = new Location(0,0);
-        RallyPoint rp = new RallyPoint(new Location(1,0), gBoard);
+        Location from = new Location(13,10);
+        RallyPoint rp = new RallyPoint(new Location(15,10), gBoard);
         ArrayList<Unit> empty = new ArrayList<Unit>();
         rp.setArmy(new Army(null,0,null,empty));
         command=rp.pathAlgorithm(from,rp.getLocation(), null);
-        Assert.assertEquals(command.getDirection(), 90);
+        Assert.assertEquals(command.getDirection(), 225);
     }
-    @Test
+    /**@Test
     public void TestPathAlgorithm2(){
         Location from = new Location(0,0);
         RallyPoint rp = new RallyPoint(new Location(5,0), gBoard);
@@ -59,6 +59,6 @@ public class RallyPointTest {
         rp.setArmy(new Army(null,0,null,empty));
         command=rp.pathAlgorithm(from,rp.getLocation(), null);
         Assert.assertEquals(command.getDirection(), 135);
-    }
+    }**/
 
 }
