@@ -46,6 +46,7 @@ public class Player {
 	private int totalUnitsCount;
 	private int basesCount;
 	private int rallyPointsCount;
+
 	//Inital Untis
 	private Colonist initColonist;
 	private Explorer initExplorer1;
