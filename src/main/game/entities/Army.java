@@ -10,8 +10,7 @@ import java.util.UUID;
 
 public class Army {
 
-    private int armyID;
-    private UUID id;                                    // Army unique id
+    private int armyID;                                 // Army unique id
     private int ownerID;                                // Player id
     private Location location;                          // Army location
     private RallyPoint rp;                              // Army Rally Point
@@ -26,7 +25,6 @@ public class Army {
     // Constructor
     public Army(Location loc, int playerId, RallyPoint rp, ArrayList<Unit> units) {
 
-        this.id = UUID.randomUUID();                    // Army unique id
         this.location = loc;                            // Set army location
         this.ownerID = playerId;                        // Set player id
         this.rp = rp;                                   // Set rally point
@@ -52,14 +50,19 @@ public class Army {
     // TODO: Setup function to filter all received commands to all units
 
     public void passCommandToUnit(Command command, Unit unit){
+        command.setDuration(0);
         for(int i = 0; i<allUnits.size(); i++){
             if(allUnits.get(i).getUnitID()==unit.getUnitID()) {
+                allUnits.get(i).cancelQueuedCommands();
                 allUnits.get(i).addCommandToQueue(command);
             }
         }
     }
 
     // TODO: Setup function to disband the army
+    public void disbandArmy(){
+        setPowerState(PowerState.STANDBY);
+    }
 
     // Add one new unit to the reinforcements array
     public void addSingleReinforcement(Unit reinforcement) {
@@ -112,7 +115,7 @@ public class Army {
     //Set Power states to correct units
     public void setPowerState(PowerState state) {
         this.powerState = state;            // Set state
-        if(this.powerState.getUpkeep()>=0.75f){
+        if(this.powerState.getUpkeep()>=1.0f){
             //Give Battlegroup combat state
             for(int i = 0; i<battleGroup.size(); i++){
                 battleGroup.get(i).setPowerState(state);
@@ -143,20 +146,17 @@ public class Army {
 
     // Set new rally point
     public void setRallyPoint(RallyPoint rp) {
-    	this.rp = rp;
+        this.rp = rp;
+        this.location = this.rp.getLocation();
     }
 
     // Getters
-    public UUID getId() { return id; }
     public int getOwnerID() { return ownerID; }
     public Location getLocation() { return location; }
     public RallyPoint getRp() { return rp; }
     public ArrayList<Unit> getBattleGroup() { return battleGroup; }
     public ArrayList<Unit> getReinforcements() { return reinforcements; }
     public ArrayList<Unit> getAllUnits(){return allUnits;}
-    public RallyPoint getRallyPoint() {
-		return rp;
-    }
     public float getResourceCost(){return resourceCost;}
 
     public void setArmyID(int armyID)

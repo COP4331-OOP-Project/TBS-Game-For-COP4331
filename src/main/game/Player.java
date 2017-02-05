@@ -358,18 +358,27 @@ public class Player {
 			}
 		}
 	}
+
+	public void removeArmy(Army army){
+		armies.set(army.getArmyID(),null);
+	}
 	
 	public void addRallyPoint(RallyPoint rallyPoint)
 	{
 		for(int i = 0;i<rallyPoints.size();i++)
 		{
-			if(totalUnits.get(i)==null)
+			if(rallyPoints.get(i)==null)
 			{
-				rallyPoints.add((rallyPoint));
+				rallyPoints.set(i,rallyPoint);
+				rallyPoint.setRallyID(i);
 				rallyPointsCount++;
 				break;
 			}
 		}
+	}
+
+	public void removeRallyPoint(RallyPoint rallyPoint){
+		rallyPoints.set(rallyPoint.getRallyID(),null);
 	}
 
 	public void addResources(int resource)

@@ -410,8 +410,23 @@ public class GameBoard {
 
     // Handle disband army command
     public void handleDisbandArmyCmd(Army actor) {
-//        actor.disband();
-       // actor.disbandArmy();
+        //Set All units to stand by
+        actor.disbandArmy();
+        //Set Player's reference to null
+        players.get(actor.getOwnerID()).removeArmy(actor);
+        //Set Players reference to rally point to null
+        players.get(actor.getOwnerID()).removeRallyPoint(actor.getRp());
+        //Set rallypoints reference to null
+        actor.getRp().setArmy(null);
+        //Set Tile reference to null
+        gameMap[actor.getLocation().getX()][actor.getLocation().getY()].removeArmy(actor.getArmyID());
+        //Set Tile reference to rally point to null
+        gameMap[actor.getLocation().getX()][actor.getLocation().getY()].removeRallyPoint(actor.getRp());
+        //Set Army reference to rally point to null
+        actor.setRallyPoint(null);
+
+
+
     }
 
     // Handle band army command
