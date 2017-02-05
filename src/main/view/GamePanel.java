@@ -145,6 +145,30 @@ public class GamePanel extends Panel {
 					player1Units.get(i).getOwnerID(),
 					0);
 		}
+		player2Units = game.getPlayer(1).getAllUnit();
+		for (int i = 0; i < player2Units.size(); i++) {
+			if (player2Units.get(i).getLocation().getX() == selectedX
+					&& player2Units.get(i).getLocation().getY() == selectedY
+					&& selectedX != -1 && selectedY != -1) {
+				if (player2Units.get(i).getUnitType() == 0 &&
+						game.getCurrentType() == UnitEnum.MELEE)
+					unitSelected = i;
+				if (player2Units.get(i).getUnitType() == 1 &&
+						game.getCurrentType() == UnitEnum.RANGED)
+					unitSelected = i;
+				if (player2Units.get(i).getUnitType() == 2 &&
+						game.getCurrentType() == UnitEnum.EXPLORER)
+					unitSelected = i;
+				if (player2Units.get(i).getUnitType() == 3 &&
+						game.getCurrentType() == UnitEnum.COLONIST)
+					unitSelected = i;
+			}
+			drawUnit(player2Units.get(i).getLocation().getX(),
+					player2Units.get(i).getLocation().getY(),
+					player2Units.get(i).getUnitType(),
+					player2Units.get(i).getOwnerID(),
+					0);
+		}
 		if (game.getCurrentMode() == ModeEnum.UNIT && unitSelected != -1) {
 			drawUnit(player1Units.get(unitSelected).getLocation().getX(),
 				player1Units.get(unitSelected).getLocation().getY(),
@@ -154,14 +178,6 @@ public class GamePanel extends Panel {
 			drawSelectedItem();
 		} else {
 			unitSelected = -1;
-			player2Units = game.getPlayer(1).getAllUnit();
-			for (int i = 0; i < player2Units.size(); i++) {
-				drawUnit(player2Units.get(i).getLocation().getX(),
-						player2Units.get(i).getLocation().getY(),
-						player2Units.get(i).getUnitType(),
-						player2Units.get(i).getOwnerID(),
-						0);
-			}
 		}
 	}
 	
