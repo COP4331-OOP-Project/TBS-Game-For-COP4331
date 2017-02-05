@@ -2,6 +2,7 @@ package game.entities;
 
 import game.commands.AttackCommand;
 import game.commands.Command;
+import game.commands.DecommissionCommand;
 import game.commands.DefendCommand;
 import game.entities.units.Unit;
 import game.gameboard.GameBoard;
@@ -173,6 +174,15 @@ public class Army{
             u.cancelQueuedCommands();
             DefendCommand<Unit> bgDefendCmd = new DefendCommand<Unit>(gameBoard, u, direction, 0);
             u.addCommandToQueue(bgDefendCmd);
+            u.doTurn();
+        }
+    }
+
+    public void groupDecomission(GameBoard gameBoard){
+        for(Unit u : reinforcements){
+            u.cancelQueuedCommands();
+            DecommissionCommand<Unit> groupDecom = new DecommissionCommand<Unit>(gameBoard,u);
+            u.addCommandToQueue(groupDecom);
             u.doTurn();
         }
     }

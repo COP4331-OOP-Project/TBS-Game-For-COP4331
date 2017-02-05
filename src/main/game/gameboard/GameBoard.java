@@ -153,8 +153,10 @@ public class GameBoard {
 
         // Find instance type and call remove command on unit
         if(actor instanceof Army){
-            Tile actorTile = getTileWithLocation( ( (Army) actor ).getLocation());
-            actorTile.removeArmy(( (Army) actor ).getArmyID());
+            ((Army) actor).getBattleGroup().clear();
+            ((Army) actor).getReinforcements().clear();
+            ((Army) actor).groupDecomission(this);
+            handleDisbandArmyCmd(((Army) actor));
         }
         else if(actor instanceof Unit){
             Tile actorTile = getTileWithLocation( ( (Unit) actor ).getLocation());
