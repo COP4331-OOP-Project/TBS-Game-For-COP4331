@@ -1,9 +1,7 @@
 package game.entities.units;
 
 import game.Player;
-import game.commands.AttackCommand;
 import game.commands.PowerDownCommand;
-import game.commands.PowerUpCommand;
 import game.entities.PowerState;
 import game.gameboard.GameBoard;
 import game.gameboard.Location;
@@ -103,4 +101,5 @@ public class UnitEntityTest {
         assertEquals(7.5f, melee.getResourceCost(), 0);
 
     }
+
 }

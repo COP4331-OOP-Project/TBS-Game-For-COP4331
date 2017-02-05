@@ -1,12 +1,12 @@
 package game.entities.units;
 
+import game.commands.Command;
 import game.entities.ICommandable;
 import game.entities.PowerState;
 import game.gameboard.Location;
-import game.gameboard.Tile;
-import game.commands.Command;
-import java.io.*;
-import java.util.*;
+
+import java.util.LinkedList;
+import java.util.Queue;
 
 public abstract class Unit implements ICommandable
 {
@@ -79,8 +79,6 @@ public abstract class Unit implements ICommandable
   public void setOwnerID(int o){ this.ownerID = o; }
   public void setUnitType(int u){ this.unitType = u; }
   public void setUnitID(int id){ this.unitID = id; }
-  public void combatState() { setPowerState(PowerState.COMBAT); }
-  public void standby() { setPowerState(PowerState.STANDBY); }
 
   public void printUnit()
   {
@@ -125,6 +123,8 @@ public abstract class Unit implements ICommandable
   public void cancelQueuedCommands() { queue.clear(); }                     // Clear queue
   public void powerUp() { setPowerState(PowerState.POWERED_UP); }           // Power down state
   public void powerDown() { setPowerState(PowerState.POWERED_DOWN); }       // Power up state
+  public void combatState() { setPowerState(PowerState.COMBAT); }
+  public void standby() { setPowerState(PowerState.STANDBY); }
 
   // TODO: Setup decommission entity
   public void decommissionEntity() {}                                       // Destroy struct & remove refs

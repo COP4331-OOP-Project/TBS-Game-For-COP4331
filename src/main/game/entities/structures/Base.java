@@ -19,7 +19,7 @@ public class Base extends Structure implements IMake {
     public Base(Location loc, int owner){
 
         super(loc, owner);
-        setStructureStats(10, 5, 5, 20, 1.0f, 10);
+        setStats(10, 5, 5, 20,  10);
         this.productionRate=1;
 
     }

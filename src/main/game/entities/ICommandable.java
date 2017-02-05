@@ -15,6 +15,8 @@ public interface ICommandable {
     void powerDown();                           // Set power down state
     void powerUp();                             // Set power up state
     void decommissionEntity();                  // Destroy entity
-
+    boolean isQueueEmpty();                     // Test is queue is empty
+    void combatState();                         // Set combat state on entity
+    void standby();                        // Set standby state on entity
 
 }
