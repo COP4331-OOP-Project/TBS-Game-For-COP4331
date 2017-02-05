@@ -6,6 +6,7 @@ import controls.Type;
 import controls.Unit.UnitEnum;
 import game.Player;
 import game.entities.Army;
+import game.entities.RallyPoint;
 import game.entities.structures.Base;
 import game.entities.structures.Structure;
 import game.entities.units.*;
@@ -39,7 +40,7 @@ public class TypeInstanceController {
     private Integer currentColonist;
     private ArrayList<Base> bases;
     private Integer currentBase;
-    private ArrayList<Object> rallyPoints;
+    private ArrayList<RallyPoint> rallyPoints;
     private Integer currentRallyPoint;
 
 

@@ -139,7 +139,9 @@ public class Player {
 	{
 		return totalUnits.size();
 	}
-	public ArrayList<Object> getArmyRallyPoint()
+
+	//@TODO GET RALLY POINT NOT FINISHED
+	public ArrayList<RallyPoint> getArmyRallyPoint()
 	{
 		return rallyPoints;
 	}

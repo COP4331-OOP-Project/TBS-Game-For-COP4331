@@ -45,10 +45,6 @@ public abstract class Structure implements ICommandable {
         this.setUpkeep(upkeep);
     }
 
-    public UUID getId() {
-        return this.id;
-    }
-
     //Accessors
 
     // Getters
