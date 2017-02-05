@@ -11,6 +11,7 @@ import game.entities.RallyPoint;
 import game.entities.structures.Structure;
 
 
+import javax.swing.text.html.parser.Entity;
 import java.sql.Struct;
 import java.util.ArrayList;
 /**
@@ -34,6 +35,11 @@ public class GameBoard {
     	
         this.players = players;                     // Set players
         setupMap();                                 // Setup gameMap
+    }
+
+    public Player getPlayer(int index) {
+        if (index > players.size() - 1) return null;
+        return this.players.get(0);
     }
 
     // Setup the gameMap array wit5h valid Tiles
@@ -87,30 +93,30 @@ public class GameBoard {
 
     // Get specific tile with actor location
     private Tile getTileWithLocation(Location l) {
-        return gameMap[l.xIndex][l.yIndex];
+        return gameMap[l.getX()][l.getY()];
     }
 
     //Get the adjecent tile
     private Tile getAdjacentTile(Tile actorTile,int direction) {
         switch(direction) {
             case 0: //Move north
-                return gameMap[actorTile.getlocation().xIndex][actorTile.getlocation().yIndex - 1];
+                return gameMap[actorTile.getlocation().getX()][actorTile.getlocation().getY() - 1];
             case 45: //Move north-east
-                return gameMap[actorTile.getlocation().xIndex+1][actorTile.getlocation().yIndex - 1];
+                return gameMap[actorTile.getlocation().getX()+1][actorTile.getlocation().getY() - 1];
             case 90: //move east
-                return gameMap[actorTile.getlocation().xIndex + 1][actorTile.getlocation().yIndex];
+                return gameMap[actorTile.getlocation().getX() + 1][actorTile.getlocation().getY()];
             case 135: //move south east
-                return gameMap[actorTile.getlocation().xIndex+1][actorTile.getlocation().yIndex + 1];
+                return gameMap[actorTile.getlocation().getX()+1][actorTile.getlocation().getY() + 1];
             case 180: //move south
-                return gameMap[actorTile.getlocation().xIndex][actorTile.getlocation().yIndex + 1];
+                return gameMap[actorTile.getlocation().getX()][actorTile.getlocation().getY() + 1];
             case 225: //move south west
-                return gameMap[actorTile.getlocation().xIndex-1][actorTile.getlocation().yIndex + 1];
+                return gameMap[actorTile.getlocation().getX()-1][actorTile.getlocation().getY() + 1];
             case 270: //move west
-                return gameMap[actorTile.getlocation().xIndex - 1][actorTile.getlocation().yIndex];
+                return gameMap[actorTile.getlocation().getX() - 1][actorTile.getlocation().getY()];
             case 315: //move north west
-                return gameMap[actorTile.getlocation().xIndex-1][actorTile.getlocation().yIndex - 1];
+                return gameMap[actorTile.getlocation().getX()-1][actorTile.getlocation().getY() - 1];
             case 360: //move north
-                return gameMap[actorTile.getlocation().xIndex][actorTile.getlocation().yIndex - 1];
+                return gameMap[actorTile.getlocation().getX()][actorTile.getlocation().getY() - 1];
             default:
                 return null;
         }
@@ -129,11 +135,11 @@ public class GameBoard {
         boolean isStructure = entity instanceof Structure;
 
         if(isArmy)
-            return gameMap[((Army)entity).getLocation().xIndex][((Army)entity).getLocation().yIndex];
+            return gameMap[((Army)entity).getLocation().getX()][((Army)entity).getLocation().getY()];
         else if(isUnit)
-            return gameMap[((Unit)entity).getLocation().xIndex][((Unit)entity).getLocation().yIndex];
+            return gameMap[((Unit)entity).getLocation().getX()][((Unit)entity).getLocation().getY()];
         else if(isStructure)
-            return gameMap[((Structure)entity).getLocation().xIndex][((Structure)entity).getLocation().yIndex];
+            return gameMap[((Structure)entity).getLocation().getX()][((Structure)entity).getLocation().getY()];
 
         return null;
     }
@@ -394,9 +400,11 @@ public class GameBoard {
 //    	players.get(actors.get(0).getOwner()).addArmy(newArmy);
 
         Location location = actors.get(0).getLocation();
-        RallyPoint rp = new RallyPoint(location, this);
+        RallyPoint rp = EntityFactory.getRallyPoint(location, this, actors.get(0).getOwnerID());
         Army newArmy = EntityFactory.getArmy(location, actors.get(0).getOwnerID(),rp, actors);
         players.get(actors.get(0).getOwnerID()).addArmy(newArmy);
+
+
     }
 
 }

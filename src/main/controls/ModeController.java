@@ -10,10 +10,8 @@ import org.apache.logging.log4j.Logger;
 public class ModeController {
     private ModeEnum mode;
     private TypeController typeController;
-    private final static Logger log = LogManager.getLogger(ModeController.class);
 
     public ModeController(Player p) {
-        log.debug("Mode controller instantiated");
         this.mode = ModeEnum.RALLY_POINT;
         this.typeController = new TypeController(this.mode, p);
     }

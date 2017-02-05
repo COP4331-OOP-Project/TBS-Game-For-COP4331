@@ -4,6 +4,7 @@ import game.entities.Army;
 import game.entities.RallyPoint;
 import game.entities.structures.*;
 import game.entities.units.*;
+import game.gameboard.GameBoard;
 import game.gameboard.Location;
 
 import java.util.ArrayList;
@@ -33,8 +34,6 @@ public class EntityFactory {
                 entity = new Explorer(location, playerId);
             case "colonist":
                 entity = new Colonist(location, playerId);
-//            case "rallyPoint":
-//                entity = new RallyPoint();
             default:
                 System.out.println("Unknown entity code specified");
                 entity = null;
@@ -49,4 +48,8 @@ public class EntityFactory {
         return new Army(location, playerId, rp, units);
     }
 
+    // Create new rally point given the target location and the gameboard
+    public static RallyPoint getRallyPoint(Location location, GameBoard gameBoard, int ownerID) {
+        return new RallyPoint(location, gameBoard, ownerID);
+    }
 }

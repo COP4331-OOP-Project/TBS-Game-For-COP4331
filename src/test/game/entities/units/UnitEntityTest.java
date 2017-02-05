@@ -23,8 +23,8 @@ public class UnitEntityTest {
     @Test
     public void testGetLocation() {
 
-        assertEquals(0, melee.getLocation().xIndex);
-        assertEquals(1, melee.getLocation().yIndex);
+        assertEquals(0, melee.getLocation().getX());
+        assertEquals(1, melee.getLocation().getY());
 
     }
 

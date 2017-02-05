@@ -11,6 +11,7 @@ import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
 import java.util.Random;
 import controls.ModeEnum;
+import game.gameboard.Location;
 
 import game.entities.units.Colonist;
 import game.entities.units.Explorer;
@@ -70,6 +71,15 @@ public class GamePanel extends Panel {
 		drawUnits();
 		drawArmies();
 		drawSelectedItem();
+		checkCenteringCoordinates();
+	}
+
+	private void checkCenteringCoordinates() {
+		if (this.game.isCenterCoordinatesUpdated()) {
+			Location loc = this.game.getCenterCoordinates();
+			this.centerOnTile(loc.getX(), loc.getY());
+			this.game.setCenterCoordinatesUpdated(false);
+		}
 	}
 
 	private void checkCentering(int x, int y) {
@@ -104,22 +114,22 @@ public class GamePanel extends Panel {
 
 	private void drawUnits() {
 		/*
-		drawUnit(game.getGameBoard().testUnit.getLocation().xIndex, 
-				game.getGameBoard().testUnit.getLocation().yIndex,
+		drawUnit(game.getGameBoard().testUnit.getLocation().getX(),
+				game.getGameBoard().testUnit.getLocation().getY(),
 				game.getGameBoard().testUnit.getUnitType(),
 				game.getGameBoard().testUnit.getOwnerID(),
 				0);
 	*/
 		/*
-		centerOnTile(game.getGameBoard().testUnit.getLocation().xIndex, 
-				game.getGameBoard().testUnit.getLocation().yIndex);
+		centerOnTile(game.getGameBoard().testUnit.getLocation().getX(),
+				game.getGameBoard().testUnit.getLocation().getY());
 		*/
 
 		colonists = game.getPlayer(0).getColonists();
 		for(int i = 0;i<colonists.size();i++)
 		{
-			drawUnit(colonists.get(i).getLocation().xIndex,
-					colonists.get(i).getLocation().yIndex,
+			drawUnit(colonists.get(i).getLocation().getX(),
+					colonists.get(i).getLocation().getY(),
 					colonists.get(i).getUnitType(),
 					colonists.get(i).getOwnerID(),
 					0);
@@ -127,8 +137,8 @@ public class GamePanel extends Panel {
 		explorers = game.getPlayer(0).getExplorers();
 		for(int i = 0;i<explorers.size();i++)
 		{
-			drawUnit(explorers.get(i).getLocation().xIndex,
-					explorers.get(i).getLocation().yIndex,
+			drawUnit(explorers.get(i).getLocation().getX(),
+					explorers.get(i).getLocation().getY(),
 					explorers.get(i).getUnitType(),
 					explorers.get(i).getOwnerID(),
 					0);
@@ -137,8 +147,8 @@ public class GamePanel extends Panel {
 		colonists1 = game.getPlayer(1).getColonists();
 		for(int i = 0;i<colonists1.size();i++)
 		{
-			drawUnit(colonists1.get(i).getLocation().xIndex,
-					colonists1.get(i).getLocation().yIndex,
+			drawUnit(colonists1.get(i).getLocation().getX(),
+					colonists1.get(i).getLocation().getY(),
 					colonists1.get(i).getUnitType(),
 					colonists1.get(i).getOwnerID(),
 					0);
@@ -146,8 +156,8 @@ public class GamePanel extends Panel {
 		explorers1 = game.getPlayer(1).getExplorers();
 		for(int i = 0;i<explorers1.size();i++)
 		{
-			drawUnit(explorers1.get(i).getLocation().xIndex,
-					explorers1.get(i).getLocation().yIndex,
+			drawUnit(explorers1.get(i).getLocation().getX(),
+					explorers1.get(i).getLocation().getY(),
 					explorers1.get(i).getUnitType(),
 					explorers1.get(i).getOwnerID(),
 					0);
