@@ -24,16 +24,22 @@ public class EntityFactory {
         switch (entityCode) {
             case "base":
                 entity = new Base(location, playerId);
+                break;
             case "melee":
                 entity = new Melee(location, playerId);
+                break;
             case "ranged":
                 entity = new Ranged(location, playerId);
+                break;
             case "worker":
                 entity = new Worker(location, playerId);
+                break;
             case "explorer":
                 entity = new Explorer(location, playerId);
+                break;
             case "colonist":
                 entity = new Colonist(location, playerId);
+                break;
             default:
                 System.out.println("Unknown entity code specified");
                 entity = null;
