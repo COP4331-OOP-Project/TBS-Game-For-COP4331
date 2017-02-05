@@ -39,7 +39,7 @@ public class Game {
 
 		this.nextPlayer = players.get(1);
 
-		turnNum = 0;
+		turnNum = 1;
 		this.currentPlayer = player0;
 		gBoard = new GameBoard(players);
 		gBoard.getPlayer(0).addRallyPoint(new RallyPoint(new Location(1,1), this.gBoard, player0.getPlayerID()));
@@ -72,8 +72,11 @@ public class Game {
 		Player temp = currentPlayer;
 		currentPlayer = nextPlayer;
 		nextPlayer = temp;
-		turnNum++;
-	}
+		if (currentPlayer.getPlayerID() == 0) {
+            turnNum++;
+        }
+        this.currentModeController = new ModeController(this.currentPlayer);
+    }
 
 	public int getTurnNum() {
 		return turnNum;
