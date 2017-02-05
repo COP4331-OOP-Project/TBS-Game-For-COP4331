@@ -2,6 +2,7 @@ package game;
 import game.entities.Army;
 import game.entities.RallyPoint;
 import game.entities.factories.EntityFactory;
+import game.entities.factories.UnknownEntityCodeException;
 import game.entities.structures.Base;
 
 import game.entities.units.Unit;
@@ -65,20 +66,32 @@ public class Player {
 	private ArrayList<Unit> totalUnits;
 	
 	//Constructor
-	public Player(int id){
-		this.playerID = id;
-		init();
-	}
-	public Player(int id, Location loc){
-		this.playerID = id;
+	public Player(int id) {
 
-		//Creates initial units
-		initColonist = (Colonist) EntityFactory.getEntity(loc, this.playerID, "colonist");
-		Location explorer1Location = new Location(loc.getX()+1, loc.getY());
-		initExplorer1 = (Explorer)EntityFactory.getEntity(explorer1Location, this.playerID,"explorer");
-		Location explorer2Location = new Location(loc.getX(), loc.getY());
-		initExplorer2 = (Explorer)EntityFactory.getEntity(explorer2Location, this.playerID,"explorer");
-		init();
+		this.playerID = id;		// Set id
+		init();					// Initialize
+	}
+
+	public Player(int id, Location loc) {
+
+		this.playerID = id;	// Set this player id
+
+		// Catch unknown entity codes
+		try {
+
+			//Creates initial units
+			initColonist = (Colonist) EntityFactory.getEntity(loc, this.playerID, "colonist");
+			Location explorer1Location = new Location(loc.getX()+1, loc.getY());
+			initExplorer1 = (Explorer)EntityFactory.getEntity(explorer1Location, this.playerID,"explorer");
+			Location explorer2Location = new Location(loc.getX(), loc.getY());
+			initExplorer2 = (Explorer)EntityFactory.getEntity(explorer2Location, this.playerID,"explorer");
+
+		} catch (UnknownEntityCodeException e) {
+			log.error(e.getLocalizedMessage());
+		} finally {
+			init();	// Initialize regardless of which units were not loaded
+		}
+
 	}
 
 	private void init()
@@ -444,5 +457,17 @@ public class Player {
 		}
 		return gBases;
     }
+
+    public ArrayList<Unit> getAllUnit(){
+		ArrayList<Unit> gUnit = new ArrayList<Unit>();
+		for(int i = 0; i<totalUnits.size();i++)
+		{
+			if(totalUnits.get(i)!=null)
+			{
+				gUnit.add(totalUnits.get(i));
+			}
+		}
+		return gUnit;
+	}
 	
 }

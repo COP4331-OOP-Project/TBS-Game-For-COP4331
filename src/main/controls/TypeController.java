@@ -23,11 +23,13 @@ public class TypeController {
     private Type currentType;
     private ModeEnum mode;
     private TypeInstanceController typeInstanceController;
+    private Player player;
     private final static Logger log = LogManager.getLogger(ModeController.class);
 
 
     public TypeController(ModeEnum mode, Player p) {
         this.mode = mode;
+        this.player = p;
         this.setMode(this.mode);
         // TODO: change start type to actual
         this.typeInstanceController = new TypeInstanceController(p, UnitEnum.MELEE);
@@ -62,15 +64,19 @@ public class TypeController {
         switch(mode) {
             case STRUCTURE:
                 this.currentType = new StructureType();
+                this.typeInstanceController = new TypeInstanceController(this.player, StructureEnum.BASE);
                 break;
             case UNIT:
                 this.currentType = new UnitType();
+                this.typeInstanceController = new TypeInstanceController(this.player, UnitEnum.EXPLORER);
                 break;
             case ARMY:
                 this.currentType = new ArmyType();
+                this.typeInstanceController = new TypeInstanceController(this.player, ArmyEnum.ENTIRE_ARMY);
                 break;
             case RALLY_POINT:
                 this.currentType = new RallyPointType();
+                this.typeInstanceController = new TypeInstanceController(this.player, RallyPointEnum.RALLY_POINT);
                 break;
             default:
                 throw new RuntimeException("Cannot switch to mode: " + mode);
@@ -83,6 +89,7 @@ public class TypeController {
             return null;
         }
         this.currentType.cycleForward();
+        this.typeInstanceController = new TypeInstanceController(this.player, this.currentType.getType());
         return this.getType();
     }
 
@@ -92,6 +99,7 @@ public class TypeController {
             return null;
         }
         this.currentType.cycleBackward();
+        this.typeInstanceController = new TypeInstanceController(this.player, this.currentType.getType());
         return this.getType();
     }
 

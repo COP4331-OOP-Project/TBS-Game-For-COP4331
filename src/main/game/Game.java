@@ -103,21 +103,33 @@ public class Game {
 		return this.currentModeController.getTypeController().getType();
 	}
 
+	private void centerOnCurrentTypeInstance() {
+        TypeController typeController = this.currentModeController.getTypeController();
+        TypeInstanceController typeInstanceController = typeController.getTypeInstanceController();
+        TileOccupant selectedEntity = typeInstanceController.getTypeInstance();
+        Location newLocation = selectedEntity.getLocation();
+        this.changeCenterCoordinates(newLocation);
+    }
+
 	protected void cycleModeForward() {
 		this.currentModeController.cycleForward();
+		this.centerOnCurrentTypeInstance();
 	}
 
 	protected void cycleModeBackward() {
 		this.currentModeController.cycleBackward();
-	}
+        this.centerOnCurrentTypeInstance();
+    }
 
 	protected void cycleTypeForward() {
 		this.currentModeController.getTypeController().cycleForward();
-	}
+        this.centerOnCurrentTypeInstance();
+    }
 
 	protected void cycleTypeBackward() {
 		this.currentModeController.getTypeController().cycleBackward();
-	}
+        this.centerOnCurrentTypeInstance();
+    }
 
 	protected void cycleCommandForward() {
 
@@ -137,7 +149,12 @@ public class Game {
 	}
 
 	protected void cycleTypeInstanceBackward() {
-        this.currentModeController.getTypeController().getTypeInstanceController().cycleBackward(this.currentModeController.getTypeController().getType());
+        TypeController typeController = this.currentModeController.getTypeController();
+        TypeInstanceController typeInstanceController = typeController.getTypeInstanceController();
+        Enum currentType = typeController.getType();
+        TileOccupant selectedEntity = typeInstanceController.cycleBackward(currentType);
+        Location newLocation = selectedEntity.getLocation();
+        this.changeCenterCoordinates(newLocation);
 	}
 
 	protected void changeCenterCoordinates(Location loc) {

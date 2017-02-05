@@ -11,6 +11,7 @@ import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
 import java.util.Random;
 import controls.ModeEnum;
+import game.entities.units.Unit;
 import game.gameboard.Location;
 
 import game.entities.units.Colonist;
@@ -36,14 +37,14 @@ public class GamePanel extends Panel {
 	private int centerToX = -1;
 	private int centerToY = -1;
 	
+	private int selectedX = -1;
+	private int selectedY = -1;
+	
 	private int width = 0;
 	private int height = 0;
 
 	//ArrayList of each player's unit
-	private ArrayList<Explorer> explorers; //Instances for player0 and player1
-	private ArrayList<Colonist> colonists;
-	private ArrayList<Explorer> explorers1;
-	private ArrayList<Colonist> colonists1;
+	private ArrayList<Unit> player1Units;
 
 	Graphics2D g2d;
 	
@@ -66,18 +67,20 @@ public class GamePanel extends Panel {
 		//checkCentering(x, y);
 		if (isCentering)
 			continueCentering();
+		checkCenteringCoordinates();
 		drawTiles();
 		drawBases();
 		drawUnits();
 		drawArmies();
 		drawSelectedItem();
-		checkCenteringCoordinates();
 	}
 
 	private void checkCenteringCoordinates() {
 		if (this.game.isCenterCoordinatesUpdated()) {
 			Location loc = this.game.getCenterCoordinates();
-			this.centerOnTile(loc.getX(), loc.getY());
+			selectedX = loc.getX();
+			selectedY = loc.getY();
+			this.centerOnTile(selectedX, selectedY);
 			this.game.setCenterCoordinatesUpdated(false);
 		}
 	}
@@ -91,19 +94,21 @@ public class GamePanel extends Panel {
 	}
 	
 	private void drawSelectedItem() {
-		int x = 2;
-		int y = 2;
-		if (game.getCurrentMode() == ModeEnum.RALLY_POINT) {
-			drawStaticTileElement(x, y, "RALLY_POINT_SELECTED");
-		}
-		if (game.getCurrentMode() == ModeEnum.UNIT) {
-			drawStaticTileElement(x, y, "UNIT_SELECTED");
-		}
-		if (game.getCurrentMode() == ModeEnum.STRUCTURE) {
-			drawStaticTileElement(x, y, "BASE_SELECTED");
-		}
-		if (game.getCurrentMode() == ModeEnum.ARMY) {
-			drawStaticTileElement(x, y, "ARMY_SELECTED");
+		if (!(selectedX == -1 && selectedY == -1)) {
+			int x = selectedX;
+			int y = selectedY;
+			if (game.getCurrentMode() == ModeEnum.RALLY_POINT) {
+				drawStaticTileElement(x, y, "RALLY_POINT_SELECTED");
+			}
+			if (game.getCurrentMode() == ModeEnum.UNIT) {
+				drawStaticTileElement(x, y, "UNIT_SELECTED");
+			}
+			if (game.getCurrentMode() == ModeEnum.STRUCTURE) {
+				drawStaticTileElement(x, y, "BASE_SELECTED");
+			}
+			if (game.getCurrentMode() == ModeEnum.ARMY) {
+				drawStaticTileElement(x, y, "UNIT_SELECTED");
+			}
 		}
 	}
 
@@ -124,42 +129,12 @@ public class GamePanel extends Panel {
 		centerOnTile(game.getGameBoard().testUnit.getLocation().getX(),
 				game.getGameBoard().testUnit.getLocation().getY());
 		*/
-
-		colonists = game.getPlayer(0).getColonists();
-		for(int i = 0;i<colonists.size();i++)
-		{
-			drawUnit(colonists.get(i).getLocation().getX(),
-					colonists.get(i).getLocation().getY(),
-					colonists.get(i).getUnitType(),
-					colonists.get(i).getOwnerID(),
-					0);
-		}
-		explorers = game.getPlayer(0).getExplorers();
-		for(int i = 0;i<explorers.size();i++)
-		{
-			drawUnit(explorers.get(i).getLocation().getX(),
-					explorers.get(i).getLocation().getY(),
-					explorers.get(i).getUnitType(),
-					explorers.get(i).getOwnerID(),
-					0);
-		}
-
-		colonists1 = game.getPlayer(1).getColonists();
-		for(int i = 0;i<colonists1.size();i++)
-		{
-			drawUnit(colonists1.get(i).getLocation().getX(),
-					colonists1.get(i).getLocation().getY(),
-					colonists1.get(i).getUnitType(),
-					colonists1.get(i).getOwnerID(),
-					0);
-		}
-		explorers1 = game.getPlayer(1).getExplorers();
-		for(int i = 0;i<explorers1.size();i++)
-		{
-			drawUnit(explorers1.get(i).getLocation().getX(),
-					explorers1.get(i).getLocation().getY(),
-					explorers1.get(i).getUnitType(),
-					explorers1.get(i).getOwnerID(),
+		player1Units = game.getPlayer(0).getAllUnit();
+		for(int i = 0;i<player1Units.size();i++){
+			drawUnit(player1Units.get(i).getLocation().getX(),
+					player1Units.get(i).getLocation().getY(),
+					player1Units.get(i).getUnitType(),
+					player1Units.get(i).getOwnerID(),
 					0);
 		}
 	}
@@ -186,7 +161,7 @@ public class GamePanel extends Panel {
 		rotateOnTile(x, y, rotation);
 			switch (player) {
 			case 0:
-				drawStaticTileElement(x, y, "ARMY_G");
+				drawStaticTileElement(x, y, "ARMY_O");
 				break;
 			case 1:
 				drawStaticTileElement(x, y, "ARMY_B");
@@ -195,7 +170,7 @@ public class GamePanel extends Panel {
 				drawStaticTileElement(x, y, "ARMY_Y");
 				break;
 			case 3:
-				drawStaticTileElement(x, y, "ARMY_O");
+				drawStaticTileElement(x, y, "ARMY_G");
 				break;
 			default:
 				log.warn("Invalid Player :" + player
@@ -230,7 +205,7 @@ public class GamePanel extends Panel {
 	private void drawBase(int x, int y, int player, int rotation) {
 		switch(player) {
 			case 0:
-				drawStaticTileElement(x, y, "BASE_G");
+				drawStaticTileElement(x, y, "BASE_O");
 				break;
 			case 1:
 				drawStaticTileElement(x, y, "BASE_B");
@@ -239,7 +214,7 @@ public class GamePanel extends Panel {
 				drawStaticTileElement(x, y, "BASE_Y");
 				break;
 			case 3:
-				drawStaticTileElement(x, y, "BASE_O");
+				drawStaticTileElement(x, y, "BASE_G");
 				break;
 			default:
 				log.warn("Invalid player specific for drawing base");
@@ -256,7 +231,7 @@ public class GamePanel extends Panel {
 		rotateOnTile(x, y, rotation);
 		switch (player) {
 			case 0:
-				drawStaticTileElement(x, y, "UNIT_G");
+				drawStaticTileElement(x, y, "UNIT_O");
 				break;
 			case 1:
 				drawStaticTileElement(x, y, "UNIT_B");
@@ -265,7 +240,7 @@ public class GamePanel extends Panel {
 				drawStaticTileElement(x, y, "UNIT_Y");
 				break;
 			case 3:
-				drawStaticTileElement(x, y, "UNIT_O");
+				drawStaticTileElement(x, y, "UNIT_G");
 				break;
 			default:
 				log.warn("Invalid Player :" + player

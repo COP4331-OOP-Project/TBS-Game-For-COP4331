@@ -1,14 +1,18 @@
 package game.gameboard;
 
+import controls.ModeController;
 import game.Game;
 import game.Player;
 import game.commands.AttackCommand;
 import game.entities.Army;
 import game.entities.ICommandable;
 import game.entities.factories.EntityFactory;
+import game.entities.factories.UnknownEntityCodeException;
 import game.entities.units.Unit;
 import game.entities.RallyPoint;
 import game.entities.structures.Structure;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 
 import javax.swing.text.html.parser.Entity;
@@ -23,6 +27,10 @@ public class GameBoard {
                                  // 0 is grass, 1 is sand, 2 is water
     private ArrayList<Player> players;              // Players for game
     private static final int BOARD_SIZE = 25;
+    private final static Logger log = LogManager.getLogger(ModeController.class);
+
+
+
     // Constructor
 /*
     Remove old constructor
@@ -356,31 +364,40 @@ public class GameBoard {
     // Handle make command w/ direction
     public <T> void handleMakeCmd(T _actor, int direction, String entityCode) {
 
-        // Cast actor and create new entity
-        ICommandable actor = (ICommandable) _actor;
-        Object newEntity = EntityFactory.getEntity(actor.getLocation(), actor.getOwnerID(), entityCode);
+        ICommandable actor;         // Actor
+        Object newEntity;           // New entity
+        Tile actorTile;             // Actor Tile
 
-        // Get postion to add new unit on
-        Tile actorTile = getTileWithLocation(actor.getLocation());
+        // Test for known entity code msg
+        try {
 
-        // Test new entity instance type and add to same tile as actor
-        if(newEntity instanceof Unit) {
+            actor = (ICommandable) _actor;                          // Cast actor and create new entity
+            newEntity = EntityFactory.getEntity(actor.getLocation(), actor.getOwnerID(), entityCode);
 
-            Unit unit = (Unit) newEntity;               // Cast as unit
+            actorTile = getTileWithLocation(actor.getLocation());   // Get postion to add new unit on
 
-            // Add unit to owner and the tile
-            players.get(actor.getOwnerID()).addUnit(unit);
-            actorTile.addUnit(unit);
+            // Test new entity instance type and add to same tile as actor
+            if(newEntity instanceof Unit) {
 
-        }
-        else if (newEntity instanceof Structure) {
+                Unit unit = (Unit) newEntity;               // Cast as unit
 
-            Structure struct = (Structure) newEntity;   // Cast as struct
+                // Add unit to owner and the tile
+                players.get(actor.getOwnerID()).addUnit(unit);
+                actorTile.addUnit(unit);
 
-            // Add structure to owner and the tile
-            players.get(actor.getOwnerID()).addStructure(struct);
-            actorTile.setStructure(struct);
+            }
+            else if (newEntity instanceof Structure) {
 
+                Structure struct = (Structure) newEntity;   // Cast as struct
+
+                // Add structure to owner and the tile
+                players.get(actor.getOwnerID()).addStructure(struct);
+                actorTile.setStructure(struct);
+
+            }
+
+        } catch (UnknownEntityCodeException e) {
+            log.error(e.getLocalizedMessage()); // Handle unknown entity code error
         }
 
     }
