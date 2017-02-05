@@ -1,15 +1,15 @@
 package controls;
 
 
-import controls.Army.ArmyEnum;
-import controls.Army.ArmyType;
-import controls.RallyPoint.RallyPointEnum;
-import controls.RallyPoint.RallyPointType;
-import controls.Structure.StructureEnum;
-import controls.Structure.StructureType;
-import controls.TypeInstance.TypeInstanceController;
-import controls.Unit.UnitEnum;
-import controls.Unit.UnitType;
+import controls.army.ArmyEnum;
+import controls.army.ArmyType;
+import controls.rallyPoint.RallyPointEnum;
+import controls.rallyPoint.RallyPointType;
+import controls.structure.StructureEnum;
+import controls.structure.StructureType;
+import controls.typeInstance.TypeInstanceController;
+import controls.unit.UnitEnum;
+import controls.unit.UnitType;
 import game.Player;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

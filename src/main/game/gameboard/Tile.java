@@ -187,7 +187,7 @@ public class Tile implements ITileAccessors {
             if (u.getUnitID() == id) return u;
         }
 
-        throw new EntityNotFoundException("Unit of id " + id + " " +
+        throw new EntityNotFoundException("unit of id " + id + " " +
                 "not found on Tile " + location.getX() + ", " + location.getY() );
     }
 
@@ -197,7 +197,7 @@ public class Tile implements ITileAccessors {
             if (a.getArmyID() == id) return a;
         }
 
-        throw new EntityNotFoundException("Army of id " + id + " " +
+        throw new EntityNotFoundException("army of id " + id + " " +
                 "not found on Tile " + location.getX() + ", " + location.getY() );
     }
 

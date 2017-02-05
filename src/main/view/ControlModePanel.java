@@ -4,9 +4,9 @@ import java.awt.Font;
 import java.awt.Graphics;
 
 import controls.ModeEnum;
-import controls.Army.ArmyEnum;
-import controls.Structure.StructureEnum;
-import controls.Unit.UnitEnum;
+import controls.army.ArmyEnum;
+import controls.structure.StructureEnum;
+import controls.unit.UnitEnum;
 import game.Assets;
 import game.Game;
 
@@ -23,11 +23,11 @@ public class ControlModePanel extends Panel{
 	private int height;
 	private Font modeFont = new Font("Lucida Sans", Font.BOLD, 16);
 	private Font subModeFont = new Font("Lucida Sans", Font.BOLD, 12);
-	private String[] modeString = {"Rally Point", "Structure", "Unit", "Army"};
+	private String[] modeString = {"Rally Point", "structure", "unit", "army"};
 	private String[][] submodeString = {{"", "", "", ""}, 
 				{"Base", "", "", ""}, 
 				{"Explorer", "Colonist", "Melee", "Ranged"}, 
-				{"Entire Army", "Battle Group", "Reinforcement", ""}};
+				{"Entire army", "Battle Group", "Reinforcement", ""}};
 	private int mode = 0;
 	private int submode = 0;
 	private Game game;

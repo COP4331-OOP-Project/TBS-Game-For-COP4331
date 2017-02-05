@@ -1,4 +1,4 @@
-package controls.RallyPoint;
+package controls.rallyPoint;
 
 import controls.Type;
 

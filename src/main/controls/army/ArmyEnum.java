@@ -1,4 +1,4 @@
-package controls.Army;
+package controls.army;
 
 /**
  * Created by gavin on 2/2/17.

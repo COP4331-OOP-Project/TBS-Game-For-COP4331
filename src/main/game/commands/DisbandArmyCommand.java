@@ -9,7 +9,7 @@ import game.gameboard.GameBoard;
  */
 public class DisbandArmyCommand extends Command {
 
-    private Army actor;                 // Army actor to disband
+    private Army actor;                 // army actor to disband
 
     // Constructor
     public DisbandArmyCommand(GameBoard gameBoard, Army actor) {

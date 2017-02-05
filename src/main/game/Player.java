@@ -26,7 +26,7 @@ public class Player {
 	private int resourceCount;
 
 	// TODO: Make unit ID's an enum
-	//Unit ID:
+	//unit ID:
 	/*
 	 * Melee:	 00
 	 * Range:	 01
@@ -195,7 +195,7 @@ public class Player {
 	}
 
 
-	//Unit ID:
+	//unit ID:
 	/*
 	 * Melee:	 00
 	 * Range:	 01
@@ -209,7 +209,7 @@ public class Player {
 
 		if(totalUnitsCount>=25)
 		{
-			log.info("Unit list is full");
+			log.info("unit list is full");
 			return;
 		}
 		switch (unit.getUnitType()) {

@@ -13,7 +13,7 @@ import java.util.LinkedList;
  */
 public class Base extends Structure implements IMake {
 
-    private int productionRate;         // Structure production rate
+    private int productionRate;         // structure production rate
 
     // Constructor
     public Base(Location loc, int owner){

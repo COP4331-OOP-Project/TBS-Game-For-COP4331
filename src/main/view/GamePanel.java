@@ -11,12 +11,10 @@ import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
 import java.util.Random;
 import controls.ModeEnum;
-import controls.Unit.UnitEnum;
+import controls.unit.UnitEnum;
 import game.entities.units.Unit;
 import game.gameboard.Location;
 
-import game.entities.units.Colonist;
-import game.entities.units.Explorer;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -294,7 +292,7 @@ public class GamePanel extends Panel {
 			drawStaticTileElement(x, y, "UNIT_COLONIST");
 			break;
 		default:
-			log.warn("Invalid Unit Type :" + type 
+			log.warn("Invalid unit Type :" + type
 					+ " cannot be drawn");
 		}
 		g2d.setTransform(currentRotation);

@@ -1,4 +1,4 @@
-package controls.RallyPoint;
+package controls.rallyPoint;
 
 /**
  * Created by gavin on 2/4/17.

@@ -15,12 +15,12 @@ public abstract class Structure implements ICommandable {
 
     private int structureID;                            // Unique structure id (0-9)
     private int ownerID;                                // Player ownder id for structure
-    private PowerState powerState;                      // Structure power state
-    private Location location;                          // Structure location
+    private PowerState powerState;                      // structure power state
+    private Location location;                          // structure location
 
-    private Queue<Command> queue;                       // Structure command queue
+    private Queue<Command> queue;                       // structure command queue
 
-    // Structure stats
+    // structure stats
     private int attackDamage;
     private int defenseDamage;
     private int armor;

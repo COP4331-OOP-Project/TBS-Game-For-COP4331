@@ -1,14 +1,15 @@
 package game;
 
-import controls.ModeController;
-import controls.Type;
-import controls.TypeController;
-import controls.TypeInstance.TypeInstanceController;
+import controls.*;
+import controls.command.CommandController;
+import controls.command.CommandEnum;
+import controls.typeInstance.TypeInstanceController;
 import game.entities.ICommandable;
 import game.entities.RallyPoint;
-import game.entities.TileOccupant;
 import game.gameboard.GameBoard;
 import game.gameboard.Location;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 
@@ -28,8 +29,11 @@ public class Game {
 	private boolean centerCoordinatesUpdated;
 
 	private ICommandable currentSelectedEntity;
+	private CommandEnum currentCommand;
+    private final static Logger log = LogManager.getLogger(CommandController.class);
 
-	Game() {
+
+    Game() {
 		//TODO: initialize game with players
 		this.players = new ArrayList<Player>();
 
@@ -113,6 +117,10 @@ public class Game {
         TypeController typeController = this.currentModeController.getTypeController();
         TypeInstanceController typeInstanceController = typeController.getTypeInstanceController();
         ICommandable selectedEntity = typeInstanceController.getTypeInstance();
+        if (selectedEntity == null) {
+            log.error("Cannot center on instance because it does not exist");
+            return;
+        }
         Location newLocation = selectedEntity.getLocation();
         this.changeCenterCoordinates(newLocation);
     }
@@ -138,12 +146,20 @@ public class Game {
     }
 
 	protected void cycleCommandForward() {
-        
+        TypeController typeController = this.currentModeController.getTypeController();
+        TypeInstanceController typeInstanceController = typeController.getTypeInstanceController();
+        CommandController commandController = typeInstanceController.getCommandController();
+        this.currentCommand = commandController.cycleForward();
+        log.info("Current command = {}", this.currentCommand);
 	}
 
 	protected void cycleCommandBackward() {
-
-	}
+        TypeController typeController = this.currentModeController.getTypeController();
+        TypeInstanceController typeInstanceController = typeController.getTypeInstanceController();
+        CommandController commandController = typeInstanceController.getCommandController();
+        this.currentCommand = commandController.cycleBackward();
+        log.info("Current command = {}", this.currentCommand);
+    }
 
 	protected void cycleTypeInstanceForward() {
 	    TypeController typeController = this.currentModeController.getTypeController();
