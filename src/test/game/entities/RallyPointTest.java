@@ -31,12 +31,12 @@ public class RallyPointTest {
         ArrayList<Unit> empty = new ArrayList<Unit>();
         rp.setArmy(new Army(null,0,null,empty));
         command=rp.pathAlgorithm(from,rp.getLocation(), null);
-        Assert.assertEquals(command.getDirection(), 225);
+        Assert.assertEquals(command.getDirection(), 45);
     }
-    /**@Test
+    @Test
     public void TestPathAlgorithm2(){
-        Location from = new Location(0,0);
-        RallyPoint rp = new RallyPoint(new Location(5,0), gBoard);
+        Location from = new Location(23,1);
+        RallyPoint rp = new RallyPoint(new Location(23,10), gBoard);
         ArrayList<Unit> empty = new ArrayList<Unit>();
         rp.setArmy(new Army(null,0,null,empty));
         command=rp.pathAlgorithm(from,rp.getLocation(), null);
@@ -44,21 +44,31 @@ public class RallyPointTest {
     }
     @Test
     public void TestPathAlgorithm3(){
-        Location from = new Location(14,14);
-        RallyPoint rp = new RallyPoint(new Location(0,14), gBoard);
-        ArrayList<Unit> empty = new ArrayList<Unit>();
-        rp.setArmy(new Army(null,0,null,empty));
-        command=rp.pathAlgorithm(from,rp.getLocation(), null);
-        Assert.assertEquals(command.getDirection(), 270);
-    }
-    @Test
-    public void TestPathAlgorithm4(){
-        Location from = new Location(2,2);
-        RallyPoint rp = new RallyPoint(new Location(4,5), gBoard);
+        Location from = new Location(8,10);
+        RallyPoint rp = new RallyPoint(new Location(12,6), gBoard);
         ArrayList<Unit> empty = new ArrayList<Unit>();
         rp.setArmy(new Army(null,0,null,empty));
         command=rp.pathAlgorithm(from,rp.getLocation(), null);
         Assert.assertEquals(command.getDirection(), 135);
-    }**/
+    }
+    @Test
+    public void TestPathAlgorithm4(){
+        Location from = new Location(4,1);
+        RallyPoint rp = new RallyPoint(new Location(10,1), gBoard);
+        ArrayList<Unit> empty = new ArrayList<Unit>();
+        rp.setArmy(new Army(null,0,null,empty));
+        command=rp.pathAlgorithm(from,rp.getLocation(), null);
+        Assert.assertEquals(command.getDirection(), 90);
+    }
+
+    @Test
+    public void TestPathAlgorithmNoPath(){
+        Location from = new Location(4,1);
+        RallyPoint rp = new RallyPoint(new Location(0,0), gBoard);
+        ArrayList<Unit> empty = new ArrayList<Unit>();
+        rp.setArmy(new Army(null,0,null,empty));
+        command=rp.pathAlgorithm(from,rp.getLocation(), null);
+        Assert.assertEquals(command,null);
+    }
 
 }

@@ -51,7 +51,7 @@ public class RallyPoint {
 			/**Check 8 spaces around to see if not visited yet. If not check if it is a valid move, if valid move
 			*   update the direction map
 			**/
-			if(current.xIndex>=0 && current.yIndex-1>=0 && current.xIndex<gameBoard.gameMap.length && current.yIndex-1<gameBoard.gameMap.length){
+			if(current.xIndex-1>=0 && current.yIndex>=0 && current.xIndex-1<gameBoard.gameMap.length && current.yIndex<gameBoard.gameMap.length){
 				Location up = current.directionLocation(0);
 				if(!closed.contains(up)){
 					closed.add(up);
@@ -61,7 +61,7 @@ public class RallyPoint {
 					}
 				}
 			}
-			if(current.xIndex+1>=0 && current.yIndex-1>=0 && current.xIndex+1<gameBoard.gameMap.length && current.yIndex-1<gameBoard.gameMap.length){
+			if(current.xIndex-1>=0 && current.yIndex+1>=0 && current.xIndex-1<gameBoard.gameMap.length && current.yIndex+1<gameBoard.gameMap.length){
 				Location upright = current.directionLocation(45);
 				if(!closed.contains(upright)){
 					closed.add(upright);
@@ -71,7 +71,7 @@ public class RallyPoint {
 					}
 				}
 			}
-			if(current.xIndex+1>=0 && current.yIndex>=0 && current.xIndex+1<gameBoard.gameMap.length && current.yIndex<gameBoard.gameMap.length){
+			if(current.xIndex>=0 && current.yIndex+1>=0 && current.xIndex<gameBoard.gameMap.length && current.yIndex+1<gameBoard.gameMap.length){
 				Location right = current.directionLocation(90);
 				if(!closed.contains(right)){
 					closed.add(right);
@@ -91,7 +91,7 @@ public class RallyPoint {
 					}
 				}
 			}
-			if(current.xIndex>=0 && current.yIndex+1>=0 && current.xIndex<gameBoard.gameMap.length && current.yIndex+1<gameBoard.gameMap.length){
+			if(current.xIndex+1>=0 && current.yIndex>=0 && current.xIndex+1<gameBoard.gameMap.length && current.yIndex<gameBoard.gameMap.length){
 				Location down = current.directionLocation(180);
 				if(!closed.contains(down)){
 					closed.add(down);
@@ -101,7 +101,7 @@ public class RallyPoint {
 					}
 				}
 			}
-			if(current.xIndex-1>=0 && current.yIndex+1>=0 && current.xIndex-1<gameBoard.gameMap.length && current.yIndex+1<gameBoard.gameMap.length){
+			if(current.xIndex+1>=0 && current.yIndex-1>=0 && current.xIndex+1<gameBoard.gameMap.length && current.yIndex-1<gameBoard.gameMap.length){
 				Location downleft = current.directionLocation(225);
 				if(!closed.contains(downleft)){
 					closed.add(downleft);
@@ -111,7 +111,7 @@ public class RallyPoint {
 					}
 				}
 			}
-			if(current.xIndex-1>=0 && current.yIndex>=0 && current.xIndex-1<gameBoard.gameMap.length && current.yIndex<gameBoard.gameMap.length){
+			if(current.xIndex>=0 && current.yIndex-1>=0 && current.xIndex<gameBoard.gameMap.length && current.yIndex-1<gameBoard.gameMap.length){
 				Location left = current.directionLocation(270);
 				if(!closed.contains(left)){
 					closed.add(left);
