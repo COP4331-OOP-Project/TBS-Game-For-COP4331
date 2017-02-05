@@ -20,7 +20,7 @@ public class Ranged extends Unit
     setBaseResourceCost(10);
     setLocation(loc);
     setOwnerID(ownerID);
-    setUnitType(2);
+    setUnitType(1);
     setPowerMode(1);
     setDecomm(true);
   }

@@ -2,6 +2,7 @@ package game;
 
 import controls.ModeController;
 import game.gameboard.GameBoard;
+import game.gameboard.Location;
 
 import java.util.ArrayList;
 
@@ -12,17 +13,27 @@ public class Game {
 	private ArrayList<Player> players;
 	private ModeController currentModeController;
 	private GameBoard gBoard;
+	private Player nextPlayer;
+	private int turnNum;
+
+
 
 	Game() {
 		//TODO: initialize game with players
 		this.players = new ArrayList<Player>();
-		Player player0 = new Player(0);
-		Player player1 = new Player(1);
+
+		Location initLocation1 = new Location(4,4);
+		Location initLocation2 = new Location(4,10);
+		Player player0 = new Player(0,initLocation1);
+		Player player1 = new Player(1,initLocation2);
 		players.add(player0);
 		players.add(player1);
-		this.currentPlayer = player0;
+		this.currentPlayer = players.get(0);
+		this.nextPlayer = players.get(1);
 		this.currentModeController = new ModeController(this.currentPlayer);
 		gBoard = new GameBoard(players);
+
+		turnNum = 0;
 	}
 
 	public void updateGame() { //This is called 20 times per second
@@ -45,6 +56,17 @@ public class Game {
 	public void createGameBoard() {
 
 	}
+
+	public void endTurn(){
+		Player temp = currentPlayer;
+		currentPlayer = nextPlayer;
+		nextPlayer = temp;
+		turnNum++;
+	}
+
+	public int getTurnNum() {
+		return turnNum;
+	}
 	
 	public GameBoard getGameBoard() {
 		return gBoard;
@@ -56,6 +78,10 @@ public class Game {
 
 	public Player getCurrentPlayer() {
 		return this.currentPlayer;
+	}
+
+	public Player getPlayer(int playerID) {
+		return players.get(playerID);
 	}
 
 	public Enum getCurrentMode() {

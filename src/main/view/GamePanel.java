@@ -8,9 +8,12 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
+import java.util.ArrayList;
 import java.util.Random;
 import controls.ModeEnum;
 
+import game.entities.units.Colonist;
+import game.entities.units.Explorer;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -33,6 +36,12 @@ public class GamePanel extends Panel {
 	private int centerToY = -1;
 	private int width = 0;
 	private int height = 0;
+
+	//ArrayList of each player's unit
+	private ArrayList<Explorer> explorers;
+	private ArrayList<Colonist> colonists;
+	private ArrayList<Explorer> explorers1;
+	private ArrayList<Colonist> colonists1;
 	
 	Graphics2D g2d;
 	
@@ -96,6 +105,44 @@ public class GamePanel extends Panel {
 		centerOnTile(game.getGameBoard().testUnit.getLocation().xIndex, 
 				game.getGameBoard().testUnit.getLocation().yIndex);
 		*/
+
+		colonists = game.getPlayer(0).getColonists();
+		for(int i = 0;i<colonists.size();i++)
+		{
+			drawUnit(colonists.get(i).getLocation().xIndex,
+					colonists.get(i).getLocation().yIndex,
+					colonists.get(i).getUnitType(),
+					colonists.get(i).getOwnerID(),
+					0);
+		}
+		explorers = game.getPlayer(0).getExplorers();
+		for(int i = 0;i<explorers.size();i++)
+		{
+			drawUnit(explorers.get(i).getLocation().xIndex,
+					explorers.get(i).getLocation().yIndex,
+					explorers.get(i).getUnitType(),
+					explorers.get(i).getOwnerID(),
+					0);
+		}
+
+		colonists1 = game.getPlayer(1).getColonists();
+		for(int i = 0;i<colonists1.size();i++)
+		{
+			drawUnit(colonists1.get(i).getLocation().xIndex,
+					colonists1.get(i).getLocation().yIndex,
+					colonists1.get(i).getUnitType(),
+					colonists1.get(i).getOwnerID(),
+					0);
+		}
+		explorers1 = game.getPlayer(1).getExplorers();
+		for(int i = 0;i<explorers1.size();i++)
+		{
+			drawUnit(explorers1.get(i).getLocation().xIndex,
+					explorers1.get(i).getLocation().yIndex,
+					explorers1.get(i).getUnitType(),
+					explorers1.get(i).getOwnerID(),
+					0);
+		}
 	}
 	
 	/**

@@ -10,6 +10,7 @@ import game.entities.units.Explorer;
 import game.entities.units.Worker;
 import game.entities.units.Colonist;
 import game.entities.structures.Structure;
+import game.gameboard.Location;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -24,11 +25,11 @@ public class Player {
 	// TODO: Make unit ID's an enum
 	//Unit ID:
 	/*
-	 * Melee:	 01
-	 * Range:	 02
-	 * Explorer: 03
-	 * colonists:04
-	 * Worker:	 05
+	 * Melee:	 00
+	 * Range:	 01
+	 * Explorer: 02
+	 * colonists:03
+	 * Worker:	 04
 	 */
 
 	private boolean isUnitListFull;
@@ -45,7 +46,10 @@ public class Player {
 	private int totalUnitsCount;
 	private int basesCount;
 	private int rallyPointsCount;
-
+	//Inital Untis
+	private Colonist initColonist;
+	private Explorer initExplorer1;
+	private Explorer initExplorer2;
 
 	private ArrayList<Army> armies;
 	private ArrayList<Melee> melees;
@@ -54,16 +58,25 @@ public class Player {
 	private ArrayList<Colonist> colonists;
 	private ArrayList<Worker> workers;
 	private ArrayList<Structure> structures;
-
 	private ArrayList<Base> bases;
-
 	private ArrayList<RallyPoint> rallyPoints;
-	
 	private ArrayList<Unit> totalUnits;
 	
 	//Constructor
 	public Player(int id){
 		this.playerID = id;
+		init();
+	}
+	public Player(int id, Location loc){
+		this.playerID = id;
+
+		//Creates initial units
+		initColonist = new Colonist(loc, this.playerID);
+		Location explorer1Location = new Location(loc.xIndex+1, loc.yIndex);
+		initExplorer1 = new Explorer(explorer1Location, this.playerID);
+		Location explorer2Location = new Location(loc.xIndex, loc.yIndex+1);
+		initExplorer2 = new Explorer(explorer2Location, this.playerID);
+
 		init();
 	}
 
@@ -103,10 +116,19 @@ public class Player {
 			bases.add(null);
 			rallyPoints.add(null);
 		}
+		colonists.set(0, initColonist);
+		initColonist.setUnitID(0);
+		explorers.set(0, initExplorer1);
+		initExplorer1.setUnitID(0);
+		explorers.set(1, initExplorer2);
+		initExplorer2.setUnitID(1);
 		for(int i = 0; i<25;i++)
 		{
 			totalUnits.add(null);
 		}
+		totalUnits.set(0,initColonist);
+		totalUnits.set(1, initExplorer1);
+		totalUnits.set(2,initExplorer2);
 	}
 	public int getPlayerID() { return this.playerID; }
 	//accessors
@@ -118,11 +140,11 @@ public class Player {
 	public int getUnitCount(int unitType)
 	{
 		switch(unitType) {
-		case 1: return meleeCount;
-		case 2: return rangeCount;
-		case 3: return explorersCount;
-		case 4: return colonistsCount;
-		case 5: return workersCount;
+		case 0: return meleeCount;
+		case 1: return rangeCount;
+		case 2: return explorersCount;
+		case 3: return colonistsCount;
+		case 4: return workersCount;
 		default: return 0;
 		}
 	}
@@ -153,11 +175,11 @@ public class Player {
 
 	//Unit ID:
 	/*
-	 * Melee:	 01
-	 * Range:	 02
-	 * Explorer: 03
-	 * colonists:04
-	 * Worker:	 05
+	 * Melee:	 00
+	 * Range:	 01
+	 * Explorer: 02
+	 * colonists:03
+	 * Worker:	 04
 	 */
 	public void addUnit(Unit unit)
 	{
@@ -169,7 +191,7 @@ public class Player {
 			return;
 		}
 		switch (unit.getUnitType()) {
-			case 1: {
+			case 0: {
 				for (int i = 0; i < melees.size(); i++) {
 					if (melees.get(i) == null) {
 						melees.set(i, (Melee) unit);
@@ -183,7 +205,7 @@ public class Player {
 					log.info("Melee list full");
 				break;
 			}
-			case 2: {
+			case 1: {
 				for (int i = 0; i < ranges.size(); i++) {
 					if (ranges.get(i) == null) {
 						ranges.set(i, (Ranged) unit);
@@ -197,7 +219,7 @@ public class Player {
 					log.info("Range list full");
 				break;
 			}
-			case 3: {
+			case 2: {
 				for (int i = 0; i < explorers.size(); i++) {
 					if (explorers.get(i) == null) {
 						explorers.set(i, (Explorer) unit);
@@ -211,7 +233,7 @@ public class Player {
 					log.info("Explorers list full");
 				break;
 			}
-			case 4: {
+			case 3: {
 				for (int i = 0; i < colonists.size(); i++) {
 					if (colonists.get(i) == null) {
 						colonists.set(i, (Colonist) unit);
@@ -225,7 +247,7 @@ public class Player {
 					log.info("Colonists list full");
 				break;
 			}
-			case 5: {
+			case 4: {
 				for (int i = 0; i < workers.size(); i++) {
 					if (workers.get(i) == null) {
 						workers.set(i, (Worker) unit);
@@ -254,23 +276,23 @@ public class Player {
 
 	public void removeUnit(Unit unit) {
 		switch(unit.getUnitType()) {
-			case 1: {
+			case 0: {
 				melees.set(unit.getUnitID(),null);
 				break;
 			}
-			case 2: {
+			case 1: {
 				ranges.set(unit.getUnitID(),null);
 				break;
 			}
-			case 3: {
+			case 2: {
 				explorers.set(unit.getUnitID(),null);
 				break;
 			}
-			case 4: {
+			case 3: {
 				colonists.set(unit.getUnitID(),null);
 				break;
 			}
-			case 5: {
+			case 4: {
 				workers.set(unit.getUnitID(),null);
 				break;
 			}

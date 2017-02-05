@@ -21,7 +21,7 @@ public class Colonist extends Unit
     setBaseResourceCost(10);
     setLocation(loc);
     setOwnerID(ownerID);
-    setUnitType(4);
+    setUnitType(3);
     setPowerMode(1);
     setDecomm(true);
   }

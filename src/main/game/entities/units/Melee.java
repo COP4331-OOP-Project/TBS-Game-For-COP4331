@@ -20,7 +20,7 @@ public class Melee extends Unit
        setBaseResourceCost(10);
        setLocation(loc);
        setOwnerID(ownerID);
-       setUnitType(1);
+       setUnitType(0);
        setPowerMode(1);
        setDecomm(true);
     }

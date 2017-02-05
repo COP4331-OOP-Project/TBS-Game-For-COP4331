@@ -20,7 +20,7 @@ public class Worker extends Unit
     setBaseResourceCost(10);
     setLocation(loc);
     setOwnerID(ownerID);
-    setUnitType(5);
+    setUnitType(4);
     setPowerMode(1);
     setDecomm(true);
   }

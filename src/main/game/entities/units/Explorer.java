@@ -20,7 +20,7 @@ public class Explorer extends Unit
     setBaseResourceCost(10);
     setLocation(loc);
     setOwnerID(ownerID);
-    setUnitType(3);
+    setUnitType(2);
     setPowerMode(1);
     setDecomm(true);
   }
