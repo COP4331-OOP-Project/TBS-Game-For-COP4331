@@ -4,6 +4,7 @@ import game.Game;
 import game.Player;
 import game.commands.AttackCommand;
 import game.entities.Army;
+import game.entities.ICommandable;
 import game.entities.factories.EntityFactory;
 import game.entities.units.Unit;
 import game.entities.RallyPoint;
@@ -315,36 +316,68 @@ public class GameBoard {
 
             Army army = (Army) actor;   // Cast army
 
+            // Get actor location and target of heal
             Tile actorTile = getTileWithLocation(army.getLocation());
             Tile targetTile = getAdjacentTile(actorTile, direction);
 
-            targetTile.healOccupants();
+            targetTile.healOccupants();     // Heal occupants of tile
 
         }
         else if(actor instanceof Unit) {
 
-            Unit unit = (Unit) actor;
+            Unit unit = (Unit) actor;             // Cast
 
+            // Get actor location and target of heal
             Tile actorTile = getTileWithLocation(unit.getLocation());
             Tile targetTile = getAdjacentTile(actorTile, direction);
 
-            targetTile.healOccupants();
+            targetTile.healOccupants();         // Heal occupants of tile
 
         }
         else if (actor instanceof Structure) {
 
-            Structure struct = (Structure) actor;
+            Structure struct = (Structure) actor;   // Cast
 
+            // Get actor location and target of heal
             Tile actorTile = getTileWithLocation(struct.getLocation());
             Tile targetTile = getAdjacentTile(actorTile, direction);
 
-            targetTile.healOccupants();
+            targetTile.healOccupants();             // Heal occupants of tile
         }
 
     }
 
     // Handle make command w/ direction
-    public <T> void handleMakeCmd(T actor, int direction, String entityCode) {}
+    public <T> void handleMakeCmd(T _actor, int direction, String entityCode) {
+
+        // Cast actor and create new entity
+        ICommandable actor = (ICommandable) _actor;
+        Object newEntity = EntityFactory.getEntity(actor.getLocation(), actor.getOwnerID(), entityCode);
+
+        // Get postion to add new unit on
+        Tile actorTile = getTileWithLocation(actor.getLocation());
+
+        // Test new entity instance type and add to same tile as actor
+        if(newEntity instanceof Unit) {
+
+            Unit unit = (Unit) newEntity;               // Cast as unit
+
+            // Add unit to owner and the tile
+            players.get(actor.getOwnerID()).addUnit(unit);
+            actorTile.addUnit(unit);
+
+        }
+        else if (newEntity instanceof Structure) {
+
+            Structure struct = (Structure) newEntity;   // Cast as struct
+
+            // Add structure to owner and the tile
+            players.get(actor.getOwnerID()).addStructure(struct);
+            actorTile.setStructure(struct);
+
+        }
+
+    }
 
     // Handle disband army command
     public void handleDisbandArmyCmd(Army actor) {
