@@ -1,12 +1,13 @@
 package controls.TypeInstance;
 
 import controls.Army.ArmyEnum;
+import controls.RallyPoint.RallyPointEnum;
 import controls.Structure.StructureEnum;
-import controls.Type;
 import controls.Unit.UnitEnum;
 import game.Player;
 import game.entities.Army;
 import game.entities.RallyPoint;
+import game.entities.TileOccupant;
 import game.entities.structures.Base;
 import game.entities.structures.Structure;
 import game.entities.units.*;
@@ -80,7 +81,7 @@ public class TypeInstanceController {
         return this.currentTypeInstance;
     }
 
-    public Object cycleForward(Enum currentType) {
+    public TileOccupant cycleForward(Enum currentType) {
         if (currentType instanceof UnitEnum) {
             UnitEnum unitEnum = (UnitEnum) currentType;
             return cycleUnitEnum(unitEnum, true);
@@ -90,12 +91,14 @@ public class TypeInstanceController {
         } else if (currentType instanceof ArmyEnum) {
             ArmyEnum armyEnum = (ArmyEnum) currentType;
             return cycleArmyEnum(armyEnum, true);
+        } else if (currentType instanceof RallyPointEnum) {
+            return cycleRallyPoint(true);
         }
         log.error("Enum: " + currentType + " not cast to type. Could not cycle forward.");
         return null;
     }
 
-    public Object cycleBackward(Enum currentType) {
+    public TileOccupant cycleBackward(Enum currentType) {
         if (currentType instanceof UnitEnum) {
             UnitEnum unitEnum = (UnitEnum) currentType;
             return cycleUnitEnum(unitEnum, false);
@@ -105,6 +108,8 @@ public class TypeInstanceController {
         } else if (currentType instanceof ArmyEnum) {
             ArmyEnum armyEnum = (ArmyEnum) currentType;
             return cycleArmyEnum(armyEnum, false);
+        } else if (currentType instanceof RallyPointEnum) {
+            return cycleRallyPoint(false);
         }
         log.error("Enum: " + currentType + " not cast to type. Could not cycle backward.");
         return null;
@@ -244,5 +249,19 @@ public class TypeInstanceController {
             }
         }
         return null;
+    }
+
+
+    private RallyPoint cycleRallyPoint(boolean forward) {
+        ItemWithIndex item;
+        if (forward) {
+            item = getNextInArrayList(new ListWithIndex(rallyPoints, currentRallyPoint));
+        } else {
+            item = getPreviousInArrayList(new ListWithIndex(rallyPoints, currentRallyPoint));
+        }
+        if (item == null) return null;
+        this.currentRallyPoint = item.getIndex();
+        this.currentTypeInstance = item.getItem();
+        return (RallyPoint) this.currentTypeInstance;
     }
 }

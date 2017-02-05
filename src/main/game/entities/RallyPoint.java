@@ -9,8 +9,12 @@ import game.entities.units.Unit;
 import game.gameboard.GameBoard;
 import game.gameboard.Location;
 
+<<<<<<< HEAD
 public class RallyPoint {
 
+=======
+public class RallyPoint extends TileOccupant {
+>>>>>>> Gavin - got move to rally point working
 	private UUID rallyID;
 	private int ownerID;
 	private Location location;
@@ -38,7 +42,7 @@ public class RallyPoint {
 
 	public MoveCommand pathAlgorithm(Location from, Location to, Unit unit){
 		//Dereference parameter input
-		Location current=new Location(from.xIndex,from.yIndex);
+		Location current=new Location(from.getX(),from.getY());
 		//Visited locations
 		Set<Location> closed = new HashSet<Location>();
 		closed.add(current);
@@ -54,7 +58,7 @@ public class RallyPoint {
 			/**Check 8 spaces around to see if not visited yet. If not check if it is a valid move, if valid move
 			*   update the direction map
 			**/
-			if(current.xIndex-1>=0 && current.yIndex>=0 && current.xIndex-1<gameBoard.gameMap.length && current.yIndex<gameBoard.gameMap.length){
+			if(current.getX()-1>=0 && current.getY()>=0 && current.getX()-1<gameBoard.gameMap.length && current.getY()<gameBoard.gameMap.length){
 				Location up = current.directionLocation(0);
 				if(!closed.contains(up)){
 					closed.add(up);
@@ -64,7 +68,7 @@ public class RallyPoint {
 					}
 				}
 			}
-			if(current.xIndex-1>=0 && current.yIndex+1>=0 && current.xIndex-1<gameBoard.gameMap.length && current.yIndex+1<gameBoard.gameMap.length){
+			if(current.getX()-1>=0 && current.getY()+1>=0 && current.getX()-1<gameBoard.gameMap.length && current.getY()+1<gameBoard.gameMap.length){
 				Location upright = current.directionLocation(45);
 				if(!closed.contains(upright)){
 					closed.add(upright);
@@ -74,7 +78,7 @@ public class RallyPoint {
 					}
 				}
 			}
-			if(current.xIndex>=0 && current.yIndex+1>=0 && current.xIndex<gameBoard.gameMap.length && current.yIndex+1<gameBoard.gameMap.length){
+			if(current.getX()>=0 && current.getY()+1>=0 && current.getX()<gameBoard.gameMap.length && current.getY()+1<gameBoard.gameMap.length){
 				Location right = current.directionLocation(90);
 				if(!closed.contains(right)){
 					closed.add(right);
@@ -84,7 +88,7 @@ public class RallyPoint {
 					}
 				}
 			}
-			if(current.xIndex+1>=0 && current.yIndex+1>=0 && current.xIndex+1<gameBoard.gameMap.length && current.yIndex+1<gameBoard.gameMap.length){
+			if(current.getX()+1>=0 && current.getY()+1>=0 && current.getX()+1<gameBoard.gameMap.length && current.getY()+1<gameBoard.gameMap.length){
 				Location downright = current.directionLocation(135);
 				if(!closed.contains(downright)){
 					closed.add(downright);
@@ -94,7 +98,7 @@ public class RallyPoint {
 					}
 				}
 			}
-			if(current.xIndex+1>=0 && current.yIndex>=0 && current.xIndex+1<gameBoard.gameMap.length && current.yIndex<gameBoard.gameMap.length){
+			if(current.getX()+1>=0 && current.getY()>=0 && current.getX()+1<gameBoard.gameMap.length && current.getY()<gameBoard.gameMap.length){
 				Location down = current.directionLocation(180);
 				if(!closed.contains(down)){
 					closed.add(down);
@@ -104,7 +108,7 @@ public class RallyPoint {
 					}
 				}
 			}
-			if(current.xIndex+1>=0 && current.yIndex-1>=0 && current.xIndex+1<gameBoard.gameMap.length && current.yIndex-1<gameBoard.gameMap.length){
+			if(current.getX()+1>=0 && current.getY()-1>=0 && current.getX()+1<gameBoard.gameMap.length && current.getY()-1<gameBoard.gameMap.length){
 				Location downleft = current.directionLocation(225);
 				if(!closed.contains(downleft)){
 					closed.add(downleft);
@@ -114,7 +118,7 @@ public class RallyPoint {
 					}
 				}
 			}
-			if(current.xIndex>=0 && current.yIndex-1>=0 && current.xIndex<gameBoard.gameMap.length && current.yIndex-1<gameBoard.gameMap.length){
+			if(current.getX()>=0 && current.getY()-1>=0 && current.getX()<gameBoard.gameMap.length && current.getY()-1<gameBoard.gameMap.length){
 				Location left = current.directionLocation(270);
 				if(!closed.contains(left)){
 					closed.add(left);
@@ -124,7 +128,7 @@ public class RallyPoint {
 					}
 				}
 			}
-			if(current.xIndex-1>=0 && current.yIndex-1>=0 && current.xIndex-1<gameBoard.gameMap.length && current.yIndex-1<gameBoard.gameMap.length){
+			if(current.getX()-1>=0 && current.getY()-1>=0 && current.getX()-1<gameBoard.gameMap.length && current.getY()-1<gameBoard.gameMap.length){
 				Location upleft = current.directionLocation(315);
 				if(!closed.contains(upleft)){
 					closed.add(upleft);
@@ -163,8 +167,8 @@ public class RallyPoint {
 		/**Return true if tile is not a river tile and
 		 * 				There are no enemies on it
 		 */
-		if(gameBoard.gameMap[location.xIndex][location.yIndex].getTileType()!=2 ){
-			if(!gameBoard.gameMap[location.xIndex][location.yIndex].hasEnemyUnit(army.getOwnerID())){
+		if(gameBoard.gameMap[location.getX()][location.getY()].getTileType()!=2 ){
+			if(!gameBoard.gameMap[location.getX()][location.getY()].hasEnemyUnit(army.getOwnerID())){
 				return true;
 			}
 		}

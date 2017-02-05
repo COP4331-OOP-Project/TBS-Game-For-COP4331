@@ -169,7 +169,15 @@ public class Player {
 	//@TODO GET RALLY POINT NOT FINISHED
 	public ArrayList<RallyPoint> getArmyRallyPoint()
 	{
-		return rallyPoints;
+        ArrayList<RallyPoint> gRallyPoints = new ArrayList<>();
+        for(int i = 0;i<rallyPoints.size();i++)
+        {
+            if(rallyPoints.get(i)!=null)
+            {
+                gRallyPoints.add(rallyPoints.get(i));
+            }
+        }
+        return gRallyPoints;
 	}
 
 

@@ -11,6 +11,7 @@ import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
 import java.util.Random;
 import controls.ModeEnum;
+import game.gameboard.Location;
 
 import game.entities.units.Colonist;
 import game.entities.units.Explorer;
@@ -70,6 +71,15 @@ public class GamePanel extends Panel {
 		drawUnits();
 		drawArmies();
 		drawSelectedItem();
+		checkCenteringCoordinates();
+	}
+
+	private void checkCenteringCoordinates() {
+		if (this.game.isCenterCoordinatesUpdated()) {
+			Location loc = this.game.getCenterCoordinates();
+			this.centerOnTile(loc.getX(), loc.getY());
+			this.game.setCenterCoordinatesUpdated(false);
+		}
 	}
 
 	private void checkCentering(int x, int y) {
