@@ -1,6 +1,7 @@
 package controls;
 
 import controls.Army.ArmyEnum;
+import controls.RallyPoint.RallyPointEnum;
 import controls.Structure.StructureEnum;
 import controls.Structure.StructureType;
 import controls.Unit.UnitEnum;
@@ -58,8 +59,8 @@ public class TypeControllerTest {
     @Test
     public void setModeRallyPoint() {
         this.typeController.setMode(ModeEnum.RALLY_POINT);
-        // There are no rally point types
-        Assert.assertNull(this.typeController.getType());
+        Assert.assertTrue(this.typeController.getType() instanceof RallyPointEnum);
+        Assert.assertEquals(this.typeController.getType(), RallyPointEnum.RALLY_POINT);
     }
 
     @Test
@@ -136,17 +137,5 @@ public class TypeControllerTest {
 
         this.typeController.cycleBackward();
         Assert.assertEquals(this.typeController.getType(), ArmyEnum.ENTIRE_ARMY);
-    }
-
-    @Test
-    public void cannotCycleForwardNullType() {
-        this.typeController.setMode(ModeEnum.RALLY_POINT);
-        Assert.assertNull(this.typeController.cycleForward());
-    }
-
-    @Test
-    public void cannotCycleBackwardNullType() {
-        this.typeController.setMode(ModeEnum.RALLY_POINT);
-        Assert.assertNull(this.typeController.cycleBackward());
     }
 }

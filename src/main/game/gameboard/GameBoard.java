@@ -1,18 +1,18 @@
 package game.gameboard;
 
-import game.Game;
+import controls.ModeController;
 import game.Player;
 import game.commands.AttackCommand;
 import game.entities.Army;
 import game.entities.ICommandable;
-import game.entities.factories.EntityFactory;
-import game.entities.units.Unit;
 import game.entities.RallyPoint;
+import game.entities.factories.EntityFactory;
+import game.entities.factories.UnknownEntityCodeException;
 import game.entities.structures.Structure;
+import game.entities.units.Unit;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
-
-import javax.swing.text.html.parser.Entity;
-import java.sql.Struct;
 import java.util.ArrayList;
 /**
  * Gameboard class containing 2D Tile array for board and interaction handler functions
@@ -23,6 +23,10 @@ public class GameBoard {
                                  // 0 is grass, 1 is sand, 2 is water
     private ArrayList<Player> players;              // Players for game
     private static final int BOARD_SIZE = 25;
+    private final static Logger log = LogManager.getLogger(ModeController.class);
+
+
+
     // Constructor
 /*
     Remove old constructor
@@ -35,6 +39,11 @@ public class GameBoard {
     	
         this.players = players;                     // Set players
         setupMap();                                 // Setup gameMap
+    }
+
+    public Player getPlayer(int index) {
+        if (index > players.size() - 1) return null;
+        return this.players.get(0);
     }
 
     // Setup the gameMap array wit5h valid Tiles
@@ -88,30 +97,30 @@ public class GameBoard {
 
     // Get specific tile with actor location
     private Tile getTileWithLocation(Location l) {
-        return gameMap[l.xIndex][l.yIndex];
+        return gameMap[l.getX()][l.getY()];
     }
 
     //Get the adjecent tile
     private Tile getAdjacentTile(Tile actorTile,int direction) {
         switch(direction) {
             case 0: //Move north
-                return gameMap[actorTile.getlocation().xIndex][actorTile.getlocation().yIndex - 1];
+                return gameMap[actorTile.getLocation().getX()][actorTile.getLocation().getY() - 1];
             case 45: //Move north-east
-                return gameMap[actorTile.getlocation().xIndex+1][actorTile.getlocation().yIndex - 1];
+                return gameMap[actorTile.getLocation().getX()+1][actorTile.getLocation().getY() - 1];
             case 90: //move east
-                return gameMap[actorTile.getlocation().xIndex + 1][actorTile.getlocation().yIndex];
+                return gameMap[actorTile.getLocation().getX() + 1][actorTile.getLocation().getY()];
             case 135: //move south east
-                return gameMap[actorTile.getlocation().xIndex+1][actorTile.getlocation().yIndex + 1];
+                return gameMap[actorTile.getLocation().getX()+1][actorTile.getLocation().getY() + 1];
             case 180: //move south
-                return gameMap[actorTile.getlocation().xIndex][actorTile.getlocation().yIndex + 1];
+                return gameMap[actorTile.getLocation().getX()][actorTile.getLocation().getY() + 1];
             case 225: //move south west
-                return gameMap[actorTile.getlocation().xIndex-1][actorTile.getlocation().yIndex + 1];
+                return gameMap[actorTile.getLocation().getX()-1][actorTile.getLocation().getY() + 1];
             case 270: //move west
-                return gameMap[actorTile.getlocation().xIndex - 1][actorTile.getlocation().yIndex];
+                return gameMap[actorTile.getLocation().getX() - 1][actorTile.getLocation().getY()];
             case 315: //move north west
-                return gameMap[actorTile.getlocation().xIndex-1][actorTile.getlocation().yIndex - 1];
+                return gameMap[actorTile.getLocation().getX()-1][actorTile.getLocation().getY() - 1];
             case 360: //move north
-                return gameMap[actorTile.getlocation().xIndex][actorTile.getlocation().yIndex - 1];
+                return gameMap[actorTile.getLocation().getX()][actorTile.getLocation().getY() - 1];
             default:
                 return null;
         }
@@ -130,11 +139,11 @@ public class GameBoard {
         boolean isStructure = entity instanceof Structure;
 
         if(isArmy)
-            return gameMap[((Army)entity).getLocation().xIndex][((Army)entity).getLocation().yIndex];
+            return gameMap[((Army)entity).getLocation().getX()][((Army)entity).getLocation().getY()];
         else if(isUnit)
-            return gameMap[((Unit)entity).getLocation().xIndex][((Unit)entity).getLocation().yIndex];
+            return gameMap[((Unit)entity).getLocation().getX()][((Unit)entity).getLocation().getY()];
         else if(isStructure)
-            return gameMap[((Structure)entity).getLocation().xIndex][((Structure)entity).getLocation().yIndex];
+            return gameMap[((Structure)entity).getLocation().getX()][((Structure)entity).getLocation().getY()];
 
         return null;
     }
@@ -213,7 +222,7 @@ public class GameBoard {
 
             Tile actorTile = getTileWithLocation( army.getLocation() );
             Tile targetTile = getAdjacentTile(actorTile, direction);
-            targetTile.attackOccupants();
+//            targetTile.attackOccupants();
 
 //            // If queue is empty, pass another attack command for next turn
 //            if (army.isQueueEmpty()) {
@@ -228,7 +237,7 @@ public class GameBoard {
 
             Tile actorTile = getTileWithLocation(struct.getLocation());
             Tile targetTile = getAdjacentTile(actorTile, direction);
-            targetTile.attackOccupants();
+            targetTile.attackOccupants(((Structure) actor).getAttackDamage());
 
             // If queue is empty, pass another attack command for next turn
             if (struct.isQueueEmpty()) {
@@ -284,6 +293,10 @@ public class GameBoard {
             if(targetTile.hasEnemyUnit(army.getOwnerID())) {
                 //(Army)actor.nextCommand();
             }
+            else if (targetTile.isImpassable()) {
+                log.error("Cannot move to tile, it is impassable!");
+                // Clear army commands
+            }
             else  {
                 actorTile.removeArmy(army.getArmyID());
                 targetTile.addArmy(army);
@@ -296,8 +309,11 @@ public class GameBoard {
             Tile actorTile = getTileWithLocation(unit.getLocation());
             Tile targetTile = getAdjacentTile(actorTile, direction);
 
-            if(targetTile.hasEnemyUnit(unit.getOwnerID())) {
+            if(!targetTile.hasEnemyUnit(unit.getOwnerID())) {
                 unit.nextCommand();
+            } else if (targetTile.isImpassable()) {
+                log.error("Cannot move to tile, it is impassable!");
+                unit.cancelQueuedCommands();
             }
             else {
                 actorTile.removeUnit(unit.getUnitID());
@@ -321,7 +337,8 @@ public class GameBoard {
             Tile actorTile = getTileWithLocation(army.getLocation());
             Tile targetTile = getAdjacentTile(actorTile, direction);
 
-            targetTile.healOccupants();     // Heal occupants of tile
+            // Todo: Find amount to heal by
+            targetTile.healOccupants(10);     // Heal occupants of tile
 
         }
         else if(actor instanceof Unit) {
@@ -332,7 +349,8 @@ public class GameBoard {
             Tile actorTile = getTileWithLocation(unit.getLocation());
             Tile targetTile = getAdjacentTile(actorTile, direction);
 
-            targetTile.healOccupants();         // Heal occupants of tile
+            // Todo: Find amount to heal by
+            targetTile.healOccupants(10);         // Heal occupants of tile
 
         }
         else if (actor instanceof Structure) {
@@ -343,7 +361,8 @@ public class GameBoard {
             Tile actorTile = getTileWithLocation(struct.getLocation());
             Tile targetTile = getAdjacentTile(actorTile, direction);
 
-            targetTile.healOccupants();             // Heal occupants of tile
+            // Todo: Find amount to heal by
+            targetTile.healOccupants(10);             // Heal occupants of tile
         }
 
     }
@@ -351,39 +370,63 @@ public class GameBoard {
     // Handle make command w/ direction
     public <T> void handleMakeCmd(T _actor, int direction, String entityCode) {
 
-        // Cast actor and create new entity
-        ICommandable actor = (ICommandable) _actor;
-        Object newEntity = EntityFactory.getEntity(actor.getLocation(), actor.getOwnerID(), entityCode);
+        ICommandable actor;         // Actor
+        Object newEntity;           // New entity
+        Tile actorTile;             // Actor Tile
 
-        // Get postion to add new unit on
-        Tile actorTile = getTileWithLocation(actor.getLocation());
+        // Test for known entity code msg
+        try {
 
-        // Test new entity instance type and add to same tile as actor
-        if(newEntity instanceof Unit) {
+            actor = (ICommandable) _actor;                          // Cast actor and create new entity
+            newEntity = EntityFactory.getEntity(actor.getLocation(), actor.getOwnerID(), entityCode);
 
-            Unit unit = (Unit) newEntity;               // Cast as unit
+            actorTile = getTileWithLocation(actor.getLocation());   // Get postion to add new unit on
 
-            // Add unit to owner and the tile
-            players.get(actor.getOwnerID()).addUnit(unit);
-            actorTile.addUnit(unit);
+            // Test new entity instance type and add to same tile as actor
+            if(newEntity instanceof Unit) {
 
-        }
-        else if (newEntity instanceof Structure) {
+                Unit unit = (Unit) newEntity;               // Cast as unit
 
-            Structure struct = (Structure) newEntity;   // Cast as struct
+                // Add unit to owner and the tile
+                players.get(actor.getOwnerID()).addUnit(unit);
+                actorTile.addUnit(unit);
 
-            // Add structure to owner and the tile
-            players.get(actor.getOwnerID()).addStructure(struct);
-            actorTile.setStructure(struct);
+            }
+            else if (newEntity instanceof Structure) {
 
+                Structure struct = (Structure) newEntity;   // Cast as struct
+
+                // Add structure to owner and the tile
+                players.get(actor.getOwnerID()).addStructure(struct);
+                actorTile.setStructure(struct);
+
+            }
+
+        } catch (UnknownEntityCodeException e) {
+            log.error(e.getLocalizedMessage()); // Handle unknown entity code error
         }
 
     }
 
     // Handle disband army command
     public void handleDisbandArmyCmd(Army actor) {
-//        actor.disband();
-       // actor.disbandArmy();
+        //Set All units to stand by
+        actor.disbandArmy();
+        //Set Player's reference to null
+        players.get(actor.getOwnerID()).removeArmy(actor);
+        //Set Players reference to rally point to null
+        players.get(actor.getOwnerID()).removeRallyPoint(actor.getRp());
+        //Set rallypoints reference to null
+        actor.getRp().setArmy(null);
+        //Set Tile reference to null
+        gameMap[actor.getLocation().getX()][actor.getLocation().getY()].removeArmy(actor.getArmyID());
+        //Set Tile reference to rally point to null
+        gameMap[actor.getLocation().getX()][actor.getLocation().getY()].removeRallyPoint(actor.getRp());
+        //Set Army reference to rally point to null
+        actor.setRallyPoint(null);
+
+
+
     }
 
     // Handle band army command
@@ -398,8 +441,22 @@ public class GameBoard {
         RallyPoint rp = EntityFactory.getRallyPoint(location, this, actors.get(0).getOwnerID());
         Army newArmy = EntityFactory.getArmy(location, actors.get(0).getOwnerID(),rp, actors);
         players.get(actors.get(0).getOwnerID()).addArmy(newArmy);
-
-
     }
 
+    public void updateGameBoard(){
+        for(int i = 0; i<gameMap.length;i++){
+            for(int j = 0; j<gameMap.length;j++){
+                gameMap[i][j].setOwnerID(-1);
+            }
+        }
+        ArrayList<Unit> player0Unit = players.get(0).getAllUnit();
+        for(int i = 0;i<player0Unit.size();i++){
+            gameMap[player0Unit.get(i).getLocation().getX()][player0Unit.get(i).getLocation().getY()].setOwnerID(players.get(0).getPlayerID());
+        }
+
+        ArrayList<Unit> player1Unit = players.get(1).getAllUnit();
+        for(int i = 0;i<player1Unit.size();i++){
+            gameMap[player0Unit.get(i).getLocation().getX()][player0Unit.get(i).getLocation().getY()].setOwnerID(players.get(1).getPlayerID());
+        }
+    }
 }

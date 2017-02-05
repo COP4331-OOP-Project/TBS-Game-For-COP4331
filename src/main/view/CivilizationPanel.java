@@ -26,11 +26,21 @@ public class CivilizationPanel extends Panel{
 	public void draw(Graphics g, int screenWidth, int screenHeight) {
 		drawBar(g, screenWidth, screenHeight);
 		drawText(g);
+		drawPlayerIcon(g);
+	}
+
+	private void drawPlayerIcon(Graphics g) {
+		if (game.getCurrentPlayer().getPlayerID() == 0) {
+			g.drawImage(Assets.getInstance().getImage("ICON_O"), 80, 5, null);
+		} else {
+			g.drawImage(Assets.getInstance().getImage("ICON_B"), 80, 5, null);
+		}
+		
 	}
 
 	private void drawText(Graphics g) {
 		g.setFont(civInfoFont);
-		g.drawString("PlayerID: " + game.getCurrentPlayer().getPlayerID(), 5, 20);
+		g.drawString("Player: ", 5, 20);
 		g.drawString("Turn: "+ game.getTurnNum(), 5, 45);
 	}
 

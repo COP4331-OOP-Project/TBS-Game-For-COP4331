@@ -1,6 +1,8 @@
 package game;
 import game.entities.Army;
 import game.entities.RallyPoint;
+import game.entities.factories.EntityFactory;
+import game.entities.factories.UnknownEntityCodeException;
 import game.entities.structures.Base;
 
 import game.entities.units.Unit;
@@ -15,6 +17,7 @@ import game.gameboard.Location;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import javax.swing.text.html.parser.Entity;
 import java.awt.font.NumericShaper;
 import java.util.ArrayList;
 
@@ -65,21 +68,32 @@ public class Player {
 	private ArrayList<Unit> totalUnits;
 	
 	//Constructor
-	public Player(int id){
-		this.playerID = id;
-		init();
+	public Player(int id) {
+
+		this.playerID = id;		// Set id
+		init();					// Initialize
 	}
-	public Player(int id, Location loc){
-		this.playerID = id;
 
-		//Creates initial units
-		initColonist = new Colonist(loc, this.playerID);
-		Location explorer1Location = new Location(loc.xIndex+1, loc.yIndex);
-		initExplorer1 = new Explorer(explorer1Location, this.playerID);
-		Location explorer2Location = new Location(loc.xIndex, loc.yIndex+1);
-		initExplorer2 = new Explorer(explorer2Location, this.playerID);
+	public Player(int id, Location loc) {
 
-		init();
+		this.playerID = id;	// Set this player id
+
+		// Catch unknown entity codes
+		try {
+
+			//Creates initial units
+			initColonist = (Colonist) EntityFactory.getEntity(loc, this.playerID, "colonist");
+			Location explorer1Location = new Location(loc.getX()+1, loc.getY());
+			initExplorer1 = (Explorer)EntityFactory.getEntity(explorer1Location, this.playerID,"explorer");
+			Location explorer2Location = new Location(loc.getX(), loc.getY());
+			initExplorer2 = (Explorer)EntityFactory.getEntity(explorer2Location, this.playerID,"explorer");
+
+		} catch (UnknownEntityCodeException e) {
+			log.error(e.getLocalizedMessage());
+		} finally {
+			init();	// Initialize regardless of which units were not loaded
+		}
+
 	}
 
 	private void init()
@@ -171,7 +185,15 @@ public class Player {
 	//@TODO GET RALLY POINT NOT FINISHED
 	public ArrayList<RallyPoint> getArmyRallyPoint()
 	{
-		return rallyPoints;
+        ArrayList<RallyPoint> gRallyPoints = new ArrayList<>();
+        for(int i = 0;i<rallyPoints.size();i++)
+        {
+            if(rallyPoints.get(i)!=null)
+            {
+                gRallyPoints.add(rallyPoints.get(i));
+            }
+        }
+        return gRallyPoints;
 	}
 
 
@@ -338,18 +360,27 @@ public class Player {
 			}
 		}
 	}
+
+	public void removeArmy(Army army){
+		armies.set(army.getArmyID(),null);
+	}
 	
 	public void addRallyPoint(RallyPoint rallyPoint)
 	{
 		for(int i = 0;i<rallyPoints.size();i++)
 		{
-			if(totalUnits.get(i)==null)
+			if(rallyPoints.get(i)==null)
 			{
-				rallyPoints.add((rallyPoint));
+				rallyPoints.set(i,rallyPoint);
+				rallyPoint.setRallyID(i);
 				rallyPointsCount++;
 				break;
 			}
 		}
+	}
+
+	public void removeRallyPoint(RallyPoint rallyPoint){
+		rallyPoints.set(rallyPoint.getRallyID(),null);
 	}
 
 	public void addResources(int resource)
@@ -428,5 +459,17 @@ public class Player {
 		}
 		return gBases;
     }
+
+    public ArrayList<Unit> getAllUnit(){
+		ArrayList<Unit> gUnit = new ArrayList<Unit>();
+		for(int i = 0; i<totalUnits.size();i++)
+		{
+			if(totalUnits.get(i)!=null)
+			{
+				gUnit.add(totalUnits.get(i));
+			}
+		}
+		return gUnit;
+	}
 	
 }

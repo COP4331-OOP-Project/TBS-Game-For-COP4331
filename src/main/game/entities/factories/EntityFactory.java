@@ -16,27 +16,32 @@ import java.util.ArrayList;
 public class EntityFactory {
 
     // Create new entity based on given entityCode for at location for player of given id
-    public static Object getEntity(Location location, int playerId, String entityCode) {
+    public static Object getEntity(Location location, int playerId, String entityCode) throws UnknownEntityCodeException {
 
         Object entity;  // New entity to create
 
         // Select entity based on type
-        switch (entityCode) {
+        switch (entityCode.toLowerCase()) {
             case "base":
                 entity = new Base(location, playerId);
+                break;
             case "melee":
                 entity = new Melee(location, playerId);
+                break;
             case "ranged":
                 entity = new Ranged(location, playerId);
+                break;
             case "worker":
                 entity = new Worker(location, playerId);
+                break;
             case "explorer":
                 entity = new Explorer(location, playerId);
+                break;
             case "colonist":
                 entity = new Colonist(location, playerId);
+                break;
             default:
-                System.out.println("Unknown entity code specified");
-                entity = null;
+                throw new UnknownEntityCodeException("Entity code not found!");
 
         }
 

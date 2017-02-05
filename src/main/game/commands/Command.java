@@ -15,6 +15,8 @@ public abstract class Command {
     // Get time until activation
     public int getDuration() { return duration; }
 
+    public void setDuration(int duration) {this.duration=duration;}
+
     // Iterate activation time
     public void iterateDuration() { this.duration--; }
 

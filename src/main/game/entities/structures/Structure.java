@@ -2,6 +2,7 @@ package game.entities.structures;
 import game.commands.Command;
 import game.entities.ICommandable;
 import game.entities.PowerState;
+import game.entities.TileOccupant;
 import game.gameboard.Location;
 
 import java.util.LinkedList;
@@ -10,7 +11,7 @@ import java.util.Queue;
 /**
  * Created by David on 2/1/2017.
  */
-public abstract class Structure implements ICommandable {
+public abstract class Structure extends TileOccupant implements ICommandable {
 
     private int structureID;                            // Unique structure id (0-9)
     private int ownerID;                                // Player ownder id for structure
