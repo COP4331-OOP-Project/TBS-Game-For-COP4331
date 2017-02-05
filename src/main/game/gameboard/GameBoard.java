@@ -309,7 +309,7 @@ public class GameBoard {
             Tile actorTile = getTileWithLocation(unit.getLocation());
             Tile targetTile = getAdjacentTile(actorTile, direction);
 
-            if(targetTile.hasEnemyUnit(unit.getOwnerID())) {
+            if(!targetTile.hasEnemyUnit(unit.getOwnerID())) {
                 unit.nextCommand();
             } else if (targetTile.isImpassable()) {
                 log.error("Cannot move to tile, it is impassable!");
@@ -441,8 +441,22 @@ public class GameBoard {
         RallyPoint rp = EntityFactory.getRallyPoint(location, this, actors.get(0).getOwnerID());
         Army newArmy = EntityFactory.getArmy(location, actors.get(0).getOwnerID(),rp, actors);
         players.get(actors.get(0).getOwnerID()).addArmy(newArmy);
-
-
     }
 
+    public void updateGameBoard(){
+        for(int i = 0; i<gameMap.length;i++){
+            for(int j = 0; j<gameMap.length;j++){
+                gameMap[i][j].setOwnerID(-1);
+            }
+        }
+        ArrayList<Unit> player0Unit = players.get(0).getAllUnit();
+        for(int i = 0;i<player0Unit.size();i++){
+            gameMap[player0Unit.get(i).getLocation().getX()][player0Unit.get(i).getLocation().getY()].setOwnerID(players.get(0).getPlayerID());
+        }
+
+        ArrayList<Unit> player1Unit = players.get(1).getAllUnit();
+        for(int i = 0;i<player1Unit.size();i++){
+            gameMap[player0Unit.get(i).getLocation().getX()][player0Unit.get(i).getLocation().getY()].setOwnerID(players.get(1).getPlayerID());
+        }
+    }
 }
