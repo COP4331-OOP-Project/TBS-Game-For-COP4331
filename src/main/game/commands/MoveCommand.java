@@ -18,6 +18,9 @@ public class MoveCommand<T> extends Command {
         super.duration = duration;
     }
 
+    //Getter
+    public int getDirection(){return this.direction;}
+
     // Execute move from Gameboard function
     public void exec() {
         gameBoard.handleMoveCmd(actor, direction);

@@ -122,8 +122,9 @@ public class Tile {
     //Check whether this tile is occupied by enemy unit
     public boolean hasEnemyUnit(int playerID)
     {
-        if (playerID!= this.ownerID)
+        if (playerID!= this.ownerID) {
             return true;
+        }
         else if (playerID==this.ownerID)
         {
             return false;
