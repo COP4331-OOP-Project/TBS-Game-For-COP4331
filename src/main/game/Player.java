@@ -73,10 +73,10 @@ public class Player {
 		this.playerID = id;
 
 		//Creates initial units
-		initColonist = (Colonist) EntityFactory.getEntity(loc, this.playerID, "colonist");
+		initColonist = (Colonist)EntityFactory.getEntity(loc, this.playerID, "colonist");
 		Location explorer1Location = new Location(loc.getX()+1, loc.getY());
 		initExplorer1 = (Explorer)EntityFactory.getEntity(explorer1Location, this.playerID,"explorer");
-		Location explorer2Location = new Location(loc.getX(), loc.getY());
+		Location explorer2Location = new Location(loc.getX(), loc.getY()+1);
 		initExplorer2 = (Explorer)EntityFactory.getEntity(explorer2Location, this.playerID,"explorer");
 		init();
 	}
@@ -435,5 +435,17 @@ public class Player {
 		}
 		return gBases;
     }
+
+    public ArrayList<Unit> getAllUnit(){
+		ArrayList<Unit> gUnit = new ArrayList<Unit>();
+		for(int i = 0; i<totalUnits.size();i++)
+		{
+			if(totalUnits.get(i)!=null)
+			{
+				gUnit.add(totalUnits.get(i));
+			}
+		}
+		return gUnit;
+	}
 	
 }

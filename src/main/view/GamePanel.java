@@ -11,6 +11,7 @@ import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
 import java.util.Random;
 import controls.ModeEnum;
+import game.entities.units.Unit;
 import game.gameboard.Location;
 
 import game.entities.units.Colonist;
@@ -40,10 +41,7 @@ public class GamePanel extends Panel {
 	private int height = 0;
 
 	//ArrayList of each player's unit
-	private ArrayList<Explorer> explorers; //Instances for player0 and player1
-	private ArrayList<Colonist> colonists;
-	private ArrayList<Explorer> explorers1;
-	private ArrayList<Colonist> colonists1;
+	private ArrayList<Unit> player1Units;
 
 	Graphics2D g2d;
 	
@@ -124,42 +122,12 @@ public class GamePanel extends Panel {
 		centerOnTile(game.getGameBoard().testUnit.getLocation().getX(),
 				game.getGameBoard().testUnit.getLocation().getY());
 		*/
-
-		colonists = game.getPlayer(0).getColonists();
-		for(int i = 0;i<colonists.size();i++)
-		{
-			drawUnit(colonists.get(i).getLocation().getX(),
-					colonists.get(i).getLocation().getY(),
-					colonists.get(i).getUnitType(),
-					colonists.get(i).getOwnerID(),
-					0);
-		}
-		explorers = game.getPlayer(0).getExplorers();
-		for(int i = 0;i<explorers.size();i++)
-		{
-			drawUnit(explorers.get(i).getLocation().getX(),
-					explorers.get(i).getLocation().getY(),
-					explorers.get(i).getUnitType(),
-					explorers.get(i).getOwnerID(),
-					0);
-		}
-
-		colonists1 = game.getPlayer(1).getColonists();
-		for(int i = 0;i<colonists1.size();i++)
-		{
-			drawUnit(colonists1.get(i).getLocation().getX(),
-					colonists1.get(i).getLocation().getY(),
-					colonists1.get(i).getUnitType(),
-					colonists1.get(i).getOwnerID(),
-					0);
-		}
-		explorers1 = game.getPlayer(1).getExplorers();
-		for(int i = 0;i<explorers1.size();i++)
-		{
-			drawUnit(explorers1.get(i).getLocation().getX(),
-					explorers1.get(i).getLocation().getY(),
-					explorers1.get(i).getUnitType(),
-					explorers1.get(i).getOwnerID(),
+		player1Units = game.getPlayer(0).getAllUnit();
+		for(int i = 0;i<player1Units.size();i++){
+			drawUnit(player1Units.get(i).getLocation().getX(),
+					player1Units.get(i).getLocation().getY(),
+					player1Units.get(i).getUnitType(),
+					player1Units.get(i).getOwnerID(),
 					0);
 		}
 	}
