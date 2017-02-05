@@ -30,8 +30,8 @@ public class CivilizationPanel extends Panel{
 
 	private void drawText(Graphics g) {
 		g.setFont(civInfoFont);
-		g.drawString("Player: ", 5, 20);
-		g.drawString("Turn: ", 5, 45);
+		g.drawString("PlayerID: " + game.getCurrentPlayer().getPlayerID(), 5, 20);
+		g.drawString("Turn: "+ game.getTurnNum(), 5, 45);
 	}
 
 	//Draw the blue panel itself
