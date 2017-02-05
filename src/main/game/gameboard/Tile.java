@@ -1,9 +1,11 @@
 package game.gameboard;
 
 import game.entities.Army;
+import game.entities.RallyPoint;
 import game.entities.structures.Structure;
 import game.entities.units.Unit;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -16,6 +18,7 @@ public class Tile implements ITileAccessors {
     //Leave out AreaOfEffect, Resources, Item for iteration 1
     private ArrayList<Unit> units;
     private ArrayList<Army> armies;
+    private ArrayList<RallyPoint> rallyPoints;
     private Structure structure;
     private Location location;
     public boolean containsUnit;
@@ -30,6 +33,7 @@ public class Tile implements ITileAccessors {
         Terrain=tileType;
         units=new ArrayList<Unit>();
         armies=new ArrayList<Army>();
+        rallyPoints = new ArrayList<RallyPoint>();
         containsStructure=false;
         containsRallyPoint=false;
         containsUnit=false;
@@ -67,7 +71,26 @@ public class Tile implements ITileAccessors {
             containsUnit=false;
         }
     }
+    public ArrayList<RallyPoint> getRallyPoints(){return rallyPoints;}
 
+    public void addRallyPoint(RallyPoint rp){
+        rallyPoints.add(rp);
+        containsRallyPoint=true;
+    }
+
+    public void removeRallyPoint(RallyPoint rp){
+        for(int i = 0; i<rallyPoints.size(); i++){
+            if(rallyPoints.get(i).getRallyID()==rp.getRallyID()){
+                rallyPoints.remove(i);
+                break;
+            }
+        }
+        if(rallyPoints.isEmpty()){
+            containsRallyPoint=false;
+        }
+    }
+
+    
     // Get all units from Tile
     public ArrayList<Unit> getUnits(){
         return units;
@@ -79,7 +102,6 @@ public class Tile implements ITileAccessors {
         containsArmy=true;
     }
 
-    //TODO Fix unique ID for armies
     public void removeArmy(int armyID){
         for(int i = 0; i<armies.size(); i++){
             if(armies.get(i).getArmyID()==armyID){

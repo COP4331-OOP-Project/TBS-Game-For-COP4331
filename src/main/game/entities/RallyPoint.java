@@ -10,14 +10,13 @@ import game.gameboard.GameBoard;
 import game.gameboard.Location;
 
 public class RallyPoint extends TileOccupant {
-	private UUID rallyID;
+	private int rallyID;
 	private int ownerID;
 	private Location location;
 	private Army army;
 	private GameBoard gameBoard;
 	
 	public RallyPoint(Location location, GameBoard gameBoard, int ownerID) {
-		this.rallyID = UUID.randomUUID();
 		this.location = location;
 		this.ownerID = ownerID;
 		this.gameBoard = gameBoard;
@@ -177,6 +176,10 @@ public class RallyPoint extends TileOccupant {
 	public void setLocation(Location location) {
 		this.location = location;
 	}
+
+	public void setRallyID(int id){rallyID=id;}
+
+	public int getRallyID(){return rallyID;}
 	
 	public Location getLocation() {
 		return location;
