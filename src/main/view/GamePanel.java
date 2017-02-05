@@ -24,6 +24,7 @@ import org.apache.logging.log4j.Logger;
 public class GamePanel extends Panel {
 
 	Game game;
+	private static final int NUM_OF_PLAYERS = 2;
 	private static final int TILE_PIXEL_SIZE = 100;
 	private static final int TIME_TO_CENTER = 50;
 	private final static Logger log = LogManager.getLogger(GamePanel.class);
@@ -45,8 +46,7 @@ public class GamePanel extends Panel {
 	private int height = 0;
 
 	//ArrayList of each player's unit
-	private ArrayList<Unit> player1Units;
-	private ArrayList<Unit> player2Units;
+	private ArrayList<Unit> playerUnits;
 
 	Graphics2D g2d;
 	
@@ -121,59 +121,37 @@ public class GamePanel extends Panel {
 
 	private void drawUnits() {
 		int unitSelected = -1;
-		player1Units = game.getPlayer(0).getAllUnit();
-		for (int i = 0; i < player1Units.size(); i++) {
-			if (player1Units.get(i).getLocation().getX() == selectedX
-					&& player1Units.get(i).getLocation().getY() == selectedY
-					&& selectedX != -1 && selectedY != -1) {
-				if (player1Units.get(i).getUnitType() == 0 &&
-						game.getCurrentType() == UnitEnum.MELEE)
-					unitSelected = i;
-				if (player1Units.get(i).getUnitType() == 1 &&
-						game.getCurrentType() == UnitEnum.RANGED)
-					unitSelected = i;
-				if (player1Units.get(i).getUnitType() == 2 &&
-						game.getCurrentType() == UnitEnum.EXPLORER)
-					unitSelected = i;
-				if (player1Units.get(i).getUnitType() == 3 &&
-						game.getCurrentType() == UnitEnum.COLONIST)
-					unitSelected = i;
+		for (int player = 0; player < NUM_OF_PLAYERS; player++) {
+			playerUnits = game.getPlayer(player).getAllUnit();
+			for (int i = 0; i < playerUnits.size(); i++) {
+				if (playerUnits.get(i).getLocation().getX() == selectedX
+						&& playerUnits.get(i).getLocation().getY() == selectedY
+						&& selectedX != -1 && selectedY != -1) {
+					if (playerUnits.get(i).getUnitType() == 0 &&
+							game.getCurrentType() == UnitEnum.MELEE)
+						unitSelected = i;
+					if (playerUnits.get(i).getUnitType() == 1 &&
+							game.getCurrentType() == UnitEnum.RANGED)
+						unitSelected = i;
+					if (playerUnits.get(i).getUnitType() == 2 &&
+							game.getCurrentType() == UnitEnum.EXPLORER)
+						unitSelected = i;
+					if (playerUnits.get(i).getUnitType() == 3 &&
+							game.getCurrentType() == UnitEnum.COLONIST)
+						unitSelected = i;
+				}
+				drawUnit(playerUnits.get(i).getLocation().getX(),
+						playerUnits.get(i).getLocation().getY(),
+						playerUnits.get(i).getUnitType(),
+						playerUnits.get(i).getOwnerID(),
+						0);
 			}
-			drawUnit(player1Units.get(i).getLocation().getX(),
-					player1Units.get(i).getLocation().getY(),
-					player1Units.get(i).getUnitType(),
-					player1Units.get(i).getOwnerID(),
-					0);
-		}
-		player2Units = game.getPlayer(1).getAllUnit();
-		for (int i = 0; i < player2Units.size(); i++) {
-			if (player2Units.get(i).getLocation().getX() == selectedX
-					&& player2Units.get(i).getLocation().getY() == selectedY
-					&& selectedX != -1 && selectedY != -1) {
-				if (player2Units.get(i).getUnitType() == 0 &&
-						game.getCurrentType() == UnitEnum.MELEE)
-					unitSelected = i;
-				if (player2Units.get(i).getUnitType() == 1 &&
-						game.getCurrentType() == UnitEnum.RANGED)
-					unitSelected = i;
-				if (player2Units.get(i).getUnitType() == 2 &&
-						game.getCurrentType() == UnitEnum.EXPLORER)
-					unitSelected = i;
-				if (player2Units.get(i).getUnitType() == 3 &&
-						game.getCurrentType() == UnitEnum.COLONIST)
-					unitSelected = i;
-			}
-			drawUnit(player2Units.get(i).getLocation().getX(),
-					player2Units.get(i).getLocation().getY(),
-					player2Units.get(i).getUnitType(),
-					player2Units.get(i).getOwnerID(),
-					0);
 		}
 		if (game.getCurrentMode() == ModeEnum.UNIT && unitSelected != -1) {
-			drawUnit(player1Units.get(unitSelected).getLocation().getX(),
-				player1Units.get(unitSelected).getLocation().getY(),
-				player1Units.get(unitSelected).getUnitType(),
-				player1Units.get(unitSelected).getOwnerID(),
+			drawUnit(playerUnits.get(unitSelected).getLocation().getX(),
+					playerUnits.get(unitSelected).getLocation().getY(),
+					playerUnits.get(unitSelected).getUnitType(),
+					playerUnits.get(unitSelected).getOwnerID(),
 				0);
 			drawSelectedItem();
 		} else {
