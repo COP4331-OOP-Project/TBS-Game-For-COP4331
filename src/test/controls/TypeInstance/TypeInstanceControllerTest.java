@@ -244,22 +244,22 @@ public class TypeInstanceControllerTest {
     public void cycleBaseStructureForward() {
         Object result = this.typeInstanceController.cycleForward(StructureEnum.BASE);
         Assert.assertTrue(result instanceof Base);
-        Assert.assertEquals(((Base)result).getId(), this.base.getId());
+        Assert.assertEquals(((Base)result).getStructureID(), this.base.getStructureID());
 
         Object result2 = this.typeInstanceController.cycleForward(StructureEnum.BASE);
         Assert.assertTrue(result2 instanceof Base);
-        Assert.assertEquals(((Base)result2).getId(), this.base.getId());
+        Assert.assertEquals(((Base)result2).getStructureID(), this.base.getStructureID());
     }
 
     @Test
     public void cycleBaseStructureBackward() {
         Object result = this.typeInstanceController.cycleBackward(StructureEnum.BASE);
         Assert.assertTrue(result instanceof Base);
-        Assert.assertEquals(((Base)result).getId(), this.base.getId());
+        Assert.assertEquals(((Base)result).getStructureID(), this.base.getStructureID());
 
         Object result2 = this.typeInstanceController.cycleBackward(StructureEnum.BASE);
         Assert.assertTrue(result2 instanceof Base);
-        Assert.assertEquals(((Base)result2).getId(), this.base.getId());
+        Assert.assertEquals(((Base)result2).getStructureID(), this.base.getStructureID());
     }
 
     @Test

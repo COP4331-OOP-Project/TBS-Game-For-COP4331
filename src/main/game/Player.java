@@ -1,5 +1,6 @@
 package game;
 import game.entities.Army;
+import game.entities.RallyPoint;
 import game.entities.structures.Base;
 
 import game.entities.units.Unit;
@@ -9,6 +10,8 @@ import game.entities.units.Explorer;
 import game.entities.units.Worker;
 import game.entities.units.Colonist;
 import game.entities.structures.Structure;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.awt.font.NumericShaper;
 import java.util.ArrayList;
@@ -28,7 +31,23 @@ public class Player {
 	 * Worker:	 05
 	 */
 
-    private ArrayList<Army> armies;
+	private boolean isUnitListFull;
+
+	private final static Logger log = LogManager.getLogger(Player.class);
+	
+	private int meleeCount;
+	private int rangeCount;
+	private int armiesCount;
+	private int explorersCount;
+	private int colonistsCount;
+	private int workersCount;
+	private int structuresCount;
+	private int totalUnitsCount;
+	private int basesCount;
+	private int rallyPointsCount;
+
+
+	private ArrayList<Army> armies;
 	private ArrayList<Melee> melees;
 	private ArrayList<Ranged> ranges;
 	private ArrayList<Explorer> explorers;
@@ -38,26 +57,57 @@ public class Player {
 
 	private ArrayList<Base> bases;
 
-	private ArrayList<Object> rallyPoints;
+	private ArrayList<RallyPoint> rallyPoints;
 	
 	private ArrayList<Unit> totalUnits;
 	
 	//Constructor
 	public Player(int id){
 		this.playerID = id;
-		this.armies = new ArrayList<Army>();
-		this.melees = new ArrayList<Melee>();
-        this.ranges = new ArrayList<Ranged>();
-        this.explorers = new ArrayList<Explorer>();
-        this.colonists = new ArrayList<Colonist>();
-        this.workers = new ArrayList<Worker>();
-        this.structures = new ArrayList<Structure>();
-        this.bases = new ArrayList<Base>();
-        this.rallyPoints = new ArrayList<Object>();
-        this.totalUnits = new ArrayList<Unit>();
-
+		init();
 	}
 
+	private void init()
+	{
+		armies = new ArrayList<Army>();
+		melees = new ArrayList<Melee>();
+		ranges = new ArrayList<Ranged>();
+		explorers = new ArrayList<Explorer>();
+		colonists = new ArrayList<Colonist>();
+		workers = new ArrayList<Worker>();
+		structures = new ArrayList<Structure>();
+		bases = new ArrayList<Base>();
+		rallyPoints = new ArrayList<RallyPoint>();
+		totalUnits = new ArrayList<Unit>();
+
+		meleeCount = 0;
+		rangeCount = 0;
+		armiesCount = 0;
+		explorersCount = 0;
+		colonistsCount = 0;
+		workersCount = 0;
+		structuresCount = 0;
+		totalUnitsCount = 0;
+		basesCount = 0;
+		rallyPointsCount = 0;
+
+		for(int i = 0; i<10;i++)
+		{
+			armies.add(null);
+			melees.add(null);
+			ranges.add(null);
+			explorers.add(null);
+			colonists.add(null);
+			workers.add(null);
+			structures.add(null);
+			bases.add(null);
+			rallyPoints.add(null);
+		}
+		for(int i = 0; i<25;i++)
+		{
+			totalUnits.add(null);
+		}
+	}
 	public int getPlayerID() { return this.playerID; }
 	//accessors
 	public int getResourceCount()
@@ -65,14 +115,14 @@ public class Player {
 		return resourceCount;
 	}
 
-	public int getUnitCount(int unitID)
+	public int getUnitCount(int unitType)
 	{
-		switch(unitID) {
-		case 1: return melees.size();
-		case 2: return ranges.size();
-		case 3: return explorers.size();
-		case 4: return colonists.size();
-		case 5: return workers.size();
+		switch(unitType) {
+		case 1: return meleeCount;
+		case 2: return rangeCount;
+		case 3: return explorersCount;
+		case 4: return colonistsCount;
+		case 5: return workersCount;
 		default: return 0;
 		}
 	}
@@ -91,10 +141,11 @@ public class Player {
 	}
 	public int getTotalUnitCount()
 	{
-		int sum = melees.size()+ ranges.size()+explorers.size()+colonists.size()+workers.size();
-		return sum;
+		return totalUnitsCount;
 	}
-	public ArrayList<Object> getArmyRallyPoint()
+
+	//@TODO GET RALLY POINT NOT FINISHED
+	public ArrayList<RallyPoint> getArmyRallyPoint()
 	{
 		return rallyPoints;
 	}
@@ -110,73 +161,248 @@ public class Player {
 	 */
 	public void addUnit(Unit unit)
 	{
-		switch(unit.getUnitType())
+		boolean isUnitAdded = false;
 
+		if(totalUnitsCount>=25)
 		{
-			case 1:
-				melees.add((Melee)unit);
+			log.info("Unit list is full");
+			return;
+		}
+		switch (unit.getUnitType()) {
+			case 1: {
+				for (int i = 0; i < melees.size(); i++) {
+					if (melees.get(i) == null) {
+						melees.set(i, (Melee) unit);
+						unit.setUnitID(i);
+						isUnitAdded = true;
+						meleeCount++;
+						break;
+					}
+				}
+				if (!isUnitAdded)
+					log.info("Melee list full");
 				break;
-			case 2:
-				ranges.add((Ranged)unit);
+			}
+			case 2: {
+				for (int i = 0; i < ranges.size(); i++) {
+					if (ranges.get(i) == null) {
+						ranges.set(i, (Ranged) unit);
+						unit.setUnitID(i);
+						isUnitAdded = true;
+						rangeCount++;
+						break;
+					}
+				}
+				if (!isUnitAdded)
+					log.info("Range list full");
 				break;
-			case 3:
-				explorers.add((Explorer)unit);
+			}
+			case 3: {
+				for (int i = 0; i < explorers.size(); i++) {
+					if (explorers.get(i) == null) {
+						explorers.set(i, (Explorer) unit);
+						unit.setUnitID(i);
+						isUnitAdded = true;
+						explorersCount++;
+						break;
+					}
+				}
+				if (!isUnitAdded)
+					log.info("Explorers list full");
 				break;
-			case 4:
-				colonists.add((Colonist)unit);
+			}
+			case 4: {
+				for (int i = 0; i < colonists.size(); i++) {
+					if (colonists.get(i) == null) {
+						colonists.set(i, (Colonist) unit);
+						unit.setUnitID(i);
+						isUnitAdded = true;
+						colonistsCount++;
+						break;
+					}
+				}
+				if (!isUnitAdded)
+					log.info("Colonists list full");
 				break;
-			case 5:
-				workers.add((Worker)unit);
+			}
+			case 5: {
+				for (int i = 0; i < workers.size(); i++) {
+					if (workers.get(i) == null) {
+						workers.set(i, (Worker) unit);
+						unit.setUnitID(i);
+						isUnitAdded = true;
+						workersCount++;
+						break;
+					}
+				}
+				if (!isUnitAdded)
+					log.info("Worker list full");
+				break;
+			}
+			default:
+				break;
+		}
+		for (int i = 0; i < totalUnits.size(); i++) {
+			if (totalUnits.get(i) == null && isUnitAdded == true) {
+				totalUnits.add(unit);
+				totalUnitsCount++;
+				break;
+			}
+		}
+	}
+
+
+	public void removeUnit(Unit unit) {
+		switch(unit.getUnitType()) {
+			case 1: {
+				melees.set(unit.getUnitID(),null);
+				break;
+			}
+			case 2: {
+				ranges.set(unit.getUnitID(),null);
+				break;
+			}
+			case 3: {
+				explorers.set(unit.getUnitID(),null);
+				break;
+			}
+			case 4: {
+				colonists.set(unit.getUnitID(),null);
+				break;
+			}
+			case 5: {
+				workers.set(unit.getUnitID(),null);
+				break;
+			}
 			default:
 				break;
 
 		}
-		totalUnits.add(unit);
+		for(int i = 0;i<totalUnits.size();i++) {
+			if(totalUnits.get(i)!=null) {
+				if((totalUnits.get(i).getUnitID() == unit.getUnitID())&&(totalUnits.get(i).getUnitType() == unit.getUnitType()))
+				{
+					totalUnits.set(i,null);
+				}
+			}
+		}
 	}
 
 	public void addStructure(Structure structure) {
 		//structures.add(1);
-		bases.add((Base) structure);
-		structures.add(structure);
+		for(int i = 0;i<structures.size();i++)
+		{
+			if(structures.get(i)==null){
+				structure.setStructureID(i);
+				structures.set(i, structure);
+				bases.set(i,(Base)structure);
+			}
+		}
 	}
 
-	public void addArmy(Army army)
-	{
-		armies.add(army);
+	public void removeStructure(Structure strucutre) {
+		structures.set(strucutre.getStructureID(),null);
+		bases.set(strucutre.getStructureID(),null);
+	}
 
+	public void addArmy(Army army) {
+		for(int i = 0;i<armies.size();i++) {
+			if (armies.get(i)==null) {
+				armies.set(i,army);
+				army.setArmyID(i);
+				break;
+			}
+		}
 	}
 	
-	public void addRallyPoint(Object rallyPoint)
+	public void addRallyPoint(RallyPoint rallyPoint)
 	{
-		rallyPoints.add(1);
+		for(int i = 0;i<rallyPoints.size();i++)
+		{
+			if(totalUnits.get(i)==null)
+			{
+				rallyPoints.add((rallyPoint));
+				rallyPointsCount++;
+				break;
+			}
+		}
 	}
+
 	public void addResources(int resource)
 	{
 		this.resourceCount = this.resourceCount+resource;
 	}
 
     public ArrayList<Army> getArmies() {
-        return armies;
+		ArrayList<Army> gArmies = new ArrayList<Army>();
+		for(int i = 0;i<armies.size();i++)
+		{
+			if(armies.get(i)!=null)
+			{
+				gArmies.add(armies.get(i));
+			}
+		}
+        return gArmies;
     }
 
     public ArrayList<Melee> getMelees() {
-        return melees;
+		ArrayList<Melee> gMelee = new ArrayList<Melee>();
+		for(int i = 0;i<melees.size();i++)
+		{
+			if(melees.get(i)!=null)
+			{
+				gMelee.add(melees.get(i));
+			}
+		}
+		return gMelee;
     }
 
     public ArrayList<Ranged> getRanges() {
-        return ranges;
+		ArrayList<Ranged> gRange = new ArrayList<Ranged>();
+		for(int i = 0;i<ranges.size();i++)
+		{
+			if(ranges.get(i)!=null)
+			{
+				gRange.add(ranges.get(i));
+			}
+		}
+		return gRange;
     }
 
     public ArrayList<Explorer> getExplorers() {
-        return explorers;
+		ArrayList<Explorer> gExplorers = new ArrayList<Explorer>();
+		for(int i = 0;i<explorers.size();i++)
+		{
+			if(explorers.get(i)!=null)
+			{
+				gExplorers.add(explorers.get(i));
+			}
+		}
+		return gExplorers;
     }
 
     public ArrayList<Colonist> getColonists() {
-        return colonists;
+		ArrayList<Colonist> gColonists = new ArrayList<Colonist>();
+		for(int i = 0;i<colonists.size();i++)
+		{
+			if(colonists.get(i)!=null)
+			{
+				gColonists.add(colonists.get(i));
+			}
+		}
+		return gColonists;
     }
 
     public ArrayList<Base> getBases() {
-        return bases;
+		ArrayList<Base> gBases = new ArrayList<Base>();
+		for(int i = 0;i<bases.size();i++)
+		{
+			if(bases.get(i)!=null)
+			{
+				gBases.add(bases.get(i));
+			}
+		}
+		return gBases;
     }
 	
 }
