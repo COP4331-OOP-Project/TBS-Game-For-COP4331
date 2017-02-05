@@ -10,14 +10,17 @@ import game.gameboard.GameBoard;
 import game.gameboard.Location;
 
 public class RallyPoint {
+
 	private UUID rallyID;
+	private int ownerID;
 	private Location location;
 	private Army army;
 	private GameBoard gameBoard;
 	
-	public RallyPoint(Location location, GameBoard gameBoard) {
+	public RallyPoint(Location location, GameBoard gameBoard, int ownerID) {
 		this.rallyID = UUID.randomUUID();
 		this.location = location;
+		this.ownerID = ownerID;
 		this.gameBoard = gameBoard;
 	}
 
