@@ -36,6 +36,9 @@ public class GamePanel extends Panel {
 	private int centerToX = -1;
 	private int centerToY = -1;
 	
+	private int selectedX = -1;
+	private int selectedY = -1;
+	
 	private int width = 0;
 	private int height = 0;
 
@@ -66,18 +69,20 @@ public class GamePanel extends Panel {
 		//checkCentering(x, y);
 		if (isCentering)
 			continueCentering();
+		checkCenteringCoordinates();
 		drawTiles();
 		drawBases();
 		drawUnits();
 		drawArmies();
 		drawSelectedItem();
-		checkCenteringCoordinates();
 	}
 
 	private void checkCenteringCoordinates() {
 		if (this.game.isCenterCoordinatesUpdated()) {
 			Location loc = this.game.getCenterCoordinates();
-			this.centerOnTile(loc.getX(), loc.getY());
+			selectedX = loc.getX();
+			selectedY = loc.getY();
+			this.centerOnTile(selectedX, selectedY);
 			this.game.setCenterCoordinatesUpdated(false);
 		}
 	}
@@ -91,19 +96,21 @@ public class GamePanel extends Panel {
 	}
 	
 	private void drawSelectedItem() {
-		int x = 2;
-		int y = 2;
-		if (game.getCurrentMode() == ModeEnum.RALLY_POINT) {
-			drawStaticTileElement(x, y, "RALLY_POINT_SELECTED");
-		}
-		if (game.getCurrentMode() == ModeEnum.UNIT) {
-			drawStaticTileElement(x, y, "UNIT_SELECTED");
-		}
-		if (game.getCurrentMode() == ModeEnum.STRUCTURE) {
-			drawStaticTileElement(x, y, "BASE_SELECTED");
-		}
-		if (game.getCurrentMode() == ModeEnum.ARMY) {
-			drawStaticTileElement(x, y, "ARMY_SELECTED");
+		if (!(selectedX == -1 && selectedY == -1)) {
+			int x = selectedX;
+			int y = selectedY;
+			if (game.getCurrentMode() == ModeEnum.RALLY_POINT) {
+				drawStaticTileElement(x, y, "RALLY_POINT_SELECTED");
+			}
+			if (game.getCurrentMode() == ModeEnum.UNIT) {
+				drawStaticTileElement(x, y, "UNIT_SELECTED");
+			}
+			if (game.getCurrentMode() == ModeEnum.STRUCTURE) {
+				drawStaticTileElement(x, y, "BASE_SELECTED");
+			}
+			if (game.getCurrentMode() == ModeEnum.ARMY) {
+				drawStaticTileElement(x, y, "UNIT_SELECTED");
+			}
 		}
 	}
 
@@ -186,7 +193,7 @@ public class GamePanel extends Panel {
 		rotateOnTile(x, y, rotation);
 			switch (player) {
 			case 0:
-				drawStaticTileElement(x, y, "ARMY_G");
+				drawStaticTileElement(x, y, "ARMY_O");
 				break;
 			case 1:
 				drawStaticTileElement(x, y, "ARMY_B");
@@ -195,7 +202,7 @@ public class GamePanel extends Panel {
 				drawStaticTileElement(x, y, "ARMY_Y");
 				break;
 			case 3:
-				drawStaticTileElement(x, y, "ARMY_O");
+				drawStaticTileElement(x, y, "ARMY_G");
 				break;
 			default:
 				log.warn("Invalid Player :" + player
@@ -230,7 +237,7 @@ public class GamePanel extends Panel {
 	private void drawBase(int x, int y, int player, int rotation) {
 		switch(player) {
 			case 0:
-				drawStaticTileElement(x, y, "BASE_G");
+				drawStaticTileElement(x, y, "BASE_O");
 				break;
 			case 1:
 				drawStaticTileElement(x, y, "BASE_B");
@@ -239,7 +246,7 @@ public class GamePanel extends Panel {
 				drawStaticTileElement(x, y, "BASE_Y");
 				break;
 			case 3:
-				drawStaticTileElement(x, y, "BASE_O");
+				drawStaticTileElement(x, y, "BASE_G");
 				break;
 			default:
 				log.warn("Invalid player specific for drawing base");
@@ -256,7 +263,7 @@ public class GamePanel extends Panel {
 		rotateOnTile(x, y, rotation);
 		switch (player) {
 			case 0:
-				drawStaticTileElement(x, y, "UNIT_G");
+				drawStaticTileElement(x, y, "UNIT_O");
 				break;
 			case 1:
 				drawStaticTileElement(x, y, "UNIT_B");
@@ -265,7 +272,7 @@ public class GamePanel extends Panel {
 				drawStaticTileElement(x, y, "UNIT_Y");
 				break;
 			case 3:
-				drawStaticTileElement(x, y, "UNIT_O");
+				drawStaticTileElement(x, y, "UNIT_G");
 				break;
 			default:
 				log.warn("Invalid Player :" + player
