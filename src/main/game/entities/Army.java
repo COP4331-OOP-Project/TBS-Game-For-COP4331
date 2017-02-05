@@ -87,19 +87,21 @@ public class Army {
 
     // Update battleGroup and reinforcements to make sure all units in correct spot
     public void updateArmy(){
-        for(int i = 0; i<battleGroup.size(); i++){
+        for(Iterator<Unit> iter = battleGroup.iterator(); iter.hasNext();){
             //If battlegroup unit not on rallypoint move to reinforcements
-            if(!battleGroup.get(i).getLocation().equals(rp.getLocation())){
-                reinforcements.add(battleGroup.get(i));
-                battleGroup.remove(i);
+            Unit checkUnit = iter.next();
+            if(!checkUnit.getLocation().equals(rp.getLocation())){
+                reinforcements.add(checkUnit);
+                iter.remove();
             }
         }
 
-        for(int i = 0; i<reinforcements.size(); i++){
+        for(Iterator<Unit> iter = reinforcements.iterator(); iter.hasNext();){
             //If reinforcement unit already on rallypoint move to battlegroup
-            if(reinforcements.get(i).getLocation().equals(rp.getLocation())){
-                battleGroup.add(reinforcements.get(i));
-                reinforcements.remove(i);
+            Unit checkUnit = iter.next();
+            if(checkUnit.getLocation().equals(rp.getLocation())){
+                battleGroup.add(checkUnit);
+                iter.remove();
             }
         }
 
