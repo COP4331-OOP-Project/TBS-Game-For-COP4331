@@ -117,128 +117,128 @@ public class TypeInstanceControllerTest {
     public void cycleMeleeUnitForward() {
         Object initialUnit = this.typeInstanceController.getTypeInstance();
         Assert.assertTrue(initialUnit instanceof Melee);
-        Assert.assertEquals(((Melee)initialUnit).getUUID(), this.m1.getUUID());
+        Assert.assertEquals(((Melee)initialUnit).getUnitID(), this.m1.getUnitID());
 
         Object result = this.typeInstanceController.cycleForward(UnitEnum.MELEE);
         Assert.assertTrue(result instanceof Melee);
-        Assert.assertEquals(((Melee)result).getUUID(), this.m2.getUUID());
+        Assert.assertEquals(((Melee)result).getUnitID(), this.m2.getUnitID());
 
         Object result2 = this.typeInstanceController.cycleForward(UnitEnum.MELEE);
         Assert.assertTrue(result2 instanceof Melee);
-        Assert.assertEquals(((Melee)result2).getUUID(), this.m3.getUUID());
+        Assert.assertEquals(((Melee)result2).getUnitID(), this.m3.getUnitID());
 
         Object result3 = this.typeInstanceController.cycleForward(UnitEnum.MELEE);
         Assert.assertTrue(result3 instanceof Melee);
-        Assert.assertEquals(((Melee)result3).getUUID(), this.m1.getUUID());
+        Assert.assertEquals(((Melee)result3).getUnitID(), this.m1.getUnitID());
     }
 
     @Test
     public void cycleMeleeUnitBackward() {
         Object initialUnit = this.typeInstanceController.getTypeInstance();
         Assert.assertTrue(initialUnit instanceof Melee);
-        Assert.assertEquals(((Melee)initialUnit).getUUID(), this.m1.getUUID());
+        Assert.assertEquals(((Melee)initialUnit).getUnitID(), this.m1.getUnitID());
 
         Object result = this.typeInstanceController.cycleBackward(UnitEnum.MELEE);
         Assert.assertTrue(result instanceof Melee);
-        Assert.assertEquals(((Melee)result).getUUID(), this.m3.getUUID());
+        Assert.assertEquals(((Melee)result).getUnitID(), this.m3.getUnitID());
 
         Object result2 = this.typeInstanceController.cycleBackward(UnitEnum.MELEE);
         Assert.assertTrue(result2 instanceof Melee);
-        Assert.assertEquals(((Melee)result2).getUUID(), this.m2.getUUID());
+        Assert.assertEquals(((Melee)result2).getUnitID(), this.m2.getUnitID());
 
         Object result3 = this.typeInstanceController.cycleBackward(UnitEnum.MELEE);
         Assert.assertTrue(result3 instanceof Melee);
-        Assert.assertEquals(((Melee)result3).getUUID(), this.m1.getUUID());
+        Assert.assertEquals(((Melee)result3).getUnitID(), this.m1.getUnitID());
     }
 
     @Test
     public void cycleRangeUnitForward() {
         Object result = this.typeInstanceController.cycleForward(UnitEnum.RANGED);
         Assert.assertTrue(result instanceof Ranged);
-        Assert.assertEquals(((Ranged)result).getUUID(), this.r1.getUUID());
+        Assert.assertEquals(((Ranged)result).getUnitID(), this.r1.getUnitID());
 
         Object result2 = this.typeInstanceController.cycleForward(UnitEnum.RANGED);
         Assert.assertTrue(result2 instanceof Ranged);
-        Assert.assertEquals(((Ranged)result2).getUUID(), this.r2.getUUID());
+        Assert.assertEquals(((Ranged)result2).getUnitID(), this.r2.getUnitID());
 
         Object result3 = this.typeInstanceController.cycleForward(UnitEnum.RANGED);
         Assert.assertTrue(result3 instanceof Ranged);
-        Assert.assertEquals(((Ranged)result3).getUUID(), this.r3.getUUID());
+        Assert.assertEquals(((Ranged)result3).getUnitID(), this.r3.getUnitID());
 
         Object result4 = this.typeInstanceController.cycleForward(UnitEnum.RANGED);
         Assert.assertTrue(result4 instanceof Ranged);
-        Assert.assertEquals(((Ranged)result4).getUUID(), this.r1.getUUID());
+        Assert.assertEquals(((Ranged)result4).getUnitID(), this.r1.getUnitID());
     }
 
     @Test
     public void cycleRangeUnitBackward() {
         Object result = this.typeInstanceController.cycleBackward(UnitEnum.RANGED);
         Assert.assertTrue(result instanceof Ranged);
-        Assert.assertEquals(((Ranged)result).getUUID(), this.r3.getUUID());
+        Assert.assertEquals(((Ranged)result).getUnitID(), this.r3.getUnitID());
 
         Object result2 = this.typeInstanceController.cycleBackward(UnitEnum.RANGED);
         Assert.assertTrue(result2 instanceof Ranged);
-        Assert.assertEquals(((Ranged)result2).getUUID(), this.r2.getUUID());
+        Assert.assertEquals(((Ranged)result2).getUnitID(), this.r2.getUnitID());
 
         Object result3 = this.typeInstanceController.cycleBackward(UnitEnum.RANGED);
         Assert.assertTrue(result3 instanceof Ranged);
-        Assert.assertEquals(((Ranged)result3).getUUID(), this.r1.getUUID());
+        Assert.assertEquals(((Ranged)result3).getUnitID(), this.r1.getUnitID());
 
         Object result4 = this.typeInstanceController.cycleBackward(UnitEnum.RANGED);
         Assert.assertTrue(result4 instanceof Ranged);
-        Assert.assertEquals(((Ranged)result4).getUUID(), this.r3.getUUID());
+        Assert.assertEquals(((Ranged)result4).getUnitID(), this.r3.getUnitID());
     }
 
     @Test
     public void cycleExplorerUnitForward() {
         Object result = this.typeInstanceController.cycleForward(UnitEnum.EXPLORER);
         Assert.assertTrue(result instanceof Explorer);
-        Assert.assertEquals(((Explorer)result).getUUID(), this.e1.getUUID());
+        Assert.assertEquals(((Explorer)result).getUnitID(), this.e1.getUnitID());
 
         Object result2 = this.typeInstanceController.cycleForward(UnitEnum.EXPLORER);
         Assert.assertTrue(result2 instanceof Explorer);
-        Assert.assertEquals(((Explorer)result2).getUUID(), this.e2.getUUID());
+        Assert.assertEquals(((Explorer)result2).getUnitID(), this.e2.getUnitID());
 
         Object result3 = this.typeInstanceController.cycleForward(UnitEnum.EXPLORER);
         Assert.assertTrue(result3 instanceof Explorer);
-        Assert.assertEquals(((Explorer)result3).getUUID(), this.e1.getUUID());
+        Assert.assertEquals(((Explorer)result3).getUnitID(), this.e1.getUnitID());
     }
 
     @Test
     public void cycleExplorerUnitBackward() {
         Object result = this.typeInstanceController.cycleBackward(UnitEnum.EXPLORER);
         Assert.assertTrue(result instanceof Explorer);
-        Assert.assertEquals(((Explorer)result).getUUID(), this.e2.getUUID());
+        Assert.assertEquals(((Explorer)result).getUnitID(), this.e2.getUnitID());
 
         Object result2 = this.typeInstanceController.cycleBackward(UnitEnum.EXPLORER);
         Assert.assertTrue(result2 instanceof Explorer);
-        Assert.assertEquals(((Explorer)result2).getUUID(), this.e1.getUUID());
+        Assert.assertEquals(((Explorer)result2).getUnitID(), this.e1.getUnitID());
 
         Object result3 = this.typeInstanceController.cycleBackward(UnitEnum.EXPLORER);
         Assert.assertTrue(result3 instanceof Explorer);
-        Assert.assertEquals(((Explorer)result3).getUUID(), this.e2.getUUID());
+        Assert.assertEquals(((Explorer)result3).getUnitID(), this.e2.getUnitID());
     }
 
     @Test
     public void cycleColonistUnitForward() {
         Object result = this.typeInstanceController.cycleForward(UnitEnum.COLONIST);
         Assert.assertTrue(result instanceof Colonist);
-        Assert.assertEquals(((Colonist)result).getUUID(), this.c1.getUUID());
+        Assert.assertEquals(((Colonist)result).getUnitID(), this.c1.getUnitID());
 
         Object result2 = this.typeInstanceController.cycleForward(UnitEnum.COLONIST);
         Assert.assertTrue(result2 instanceof Colonist);
-        Assert.assertEquals(((Colonist)result2).getUUID(), this.c1.getUUID());
+        Assert.assertEquals(((Colonist)result2).getUnitID(), this.c1.getUnitID());
     }
 
     @Test
     public void cycleColonistUnitBackward() {
         Object result = this.typeInstanceController.cycleBackward(UnitEnum.COLONIST);
         Assert.assertTrue(result instanceof Colonist);
-        Assert.assertEquals(((Colonist)result).getUUID(), this.c1.getUUID());
+        Assert.assertEquals(((Colonist)result).getUnitID(), this.c1.getUnitID());
 
         Object result2 = this.typeInstanceController.cycleBackward(UnitEnum.COLONIST);
         Assert.assertTrue(result2 instanceof Colonist);
-        Assert.assertEquals(((Colonist)result2).getUUID(), this.c1.getUUID());
+        Assert.assertEquals(((Colonist)result2).getUnitID(), this.c1.getUnitID());
     }
 
     @Test
@@ -269,31 +269,31 @@ public class TypeInstanceControllerTest {
 
         Object result = this.typeInstanceController.cycleForward(ArmyEnum.ENTIRE_ARMY);
         Assert.assertTrue(result instanceof Unit);
-        Assert.assertEquals(((Unit)result).getUUID(), this.e1.getUUID());
+        Assert.assertEquals(((Unit)result).getUnitID(), this.e1.getUnitID());
 
         Object result2 = this.typeInstanceController.cycleForward(ArmyEnum.ENTIRE_ARMY);
         Assert.assertTrue(result2 instanceof Unit);
-        Assert.assertEquals(((Unit)result2).getUUID(), this.r1.getUUID());
+        Assert.assertEquals(((Unit)result2).getUnitID(), this.r1.getUnitID());
 
         Object result3 = this.typeInstanceController.cycleForward(ArmyEnum.ENTIRE_ARMY);
         Assert.assertTrue(result3 instanceof Unit);
-        Assert.assertEquals(((Unit)result3).getUUID(), this.r2.getUUID());
+        Assert.assertEquals(((Unit)result3).getUnitID(), this.r2.getUnitID());
 
         Object result4 = this.typeInstanceController.cycleForward(ArmyEnum.ENTIRE_ARMY);
         Assert.assertTrue(result4 instanceof Unit);
-        Assert.assertEquals(((Unit)result4).getUUID(), this.r3.getUUID());
+        Assert.assertEquals(((Unit)result4).getUnitID(), this.r3.getUnitID());
 
         Object result5 = this.typeInstanceController.cycleForward(ArmyEnum.ENTIRE_ARMY);
         Assert.assertTrue(result5 instanceof Unit);
-        Assert.assertEquals(((Unit)result5).getUUID(), this.m2.getUUID());
+        Assert.assertEquals(((Unit)result5).getUnitID(), this.m2.getUnitID());
 
         Object result6 = this.typeInstanceController.cycleForward(ArmyEnum.ENTIRE_ARMY);
         Assert.assertTrue(result6 instanceof Unit);
-        Assert.assertEquals(((Unit)result6).getUUID(), this.m3.getUUID());
+        Assert.assertEquals(((Unit)result6).getUnitID(), this.m3.getUnitID());
 
         Object result7 = this.typeInstanceController.cycleForward(ArmyEnum.ENTIRE_ARMY);
         Assert.assertTrue(result7 instanceof Unit);
-        Assert.assertEquals(((Unit)result7).getUUID(), this.e1.getUUID());
+        Assert.assertEquals(((Unit)result7).getUnitID(), this.e1.getUnitID());
     }
 
     @Test
@@ -302,27 +302,27 @@ public class TypeInstanceControllerTest {
 
         Object result2 = this.typeInstanceController.cycleBackward(ArmyEnum.ENTIRE_ARMY);
         Assert.assertTrue(result2 instanceof Unit);
-        Assert.assertEquals(((Unit)result2).getUUID(), this.m3.getUUID());
+        Assert.assertEquals(((Unit)result2).getUnitID(), this.m3.getUnitID());
 
         Object result3 = this.typeInstanceController.cycleBackward(ArmyEnum.ENTIRE_ARMY);
         Assert.assertTrue(result3 instanceof Unit);
-        Assert.assertEquals(((Unit)result3).getUUID(), this.m2.getUUID());
+        Assert.assertEquals(((Unit)result3).getUnitID(), this.m2.getUnitID());
 
         Object result4 = this.typeInstanceController.cycleBackward(ArmyEnum.ENTIRE_ARMY);
         Assert.assertTrue(result4 instanceof Unit);
-        Assert.assertEquals(((Unit)result4).getUUID(), this.r3.getUUID());
+        Assert.assertEquals(((Unit)result4).getUnitID(), this.r3.getUnitID());
 
         Object result5 = this.typeInstanceController.cycleBackward(ArmyEnum.ENTIRE_ARMY);
         Assert.assertTrue(result5 instanceof Unit);
-        Assert.assertEquals(((Unit)result5).getUUID(), this.r2.getUUID());
+        Assert.assertEquals(((Unit)result5).getUnitID(), this.r2.getUnitID());
 
         Object result6 = this.typeInstanceController.cycleBackward(ArmyEnum.ENTIRE_ARMY);
         Assert.assertTrue(result6 instanceof Unit);
-        Assert.assertEquals(((Unit)result6).getUUID(), this.r1.getUUID());
+        Assert.assertEquals(((Unit)result6).getUnitID(), this.r1.getUnitID());
 
         Object result7 = this.typeInstanceController.cycleBackward(ArmyEnum.ENTIRE_ARMY);
         Assert.assertTrue(result7 instanceof Unit);
-        Assert.assertEquals(((Unit)result7).getUUID(), this.e1.getUUID());
+        Assert.assertEquals(((Unit)result7).getUnitID(), this.e1.getUnitID());
     }
 
     @Test
@@ -331,19 +331,19 @@ public class TypeInstanceControllerTest {
 
         Object result = this.typeInstanceController.cycleForward(ArmyEnum.BATTLE_GROUP);
         Assert.assertTrue(result instanceof Unit);
-        Assert.assertEquals(((Unit)result).getUUID(), this.m1.getUUID());
+        Assert.assertEquals(((Unit)result).getUnitID(), this.m1.getUnitID());
 
         Object result2 = this.typeInstanceController.cycleForward(ArmyEnum.BATTLE_GROUP);
         Assert.assertTrue(result2 instanceof Unit);
-        Assert.assertEquals(((Unit)result2).getUUID(), this.m2.getUUID());
+        Assert.assertEquals(((Unit)result2).getUnitID(), this.m2.getUnitID());
 
         Object result3 = this.typeInstanceController.cycleForward(ArmyEnum.BATTLE_GROUP);
         Assert.assertTrue(result3 instanceof Unit);
-        Assert.assertEquals(((Unit)result3).getUUID(), this.m3.getUUID());
+        Assert.assertEquals(((Unit)result3).getUnitID(), this.m3.getUnitID());
 
         Object result6 = this.typeInstanceController.cycleForward(ArmyEnum.BATTLE_GROUP);
         Assert.assertTrue(result6 instanceof Unit);
-        Assert.assertEquals(((Unit)result6).getUUID(), this.m1.getUUID());
+        Assert.assertEquals(((Unit)result6).getUnitID(), this.m1.getUnitID());
     }
 
     @Test
@@ -352,15 +352,15 @@ public class TypeInstanceControllerTest {
 
         Object result4 = this.typeInstanceController.cycleBackward(ArmyEnum.BATTLE_GROUP);
         Assert.assertTrue(result4 instanceof Unit);
-        Assert.assertEquals(((Unit)result4).getUUID(), this.m3.getUUID());
+        Assert.assertEquals(((Unit)result4).getUnitID(), this.m3.getUnitID());
 
         Object result5 = this.typeInstanceController.cycleBackward(ArmyEnum.BATTLE_GROUP);
         Assert.assertTrue(result5 instanceof Unit);
-        Assert.assertEquals(((Unit)result5).getUUID(), this.m2.getUUID());
+        Assert.assertEquals(((Unit)result5).getUnitID(), this.m2.getUnitID());
 
         Object result6 = this.typeInstanceController.cycleBackward(ArmyEnum.BATTLE_GROUP);
         Assert.assertTrue(result6 instanceof Unit);
-        Assert.assertEquals(((Unit)result6).getUUID(), this.m1.getUUID());
+        Assert.assertEquals(((Unit)result6).getUnitID(), this.m1.getUnitID());
     }
 
     @Test
@@ -369,15 +369,15 @@ public class TypeInstanceControllerTest {
 
         Object result4 = this.typeInstanceController.cycleForward(ArmyEnum.REINFORCEMENTS);
         Assert.assertTrue(result4 instanceof Unit);
-        Assert.assertEquals(((Unit)result4).getUUID(), this.r1.getUUID());
+        Assert.assertEquals(((Unit)result4).getUnitID(), this.r1.getUnitID());
 
         Object result5 = this.typeInstanceController.cycleForward(ArmyEnum.REINFORCEMENTS);
         Assert.assertTrue(result5 instanceof Unit);
-        Assert.assertEquals(((Unit)result5).getUUID(), this.r2.getUUID());
+        Assert.assertEquals(((Unit)result5).getUnitID(), this.r2.getUnitID());
 
         Object result6 = this.typeInstanceController.cycleForward(ArmyEnum.REINFORCEMENTS);
         Assert.assertTrue(result6 instanceof Unit);
-        Assert.assertEquals(((Unit)result6).getUUID(), this.r1.getUUID());
+        Assert.assertEquals(((Unit)result6).getUnitID(), this.r1.getUnitID());
     }
 
     @Test
@@ -386,10 +386,10 @@ public class TypeInstanceControllerTest {
 
         Object result5 = this.typeInstanceController.cycleBackward(ArmyEnum.REINFORCEMENTS);
         Assert.assertTrue(result5 instanceof Unit);
-        Assert.assertEquals(((Unit)result5).getUUID(), this.r2.getUUID());
+        Assert.assertEquals(((Unit)result5).getUnitID(), this.r2.getUnitID());
 
         Object result6 = this.typeInstanceController.cycleBackward(ArmyEnum.REINFORCEMENTS);
         Assert.assertTrue(result6 instanceof Unit);
-        Assert.assertEquals(((Unit)result6).getUUID(), this.r1.getUUID());
+        Assert.assertEquals(((Unit)result6).getUnitID(), this.r1.getUnitID());
     }
 }

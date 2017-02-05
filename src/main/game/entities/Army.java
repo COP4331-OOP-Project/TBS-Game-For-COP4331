@@ -82,7 +82,7 @@ public class Army {
             this.battleGroup.add(u);
         }
     }
-    
+
     // Print all units in an army
     public void printArmy(){
         Unit temp;
