@@ -137,7 +137,7 @@ public class Player {
 	}
 	public int getTotalUnitCount()
 	{
-		return totalUnits.size();
+		return totalUnitsCount;
 	}
 
 	//@TODO GET RALLY POINT NOT FINISHED
@@ -157,6 +157,8 @@ public class Player {
 	 */
 	public void addUnit(Unit unit)
 	{
+		boolean isUnitAdded = false;
+
 		if(totalUnitsCount>=25)
 		{
 			System.out.println("Unit list full");
@@ -164,7 +166,6 @@ public class Player {
 		else {
 			switch (unit.getUnitType()) {
 				case 1: {
-					boolean isUnitAdded = false;
 					for (int i = 0; i < melees.size(); i++) {
 						if (melees.get(i) == null) {
 							melees.set(i, (Melee) unit);
@@ -179,7 +180,6 @@ public class Player {
 					break;
 				}
 				case 2: {
-					boolean isUnitAdded = false;
 					for (int i = 0; i < ranges.size(); i++) {
 						if (ranges.get(i) == null) {
 							ranges.set(i, (Ranged) unit);
@@ -194,7 +194,6 @@ public class Player {
 					break;
 				}
 				case 3: {
-					boolean isUnitAdded = false;
 					for (int i = 0; i < explorers.size(); i++) {
 						if (explorers.get(i) == null) {
 							explorers.set(i, (Explorer) unit);
@@ -209,7 +208,6 @@ public class Player {
 					break;
 				}
 				case 4: {
-					boolean isUnitAdded = false;
 					for (int i = 0; i < colonists.size(); i++) {
 						if (colonists.get(i) == null) {
 							colonists.set(i, (Colonist) unit);
@@ -224,7 +222,6 @@ public class Player {
 					break;
 				}
 				case 5: {
-					boolean isUnitAdded = false;
 					for (int i = 0; i < workers.size(); i++) {
 						if (workers.get(i) == null) {
 							workers.set(i, (Worker) unit);
@@ -242,7 +239,7 @@ public class Player {
 					break;
 			}
 			for (int i = 0; i < totalUnits.size(); i++) {
-				if (totalUnits.get(i) == null) {
+				if (totalUnits.get(i) == null && isUnitAdded == true) {
 					totalUnits.add(unit);
 					totalUnitsCount++;
 					break;
@@ -301,6 +298,7 @@ public class Player {
 
 	public void removeStructure(Structure strucutre) {
 		structures.set(strucutre.getStructureID(),null);
+		bases.set(strucutre.getStructureID(),null);
 	}
 
 	public void addArmy(Army army) {
