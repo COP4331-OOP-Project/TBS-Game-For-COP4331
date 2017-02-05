@@ -27,7 +27,7 @@ public class RallyPoint {
 		for(int i = 0; i<army.getAllUnits().size(); i++){
 			//Not at rallypoint. Give next path command to rally point
 			if(!army.getAllUnits().get(i).getLocation().equals(location)){
-				Command nextMove = pathAlgorithm(army.getAllUnits().get(i).getLocation(),location, army.getAllUnits().get(i));
+				MoveCommand nextMove = pathAlgorithm(army.getAllUnits().get(i).getLocation(),location, army.getAllUnits().get(i));
 				army.passCommandToUnit(nextMove, army.getAllUnits().get(i));
 			}
 		}
