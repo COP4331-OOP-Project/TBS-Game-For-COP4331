@@ -330,27 +330,75 @@ public class Player {
 	}
 
     public ArrayList<Army> getArmies() {
-        return armies;
+		ArrayList<Army> gArmies = new ArrayList<Army>();
+		for(int i = 0;i<armies.size();i++)
+		{
+			if(armies.get(i)!=null)
+			{
+				gArmies.add(armies.get(i));
+			}
+		}
+        return gArmies;
     }
 
     public ArrayList<Melee> getMelees() {
-        return melees;
+		ArrayList<Melee> gMelee = new ArrayList<Melee>();
+		for(int i = 0;i<melees.size();i++)
+		{
+			if(melees.get(i)!=null)
+			{
+				gMelee.add(melees.get(i));
+			}
+		}
+		return gMelee;
     }
 
     public ArrayList<Ranged> getRanges() {
-        return ranges;
+		ArrayList<Ranged> gRange = new ArrayList<Ranged>();
+		for(int i = 0;i<ranges.size();i++)
+		{
+			if(ranges.get(i)!=null)
+			{
+				gRange.add(ranges.get(i));
+			}
+		}
+		return gRange;
     }
 
     public ArrayList<Explorer> getExplorers() {
-        return explorers;
+		ArrayList<Explorer> gExplorers = new ArrayList<Explorer>();
+		for(int i = 0;i<explorers.size();i++)
+		{
+			if(explorers.get(i)!=null)
+			{
+				gExplorers.add(explorers.get(i));
+			}
+		}
+		return gExplorers;
     }
 
     public ArrayList<Colonist> getColonists() {
-        return colonists;
+		ArrayList<Colonist> gColonists = new ArrayList<Colonist>();
+		for(int i = 0;i<colonists.size();i++)
+		{
+			if(colonists.get(i)!=null)
+			{
+				gColonists.add(colonists.get(i));
+			}
+		}
+		return gColonists;
     }
 
     public ArrayList<Base> getBases() {
-        return bases;
+		ArrayList<Base> gBases = new ArrayList<Base>();
+		for(int i = 0;i<bases.size();i++)
+		{
+			if(bases.get(i)!=null)
+			{
+				gBases.add(bases.get(i));
+			}
+		}
+		return gBases;
     }
 	
 }
