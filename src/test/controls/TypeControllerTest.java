@@ -1,12 +1,10 @@
 package controls;
 
-import controls.Army.ArmyEnum;
-import controls.RallyPoint.RallyPointEnum;
-import controls.Structure.StructureEnum;
-import controls.Structure.StructureType;
-import controls.Unit.UnitEnum;
+import controls.army.ArmyEnum;
+import controls.rallyPoint.RallyPointEnum;
+import controls.structure.StructureEnum;
+import controls.unit.UnitEnum;
 import game.Player;
-import game.entities.structures.Structure;
 import game.gameboard.Location;
 import org.junit.Before;
 import org.junit.Test;

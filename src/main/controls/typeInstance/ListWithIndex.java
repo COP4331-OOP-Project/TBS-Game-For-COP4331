@@ -1,4 +1,4 @@
-package controls.TypeInstance;
+package controls.typeInstance;
 
 import game.entities.ICommandable;
 

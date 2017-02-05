@@ -1,4 +1,4 @@
-package controls.Army;
+package controls.army;
 
 import controls.Type;
 

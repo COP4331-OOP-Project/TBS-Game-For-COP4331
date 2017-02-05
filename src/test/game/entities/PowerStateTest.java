@@ -7,7 +7,7 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
 /**
- * Unit test for enum PowerState in entities package
+ * unit test for enum PowerState in entities package
  */
 public class PowerStateTest {
 

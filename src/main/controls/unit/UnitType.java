@@ -1,4 +1,4 @@
-package controls.Unit;
+package controls.unit;
 import controls.Type;
 
 /**

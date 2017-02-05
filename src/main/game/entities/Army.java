@@ -10,18 +10,19 @@ import java.util.UUID;
 
 public class Army {
 
-    private int armyID;                                 // Army unique id
+    private int armyID;                                 // army unique id
     private int ownerID;                                // Player id
     private int rotation = 0;
     private Location location;                          // Army location
     private RallyPoint rp;                              // Army Rally Point
     private PowerState powerState;                      // Army power state
+
     private float resourceCost;                           // Total army resource cost
 
     private ArrayList<Unit> battleGroup;                // Active battlegroup units
     private ArrayList<Unit> reinforcements;             // Reinforcing units
     private ArrayList<Unit> allUnits;                   // All Units in the army
-    private ArrayList<Command> commands;                // Army commands
+    private ArrayList<Command> commands;                // army commands
 
     // Constructor
     public Army(Location loc, int playerId, RallyPoint rp, ArrayList<Unit> units) {

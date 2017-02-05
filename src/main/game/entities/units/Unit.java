@@ -12,13 +12,13 @@ import java.util.Queue;
 public abstract class Unit implements ICommandable
 {
 
-  private int unitID;               // Unit id (0 - 9 of instance type)
+  private int unitID;               // unit id (0 - 9 of instance type)
   private int ownerID;              // Player's id
-  private Location location;        // Unit location
-  private PowerState powerState;    // Unit power state
-  private int unitType;             // Unit's type
+  private Location location;        // unit location
+  private PowerState powerState;    // unit power state
+  private int unitType;             // unit's type
 
-  // Unit stats
+  // unit stats
   private int attackDamage;
   private int defenseDamage;
   private int armor;
@@ -28,7 +28,7 @@ public abstract class Unit implements ICommandable
   private float upkeep;
   private int baseResourceCost;
 
-  protected Queue<Command> queue = new LinkedList<Command>(); // Unit command queue
+  protected Queue<Command> queue = new LinkedList<Command>(); // unit command queue
 
   // Constructor
   public Unit(Location loc, int ownerID, int unitType) {
@@ -82,7 +82,7 @@ public abstract class Unit implements ICommandable
 
   public void printUnit()
   {
-    System.out.println("    Unit type: " + getUnitType());
+    System.out.println("    unit type: " + getUnitType());
     System.out.println("	Armor: " + getArmor());
     System.out.println("	Health: " + getHealth());
     System.out.println("	Orientation: " + getOrientation());

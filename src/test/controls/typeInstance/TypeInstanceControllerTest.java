@@ -1,9 +1,8 @@
-package controls.TypeInstance;
+package controls.typeInstance;
 
-import controls.Army.ArmyEnum;
-import controls.Structure.StructureEnum;
-import controls.TypeInstance.TypeInstanceController;
-import controls.Unit.UnitEnum;
+import controls.army.ArmyEnum;
+import controls.structure.StructureEnum;
+import controls.unit.UnitEnum;
 import game.Player;
 import game.entities.Army;
 import game.entities.RallyPoint;

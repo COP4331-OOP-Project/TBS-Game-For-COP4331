@@ -186,7 +186,7 @@ public class RallyPoint implements ICommandable {
 	}
 
 
-	// TODO: implement ICommandable functions for RallyPoint
+	// TODO: implement ICommandable functions for rallyPoint
 	public void addCommandToQueue(Command command) {
 
 	}

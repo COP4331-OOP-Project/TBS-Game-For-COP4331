@@ -1,10 +1,10 @@
-package controls.TypeInstance;
+package controls.typeInstance;
 
-import controls.Army.ArmyEnum;
-import controls.CommandController;
-import controls.RallyPoint.RallyPointEnum;
-import controls.Structure.StructureEnum;
-import controls.Unit.UnitEnum;
+import controls.army.ArmyEnum;
+import controls.command.CommandController;
+import controls.rallyPoint.RallyPointEnum;
+import controls.structure.StructureEnum;
+import controls.unit.UnitEnum;
 import game.Player;
 import game.entities.Army;
 import game.entities.ICommandable;
@@ -84,6 +84,9 @@ public class TypeInstanceController {
         return this.currentTypeInstance;
     }
 
+    public CommandController getCommandController() {
+        return this.commandController;
+    }
     // This is private on purpose!
     private void setCurrentTypeInstance(ICommandable commandable) {
         this.currentTypeInstance = commandable;
@@ -159,7 +162,7 @@ public class TypeInstanceController {
                 }
                 if (item == null) return null;
                 this.currentMelee = item.getIndex();
-                this.currentTypeInstance = item.getItem();
+                this.setCurrentTypeInstance(item.getItem());
                 return (Melee) this.currentTypeInstance;
             }
             case RANGED: {
@@ -171,7 +174,7 @@ public class TypeInstanceController {
                 }
                 if (item == null) return null;
                 this.currentRanged = item.getIndex();
-                this.currentTypeInstance = item.getItem();
+                this.setCurrentTypeInstance(item.getItem());
                 return (Ranged) this.currentTypeInstance;
             }
             case EXPLORER: {
@@ -183,7 +186,7 @@ public class TypeInstanceController {
                 }
                 if (item == null) return null;
                 this.currentExplorer = item.getIndex();
-                this.currentTypeInstance = item.getItem();
+                this.setCurrentTypeInstance(item.getItem());
                 return (Explorer) this.currentTypeInstance;
             }
             case COLONIST: {
@@ -195,7 +198,7 @@ public class TypeInstanceController {
                 }
                 if (item == null) return null;
                 this.currentColonist = item.getIndex();
-                this.currentTypeInstance = item.getItem();
+                this.setCurrentTypeInstance(item.getItem());
                 return (Colonist) this.currentTypeInstance;
             }
         }
@@ -213,7 +216,7 @@ public class TypeInstanceController {
                 }
                 if (item == null) return null;
                 this.currentBase = item.getIndex();
-                this.currentTypeInstance = item.getItem();
+                this.setCurrentTypeInstance(item.getItem());
                 return (Base) this.currentTypeInstance;
             }
         }
@@ -231,7 +234,7 @@ public class TypeInstanceController {
                 }
                 if (item == null) return null;
                 this.currentArmyUnit = item.getIndex();
-                this.currentTypeInstance = item.getItem();
+                this.setCurrentTypeInstance(item.getItem());
                 return (Unit) this.currentTypeInstance;
             }
             case BATTLE_GROUP: {
@@ -243,7 +246,7 @@ public class TypeInstanceController {
                 }
                 if (item == null) return null;
                 this.currentArmyBattleGroup = item.getIndex();
-                this.currentTypeInstance = item.getItem();
+                this.setCurrentTypeInstance(item.getItem());
                 return (Unit) this.currentTypeInstance;
             }
             case REINFORCEMENTS: {
@@ -255,7 +258,7 @@ public class TypeInstanceController {
                 }
                 if (item == null) return null;
                 this.currentArmyReinforcement = item.getIndex();
-                this.currentTypeInstance = item.getItem();
+                this.setCurrentTypeInstance(item.getItem());
                 return (Unit) this.currentTypeInstance;
             }
         }
@@ -272,7 +275,7 @@ public class TypeInstanceController {
         }
         if (item == null) return null;
         this.currentRallyPoint = item.getIndex();
-        this.currentTypeInstance = item.getItem();
+        this.setCurrentTypeInstance(item.getItem());
         return (RallyPoint) this.currentTypeInstance;
     }
 }

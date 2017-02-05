@@ -171,7 +171,7 @@ public class GameBoard {
 
         // Find instance type and call actor's command
         if(actor instanceof Army){
-           // ( (Army) actor ).powerUp();
+           // ( (army) actor ).powerUp();
         }
         else if(actor instanceof Unit){
             ( (Unit) actor ).powerUp();
@@ -186,7 +186,7 @@ public class GameBoard {
 
         // Find instance type and call actor's command
         if(actor instanceof Army){
-//            ( (Army) actor ).powerDown();
+//            ( (army) actor ).powerDown();
         }
         else if(actor instanceof Unit){
             ( (Unit) actor ).powerDown();
@@ -201,7 +201,7 @@ public class GameBoard {
 
         // Find instance type and call cancel command queue on it
         if(actor instanceof Army){
-           // ( (Army) actor ).cancelCommandQueue();
+           // ( (army) actor ).cancelCommandQueue();
         }
         else if(actor instanceof Unit){
             ( (Unit) actor ).cancelQueuedCommands();
@@ -226,7 +226,7 @@ public class GameBoard {
 
 //            // If queue is empty, pass another attack command for next turn
 //            if (army.isQueueEmpty()) {
-//                AttackCommand<Army> atkCmd = new AttackCommand<Army>(this, army, direction, 0);
+//                AttackCommand<army> atkCmd = new AttackCommand<army>(this, army, direction, 0);
 //                army.addCommandToQueue(atkCmd);
 //            }
 
@@ -247,7 +247,7 @@ public class GameBoard {
 
         }
         else if(actor instanceof Unit) {
-            System.out.println("Unit can't attack");
+            System.out.println("unit can't attack");
         }
 
     }
@@ -274,7 +274,7 @@ public class GameBoard {
 
         }
         else if(actor instanceof Unit) {
-            System.out.println("Unit can't defend");
+            System.out.println("unit can't defend");
         }
     }
 
@@ -291,7 +291,7 @@ public class GameBoard {
             Tile targetTile = getAdjacentTile(actorTile, direction);
 
             if(targetTile.hasEnemyUnit(army.getOwnerID())) {
-                //(Army)actor.nextCommand();
+                //(army)actor.nextCommand();
             }
             else if (targetTile.isImpassable()) {
                 log.error("Cannot move to tile, it is impassable!");
@@ -321,7 +321,7 @@ public class GameBoard {
             }
         }
         else if (actor instanceof Structure) {
-            System.out.println("Structure cannot move");
+            System.out.println("structure cannot move");
         }
     }
 
@@ -422,7 +422,7 @@ public class GameBoard {
         gameMap[actor.getLocation().getX()][actor.getLocation().getY()].removeArmy(actor.getArmyID());
         //Set Tile reference to rally point to null
         gameMap[actor.getLocation().getX()][actor.getLocation().getY()].removeRallyPoint(actor.getRp());
-        //Set Army reference to rally point to null
+        //Set army reference to rally point to null
         actor.setRallyPoint(null);
 
 
@@ -433,8 +433,8 @@ public class GameBoard {
     public void handleBandArmyCmd(ArrayList<Unit> actors) {
 
 //    	Location location = actors.get(0).location.getlocation();
-//    	RallyPoint rp = new RallyPoint(location, this);
-//    	Army newArmy = EntityFactory.getArmy(location, actors.get(0).getOwner(), rp, actors);
+//    	rallyPoint rp = new rallyPoint(location, this);
+//    	army newArmy = EntityFactory.getArmy(location, actors.get(0).getOwner(), rp, actors);
 //    	players.get(actors.get(0).getOwner()).addArmy(newArmy);
 
         Location location = actors.get(0).getLocation();

@@ -1,4 +1,4 @@
-package controls.Structure;
+package controls.structure;
 
 import controls.Type;
 
