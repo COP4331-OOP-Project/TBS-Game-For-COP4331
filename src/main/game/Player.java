@@ -10,6 +10,8 @@ import game.entities.units.Explorer;
 import game.entities.units.Worker;
 import game.entities.units.Colonist;
 import game.entities.structures.Structure;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.awt.font.NumericShaper;
 import java.util.ArrayList;
@@ -31,6 +33,8 @@ public class Player {
 
 	private boolean isUnitListFull;
 
+	private final static Logger log = LogManager.getLogger(Player.class);
+	
 	private int meleeCount;
 	private int rangeCount;
 	private int armiesCount;
@@ -161,92 +165,92 @@ public class Player {
 
 		if(totalUnitsCount>=25)
 		{
-			System.out.println("Unit list full");
+			log.info("Unit list is full");
+			return;
 		}
-		else {
-			switch (unit.getUnitType()) {
-				case 1: {
-					for (int i = 0; i < melees.size(); i++) {
-						if (melees.get(i) == null) {
-							melees.set(i, (Melee) unit);
-							unit.setUnitID(i);
-							isUnitAdded = true;
-							meleeCount++;
-							break;
-						}
+		switch (unit.getUnitType()) {
+			case 1: {
+				for (int i = 0; i < melees.size(); i++) {
+					if (melees.get(i) == null) {
+						melees.set(i, (Melee) unit);
+						unit.setUnitID(i);
+						isUnitAdded = true;
+						meleeCount++;
+						break;
 					}
-					if (!isUnitAdded)
-						System.out.println("Melee list full");
-					break;
 				}
-				case 2: {
-					for (int i = 0; i < ranges.size(); i++) {
-						if (ranges.get(i) == null) {
-							ranges.set(i, (Ranged) unit);
-							unit.setUnitID(i);
-							isUnitAdded = true;
-							rangeCount++;
-							break;
-						}
-					}
-					if (!isUnitAdded)
-						System.out.println("Range list full");
-					break;
-				}
-				case 3: {
-					for (int i = 0; i < explorers.size(); i++) {
-						if (explorers.get(i) == null) {
-							explorers.set(i, (Explorer) unit);
-							unit.setUnitID(i);
-							isUnitAdded = true;
-							explorersCount++;
-							break;
-						}
-					}
-					if (!isUnitAdded)
-						System.out.println("Explorers list full");
-					break;
-				}
-				case 4: {
-					for (int i = 0; i < colonists.size(); i++) {
-						if (colonists.get(i) == null) {
-							colonists.set(i, (Colonist) unit);
-							unit.setUnitID(i);
-							isUnitAdded = true;
-							colonistsCount++;
-							break;
-						}
-					}
-					if (!isUnitAdded)
-						System.out.println("Colonists list full");
-					break;
-				}
-				case 5: {
-					for (int i = 0; i < workers.size(); i++) {
-						if (workers.get(i) == null) {
-							workers.set(i, (Worker) unit);
-							unit.setUnitID(i);
-							isUnitAdded = true;
-							workersCount++;
-							break;
-						}
-					}
-					if (!isUnitAdded)
-						System.out.println("Worker list full");
-					break;
-				}
-				default:
-					break;
+				if (!isUnitAdded)
+					log.info("Melee list full");
+				break;
 			}
-			for (int i = 0; i < totalUnits.size(); i++) {
-				if (totalUnits.get(i) == null && isUnitAdded == true) {
-					totalUnits.add(unit);
-					totalUnitsCount++;
-					break;
+			case 2: {
+				for (int i = 0; i < ranges.size(); i++) {
+					if (ranges.get(i) == null) {
+						ranges.set(i, (Ranged) unit);
+						unit.setUnitID(i);
+						isUnitAdded = true;
+						rangeCount++;
+						break;
+					}
 				}
+				if (!isUnitAdded)
+					log.info("Range list full");
+				break;
+			}
+			case 3: {
+				for (int i = 0; i < explorers.size(); i++) {
+					if (explorers.get(i) == null) {
+						explorers.set(i, (Explorer) unit);
+						unit.setUnitID(i);
+						isUnitAdded = true;
+						explorersCount++;
+						break;
+					}
+				}
+				if (!isUnitAdded)
+					log.info("Explorers list full");
+				break;
+			}
+			case 4: {
+				for (int i = 0; i < colonists.size(); i++) {
+					if (colonists.get(i) == null) {
+						colonists.set(i, (Colonist) unit);
+						unit.setUnitID(i);
+						isUnitAdded = true;
+						colonistsCount++;
+						break;
+					}
+				}
+				if (!isUnitAdded)
+					log.info("Colonists list full");
+				break;
+			}
+			case 5: {
+				for (int i = 0; i < workers.size(); i++) {
+					if (workers.get(i) == null) {
+						workers.set(i, (Worker) unit);
+						unit.setUnitID(i);
+						isUnitAdded = true;
+						workersCount++;
+						break;
+					}
+				}
+				if (!isUnitAdded)
+					log.info("Worker list full");
+				break;
+			}
+			default:
+				break;
+		}
+		for (int i = 0; i < totalUnits.size(); i++) {
+			if (totalUnits.get(i) == null && isUnitAdded == true) {
+				totalUnits.add(unit);
+				totalUnitsCount++;
+				break;
 			}
 		}
 	}
+
 
 	public void removeUnit(Unit unit) {
 		switch(unit.getUnitType()) {
@@ -289,8 +293,8 @@ public class Player {
 		for(int i = 0;i<structures.size();i++)
 		{
 			if(structures.get(i)==null){
-				structures.set(i, structure);
 				structure.setStructureID(i);
+				structures.set(i, structure);
 				bases.set(i,(Base)structure);
 			}
 		}
