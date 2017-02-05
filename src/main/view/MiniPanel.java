@@ -10,8 +10,8 @@ import org.apache.logging.log4j.Logger;
 
 public class MiniPanel extends Panel{
 	Game game;
-	private static final int TILE_SIZE = 6;
-	private static final int DISTANCE_FROM_RIGHT = 170;
+	private static final int TILE_SIZE = 12;
+	private static final int DISTANCE_FROM_RIGHT = 350;
 	private final static Logger log = LogManager.getLogger(MiniPanel.class);
 	
 	private int width;
@@ -97,7 +97,7 @@ public class MiniPanel extends Panel{
 	}
 	
 	private int offY(int y) {
-		return (y * TILE_SIZE) + this.height - 265;
+		return (y * TILE_SIZE) + this.height - 440;
 	}
 
 }
