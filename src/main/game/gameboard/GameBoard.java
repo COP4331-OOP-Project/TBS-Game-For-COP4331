@@ -190,13 +190,13 @@ public class GameBoard {
         boolean isStructure = actor instanceof Structure;
 
         if(isArmy){
-            // (Army)actor.powerDown();
+//            ((Army) actor).powerDown();
         }
         else if(isUnit){
-            // (Unit)actor.powerDown();
+            ((Unit) actor).powerDown();
         }
         else if(isStructure){
-            // (Structure)actor.powerDown();
+            ((Structure) actor).powerDown();
         }
     }
 
