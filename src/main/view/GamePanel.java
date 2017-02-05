@@ -31,9 +31,9 @@ public class GamePanel extends Panel {
 	private int centerStartY = -1;
 	private int centerToX = -1;
 	private int centerToY = -1;
+	
 	private int width = 0;
 	private int height = 0;
-	
 	Graphics2D g2d;
 	
 	//TEST ELEMENTS BELOW
@@ -71,11 +71,19 @@ public class GamePanel extends Panel {
 	}
 	
 	private void drawSelectedItem() {
+		int x = 2;
+		int y = 2;
+		if (game.getCurrentMode() == ModeEnum.RALLY_POINT) {
+			drawStaticTileElement(x, y, "RALLY_POINT_SELECTED");
+		}
 		if (game.getCurrentMode() == ModeEnum.UNIT) {
-			//drawStaticElement(g, x, y, "UNIT_SELECTED");
+			drawStaticTileElement(x, y, "UNIT_SELECTED");
 		}
 		if (game.getCurrentMode() == ModeEnum.STRUCTURE) {
-			//drawStaticElement(g, x, y, "BASE_SELECTED");
+			drawStaticTileElement(x, y, "BASE_SELECTED");
+		}
+		if (game.getCurrentMode() == ModeEnum.ARMY) {
+			drawStaticTileElement(x, y, "ARMY_SELECTED");
 		}
 	}
 
