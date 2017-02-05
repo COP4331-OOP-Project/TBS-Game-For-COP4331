@@ -29,7 +29,21 @@ public class Player {
 	 * Worker:	 05
 	 */
 
-    private ArrayList<Army> armies;
+	private boolean isUnitListFull;
+
+	private int meleeCount;
+	private int rangeCount;
+	private int armiesCount;
+	private int explorersCount;
+	private int colonistsCount;
+	private int workersCount;
+	private int structuresCount;
+	private int totalUnitsCount;
+	private int basesCount;
+	private int rallyPointsCount;
+
+
+	private ArrayList<Army> armies;
 	private ArrayList<Melee> melees;
 	private ArrayList<Ranged> ranges;
 	private ArrayList<Explorer> explorers;
@@ -90,9 +104,7 @@ public class Player {
 			totalUnits.add(null);
 		}
 	}
-
 	public int getPlayerID() { return this.playerID; }
-
 	//accessors
 	public int getResourceCount()
 	{
