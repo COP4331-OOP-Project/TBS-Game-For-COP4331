@@ -14,10 +14,11 @@ import java.awt.font.NumericShaper;
 import java.util.ArrayList;
 
 public class Player {
-	public int playerID;
+	private int playerID;
 	
 	private int resourceCount;
-	
+
+	// TODO: Make unit ID's an enum
 	//Unit ID:
 	/*
 	 * Melee:	 01
@@ -26,8 +27,8 @@ public class Player {
 	 * colonists:04
 	 * Worker:	 05
 	 */
-	
-	private ArrayList<Army> armies;
+
+    private ArrayList<Army> armies;
 	private ArrayList<Melee> melees;
 	private ArrayList<Ranged> ranges;
 	private ArrayList<Explorer> explorers;
@@ -44,18 +45,20 @@ public class Player {
 	//Constructor
 	public Player(int id){
 		this.playerID = id;
-		armies = new ArrayList<Army>();
-		melees = new ArrayList<Melee>();
-		ranges = new ArrayList<Ranged>();
-		explorers = new ArrayList<Explorer>();
-		colonists = new ArrayList<Colonist>();
-		workers = new ArrayList<Worker>();
-		structures = new ArrayList<Structure>();
-		bases = new ArrayList<Base>();
-		rallyPoints = new ArrayList<Object>();
+		this.armies = new ArrayList<Army>();
+		this.melees = new ArrayList<Melee>();
+        this.ranges = new ArrayList<Ranged>();
+        this.explorers = new ArrayList<Explorer>();
+        this.colonists = new ArrayList<Colonist>();
+        this.workers = new ArrayList<Worker>();
+        this.structures = new ArrayList<Structure>();
+        this.bases = new ArrayList<Base>();
+        this.rallyPoints = new ArrayList<Object>();
+        this.totalUnits = new ArrayList<Unit>();
 
 	}
-	
+
+	public int getPlayerID() { return this.playerID; }
 	//accessors
 	public int getResourceCount()
 	{
@@ -91,7 +94,7 @@ public class Player {
 		int sum = melees.size()+ ranges.size()+explorers.size()+colonists.size()+workers.size();
 		return sum;
 	}
-	public Object getArmyRallyPoint()
+	public ArrayList<Object> getArmyRallyPoint()
 	{
 		return rallyPoints;
 	}
@@ -152,5 +155,28 @@ public class Player {
 		this.resourceCount = this.resourceCount+resource;
 	}
 
+    public ArrayList<Army> getArmies() {
+        return armies;
+    }
+
+    public ArrayList<Melee> getMelees() {
+        return melees;
+    }
+
+    public ArrayList<Ranged> getRanges() {
+        return ranges;
+    }
+
+    public ArrayList<Explorer> getExplorers() {
+        return explorers;
+    }
+
+    public ArrayList<Colonist> getColonists() {
+        return colonists;
+    }
+
+    public ArrayList<Base> getBases() {
+        return bases;
+    }
 	
 }

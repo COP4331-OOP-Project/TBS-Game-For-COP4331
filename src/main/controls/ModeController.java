@@ -1,5 +1,6 @@
 package controls;
 
+import game.Player;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger; 
 
@@ -11,10 +12,10 @@ public class ModeController {
     private TypeController typeController;
     private final static Logger log = LogManager.getLogger(ModeController.class);
 
-    public ModeController() {
+    public ModeController(Player p) {
         log.debug("Mode controller instantiated");
         this.mode = ModeEnum.RALLY_POINT;
-        this.typeController = new TypeController(this.mode);
+        this.typeController = new TypeController(this.mode, p);
     }
 
     public ModeEnum getMode() {

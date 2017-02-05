@@ -65,12 +65,23 @@ public class Army {
     }
 
     // Add a group of new units to reinforcements array
-    public void addReinforcements(ArrayList<Unit> reinforcements) {
+    public void addListOfReinforcements(ArrayList<Unit> reinforcements) {
         for (Unit u : reinforcements) {
             this.reinforcements.add(u);
         }
     }
 
+    // Add one new unit to the reinforcements array
+    public void addSingleBattleGroupMember(Unit battleGroupMember) {
+        this.battleGroup.add(battleGroupMember);
+    }
+
+    // Add a group of new units to reinforcements array
+    public void addListToBattleGroup(ArrayList<Unit> battleGroupMembers) {
+        for (Unit u : battleGroupMembers) {
+            this.battleGroup.add(u);
+        }
+    }
 
     // Print all units in an army
     public void printArmy(){
