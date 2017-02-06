@@ -100,7 +100,7 @@ public class Game {
         }
         this.currentModeController = new ModeController(this.currentPlayer);
 
-		ArrayList<ICommandable> playerEntities = new ArrayList<>(this.currentPlayer.getAllUnit());
+		ArrayList<ICommandable> playerEntities = new ArrayList<ICommandable>(this.currentPlayer.getAllUnit());
 		playerEntities.addAll(this.currentPlayer.getArmyRallyPoint());
 		playerEntities.addAll(this.currentPlayer.getBases());
 
