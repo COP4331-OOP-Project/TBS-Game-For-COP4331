@@ -1,26 +1,22 @@
 package game;
 
-import com.sun.tools.javac.code.Attribute;
-import controls.*;
+import controls.ModeController;
+import controls.TypeController;
 import controls.command.CommandController;
 import controls.command.CommandEnum;
 import controls.structure.StructureEnum;
 import controls.typeInstance.TypeInstanceController;
 import controls.unit.UnitEnum;
-import game.commands.Command;
 import game.commands.MakeCommand;
 import game.commands.MoveCommand;
 import game.entities.ICommandable;
-import game.entities.RallyPoint;
 import game.entities.structures.Structure;
-import game.entities.units.Colonist;
 import game.entities.units.Unit;
 import game.gameboard.GameBoard;
 import game.gameboard.Location;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.sql.Struct;
 import java.util.ArrayList;
 
 public class Game {
