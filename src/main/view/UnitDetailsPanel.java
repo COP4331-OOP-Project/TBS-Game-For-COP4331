@@ -25,12 +25,12 @@ public class UnitDetailsPanel extends DetailsPanel{
 		g.setFont(detailsFont);
 		g.drawString("Unit Details", 10, height - 65);
 		if (game.getSelectedUnit() != -1) {
-		g.drawString("Type: ", 30, height - 35);
-		g.drawString("Health: ", 30, height - 10);
-		g.drawString("Attack: ", 430, height - 35);
-		g.drawString("Defense: ", 430, height - 10);
-		g.drawString("Armor: ", 830, height - 35);
-		g.drawString("Upkeep: ", 830, height - 10);
+			g.drawString("Type: ", 30, height - 35);
+			g.drawString("Health: ", 30, height - 10);
+			g.drawString("Attack: ", 430, height - 35);
+			g.drawString("Defense: ", 430, height - 10);
+			g.drawString("Armor: ", 830, height - 35);
+			g.drawString("Upkeep: ", 830, height - 10);
 			if (game.getCurrentType() == UnitEnum.EXPLORER) {
 				g.drawString("Explorer", 130, height - 35);
 			}
