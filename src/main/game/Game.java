@@ -4,6 +4,9 @@ import controls.*;
 import controls.command.CommandController;
 import controls.command.CommandEnum;
 import controls.typeInstance.TypeInstanceController;
+import game.commands.Command;
+import game.commands.MakeCommand;
+import game.commands.MoveCommand;
 import game.entities.ICommandable;
 import game.entities.RallyPoint;
 import game.gameboard.GameBoard;
@@ -22,6 +25,7 @@ public class Game {
 	private GameBoard gBoard;
 	private Player nextPlayer;
 	private int turnNum;
+	private ArrayList<MoveCommand> moveCommands;
 
 
 
@@ -87,6 +91,10 @@ public class Game {
 			getGameBoard().handleBandArmyCmd(players.get(0).getExplorers());
         }
         this.currentModeController = new ModeController(this.currentPlayer);
+
+		ArrayList<ICommandable> playerEntities = new ArrayList<>(this.currentPlayer.getAllUnit());
+		playerEntities.addAll(this.currentPlayer.getArmyRallyPoint());
+		playerEntities.addAll(this.currentPlayer.getBases());
     }
 
 	public int getTurnNum() {
@@ -204,5 +212,36 @@ public class Game {
 
     public void setCenterCoordinatesUpdated(boolean updated) {
 	    this.centerCoordinatesUpdated = updated;
+    }
+
+
+    public void addMoveToList(int direction) {
+	    MoveCommand command = new MoveCommand<>(this.gBoard, this.currentSelectedEntity, direction, 1);
+	    this.moveCommands.add(command);
+    }
+
+    public void executeMoveCommand() {
+	    for (MoveCommand command : this.moveCommands) {
+	        this.currentSelectedEntity.addCommandToQueue(command);
+        }
+        this.moveCommands = null;
+	    this.currentSelectedEntity.doTurn();
+        this.currentSelectedEntity.doTurn();
+        this.currentSelectedEntity.doTurn();
+        this.currentSelectedEntity.doTurn();
+
+        System.out.println("Executed move command");
+    }
+//    MAKE, HEAL, ATTACK, DEFEND, POWER_UP, POWER_DOWN, CANCEL_COMMAND_QUEUE, DECOMISSION, MOVE;
+
+    public CommandEnum executeCommand() {
+	    switch(this.currentCommand) {
+            case MOVE: {
+                this.moveCommands = new ArrayList<>();
+                return CommandEnum.MOVE;
+            }
+            default:
+                return null;
+        }
     }
 }
