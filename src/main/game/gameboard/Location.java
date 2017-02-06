@@ -33,25 +33,25 @@ public class Location {
     public Location directionLocation(int direction){
         switch (direction){
             case 0:
-                return new Location(xIndex - 1 , yIndex);
+                return new Location(xIndex , yIndex - 1);
 
             case 45:
-                return new Location(xIndex - 1, yIndex + 1);
+                return new Location(xIndex + 1, yIndex - 1);
 
             case 90:
-                return new Location(xIndex, yIndex + 1);
+                return new Location(xIndex + 1, yIndex);
 
             case 135:
                 return new Location(xIndex + 1, yIndex + 1);
 
             case 180:
-                return new Location(xIndex + 1, yIndex);
+                return new Location(xIndex, yIndex + 1);
 
             case 225:
-                return new Location(xIndex + 1, yIndex - 1);
+                return new Location(xIndex - 1, yIndex + 1);
 
             case 270:
-                return new Location(xIndex, yIndex - 1);
+                return new Location(xIndex-1, yIndex);
 
             case 315:
                 return new Location(xIndex - 1, yIndex - 1);
