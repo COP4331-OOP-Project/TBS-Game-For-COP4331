@@ -176,7 +176,6 @@ public class GameBoard {
 
         // Find instance type and call actor's command
         if(actor instanceof Army){
-           // ( (army) actor ).powerUp();
             ( (Army) actor ).powerUp();
         }
         else if(actor instanceof Unit){
@@ -192,7 +191,6 @@ public class GameBoard {
 
         // Find instance type and call actor's command
         if(actor instanceof Army){
-//            ( (army) actor ).powerDown();
             ( (Army) actor ).powerDown();
         }
         else if(actor instanceof Unit){
@@ -208,7 +206,6 @@ public class GameBoard {
 
         // Find instance type and call cancel command queue on it
         if(actor instanceof Army){
-           // ( (army) actor ).cancelCommandQueue();
             ( (Army) actor ).cancelQueuedCommands();
         }
         else if(actor instanceof Unit){
@@ -227,16 +224,6 @@ public class GameBoard {
         if(actor instanceof Army) {
 
             Army army = (Army) actor;
-
-            Tile actorTile = getTileWithLocation( army.getLocation() );
-            Tile targetTile = getAdjacentTile(actorTile, direction);
-//            targetTile.attackOccupants();
-
-//            // If queue is empty, pass another attack command for next turn
-//            if (army.isQueueEmpty()) {
-//                AttackCommand<army> atkCmd = new AttackCommand<army>(this, army, direction, 0);
-//                army.addCommandToQueue(atkCmd);
-//            }
             //Call army to give attack command to all its units
             army.battlegroupAttack(this,direction);
 
@@ -257,6 +244,7 @@ public class GameBoard {
 
         }
         else if(actor instanceof Unit) {
+            //TODO Unit attack
             System.out.println("unit can't attack");
         }
 
@@ -269,9 +257,6 @@ public class GameBoard {
         if(actor instanceof Army) {
 
             Army army = (Army) actor;
-
-            Tile actorTile = getTileWithLocation(army.getLocation());
-            Tile targetTile = getAdjacentTile(actorTile, direction);
 
             army.battlegroupDefend(this, direction);
         }
