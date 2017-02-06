@@ -172,32 +172,32 @@ public class Game {
     private void resetControls() {
         this.moveCommands = new ArrayList<>();
         this.moveLocations = new ArrayList<>();
-
+        this.currentSelectedEntity = null;
         this.currentCommand = null;
     }
 
 	protected void cycleModeForward() {
-		this.currentModeController.cycleForward();
+        this.resetControls();
+        this.currentModeController.cycleForward();
 		this.centerOnCurrentTypeInstance();
-		this.resetControls();
 	}
 
 	protected void cycleModeBackward() {
-		this.currentModeController.cycleBackward();
-        this.centerOnCurrentTypeInstance();
         this.resetControls();
+        this.currentModeController.cycleBackward();
+        this.centerOnCurrentTypeInstance();
     }
 
 	protected void cycleTypeForward() {
-		this.currentModeController.getTypeController().cycleForward();
-        this.centerOnCurrentTypeInstance();
         this.resetControls();
+        this.currentModeController.getTypeController().cycleForward();
+        this.centerOnCurrentTypeInstance();
     }
 
 	protected void cycleTypeBackward() {
-		this.currentModeController.getTypeController().cycleBackward();
-        this.centerOnCurrentTypeInstance();
         this.resetControls();
+        this.currentModeController.getTypeController().cycleBackward();
+        this.centerOnCurrentTypeInstance();
     }
 
 	protected void cycleCommandForward() {
@@ -362,10 +362,9 @@ public class Game {
 	    ArrayList<Unit> tileUnits = currentTile.getUnits();
 	    RallyPoint newRallyPoint = new RallyPoint(currentLocation, this.gBoard, this.currentPlayer.getPlayerID());
 	    Army newArmy = new Army(this.currentPlayer.getPlayerID(), newRallyPoint, tileUnits);
-	    for (Unit unit : tileUnits) {
-            currentTile.removeUnit(unit.getUnitID());
-        }
+	    currentTile.removeAllUnits();
 	    currentTile.addRallyPoint(newRallyPoint);
 	    currentTile.addArmy(newArmy);
+	    this.currentPlayer.addArmy(newArmy);
     }
 }

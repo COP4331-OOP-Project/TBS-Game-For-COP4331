@@ -80,6 +80,10 @@ public class Tile implements ITileAccessors {
             containsUnit=false;
         }
     }
+
+    public void removeAllUnits() {
+        this.units.clear();
+    }
     public ArrayList<RallyPoint> getRallyPoints(){return rallyPoints;}
 
     public void addRallyPoint(RallyPoint rp){
