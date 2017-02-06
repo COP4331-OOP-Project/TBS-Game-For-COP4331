@@ -106,7 +106,7 @@ public class GameBoard {
 
 
     // Get specific tile with actor location
-    private Tile getTileWithLocation(Location l) {
+    public Tile getTileWithLocation(Location l) {
         return gameMap[l.getX()][l.getY()];
     }
 

@@ -9,11 +9,14 @@ import controls.typeInstance.TypeInstanceController;
 import controls.unit.UnitEnum;
 import game.commands.MakeCommand;
 import game.commands.MoveCommand;
+import game.entities.Army;
 import game.entities.ICommandable;
+import game.entities.RallyPoint;
 import game.entities.structures.Structure;
 import game.entities.units.Unit;
 import game.gameboard.GameBoard;
 import game.gameboard.Location;
+import game.gameboard.Tile;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -282,7 +285,6 @@ public class Game {
 			this.currentSelectedEntity.addCommandToQueue(makeCmd);
 		}
 
-
 	}
 
 	public int getCurrentMakeOption() {
@@ -353,4 +355,17 @@ public class Game {
 	public boolean getStructureOverviewVisible() {
 		return structureOverviewVisible;
 	}
+
+	public void formArmy() {
+	    Location currentLocation = this.currentSelectedEntity.getLocation();
+	    Tile currentTile = this.gBoard.getTileWithLocation(currentLocation);
+	    ArrayList<Unit> tileUnits = currentTile.getUnits();
+	    RallyPoint newRallyPoint = new RallyPoint(currentLocation, this.gBoard, this.currentPlayer.getPlayerID());
+	    Army newArmy = new Army(this.currentPlayer.getPlayerID(), newRallyPoint, tileUnits);
+	    for (Unit unit : tileUnits) {
+            currentTile.removeUnit(unit.getUnitID());
+        }
+	    currentTile.addRallyPoint(newRallyPoint);
+	    currentTile.addArmy(newArmy);
+    }
 }
