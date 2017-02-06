@@ -26,6 +26,8 @@ public class Game {
 	private Player nextPlayer;
 	private int turnNum;
 	private ArrayList<MoveCommand> moveCommands;
+	private Location lastMoveLocation;
+	private ArrayList<Location> moveLocations;
 
 
 
@@ -56,10 +58,12 @@ public class Game {
 		gBoard.getPlayer(0).addRallyPoint(new RallyPoint(new Location(1,1), this.gBoard, player0.getPlayerID()));
         this.currentModeController = new ModeController(gBoard.getPlayer(0));
         this.centerCoordinatesUpdated = false;
+        this.moveCommands = new ArrayList<>();
+        this.moveLocations = new ArrayList<>();
 	}
 
-	public ArrayList<MoveCommand> getMoveCommands() {
-        return this.moveCommands;
+	public ArrayList<Location> getMoveLocations() {
+        return this.moveLocations;
     }
 
 	public void updateGame() { //This is called 20 times per second
@@ -133,7 +137,7 @@ public class Game {
 		return this.currentCommand;
 	}
 
-	private void centerOnCurrentTypeInstance() {
+	public void centerOnCurrentTypeInstance() {
         TypeController typeController = this.currentModeController.getTypeController();
         TypeInstanceController typeInstanceController = typeController.getTypeInstanceController();
         ICommandable selectedEntity = typeInstanceController.getTypeInstance();
@@ -222,13 +226,17 @@ public class Game {
     public void addMoveToList(int direction) {
 	    MoveCommand command = new MoveCommand<>(this.gBoard, this.currentSelectedEntity, direction, 1);
 	    this.moveCommands.add(command);
+	    Location newLocation = this.lastMoveLocation.directionLocation(direction);
+	    this.moveLocations.add(newLocation);
+	    this.lastMoveLocation = newLocation;
     }
 
     public void executeMoveCommand() {
 	    for (MoveCommand command : this.moveCommands) {
 	        this.currentSelectedEntity.addCommandToQueue(command);
         }
-        this.moveCommands = null;
+        this.moveCommands = new ArrayList<>();
+        this.moveLocations = new ArrayList<>();
 
         System.out.println("Executed move command");
     }
@@ -238,10 +246,17 @@ public class Game {
 	    switch(this.currentCommand) {
             case MOVE: {
                 this.moveCommands = new ArrayList<>();
+                this.moveLocations = new ArrayList<>();
+                this.lastMoveLocation = this.currentSelectedEntity.getLocation();
+                this.moveLocations.add(this.lastMoveLocation);
                 return CommandEnum.MOVE;
             }
             default:
                 return null;
         }
+    }
+
+    public void centerOnLastMoveLocation() {
+	    this.changeCenterCoordinates(this.lastMoveLocation);
     }
 }

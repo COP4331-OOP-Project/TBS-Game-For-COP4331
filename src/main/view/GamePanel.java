@@ -78,14 +78,9 @@ public class GamePanel extends Panel {
 	}
 
 	private void drawMovingTiles() {
-		for (MoveCommand moveCommand : game.getMoveCommands()) {
-			drawStaticTileElement(moveCommand.get);
+		for (Location moveLocation : game.getMoveLocations()) {
+			drawStaticTileElement(moveLocation.getX(), moveLocation.getY(), "MOVE_SELECTED");
 		}
-		for (int i = 0; i < game.getMoveCommands().size(); i++) {
-			drawStaticTileElement(moveTile.x, moveTile.y, "MOVE_SELECTED");
-		}
-
-		
 	}
 
 	private void checkCenteringCoordinates() {
