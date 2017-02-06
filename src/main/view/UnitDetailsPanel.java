@@ -55,7 +55,6 @@ public class UnitDetailsPanel extends DetailsPanel{
 			g.drawString(game.getCurrentPlayer().getAllUnit().get(game.getSelectedUnit()).getUpkeep() + "", 930, height - 10);
 		}
 		g.setFont(old);
-		
 	}
 
 }

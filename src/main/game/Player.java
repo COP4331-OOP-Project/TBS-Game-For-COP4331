@@ -169,7 +169,15 @@ public class Player {
 
 	public int getStructureCount()
 	{
-		return structures.size();
+		int count = 0;
+		for(int i = 0;i<structures.size();i++)
+        {
+            if(structures.get(i)!=null)
+            {
+                count++;
+            }
+        }
+		return count;
 	}
 	public int getArmyCount()
 	{

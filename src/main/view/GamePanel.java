@@ -72,8 +72,15 @@ public class GamePanel extends Panel {
 		drawTiles();
 		drawMovingTiles();
 		drawBases();
-		drawUnits();
-		drawArmies();
+		if (game.getCurrentMode() == ModeEnum.UNIT) {
+			drawArmies();
+			drawUnits();
+		}
+		if (game.getCurrentMode() == ModeEnum.ARMY) {
+			drawUnits();
+			drawArmies();
+			
+		}
 		//drawSelectedItem();
 	}
 
@@ -227,21 +234,21 @@ public class GamePanel extends Panel {
 		
 		if (numOfUnits < 10) {
 			g2d.setColor(Color.BLACK);
-			g2d.drawString("" + numOfUnits, tileLocation(x) + 
-					TILE_PIXEL_SIZE/2 - 15, tileLocation(y) + 
+			g2d.drawString("" + numOfUnits, offX(tileLocation(x)) + 
+					TILE_PIXEL_SIZE/2 - 15, offY(tileLocation(y)) + 
 					TILE_PIXEL_SIZE/2 + 18);
 			g2d.setColor(Color.WHITE);
-			g2d.drawString("" + numOfUnits, tileLocation(x) + 
-					TILE_PIXEL_SIZE/2 - 17, tileLocation(y) + 
+			g2d.drawString("" + numOfUnits, offX(tileLocation(x)) + 
+					TILE_PIXEL_SIZE/2 - 17, offY(tileLocation(y)) + 
 					TILE_PIXEL_SIZE/2 + 17);
 		} else {
 			g2d.setColor(Color.BLACK);
-			g2d.drawString("" + numOfUnits, tileLocation(x) + 
-					TILE_PIXEL_SIZE/2 - 23, tileLocation(y) + 
+			g2d.drawString("" + numOfUnits, offX(tileLocation(x)) + 
+					TILE_PIXEL_SIZE/2 - 23, offY(tileLocation(y)) + 
 					TILE_PIXEL_SIZE/2 + 18);
 			g2d.setColor(Color.WHITE);
-			g2d.drawString("" + numOfUnits, tileLocation(x) + 
-					TILE_PIXEL_SIZE/2 - 25, tileLocation(y) + 
+			g2d.drawString("" + numOfUnits, offX(tileLocation(x)) + 
+					TILE_PIXEL_SIZE/2 - 25, offY(tileLocation(y)) + 
 					TILE_PIXEL_SIZE/2 + 17);
 		}
 		g2d.setColor(original);

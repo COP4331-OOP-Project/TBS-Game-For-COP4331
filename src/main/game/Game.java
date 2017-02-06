@@ -32,7 +32,8 @@ public class Game {
 
     private Location centerCoordinates;
 	private boolean centerCoordinatesUpdated;
-
+	private boolean unitOverviewVisible = false;
+	private boolean structureOverviewVisible = false;
 	private ICommandable currentSelectedEntity;
 	private CommandEnum currentCommand;
     private final static Logger log = LogManager.getLogger(CommandController.class);
@@ -269,4 +270,27 @@ public class Game {
     public int getSelectedUnit() {
     	return selectedUnit;
     }
+
+	public void toggleUnitOverview() {
+		if (structureOverviewVisible) {
+			structureOverviewVisible = !structureOverviewVisible;
+		}
+		unitOverviewVisible = !unitOverviewVisible;
+	}
+
+	public void toggleStructureOverview() {
+		if (unitOverviewVisible) {
+			unitOverviewVisible = !unitOverviewVisible;
+		}
+		structureOverviewVisible = !structureOverviewVisible;
+		
+	}
+	
+	public boolean getUnitOverviewVisible() {
+		return unitOverviewVisible;
+	}
+	
+	public boolean getStructureOverviewVisible() {
+		return structureOverviewVisible;
+	}
 }

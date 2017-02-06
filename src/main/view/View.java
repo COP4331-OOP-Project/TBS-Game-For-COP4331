@@ -38,7 +38,10 @@ public class View {
 		if (game.getCurrentMode() == ModeEnum.STRUCTURE)
 			structureDetailsPanel.draw(g, width, height);
 		miniPanel.draw(g, width, height);
-		//unitOverviewPanel.drawPanelBox(g, width, height);
+		if (game.getUnitOverviewVisible())
+			unitOverviewPanel.draw(g, width, height);
+		if (game.getStructureOverviewVisible())
+			structureOverviewPanel.draw(g, width, height);
 	}
 
 	public void updateAnimationTime() {

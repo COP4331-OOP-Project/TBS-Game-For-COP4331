@@ -77,6 +77,14 @@ public class EventController implements KeyListener{
 				log.debug("Escape pressed");
 				this.game.endTurn();
 				break;
+			case KeyEvent.VK_Z:
+				log.debug("Z Pressed");
+				this.game.toggleUnitOverview();
+				break;
+			case KeyEvent.VK_X:
+				log.debug("X Pressed");
+				this.game.toggleStructureOverview();
+				break;
 			default:
 				log.info("Invalid command");
 				break;
