@@ -121,6 +121,7 @@ public class EventController implements KeyListener{
 			case KeyEvent.VK_ENTER:
 				log.debug("Enter pressed");
 				game.executeMoveCommand();
+				this.gettingMoves = false;
 				break;
 		}
 	}
@@ -130,6 +131,7 @@ public class EventController implements KeyListener{
 		if (this.gettingMoves) {
 			this.getMoves(e);
 		}
+
 		if (e.isControlDown()) {
 			controlDownActions(e);
 			return;

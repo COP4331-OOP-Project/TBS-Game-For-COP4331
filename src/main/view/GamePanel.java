@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Random;
 import controls.ModeEnum;
 import controls.unit.UnitEnum;
+import game.commands.MoveCommand;
 import game.entities.units.Unit;
 import game.gameboard.Location;
 
@@ -77,11 +78,13 @@ public class GamePanel extends Panel {
 	}
 
 	private void drawMovingTiles() {
-		/*
-		for (int i = 0; i < game.getMovingTiles.size(); i++) {
+		for (MoveCommand moveCommand : game.getMoveCommands()) {
+			drawStaticTileElement(moveCommand.get);
+		}
+		for (int i = 0; i < game.getMoveCommands().size(); i++) {
 			drawStaticTileElement(moveTile.x, moveTile.y, "MOVE_SELECTED");
 		}
-		*/
+
 		
 	}
 

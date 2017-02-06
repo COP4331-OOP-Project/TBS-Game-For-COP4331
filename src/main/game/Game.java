@@ -58,6 +58,10 @@ public class Game {
         this.centerCoordinatesUpdated = false;
 	}
 
+	public ArrayList<MoveCommand> getMoveCommands() {
+        return this.moveCommands;
+    }
+
 	public void updateGame() { //This is called 20 times per second
 
 	}
@@ -225,10 +229,6 @@ public class Game {
 	        this.currentSelectedEntity.addCommandToQueue(command);
         }
         this.moveCommands = null;
-	    this.currentSelectedEntity.doTurn();
-        this.currentSelectedEntity.doTurn();
-        this.currentSelectedEntity.doTurn();
-        this.currentSelectedEntity.doTurn();
 
         System.out.println("Executed move command");
     }
