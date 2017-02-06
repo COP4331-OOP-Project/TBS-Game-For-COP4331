@@ -153,10 +153,15 @@ public class GameBoard {
 
         // Find instance type and call remove command on unit
         if(actor instanceof Army){
-            Tile actorTile = getTileWithLocation( ( (Army) actor ).getLocation());
-            actorTile.removeArmy(( (Army) actor ).getArmyID());
+            Army army = ((Army) actor);
+            army.getBattleGroup().clear();
+            army.getReinforcements().clear();
+            army.groupDecomission(this);
+            army.getAllUnits().clear();
+            handleDisbandArmyCmd(((Army) actor));
         }
         else if(actor instanceof Unit){
+            players.get(((Unit) actor).getOwnerID()).removeUnit(((Unit)actor));
             Tile actorTile = getTileWithLocation( ( (Unit) actor ).getLocation());
             actorTile.removeUnit( ( (Unit) actor ).getUnitID());
         }
@@ -171,7 +176,7 @@ public class GameBoard {
 
         // Find instance type and call actor's command
         if(actor instanceof Army){
-           // ( (army) actor ).powerUp();
+            ( (Army) actor ).powerUp();
         }
         else if(actor instanceof Unit){
             ( (Unit) actor ).powerUp();
@@ -186,7 +191,7 @@ public class GameBoard {
 
         // Find instance type and call actor's command
         if(actor instanceof Army){
-//            ( (army) actor ).powerDown();
+            ( (Army) actor ).powerDown();
         }
         else if(actor instanceof Unit){
             ( (Unit) actor ).powerDown();
@@ -201,7 +206,7 @@ public class GameBoard {
 
         // Find instance type and call cancel command queue on it
         if(actor instanceof Army){
-           // ( (army) actor ).cancelCommandQueue();
+            ( (Army) actor ).cancelQueuedCommands();
         }
         else if(actor instanceof Unit){
             ( (Unit) actor ).cancelQueuedCommands();
@@ -219,16 +224,8 @@ public class GameBoard {
         if(actor instanceof Army) {
 
             Army army = (Army) actor;
-
-            Tile actorTile = getTileWithLocation( army.getLocation() );
-            Tile targetTile = getAdjacentTile(actorTile, direction);
-//            targetTile.attackOccupants();
-
-//            // If queue is empty, pass another attack command for next turn
-//            if (army.isQueueEmpty()) {
-//                AttackCommand<army> atkCmd = new AttackCommand<army>(this, army, direction, 0);
-//                army.addCommandToQueue(atkCmd);
-//            }
+            //Call army to give attack command to all its units
+            army.battlegroupAttack(this,direction);
 
         }
         else if(actor instanceof Structure) {
@@ -247,6 +244,7 @@ public class GameBoard {
 
         }
         else if(actor instanceof Unit) {
+            //TODO Unit attack
             System.out.println("unit can't attack");
         }
 
@@ -260,10 +258,7 @@ public class GameBoard {
 
             Army army = (Army) actor;
 
-            Tile actorTile = getTileWithLocation(army.getLocation());
-            Tile targetTile = getAdjacentTile(actorTile, direction);
-
-            //actorTile.setDefendDirection();
+            army.battlegroupDefend(this, direction);
         }
         else if(actor instanceof Structure) {
 
@@ -286,7 +281,6 @@ public class GameBoard {
         if(actor instanceof Army) {
 
             Army army = (Army) actor;
-
             Tile actorTile = getTileWithLocation(army.getLocation());
             Tile targetTile = getAdjacentTile(actorTile, direction);
 
@@ -439,8 +433,11 @@ public class GameBoard {
 
         Location location = actors.get(0).getLocation();
         RallyPoint rp = EntityFactory.getRallyPoint(location, this, actors.get(0).getOwnerID());
-        Army newArmy = EntityFactory.getArmy(location, actors.get(0).getOwnerID(),rp, actors);
+        Army newArmy = EntityFactory.getArmy(location, actors.get(0).getOwnerID(), rp, actors);
         players.get(actors.get(0).getOwnerID()).addArmy(newArmy);
+        players.get(actors.get(0).getOwnerID()).addRallyPoint(rp);
+        gameMap[location.getX()][location.getY()].addArmy(newArmy);
+        gameMap[location.getX()][location.getY()].addRallyPoint(rp);
     }
 
     public void updateGameBoard(){
