@@ -27,10 +27,12 @@ public class GameEngine {
 	private void mainLoop() {
 		long lastTime = System.currentTimeMillis();
 		long accumulatedTime = 0;
+		long fpsTime = 0;
 		while (running) {
 			long newTime = System.currentTimeMillis();
 			long diffTime = newTime - lastTime;
 			lastTime = newTime;
+			fpsTime += diffTime;
 			accumulatedTime += diffTime;
 			while (accumulatedTime >= TIME_PER_UPDATE) {
 				game.updateGame();
@@ -38,6 +40,7 @@ public class GameEngine {
 				accumulatedTime -= TIME_PER_UPDATE;
 			}
 			window.renderGame();
+				
 		}
 	}
 }

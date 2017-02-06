@@ -13,9 +13,13 @@ import java.util.Random;
 import controls.ModeEnum;
 import controls.unit.UnitEnum;
 import game.commands.MoveCommand;
+import game.entities.Army;
+import game.entities.RallyPoint;
+import game.entities.structures.Structure;
 import game.entities.units.Unit;
 import game.gameboard.Location;
 
+import game.gameboard.Tile;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -64,6 +68,9 @@ public class GamePanel extends Panel {
 	}
 	
 	public void draw(Graphics g, int width, int height) {
+		if (!game.getMovedToNewPlayer()) {
+				centerOnNextPlayer();
+		}
 		g2d = (Graphics2D)g;
 		this.width = width;
 		this.height = height;
@@ -75,7 +82,16 @@ public class GamePanel extends Panel {
 		drawArmies();
 		drawUnits();
 		checkCenteringCoordinates();
-		//drawSelectedItem();
+
+	}
+
+	private void centerOnNextPlayer() {
+		if (game.getCurrentPlayer().getAllUnit().size() > 0) {
+		checkCentering(game.getCurrentPlayer().getAllUnit().
+				get(0).getLocation().getX(),game.getCurrentPlayer().getAllUnit().
+				get(0).getLocation().getY());
+		}
+		game.setMovedToNewPlayer(true);
 	}
 
 	private void drawMovingTiles() {
@@ -102,17 +118,24 @@ public class GamePanel extends Panel {
 		
 	}
 	
-	private void drawSelectedItem() {
+	private void drawSelectedItem(boolean isArmyUnit) {
 		if (!(selectedX == -1 && selectedY == -1)) {
 			int x = selectedX;
 			int y = selectedY;
-			if (game.getCurrentMode() == ModeEnum.RALLY_POINT) {
+			if (game.getCurrentMode() == ModeEnum.RALLY_POINT
+					&& game.getCurrentPlayer().getArmyRallyPoint().size() > 0) {
 				drawStaticTileElement(x, y, "RALLY_POINT_SELECTED");
 			}
 			if (game.getCurrentMode() == ModeEnum.UNIT) {
-				drawStaticTileElement(x, y, "UNIT_SELECTED");
+				if (isArmyUnit) {
+					drawStaticTileElement(x, y, "ARMY_SELECTED");
+				} else {
+					drawStaticTileElement(x, y, "UNIT_SELECTED");
+				}
+				
 			}
-			if (game.getCurrentMode() == ModeEnum.STRUCTURE) {
+			if (game.getCurrentMode() == ModeEnum.STRUCTURE
+					&& game.getCurrentPlayer().getBases().size() > 0) {
 				drawStaticTileElement(x, y, "BASE_SELECTED");
 			}
 			if (game.getCurrentMode() == ModeEnum.ARMY) {
@@ -122,17 +145,43 @@ public class GamePanel extends Panel {
 	}
 
 	private void drawBases() {
-		for (int player = 0; player < NUM_OF_PLAYERS; player++) {
-			for (int i = 0; i < game.getPlayer(player).getBaseCount(); i++) {
-				drawBase(game.getPlayer(player).getBases().get(i).getLocation().getX(),
-						game.getPlayer(player).getBases().get(i).getLocation().getY(),
-						player, game.getPlayer(player).getBases().get(i).getRotation());
+		int currentPlayerId = this.game.getCurrentPlayer().getPlayerID();
+		for (Tile[] tiles : this.game.getGameBoard().getTiles()) {
+			for (Tile tile : tiles) {
+				if (tile.containsStructure) {
+					Structure structure = tile.getStructure();
+					drawBase(tile.getLocation().getX(), tile.getLocation().getY(), 
+							structure.getOwnerID(), structure.getRotation());
+				}
 			}
 		}
-		drawSelectedItem();
+
+//		for (int player = 0; player < NUM_OF_PLAYERS; player++) {
+//			for (int i = 0; i < game.getPlayer(player).getBaseCount(); i++) {
+//				drawBase(game.getPlayer(player).getBases().get(i).getLocation().getX(),
+//						game.getPlayer(player).getBases().get(i).getLocation().getY(),
+//						player, game.getPlayer(player).getBases().get(i).getRotation());
+//			}
+//		}
+		drawSelectedItem(false);
+
+		if (game.getCurrentPlayer().getBases().size() > 0)
+			drawSelectedItem(false);
 	}
 
 	private void drawUnits() {
+		for (Tile[] tiles : this.game.getGameBoard().getTiles()) {
+			for (Tile tile : tiles) {
+				if (tile.containsUnit) {
+					for (Unit unit : tile.getUnits()) {
+						if (!tile.containsArmy && !tile.containsBattleGroup()) {
+							drawUnit(tile.getLocation().getX(), tile.getLocation().getY(), unit.getUnitType(), unit.getOwnerID(), 0);
+						}
+					}
+				}
+			}
+		}
+				
 		int unitSelected = -1;
 		for (int player = 0; player < NUM_OF_PLAYERS; player++) {
 			playerUnits = game.getPlayer(player).getAllUnit();
@@ -153,6 +202,7 @@ public class GamePanel extends Panel {
 							game.getCurrentType() == UnitEnum.COLONIST)
 						unitSelected = i;
 				}
+				/*
 				if (!(game.getGameBoard().gameMap[playerUnits.get(i).getLocation().getX()]
 						[playerUnits.get(i).getLocation().getY()]).containsArmy) {
 					drawUnit(playerUnits.get(i).getLocation().getX(),
@@ -161,21 +211,30 @@ public class GamePanel extends Panel {
 							playerUnits.get(i).getOwnerID(),
 							0);
 				}
+				*/
 			}
 			if (game.getCurrentMode() == ModeEnum.UNIT && unitSelected != -1
-				&& game.getCurrentPlayer().getPlayerID() == player) {
+				&& game.getCurrentPlayer().getPlayerID() == player &&
+				!(game.getGameBoard().gameMap[playerUnits.get(unitSelected).getLocation().getX()]
+						[playerUnits.get(unitSelected).getLocation().getY()]).containsArmy) {
 				game.setSelectedUnit(unitSelected);
-				drawUnit(playerUnits.get(unitSelected).getLocation().getX(),
-						playerUnits.get(unitSelected).getLocation().getY(),
-						playerUnits.get(unitSelected).getUnitType(),
-						playerUnits.get(unitSelected).getOwnerID(),
-					0);
-				drawSelectedItem();
-			} else {
+				//drawUnit(playerUnits.get(unitSelected).getLocation().getX(),
+				//		playerUnits.get(unitSelected).getLocation().getY(),
+				//		playerUnits.get(unitSelected).getUnitType(),
+				//		playerUnits.get(unitSelected).getOwnerID(),
+				//	0);
+				drawSelectedItem(false);
+			} else if (game.getCurrentMode() == ModeEnum.UNIT && unitSelected != -1
+				&& game.getCurrentPlayer().getPlayerID() == player &&
+				(game.getGameBoard().gameMap[playerUnits.get(unitSelected).getLocation().getX()]
+						[playerUnits.get(unitSelected).getLocation().getY()]).containsArmy) {
+				game.setSelectedUnit(unitSelected);
+				drawSelectedItem(true);
+			} else if (game.getCurrentPlayer().getPlayerID() == player){
 				unitSelected = -1;
 				game.setSelectedUnit(-1);
 			}
-		} 
+		}
 	}
 	
 	/**
@@ -190,7 +249,8 @@ public class GamePanel extends Panel {
 		for (int i = 0; i < game.getGameBoard().gameMap.length; i++) {
 			for (int j = 0; j < game.getGameBoard().gameMap[i].length; j++) {
 				drawTile(i, j, game.getGameBoard().gameMap[i][j].getTileType());
-				if (game.getGameBoard().gameMap[i][j].getUnits().size() > 1) {
+				if (game.getGameBoard().gameMap[i][j].getUnits().size() > 1
+						&& !game.getGameBoard().gameMap[i][i].containsArmy) {
 					g2d.drawString("" + game.getGameBoard().gameMap[i][j].getUnits().size()
 							,offX(tileLocation(i)) + 5, offY(tileLocation(j)) + 22);
 				}
@@ -202,21 +262,39 @@ public class GamePanel extends Panel {
 	}
 	
 	private void drawArmies() {
-		for (int player = 0; player < NUM_OF_PLAYERS; player++) {
-			for (int i = 0; i < game.getPlayer(player).getArmies().size(); i++) {
-				drawArmy(game.getPlayer(player).getArmies().get(i).getLocation().getX(),
-						game.getPlayer(player).getArmies().get(i).getLocation().getY(),
-						player, game.getPlayer(player).getArmies().get(i).getRotation(),
-						game.getPlayer(player).getArmies().get(i).getAllUnits().size());
+		for (Tile[] tiles : this.game.getGameBoard().getTiles()) {
+			for (Tile tile : tiles) {
+				if (tile.containsArmy) {
+					for (Army army : tile.getArmies()) {
+						drawArmy(tile.getLocation().getX(), tile.getLocation().getY(), army.getOwnerID(), 
+								army.getRotation(), army.getAllUnits().size());
+						drawSelectedItem(true);
+					}
+				} else if (tile.containsBattleGroup() && tile.getUnits().size() > 0) {
+					// this is so wrong but might work for demo
+					
+					drawArmy(tile.getLocation().getX(), tile.getLocation().getY(),
+							tile.getUnits().get(0).getOwnerID(), 0, tile.getUnits().size()); // lol
+					drawSelectedItem(true);
+				}
 			}
-		}	
+		}
+//		for (int player = 0; player < NUM_OF_PLAYERS; player++) {
+//			for (int i = 0; i < game.getPlayer(player).getArmies().size(); i++) {
+//				drawArmy(game.getPlayer(player).getArmies().get(i).getLocation().getX(),
+//						game.getPlayer(player).getArmies().get(i).getLocation().getY(),
+//						player, game.getPlayer(player).getArmies().get(i).getRotation(),
+//						game.getPlayer(player).getArmies().get(i).getAllUnits().size());
+//			}
+//		}
+		
 	}
 	
 	private void drawArmy(int x, int y, int player, int rotation, 
 			int numOfUnits) {
 		AffineTransform currentRotation = g2d.getTransform();
 		rotateOnTile(x, y, rotation);
-			switch (player) {
+		switch (player) {
 			case 0:
 				drawStaticTileElement(x, y, "ARMY_O");
 				break;

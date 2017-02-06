@@ -15,6 +15,7 @@ public class RallyPoint implements ICommandable {
 	private Location location;
 	private Army army;
 	private GameBoard gameBoard;
+	private boolean hasBattleGroupAtLocation;
 	
 	public RallyPoint(Location location, GameBoard gameBoard, int ownerID) {
 		this.location = location;
@@ -32,6 +33,10 @@ public class RallyPoint implements ICommandable {
 				army.passCommandToUnit(nextMove, army.getReinforcements().get(i));
 			}
 		}
+	}
+
+	public boolean hasBattleGroupAtLocation() {
+		return this.hasBattleGroupAtLocation;
 	}
 
 	public MoveCommand pathAlgorithm(Location from, Location to, Unit unit){
@@ -193,6 +198,11 @@ public class RallyPoint implements ICommandable {
 	public void doTurn() {
 		if (army == null) return;
 		army.doTurn();
+		if (!army.getBattleGroup().isEmpty()) {
+			this.hasBattleGroupAtLocation = true;
+		} else {
+			this.hasBattleGroupAtLocation = false;
+		}
 	}
 	public Command nextCommand() {
 		return army.getCommands().poll();

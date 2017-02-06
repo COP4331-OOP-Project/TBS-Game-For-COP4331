@@ -27,7 +27,7 @@ public class ControlModePanel extends Panel{
 	private String[][] submodeString = {{"", "", "", ""}, 
 				{"Base", "", "", ""}, 
 				{"Explorer", "Colonist", "Melee", "Ranged"}, 
-				{"Entire army", "Battle Group", "Reinforcement", ""}};
+				{"Entire Army", "Battle Group", "Reinforcement", ""}};
 	private int mode = 0;
 	private int submode = 0;
 	private Game game;

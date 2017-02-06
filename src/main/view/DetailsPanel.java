@@ -9,7 +9,6 @@ public abstract class DetailsPanel extends Panel{
 			Assets.getInstance().getImage("GUI_BOTTOM_LEFT").getWidth();
 	private static int GUI_PANEL_HEIGHT = 
 			Assets.getInstance().getImage("GUI_BOTTOM_LEFT").getHeight();
-	
 
 	void drawBar(Graphics g, int width, int height) {
 		g.drawImage(Assets.getInstance().getImage("GUI_BOTTOM_LEFT"), 0, height - GUI_PANEL_HEIGHT, null);

@@ -41,6 +41,8 @@ public class Game {
 	private boolean unitOverviewVisible = false;
 	private boolean structureOverviewVisible = false;
 	private boolean showingMakeDetails = false;
+	private boolean someItemSelected = false;
+	private boolean movedToNewPlayer = true;
 	private int makeOption = 0;
 
 	private ICommandable currentSelectedEntity;
@@ -75,7 +77,6 @@ public class Game {
     }
 
 	public void updateGame() { //This is called 20 times per second
-
 	}
 
 	public void startGame() {
@@ -84,6 +85,10 @@ public class Game {
 
 	public void endGame() {
 
+	}
+	
+	public void waitASecond() {
+		
 	}
 
 	// Assign showing the make details panel
@@ -122,6 +127,8 @@ public class Game {
 		for (ICommandable commandable : playerEntities) {
 		    commandable.doTurn();
         }
+		centerOnCurrentTypeInstance();
+		movedToNewPlayer = false;
     }
 
 	public int getTurnNum() {
@@ -163,13 +170,15 @@ public class Game {
         if (selectedEntity == null) {
             log.error("Cannot center on instance because it does not exist");
             return;
+        } else {
+        	someItemSelected = true;
         }
         Location newLocation = selectedEntity.getLocation();
         this.changeCenterCoordinates(newLocation);
         this.currentSelectedEntity = selectedEntity;
     }
 
-    private void resetControls() {
+    public void resetControls() {
         this.moveCommands = new ArrayList<>();
         this.moveLocations = new ArrayList<>();
         this.currentSelectedEntity = null;
@@ -217,14 +226,19 @@ public class Game {
     }
 
 	protected void cycleTypeInstanceForward() {
-	    this.resetControls();
+		this.resetControls();
 	    TypeController typeController = this.currentModeController.getTypeController();
         TypeInstanceController typeInstanceController = typeController.getTypeInstanceController();
         Enum currentType = typeController.getType();
         ICommandable selectedEntity = typeInstanceController.cycleForward(currentType);
-        this.currentSelectedEntity = selectedEntity;
-        Location newLocation = selectedEntity.getLocation();
-	    this.changeCenterCoordinates(newLocation);
+        if (selectedEntity != null) {
+        	someItemSelected = true;
+	        this.currentSelectedEntity = selectedEntity;
+	        Location newLocation = selectedEntity.getLocation();
+		    this.changeCenterCoordinates(newLocation);
+        } else {
+        	someItemSelected = false;
+        }
 	}
 
 	protected void cycleTypeInstanceBackward() {
@@ -233,9 +247,14 @@ public class Game {
         TypeInstanceController typeInstanceController = typeController.getTypeInstanceController();
         Enum currentType = typeController.getType();
         ICommandable selectedEntity = typeInstanceController.cycleBackward(currentType);
-        this.currentSelectedEntity = selectedEntity;
-        Location newLocation = selectedEntity.getLocation();
-        this.changeCenterCoordinates(newLocation);
+        if (selectedEntity != null) {
+        	someItemSelected = true;
+	        this.currentSelectedEntity = selectedEntity;
+	        Location newLocation = selectedEntity.getLocation();
+		    this.changeCenterCoordinates(newLocation);
+        } else {
+        	someItemSelected = false;
+        }
 	}
 
 	protected void changeCenterCoordinates(Location loc) {
@@ -264,13 +283,25 @@ public class Game {
     }
 
     public void executeMoveCommand() {
-	    for (MoveCommand command : this.moveCommands) {
-	        this.currentSelectedEntity.addCommandToQueue(command);
+	    if (this.currentSelectedEntity instanceof RallyPoint) {
+	        Tile currentTile = this.gBoard.getTileWithLocation(this.currentSelectedEntity.getLocation());
+	        currentTile.getArmies().clear();
+	        currentTile.containsArmy = false;
+	        currentTile.getRallyPoints().clear();
+	        currentTile.containsRallyPoint = false;
+            RallyPoint rp = (RallyPoint) this.currentSelectedEntity;
+            Tile rallyPointTile = this.gBoard.getTileWithLocation(this.lastMoveLocation);
+            rallyPointTile.addRallyPoint(rp);
+	        this.centerOnCurrentTypeInstance();
+        } else {
+            for (MoveCommand command : this.moveCommands) {
+                this.currentSelectedEntity.addCommandToQueue(command);
+            }
         }
         this.moveCommands = new ArrayList<>();
         this.moveLocations = new ArrayList<>();
 
-        System.out.println("Executed move command");
+        log.info("Executed move command");
     }
 
 	// Create chosen entity from selected command
@@ -348,12 +379,28 @@ public class Game {
 		
 	}
 	
+	public void setMovedToNewPlayer(boolean movedToNewPlayer) {
+		this.movedToNewPlayer = movedToNewPlayer;
+	}
+	
+	public boolean getMovedToNewPlayer() {
+		return this.movedToNewPlayer;
+	}
+	
 	public boolean getUnitOverviewVisible() {
 		return unitOverviewVisible;
 	}
 	
 	public boolean getStructureOverviewVisible() {
 		return structureOverviewVisible;
+	}
+	
+	public void setSomeItemSelected(boolean someItemSelected) {
+		this.someItemSelected = someItemSelected;
+	}
+	
+	public boolean getSomeItemSelected() {
+		return someItemSelected;
 	}
 
 	public void formArmy() {
@@ -362,9 +409,13 @@ public class Game {
 	    ArrayList<Unit> tileUnits = currentTile.getUnits();
 	    RallyPoint newRallyPoint = new RallyPoint(currentLocation, this.gBoard, this.currentPlayer.getPlayerID());
 	    Army newArmy = new Army(this.currentPlayer.getPlayerID(), newRallyPoint, tileUnits);
+	    newRallyPoint.setArmy(newArmy);
 	    currentTile.removeAllUnits();
 	    currentTile.addRallyPoint(newRallyPoint);
 	    currentTile.addArmy(newArmy);
 	    this.currentPlayer.addArmy(newArmy);
+	    this.currentPlayer.addRallyPoint(newRallyPoint);
     }
+	
+	
 }
