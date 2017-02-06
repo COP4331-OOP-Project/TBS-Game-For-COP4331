@@ -164,6 +164,8 @@ public class Game {
         if (selectedEntity == null) {
             log.error("Cannot center on instance because it does not exist");
             return;
+        } else {
+        	someItemSelected = true;
         }
         Location newLocation = selectedEntity.getLocation();
         this.changeCenterCoordinates(newLocation);
