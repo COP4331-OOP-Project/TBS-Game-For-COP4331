@@ -191,6 +191,7 @@ public class RallyPoint implements ICommandable {
 		army.addCommandToQueue(command);
 	}
 	public void doTurn() {
+		if (army == null) return;
 		army.doTurn();
 	}
 	public Command nextCommand() {
