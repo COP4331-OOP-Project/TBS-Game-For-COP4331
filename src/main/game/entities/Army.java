@@ -23,7 +23,7 @@ public class Army{
     private ArrayList<Unit> battleGroup;                // Active battlegroup units
     private ArrayList<Unit> reinforcements;             // Reinforcing units
     private ArrayList<Unit> allUnits;                   // All Units in the army
-    private Queue<Command> commands;                // Army commands
+    private Queue<Command> queue;                // Army commands
 
     // Constructor
     public Army(Location loc, int playerId, RallyPoint rp, ArrayList<Unit> units) {
@@ -31,7 +31,7 @@ public class Army{
         this.location = loc;                            // Set army location
         this.ownerID = playerId;                        // Set player id
         this.rp = rp;                                   // Set rally point
-        this.commands = new LinkedList<>();
+        this.queue = new LinkedList<>();
         this.battleGroup = new ArrayList<Unit>();       // Initialize battleGroup
         this.reinforcements = new ArrayList<Unit>();    // Initialize reinforcements
         this.allUnits = new ArrayList<Unit>();          // Initialize allUnits
@@ -200,7 +200,7 @@ public class Army{
 
         updateArmy();
         //Make sure has commands and powered state is not powered down
-        if (!commands.isEmpty()&&powerState.getUpkeep()!=0.25f) {
+        if (!queue.isEmpty()&&powerState.getUpkeep()!=0.25f) {
             if (peekCommand().getDuration() == 0) {                               // Test if next cmd can fire
                 nextCommand().exec();                                      // Send commands to units
             }
@@ -218,11 +218,11 @@ public class Army{
 
     }
 
-    public Command nextCommand() { return commands.poll(); }                     // Pop off next command
-    public Command peekCommand() { return commands.peek(); }                     // Look next command
-    public boolean isQueueEmpty() { return commands.isEmpty(); }                 // check if empty
-    public void addCommandToQueue(Command command){ commands.add(command); }     // Add next cmd to queue
-    public void cancelQueuedCommands() { commands.clear(); }                     // Clear queue
+    public Command nextCommand() { return queue.poll(); }                     // Pop off next command
+    public Command peekCommand() { return queue.peek(); }                     // Look next command
+    public boolean isQueueEmpty() { return queue.isEmpty(); }                 // check if empty
+    public void addCommandToQueue(Command command){ queue.add(command); }     // Add next cmd to queue
+    public void cancelQueuedCommands() { queue.clear(); }                     // Clear queue
 
 
 
@@ -233,7 +233,7 @@ public class Army{
     public ArrayList<Unit> getBattleGroup() { return battleGroup; }
     public ArrayList<Unit> getReinforcements() { return reinforcements; }
     public ArrayList<Unit> getAllUnits(){return allUnits;}
-    public Queue<Command> getCommands(){return commands;}
+    public Queue<Command> getCommands(){return queue;}
     public float getResourceCost(){return resourceCost;}
 
     public void setArmyID(int armyID)
