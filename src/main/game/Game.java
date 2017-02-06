@@ -166,24 +166,35 @@ public class Game {
         this.currentSelectedEntity = selectedEntity;
     }
 
+    private void resetControls() {
+        this.moveCommands = new ArrayList<>();
+        this.moveLocations = new ArrayList<>();
+
+        this.currentCommand = null;
+    }
+
 	protected void cycleModeForward() {
 		this.currentModeController.cycleForward();
 		this.centerOnCurrentTypeInstance();
+		this.resetControls();
 	}
 
 	protected void cycleModeBackward() {
 		this.currentModeController.cycleBackward();
         this.centerOnCurrentTypeInstance();
+        this.resetControls();
     }
 
 	protected void cycleTypeForward() {
 		this.currentModeController.getTypeController().cycleForward();
         this.centerOnCurrentTypeInstance();
+        this.resetControls();
     }
 
 	protected void cycleTypeBackward() {
 		this.currentModeController.getTypeController().cycleBackward();
         this.centerOnCurrentTypeInstance();
+        this.resetControls();
     }
 
 	protected void cycleCommandForward() {
@@ -203,6 +214,7 @@ public class Game {
     }
 
 	protected void cycleTypeInstanceForward() {
+	    this.resetControls();
 	    TypeController typeController = this.currentModeController.getTypeController();
         TypeInstanceController typeInstanceController = typeController.getTypeInstanceController();
         Enum currentType = typeController.getType();
@@ -213,6 +225,7 @@ public class Game {
 	}
 
 	protected void cycleTypeInstanceBackward() {
+	    this.resetControls();
         TypeController typeController = this.currentModeController.getTypeController();
         TypeInstanceController typeInstanceController = typeController.getTypeInstanceController();
         Enum currentType = typeController.getType();
