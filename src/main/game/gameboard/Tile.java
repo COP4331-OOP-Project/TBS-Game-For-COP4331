@@ -84,6 +84,7 @@ public class Tile implements ITileAccessors {
 
     public void addRallyPoint(RallyPoint rp){
         rallyPoints.add(rp);
+        rp.setLocation(location);
         containsRallyPoint=true;
     }
 
@@ -149,13 +150,15 @@ public class Tile implements ITileAccessors {
     public void attackOccupants(int damage) {
 
         // Damage all units
-        for (Unit u : units) {
-            u.setHealth(u.getHealth() - damage);
+        if(containsUnit) {
+            for (Unit u : units) {
+                u.setHealth(u.getHealth() - damage);
+            }
         }
-
         // Damage structure
-        structure.setHealth(structure.getHealth() - damage);
-
+        if(containsStructure) {
+            structure.setHealth(structure.getHealth() - damage);
+        }
     }
 
     // Heal all units and structure on tile

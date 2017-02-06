@@ -244,8 +244,18 @@ public class GameBoard {
 
         }
         else if(actor instanceof Unit) {
-            //TODO Unit attack
-            System.out.println("unit can't attack");
+            Unit unit = (Unit) actor;
+            Tile actorTile = getTileWithLocation(unit.getLocation());
+            Tile targetTile = getAdjacentTile(actorTile, direction);
+            if(targetTile.hasEnemyUnit(unit.getOwnerID())){
+                targetTile.attackOccupants(unit.getAttackDamage());
+                for(Unit u : targetTile.getUnits()){
+                    if(u.getHealth()<=0){
+                        handleDecommissionCmd(u);
+                    }
+                }
+            }
+
         }
 
     }
