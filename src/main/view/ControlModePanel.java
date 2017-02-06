@@ -23,7 +23,7 @@ public class ControlModePanel extends Panel{
 	private int height;
 	private Font modeFont = new Font("Lucida Sans", Font.BOLD, 16);
 	private Font subModeFont = new Font("Lucida Sans", Font.BOLD, 12);
-	private String[] modeString = {"Rally Point", "structure", "unit", "army"};
+	private String[] modeString = {"Rally Point", "Structure", "Unit", "Army"};
 	private String[][] submodeString = {{"", "", "", ""}, 
 				{"Base", "", "", ""}, 
 				{"Explorer", "Colonist", "Melee", "Ranged"}, 

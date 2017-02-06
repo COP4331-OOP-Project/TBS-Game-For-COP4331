@@ -79,7 +79,9 @@ public class GamePanel extends Panel {
 		if (game.getCurrentMode() == ModeEnum.ARMY) {
 			drawUnits();
 			drawArmies();
-			
+		} else {
+			drawArmies();
+			drawUnits();
 		}
 		//drawSelectedItem();
 	}
