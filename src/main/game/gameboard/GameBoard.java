@@ -39,6 +39,16 @@ public class GameBoard {
     	
         this.players = players;                     // Set players
         setupMap();                                 // Setup gameMap
+        init();                                     // Set initial units to initial tiles
+    }
+
+    private void init(){
+        for(int i = 0; i<players.size();i++){
+            ArrayList<Unit> playerUnit = players.get(i).getAllUnit();
+            for(int n = 0; n<playerUnit.size();n++){
+                gameMap[playerUnit.get(n).getLocation().getX()][playerUnit.get(n).getLocation().getY()].addUnit(playerUnit.get(n));
+            }
+        }
     }
 
     public Player getPlayer(int index) {
@@ -418,13 +428,10 @@ public class GameBoard {
         gameMap[actor.getLocation().getX()][actor.getLocation().getY()].removeRallyPoint(actor.getRp());
         //Set army reference to rally point to null
         actor.setRallyPoint(null);
-
-
-
     }
 
     // Handle band army command
-    public void handleBandArmyCmd(ArrayList<Unit> actors) {
+    public void handleBandArmyCmd(ArrayList<? extends Unit> actors) {
 
 //    	Location location = actors.get(0).location.getlocation();
 //    	rallyPoint rp = new rallyPoint(location, this);
@@ -446,14 +453,12 @@ public class GameBoard {
                 gameMap[i][j].setOwnerID(-1);
             }
         }
-        ArrayList<Unit> player0Unit = players.get(0).getAllUnit();
-        for(int i = 0;i<player0Unit.size();i++){
-            gameMap[player0Unit.get(i).getLocation().getX()][player0Unit.get(i).getLocation().getY()].setOwnerID(players.get(0).getPlayerID());
-        }
 
-        ArrayList<Unit> player1Unit = players.get(1).getAllUnit();
-        for(int i = 0;i<player1Unit.size();i++){
-            gameMap[player0Unit.get(i).getLocation().getX()][player0Unit.get(i).getLocation().getY()].setOwnerID(players.get(1).getPlayerID());
+        for(int a = 0; a<2;a++) {
+            ArrayList<Unit> playerUnit = players.get(a).getAllUnit();
+            for (int i = 0; i < playerUnit.size(); i++) {
+                gameMap[playerUnit.get(i).getLocation().getX()][playerUnit.get(i).getLocation().getY()].setOwnerID(players.get(a).getPlayerID());
+            }
         }
     }
 }
