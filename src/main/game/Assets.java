@@ -69,6 +69,11 @@ public class Assets {
 	
 	private static final String RALLY_POINT_SELECTED = "assets/rallyPoint/selectedRallyPoint.png";
 	
+	private static final String MOVE_SELECTED = "assets/move/moveSelected.png";
+	private static final String AOE_DIE = "assets/areaEffect/loseHealth.png";
+	private static final String AOE_LOSE = "assets/areaEffect/redCross.png";
+	private static final String AOE_HEAL = "assets/areaEffect/skullDecal.png";
+	
 	private ArrayList<BufferedImage> gameImages;
 	private int lastItemLoaded = 0;
 	
@@ -130,6 +135,11 @@ public class Assets {
 		loadItem("ICON_B", ICON_B);
 		
 		loadItem("RALLY_POINT_SELECTED", RALLY_POINT_SELECTED);
+		
+		loadItem("MOVE_SELECTED", MOVE_SELECTED);
+		loadItem("AOE_DIE", AOE_DIE);
+		loadItem("AOE_LOSE", AOE_LOSE);
+		loadItem("AOE_HEAL", AOE_HEAL);
 		
 	}
 	
