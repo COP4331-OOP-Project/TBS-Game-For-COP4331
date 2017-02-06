@@ -10,7 +10,7 @@ import java.awt.Graphics;
 import java.awt.Font;
 
 public class CivilizationPanel extends Panel{
-
+	Font currentCommandFont = new Font("Lucida Sans", Font.BOLD, 20);
 	Font civInfoFont = new Font("Lucida Sans", Font.BOLD, 20);
 	private Game game;
 
@@ -27,21 +27,62 @@ public class CivilizationPanel extends Panel{
 		drawBar(g, screenWidth, screenHeight);
 		drawText(g);
 		drawPlayerIcon(g);
+		drawCurrentCommand(g, screenWidth, screenHeight);
+	}
+
+	private void drawCurrentCommand(Graphics g, int width, int height) {
+		Font oldFont = g.getFont();
+		g.setFont(currentCommandFont);
+		String commandString = "";
+		if (game.getCurrentCommand() != null && 
+				game.getCurrentCommand().toString() == "MAKE") {
+			commandString = "Make";
+		} else if (game.getCurrentCommand() != null && 
+				game.getCurrentCommand().toString() == "HEAL") {
+			commandString = "Heal";
+		} else if (game.getCurrentCommand() != null && 
+				game.getCurrentCommand().toString() == "ATTACK") {
+			commandString = "Attack";
+		} else if (game.getCurrentCommand() != null && 
+				game.getCurrentCommand().toString() == "DEFEND") {
+			commandString = "Defend";
+		} else if (game.getCurrentCommand() != null && 
+				game.getCurrentCommand().toString() == "POWER_UP") {
+			commandString = "Power Up";
+		} else if (game.getCurrentCommand() != null && 
+				game.getCurrentCommand().toString() == "POWER_DOWN") {
+			commandString = "Power Down";
+		} else if (game.getCurrentCommand() != null && 
+				game.getCurrentCommand().toString() == "CANCEL_COMMAND_QUEUE") {
+			commandString = "Cancel Command Queue";
+		} else if (game.getCurrentCommand() != null && 
+				game.getCurrentCommand().toString() == "DECOMISSION") {
+			commandString = "Decomission";
+		} else if (game.getCurrentCommand() != null && 
+				game.getCurrentCommand().toString() == "MOVE") {
+			commandString = "Move";
+		} else if (game.getCurrentCommand() == null) {
+			commandString = "None";
+		}
+		
+		g.drawString("Current Command: " + commandString, width - 470, 60);
+		g.setFont(oldFont);
+		
 	}
 
 	private void drawPlayerIcon(Graphics g) {
 		if (game.getCurrentPlayer().getPlayerID() == 0) {
-			g.drawImage(Assets.getInstance().getImage("ICON_O"), 80, 5, null);
+			g.drawImage(Assets.getInstance().getImage("ICON_O"), 80, 17, null);
 		} else {
-			g.drawImage(Assets.getInstance().getImage("ICON_B"), 80, 5, null);
+			g.drawImage(Assets.getInstance().getImage("ICON_B"), 80, 17, null);
 		}
 		
 	}
 
 	private void drawText(Graphics g) {
 		g.setFont(civInfoFont);
-		g.drawString("Player: ", 5, 20);
-		g.drawString("Turn: "+ game.getTurnNum(), 5, 45);
+		g.drawString("Player: ", 5, 35);
+		g.drawString("Turn: "+ game.getTurnNum(), 5, 65);
 	}
 
 	//Draw the blue panel itself
