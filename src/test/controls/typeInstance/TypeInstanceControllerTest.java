@@ -79,7 +79,7 @@ public class TypeInstanceControllerTest {
         ArrayList<Unit> army1Units = new ArrayList<Unit>();
         army1Units.add(this.e1);
 
-        this.army1 = new Army(loc, 0, this.rallyPoint, army1Units);
+        this.army1 = new Army(0, this.rallyPoint, army1Units);
 
         this.army1.addSingleBattleGroupMember(this.r1);
         this.army1.addSingleBattleGroupMember(this.r2);
@@ -90,7 +90,7 @@ public class TypeInstanceControllerTest {
         ArrayList<Unit> army2Units = new ArrayList<Unit>();
         army2Units.add(this.m1);
 
-        this.army2 = new Army(loc, 0, this.rallyPoint, army2Units);
+        this.army2 = new Army( 0, this.rallyPoint, army2Units);
         this.army2.addSingleBattleGroupMember(this.m2);
         this.army2.addSingleBattleGroupMember(this.m3);
         this.army2.addSingleReinforcement(this.r1);
