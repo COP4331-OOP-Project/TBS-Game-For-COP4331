@@ -38,13 +38,13 @@ public class GameBoard {
     public GameBoard(ArrayList<Player> players) {
     	
         this.players = players;                     // Set players
-        init();                                     // Set initial units to initial tiles
         setupMap();                                 // Setup gameMap
+        init();                                     // Set initial units to initial tiles
     }
 
     private void init(){
         for(int i = 0; i<players.size();i++){
-            ArrayList<Unit> playerUnit = players.get(0).getAllUnit();
+            ArrayList<Unit> playerUnit = players.get(i).getAllUnit();
             for(int n = 0; n<playerUnit.size();n++){
                 gameMap[playerUnit.get(n).getLocation().getX()][playerUnit.get(n).getLocation().getY()].addUnit(playerUnit.get(n));
             }
