@@ -69,10 +69,20 @@ public class GamePanel extends Panel {
 			continueCentering();
 		checkCenteringCoordinates();
 		drawTiles();
+		drawMovingTiles();
 		drawBases();
 		drawUnits();
 		drawArmies();
 		//drawSelectedItem();
+	}
+
+	private void drawMovingTiles() {
+		/*
+		for (int i = 0; i < game.getMovingTiles.size(); i++) {
+			drawStaticTileElement(moveTile.x, moveTile.y, "MOVE_SELECTED");
+		}
+		*/
+		
 	}
 
 	private void checkCenteringCoordinates() {
