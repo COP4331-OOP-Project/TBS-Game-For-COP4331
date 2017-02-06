@@ -8,7 +8,7 @@ public class Colonist extends Unit {
   // Constructor
   public Colonist(Location loc, int ownerID){
     super(loc, ownerID, 3);  // Call super constructor & set stats
-    setStats(1, 1, 1, 10, 1, 5, 10);
+    setStats(0, 0, 1, 10, 1, 5, 10);
   }
 
   public boolean canMake() {
