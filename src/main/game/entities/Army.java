@@ -118,7 +118,7 @@ public class Army{
     //Set Power states to correct units
     public void setPowerState(PowerState state) {
         this.powerState = state;            // Set state
-        if(this.powerState.getUpkeep()>=1.0f){
+        if(this.powerState==PowerState.POWERED_UP || this.powerState==PowerState.COMBAT){
             //Give Battlegroup combat state
             for(int i = 0; i<battleGroup.size(); i++){
                 battleGroup.get(i).setPowerState(state);
