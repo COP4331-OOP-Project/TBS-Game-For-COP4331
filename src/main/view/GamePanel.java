@@ -186,6 +186,7 @@ public class GamePanel extends Panel {
 				&& game.getCurrentPlayer().getPlayerID() == player &&
 				(game.getGameBoard().gameMap[playerUnits.get(unitSelected).getLocation().getX()]
 						[playerUnits.get(unitSelected).getLocation().getY()]).containsArmy) {
+				game.setSelectedUnit(unitSelected);
 				drawSelectedItem(true);
 			} else if (game.getCurrentPlayer().getPlayerID() == player){
 				unitSelected = -1;
