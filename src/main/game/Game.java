@@ -81,6 +81,10 @@ public class Game {
 		nextPlayer = temp;
 		if (currentPlayer.getPlayerID() == 0) {
             turnNum++;
+
+            //Test Army Band
+
+			getGameBoard().handleBandArmyCmd(players.get(0).getExplorers());
         }
         this.currentModeController = new ModeController(this.currentPlayer);
     }

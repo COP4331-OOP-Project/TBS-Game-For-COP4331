@@ -35,7 +35,6 @@ public abstract class Unit implements ICommandable
     this.location = loc;
     this.ownerID = ownerID;
     this.unitType = unitType;
-
     setPowerState(PowerState.POWERED_UP);
   }
 

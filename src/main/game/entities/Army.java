@@ -25,7 +25,7 @@ public class Army{
     private Queue<Command> queue;                // Army commands
 
     // Constructor
-    public Army(Location loc, int playerId, RallyPoint rp, ArrayList<Unit> units) {
+    public Army(Location loc, int playerId, RallyPoint rp, ArrayList<? extends Unit> units) {
 
         this.location = loc;                            // Set army location
         this.ownerID = playerId;                        // Set player id
