@@ -85,7 +85,10 @@ public class GamePanel extends Panel {
 
 	private void drawRallyPoint() {
 		if (game.getCurrentMode() == ModeEnum.RALLY_POINT) {
-			//drawStaticTileElement(x, y, "RALLY_POINT_SELECTED");
+			if (game.getSomeItemSelected()) {
+			//drawStaticTileElement(game.getCenterCoordinates().getX(), 
+			//		game.getCenterCoordinates().getY(), "RALLY_POINT_SELECTED");
+			}
 		}
 
 	}
