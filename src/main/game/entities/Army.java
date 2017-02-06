@@ -12,22 +12,21 @@ import java.util.*;
 
 public class Army{
 
-    private int armyID;                                 // Army unique id
+    private int armyID;                                 // army unique id
     private int ownerID;                                // Player id
     private int rotation = 0;
-    private Location location;                          // Army location
-    private RallyPoint rp;                              // Army Rally Point
-    private PowerState powerState;                      // Army power state
+    private Location location;                          // army location
+    private RallyPoint rp;                              // army Rally Point
+    private PowerState powerState;                      // army power state
 
     private ArrayList<Unit> battleGroup;                // Active battlegroup units
     private ArrayList<Unit> reinforcements;             // Reinforcing units
     private ArrayList<Unit> allUnits;                   // All Units in the army
-    private Queue<Command> queue;                // Army commands
+    private Queue<Command> queue;                // army commands
 
     // Constructor
-    public Army(Location loc, int playerId, RallyPoint rp, ArrayList<? extends Unit> units) {
-
-        this.location = loc;                            // Set army location
+    public Army(int playerId, RallyPoint rp, ArrayList<? extends Unit> units) {
+        this.location = rp.getLocation();                            // Set army location
         this.ownerID = playerId;                        // Set player id
         this.rp = rp;                                   // Set rally point
         this.queue = new LinkedList<>();
@@ -92,6 +91,7 @@ public class Army{
 
     // Update battleGroup and reinforcements to make sure all units in correct spot
     public void updateArmy(){
+        this.location=rp.getLocation();
         for(Iterator<Unit> iter = battleGroup.iterator(); iter.hasNext();){
             //If battlegroup unit not on rallypoint move to reinforcements
             Unit checkUnit = iter.next();

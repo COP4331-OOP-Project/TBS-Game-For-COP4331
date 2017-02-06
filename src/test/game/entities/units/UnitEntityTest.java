@@ -69,8 +69,8 @@ public class UnitEntityTest {
     @Test
     public void testGetStats() {
         assertEquals(7, melee.getAttackDamage());
-        assertEquals(7, melee.getDefenseDamage());
-        assertEquals(7, melee.getArmor());
+        assertEquals(2, melee.getDefenseDamage());
+        assertEquals(2, melee.getArmor());
         assertEquals(10, melee.getBaseResourceCost());
         assertEquals(10, melee.getHealth());
         assertEquals(3, melee.getSpeed());

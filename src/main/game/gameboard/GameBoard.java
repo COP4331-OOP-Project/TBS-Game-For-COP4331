@@ -254,8 +254,18 @@ public class GameBoard {
 
         }
         else if(actor instanceof Unit) {
-            //TODO Unit attack
-            System.out.println("unit can't attack");
+            Unit unit = (Unit) actor;
+            Tile actorTile = getTileWithLocation(unit.getLocation());
+            Tile targetTile = getAdjacentTile(actorTile, direction);
+            if(targetTile.hasEnemyUnit(unit.getOwnerID())){
+                targetTile.attackOccupants(unit.getAttackDamage());
+                for(Unit u : targetTile.getUnits()){
+                    if(u.getHealth()<=0){
+                        handleDecommissionCmd(u);
+                    }
+                }
+            }
+
         }
 
     }
@@ -440,7 +450,7 @@ public class GameBoard {
 
         Location location = actors.get(0).getLocation();
         RallyPoint rp = EntityFactory.getRallyPoint(location, this, actors.get(0).getOwnerID());
-        Army newArmy = EntityFactory.getArmy(location, actors.get(0).getOwnerID(), rp, actors);
+        Army newArmy = EntityFactory.getArmy(actors.get(0).getOwnerID(), rp, actors);
         players.get(actors.get(0).getOwnerID()).addArmy(newArmy);
         players.get(actors.get(0).getOwnerID()).addRallyPoint(rp);
         gameMap[location.getX()][location.getY()].addArmy(newArmy);

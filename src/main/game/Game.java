@@ -93,7 +93,7 @@ public class Game {
 		if (currentPlayer.getPlayerID() == 0) {
             turnNum++;
 
-            //Test Army Band
+            //Test army Band
 
 			getGameBoard().handleBandArmyCmd(players.get(0).getExplorers());
         }
