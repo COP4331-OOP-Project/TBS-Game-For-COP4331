@@ -118,21 +118,13 @@ public class Army{
     //Set Power states to correct units
     public void setPowerState(PowerState state) {
         this.powerState = state;            // Set state
-        if(this.powerState==PowerState.POWERED_UP || this.powerState==PowerState.COMBAT){
-            //Give Battlegroup combat state
-            for(int i = 0; i<battleGroup.size(); i++){
-                battleGroup.get(i).setPowerState(state);
-            }
-            //Give reinforcements normal moving state
-            for(int i = 0; i<reinforcements.size(); i++){
-                reinforcements.get(i).setPowerState(PowerState.POWERED_UP);
-            }
+        //Give Battlegroup combat state
+        for(int i = 0; i<battleGroup.size(); i++){
+            battleGroup.get(i).setPowerState(state);
         }
-        //If Power down state all units go to powered down regardless of battlegroup or reinforcements
-        else{
-            for(int i = 0; i<allUnits.size();i++){
-                allUnits.get(i).setPowerState(state);
-            }
+        //Give reinforcements normal moving state
+        for(int i = 0; i<reinforcements.size(); i++){
+            reinforcements.get(i).setPowerState(PowerState.POWERED_UP);
         }
     }
 
