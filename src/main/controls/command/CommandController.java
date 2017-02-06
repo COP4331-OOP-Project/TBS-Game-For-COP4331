@@ -65,7 +65,7 @@ public class CommandController {
     }
 
     public CommandEnum cycleBackward() {
-        CommandEnum command = this.currentCommand.getNext();
+        CommandEnum command = this.currentCommand.getPrevious();
         if (canExecuteCommand(command)) {
             this.currentCommand = command;
             return command;

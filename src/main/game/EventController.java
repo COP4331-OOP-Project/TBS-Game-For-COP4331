@@ -1,5 +1,6 @@
 package game;
 
+import controls.command.CommandEnum;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -11,6 +12,7 @@ public class EventController implements KeyListener{
 
 	Game game;
 	private final static Logger log = LogManager.getLogger(EventController.class);
+	private boolean gettingMoves = false;
 
 	public EventController(Game game) {
 		this.game = game;
@@ -60,36 +62,17 @@ public class EventController implements KeyListener{
 				log.debug("Right key pressed");
 				this.game.cycleTypeInstanceForward();
 				break;
-			case KeyEvent.VK_NUMPAD1:
-				log.debug("Numpad 1 pressed");
-				break;
-			case KeyEvent.VK_NUMPAD2:
-				log.debug("Numpad 2 pressed");
-				break;
-			case KeyEvent.VK_NUMPAD3:
-				log.debug("Numpad 3 pressed");
-				break;
-			case KeyEvent.VK_NUMPAD4:
-				log.debug("Numpad 4 pressed");
-				break;
-			case KeyEvent.VK_NUMPAD5:
-				log.debug("Numpad 5 pressed");
-				break;
-			case KeyEvent.VK_NUMPAD6:
-				log.debug("Numpad 6 pressed");
-				break;
-			case KeyEvent.VK_NUMPAD7:
-				log.debug("Numpad 7 pressed");
-				break;
-			case KeyEvent.VK_NUMPAD8:
-				log.debug("Numpad 8 pressed");
-				break;
-			case KeyEvent.VK_NUMPAD9:
-				log.debug("Numpad 9 pressed");
-				break;
 			case KeyEvent.VK_ENTER:
 				log.debug("Enter pressed");
+				CommandEnum command = this.game.executeCommand();
+				if (command == CommandEnum.MOVE) {
+					this.gettingMoves = true;
+				}
 				break;
+            case KeyEvent.VK_NUMPAD5:
+                log.debug("Numpad 5 pressed");
+                this.game.centerOnCurrentTypeInstance();
+                break;
 			case KeyEvent.VK_ESCAPE:
 				log.debug("Escape pressed");
 				this.game.endTurn();
@@ -100,8 +83,59 @@ public class EventController implements KeyListener{
 		}
 	}
 
+	public void getMoves(KeyEvent e) {
+		int key = e.getKeyCode();
+		switch(key) {
+			case KeyEvent.VK_NUMPAD1:
+				log.debug("Numpad 1 pressed");
+				this.game.addMoveToList(225);
+				break;
+			case KeyEvent.VK_NUMPAD2:
+				log.debug("Numpad 2 pressed");
+				this.game.addMoveToList(180);
+				break;
+			case KeyEvent.VK_NUMPAD3:
+				log.debug("Numpad 3 pressed");
+				this.game.addMoveToList(135);
+				break;
+			case KeyEvent.VK_NUMPAD4:
+				log.debug("Numpad 4 pressed");
+				this.game.addMoveToList(270);
+				break;
+			case KeyEvent.VK_NUMPAD5:
+				log.debug("Numpad 5 pressed");
+				this.game.centerOnLastMoveLocation();
+				break;
+			case KeyEvent.VK_NUMPAD6:
+				log.debug("Numpad 6 pressed");
+				this.game.addMoveToList(90);
+				break;
+			case KeyEvent.VK_NUMPAD7:
+				log.debug("Numpad 7 pressed");
+				this.game.addMoveToList(315);
+				break;
+			case KeyEvent.VK_NUMPAD8:
+				log.debug("Numpad 8 pressed");
+				this.game.addMoveToList(0);
+				break;
+			case KeyEvent.VK_NUMPAD9:
+				log.debug("Numpad 9 pressed");
+				this.game.addMoveToList(45);
+				break;
+			case KeyEvent.VK_ENTER:
+				log.debug("Enter pressed");
+				game.executeMoveCommand();
+				this.gettingMoves = false;
+				break;
+		}
+	}
+
 	@Override
 	public void keyReleased(KeyEvent e) {
+		if (this.gettingMoves) {
+			this.getMoves(e);
+		}
+
 		if (e.isControlDown()) {
 			controlDownActions(e);
 			return;
