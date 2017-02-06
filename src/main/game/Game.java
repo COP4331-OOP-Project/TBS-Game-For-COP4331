@@ -95,7 +95,7 @@ public class Game {
 
             //Test army Band
 
-			getGameBoard().handleBandArmyCmd(players.get(0).getExplorers());
+			//getGameBoard().handleBandArmyCmd(players.get(0).getExplorers());
         }
         this.currentModeController = new ModeController(this.currentPlayer);
 
