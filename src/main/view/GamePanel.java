@@ -78,7 +78,16 @@ public class GamePanel extends Panel {
 		drawBases();
 		drawArmies();
 		drawUnits();
+		drawRallyPoint();
 		checkCenteringCoordinates();
+
+	}
+
+	private void drawRallyPoint() {
+		if (game.getCurrentMode() == ModeEnum.RALLY_POINT) {
+			//drawStaticTileElement(x, y, "RALLY_POINT_SELECTED");
+		}
+
 	}
 
 	private void drawMovingTiles() {
@@ -105,15 +114,17 @@ public class GamePanel extends Panel {
 		
 	}
 	
-	private void drawSelectedItem() {
+	private void drawSelectedItem(boolean isArmyUnit) {
 		if (!(selectedX == -1 && selectedY == -1)) {
 			int x = selectedX;
 			int y = selectedY;
-			if (game.getCurrentMode() == ModeEnum.RALLY_POINT) {
-				drawStaticTileElement(x, y, "RALLY_POINT_SELECTED");
-			}
 			if (game.getCurrentMode() == ModeEnum.UNIT) {
-				drawStaticTileElement(x, y, "UNIT_SELECTED");
+				if (isArmyUnit) {
+					drawStaticTileElement(x, y, "ARMY_SELECTED");
+				} else {
+					drawStaticTileElement(x, y, "UNIT_SELECTED");
+				}
+				
 			}
 			if (game.getCurrentMode() == ModeEnum.STRUCTURE) {
 				drawStaticTileElement(x, y, "BASE_SELECTED");
@@ -146,7 +157,7 @@ public class GamePanel extends Panel {
 		drawSelectedItem();
 
 		if (game.getCurrentPlayer().getBases().size() > 0)
-			drawSelectedItem();
+			drawSelectedItem(false);
 	}
 
 	private void drawUnits() {
@@ -179,14 +190,12 @@ public class GamePanel extends Panel {
 						playerUnits.get(unitSelected).getUnitType(),
 						playerUnits.get(unitSelected).getOwnerID(),
 					0);
-				drawSelectedItem();
+				drawSelectedItem(false);
 			} else if (game.getCurrentMode() == ModeEnum.UNIT && unitSelected != -1
 				&& game.getCurrentPlayer().getPlayerID() == player &&
 				(game.getGameBoard().gameMap[playerUnits.get(unitSelected).getLocation().getX()]
 						[playerUnits.get(unitSelected).getLocation().getY()]).containsArmy) {
-				drawStaticTileElement(playerUnits.get(unitSelected).getLocation().getX(),
-						playerUnits.get(unitSelected).getLocation().getY(),
-						"ARMY_SELECTED");	
+				drawSelectedItem(true);
 			} else if (game.getCurrentPlayer().getPlayerID() == player){
 				unitSelected = -1;
 				game.setSelectedUnit(-1);

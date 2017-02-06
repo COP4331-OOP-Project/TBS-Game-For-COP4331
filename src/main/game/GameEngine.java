@@ -1,7 +1,6 @@
 package game;
 
 public class GameEngine {
-	private static final long RENDER_WAIT = 50;
 	private final int GAME_UPDATES_PER_SECOND = 20;
 	private final int TIME_PER_UPDATE = 1000/GAME_UPDATES_PER_SECOND;
 	private boolean running = true;
@@ -40,10 +39,7 @@ public class GameEngine {
 				window.updateAnimationTime();
 				accumulatedTime -= TIME_PER_UPDATE;
 			}
-			while (fpsTime >= RENDER_WAIT ){
-				window.renderGame();
-				fpsTime -= RENDER_WAIT;
-			}
+			window.renderGame();
 				
 		}
 	}
