@@ -68,6 +68,10 @@ public class GamePanel extends Panel {
 	}
 	
 	public void draw(Graphics g, int width, int height) {
+		if (!game.getMovedToNewPlayer()) {
+			centerOnNextPlayer();
+			game.setMovedToNewPlayer(true);
+		}
 		g2d = (Graphics2D)g;
 		this.width = width;
 		this.height = height;
@@ -81,6 +85,14 @@ public class GamePanel extends Panel {
 		drawRallyPoint();
 		checkCenteringCoordinates();
 
+	}
+
+	private void centerOnNextPlayer() {
+		if (game.getCurrentPlayer().getAllUnit().size() > 0) {
+		checkCentering(game.getCurrentPlayer().getAllUnit().
+				get(0).getLocation().getX(),game.getCurrentPlayer().getAllUnit().
+				get(0).getLocation().getY());
+		}
 	}
 
 	private void drawRallyPoint() {

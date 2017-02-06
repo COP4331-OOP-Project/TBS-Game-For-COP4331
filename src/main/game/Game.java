@@ -42,6 +42,7 @@ public class Game {
 	private boolean structureOverviewVisible = false;
 	private boolean showingMakeDetails = false;
 	private boolean someItemSelected = false;
+	private boolean movedToNewPlayer = true;
 	private int makeOption = 0;
 
 	private ICommandable currentSelectedEntity;
@@ -123,6 +124,8 @@ public class Game {
 		for (ICommandable commandable : playerEntities) {
 		    commandable.doTurn();
         }
+		centerOnCurrentTypeInstance();
+		movedToNewPlayer = false;
     }
 
 	public int getTurnNum() {
@@ -371,6 +374,14 @@ public class Game {
 		}
 		structureOverviewVisible = !structureOverviewVisible;
 		
+	}
+	
+	public void setMovedToNewPlayer(boolean movedToNewPlayer) {
+		this.movedToNewPlayer = movedToNewPlayer;
+	}
+	
+	public boolean getMovedToNewPlayer() {
+		return this.movedToNewPlayer;
 	}
 	
 	public boolean getUnitOverviewVisible() {
