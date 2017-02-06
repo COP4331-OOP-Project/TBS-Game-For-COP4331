@@ -218,16 +218,16 @@ public class Game {
     }
 
 	protected void cycleTypeInstanceForward() {
-	    this.resetControls();
+		this.resetControls();
 	    TypeController typeController = this.currentModeController.getTypeController();
         TypeInstanceController typeInstanceController = typeController.getTypeInstanceController();
         Enum currentType = typeController.getType();
         ICommandable selectedEntity = typeInstanceController.cycleForward(currentType);
         if (selectedEntity != null) {
+        	someItemSelected = true;
 	        this.currentSelectedEntity = selectedEntity;
 	        Location newLocation = selectedEntity.getLocation();
 		    this.changeCenterCoordinates(newLocation);
-	        someItemSelected = true;
         } else {
         	someItemSelected = false;
         }
@@ -239,9 +239,14 @@ public class Game {
         TypeInstanceController typeInstanceController = typeController.getTypeInstanceController();
         Enum currentType = typeController.getType();
         ICommandable selectedEntity = typeInstanceController.cycleBackward(currentType);
-        this.currentSelectedEntity = selectedEntity;
-        Location newLocation = selectedEntity.getLocation();
-        this.changeCenterCoordinates(newLocation);
+        if (selectedEntity != null) {
+        	someItemSelected = true;
+	        this.currentSelectedEntity = selectedEntity;
+	        Location newLocation = selectedEntity.getLocation();
+		    this.changeCenterCoordinates(newLocation);
+        } else {
+        	someItemSelected = false;
+        }
 	}
 
 	protected void changeCenterCoordinates(Location loc) {

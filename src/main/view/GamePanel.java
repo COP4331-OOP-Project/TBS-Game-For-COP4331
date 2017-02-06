@@ -164,7 +164,9 @@ public class GamePanel extends Panel {
 				}
 			}
 			if (game.getCurrentMode() == ModeEnum.UNIT && unitSelected != -1
-				&& game.getCurrentPlayer().getPlayerID() == player) {
+				&& game.getCurrentPlayer().getPlayerID() == player &&
+				!(game.getGameBoard().gameMap[playerUnits.get(unitSelected).getLocation().getX()]
+						[playerUnits.get(unitSelected).getLocation().getY()]).containsArmy) {
 				game.setSelectedUnit(unitSelected);
 				drawUnit(playerUnits.get(unitSelected).getLocation().getX(),
 						playerUnits.get(unitSelected).getLocation().getY(),
@@ -172,6 +174,13 @@ public class GamePanel extends Panel {
 						playerUnits.get(unitSelected).getOwnerID(),
 					0);
 				drawSelectedItem();
+			} else if (game.getCurrentMode() == ModeEnum.UNIT && unitSelected != -1
+				&& game.getCurrentPlayer().getPlayerID() == player &&
+				(game.getGameBoard().gameMap[playerUnits.get(unitSelected).getLocation().getX()]
+						[playerUnits.get(unitSelected).getLocation().getY()]).containsArmy) {
+				drawStaticTileElement(playerUnits.get(unitSelected).getLocation().getX(),
+						playerUnits.get(unitSelected).getLocation().getY(),
+						"ARMY_SELECTED");	
 			} else if (game.getCurrentPlayer().getPlayerID() == player){
 				unitSelected = -1;
 				game.setSelectedUnit(-1);
@@ -217,7 +226,7 @@ public class GamePanel extends Panel {
 			int numOfUnits) {
 		AffineTransform currentRotation = g2d.getTransform();
 		rotateOnTile(x, y, rotation);
-			switch (player) {
+		switch (player) {
 			case 0:
 				drawStaticTileElement(x, y, "ARMY_O");
 				break;
