@@ -153,10 +153,11 @@ public class GameBoard {
 
         // Find instance type and call remove command on unit
         if(actor instanceof Army){
-            ((Army) actor).getBattleGroup().clear();
-            ((Army) actor).getReinforcements().clear();
-            ((Army) actor).groupDecomission(this);
-            ((Army) actor).getAllUnits().clear();
+            Army army = ((Army) actor);
+            army.getBattleGroup().clear();
+            army.getReinforcements().clear();
+            army.groupDecomission(this);
+            army.getAllUnits().clear();
             handleDisbandArmyCmd(((Army) actor));
         }
         else if(actor instanceof Unit){
