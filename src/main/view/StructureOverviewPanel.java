@@ -20,7 +20,7 @@ public class StructureOverviewPanel extends OverviewPanel{
 		g.setFont(titleFont);
 		g.drawString("Structure Overview", width/2 - 370, height/2 - 245);
 		g.setFont(plainFont);
-		for (int i = 0; i < game.getCurrentPlayer().getStructureCount(); i++) {
+		for (int i = 0; i < game.getCurrentPlayer().getBases().size(); i++) {
 			g.drawString("Base", width/2 - 370, height/2 + (i * 30) - 200);
 		}
 		g.setColor(oldColor);

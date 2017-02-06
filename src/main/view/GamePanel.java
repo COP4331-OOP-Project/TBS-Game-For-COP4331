@@ -68,21 +68,12 @@ public class GamePanel extends Panel {
 		this.height = height;
 		if (isCentering)
 			continueCentering();
-		checkCenteringCoordinates();
 		drawTiles();
 		drawMovingTiles();
 		drawBases();
-		if (game.getCurrentMode() == ModeEnum.UNIT) {
-			drawArmies();
-			drawUnits();
-		}
-		if (game.getCurrentMode() == ModeEnum.ARMY) {
-			drawUnits();
-			drawArmies();
-		} else {
-			drawArmies();
-			drawUnits();
-		}
+		drawArmies();
+		drawUnits();
+		checkCenteringCoordinates();
 		//drawSelectedItem();
 	}
 
@@ -137,6 +128,7 @@ public class GamePanel extends Panel {
 						player, game.getPlayer(player).getBases().get(i).getRotation());
 			}
 		}
+		drawSelectedItem();
 	}
 
 	private void drawUnits() {
@@ -166,7 +158,8 @@ public class GamePanel extends Panel {
 						playerUnits.get(i).getOwnerID(),
 						0);
 			}
-			if (game.getCurrentMode() == ModeEnum.UNIT && unitSelected != -1) {
+			if (game.getCurrentMode() == ModeEnum.UNIT && unitSelected != -1
+				&& game.getCurrentPlayer().getPlayerID() == player) {
 				game.setSelectedUnit(unitSelected);
 				drawUnit(playerUnits.get(unitSelected).getLocation().getX(),
 						playerUnits.get(unitSelected).getLocation().getY(),
