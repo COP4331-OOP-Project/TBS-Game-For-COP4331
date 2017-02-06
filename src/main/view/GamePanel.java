@@ -53,6 +53,7 @@ public class GamePanel extends Panel {
 	Random rand = new Random(); 
 	Font armyFont = new Font("Lucida Sans", Font.BOLD, 40);
 	Font tileFont = new Font("Lucida Sans", Font.PLAIN, 20);
+	Font numFont = new Font("Lucida Sans", Font.BOLD, 20);
 	private static final int NUM_TILES = 20; 
 	int[][] tiles = new int[NUM_TILES][NUM_TILES];
 	//END TEST ELEMENTS
@@ -179,16 +180,22 @@ public class GamePanel extends Panel {
 	 * that draw all the tiles
 	 */
 	private void drawTiles() {
+		Color oldColor = g2d.getColor();
+		Font oldFont = g2d.getFont();
+		g2d.setFont(numFont);
+		g2d.setColor(Color.BLACK);
 		for (int i = 0; i < game.getGameBoard().gameMap.length; i++) {
 			for (int j = 0; j < game.getGameBoard().gameMap[i].length; j++) {
 				drawTile(i, j, game.getGameBoard().gameMap[i][j].getTileType());
-				if (game.getGameBoard().gameMap[j][i].getUnits().size() > 1) {
-					g2d.drawString("" + game.getGameBoard().gameMap[j][i].getUnits().size()
-							, offX(tileLocation(i)), offY(tileLocation(j)));
+				if (game.getGameBoard().gameMap[i][j].getUnits().size() > 1) {
+					g2d.drawString("" + game.getGameBoard().gameMap[i][j].getUnits().size()
+							,offX(tileLocation(i)) + 5, offY(tileLocation(j)) + 22);
 				}
 					
 			}
 		}
+		g2d.setColor(oldColor);
+		g2d.setFont(oldFont);
 	}
 	
 	private void drawArmies() {
