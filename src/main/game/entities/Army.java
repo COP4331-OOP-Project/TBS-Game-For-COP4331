@@ -233,6 +233,7 @@ public class Army{
     public ArrayList<Unit> getBattleGroup() { return battleGroup; }
     public ArrayList<Unit> getReinforcements() { return reinforcements; }
     public ArrayList<Unit> getAllUnits(){return allUnits;}
+    public Queue<Command> getCommands(){return commands;}
     public float getResourceCost(){return resourceCost;}
 
     public void setArmyID(int armyID)

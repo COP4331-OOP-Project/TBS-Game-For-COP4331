@@ -188,37 +188,37 @@ public class RallyPoint implements ICommandable {
 
 	// TODO: implement ICommandable functions for rallyPoint
 	public void addCommandToQueue(Command command) {
-
+		army.addCommandToQueue(command);
 	}
 	public void doTurn() {
-
+		army.doTurn();
 	}
 	public Command nextCommand() {
-		return null;
+		return army.getCommands().poll();
 	}
 	public Command peekCommand() {
-		return null;
+		return army.getCommands().peek();
 	}
 	public boolean isQueueEmpty() {
-		return false;
+		return army.isQueueEmpty();
 	}
 	public void cancelQueuedCommands() {
-
+		army.cancelQueuedCommands();
 	}
 	public void powerDown() {
-
+		army.powerDown();
 	}
 	public void powerUp() {
-
+		army.powerUp();
 	}
 	public void combatState() {
-
+		army.setPowerState(PowerState.COMBAT);
 	}
 	public void standby() {
-
+		System.out.println("Army cannot be on standby");
 	}
 	public void decommissionEntity() {
-
+		army.groupDecomission(gameBoard);
 	}
 	public int getOwnerID() {
 		return -1;
