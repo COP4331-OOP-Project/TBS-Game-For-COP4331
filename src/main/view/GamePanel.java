@@ -169,7 +169,7 @@ public class GamePanel extends Panel {
 //						player, game.getPlayer(player).getBases().get(i).getRotation());
 //			}
 //		}
-		drawSelectedItem();
+		drawSelectedItem(false);
 
 		if (game.getCurrentPlayer().getBases().size() > 0)
 			drawSelectedItem(false);
@@ -185,7 +185,9 @@ public class GamePanel extends Panel {
 						}
 					}
 				}
-				
+			}
+		}
+				/*
 				if (!(game.getGameBoard().gameMap[playerUnits.get(i).getLocation().getX()]
 						[playerUnits.get(i).getLocation().getY()]).containsArmy) {
 					drawUnit(playerUnits.get(i).getLocation().getX(),
@@ -216,7 +218,8 @@ public class GamePanel extends Panel {
 				unitSelected = -1;
 				game.setSelectedUnit(-1);
 			}
-		}
+			*/
+		//}
 //		int unitSelected = -1;
 //		for (int player = 0; player < NUM_OF_PLAYERS; player++) {
 //			playerUnits = game.getPlayer(player).getAllUnit();
