@@ -35,7 +35,6 @@ public class UnitDetailsPanel extends DetailsPanel{
 		g.drawString("Defense: ", 430, height - 10);
 		g.drawString("Armor: ", 830, height - 35);
 		g.drawString("Upkeep: ", 830, height - 10);
-		System.out.println(game.getSelectedUnit());
 		if (game.getSelectedUnit() != -1) {
 			if (game.getCurrentType() == UnitEnum.EXPLORER) {
 				g.drawString("Explorer", 130, height - 35);
