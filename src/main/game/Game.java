@@ -4,6 +4,9 @@ import controls.*;
 import controls.command.CommandController;
 import controls.command.CommandEnum;
 import controls.typeInstance.TypeInstanceController;
+import game.commands.Command;
+import game.commands.MakeCommand;
+import game.commands.MoveCommand;
 import game.entities.ICommandable;
 import game.entities.RallyPoint;
 import game.gameboard.GameBoard;
@@ -22,6 +25,9 @@ public class Game {
 	private GameBoard gBoard;
 	private Player nextPlayer;
 	private int turnNum;
+	private ArrayList<MoveCommand> moveCommands;
+	private Location lastMoveLocation;
+	private ArrayList<Location> moveLocations;
 
 
 
@@ -52,7 +58,13 @@ public class Game {
 		gBoard.getPlayer(0).addRallyPoint(new RallyPoint(new Location(1,1), this.gBoard, player0.getPlayerID()));
         this.currentModeController = new ModeController(gBoard.getPlayer(0));
         this.centerCoordinatesUpdated = false;
+        this.moveCommands = new ArrayList<>();
+        this.moveLocations = new ArrayList<>();
 	}
+
+	public ArrayList<Location> getMoveLocations() {
+        return this.moveLocations;
+    }
 
 	public void updateGame() { //This is called 20 times per second
 
@@ -87,6 +99,14 @@ public class Game {
 			getGameBoard().handleBandArmyCmd(players.get(0).getExplorers());
         }
         this.currentModeController = new ModeController(this.currentPlayer);
+
+		ArrayList<ICommandable> playerEntities = new ArrayList<>(this.currentPlayer.getAllUnit());
+		playerEntities.addAll(this.currentPlayer.getArmyRallyPoint());
+		playerEntities.addAll(this.currentPlayer.getBases());
+
+		for (ICommandable commandable : playerEntities) {
+		    commandable.doTurn();
+        }
     }
 
 	public int getTurnNum() {
@@ -121,7 +141,7 @@ public class Game {
 		return this.currentCommand;
 	}
 
-	private void centerOnCurrentTypeInstance() {
+	public void centerOnCurrentTypeInstance() {
         TypeController typeController = this.currentModeController.getTypeController();
         TypeInstanceController typeInstanceController = typeController.getTypeInstanceController();
         ICommandable selectedEntity = typeInstanceController.getTypeInstance();
@@ -204,5 +224,43 @@ public class Game {
 
     public void setCenterCoordinatesUpdated(boolean updated) {
 	    this.centerCoordinatesUpdated = updated;
+    }
+
+
+    public void addMoveToList(int direction) {
+	    MoveCommand command = new MoveCommand<>(this.gBoard, this.currentSelectedEntity, direction, 1);
+	    this.moveCommands.add(command);
+	    Location newLocation = this.lastMoveLocation.directionLocation(direction);
+	    this.moveLocations.add(newLocation);
+	    this.lastMoveLocation = newLocation;
+    }
+
+    public void executeMoveCommand() {
+	    for (MoveCommand command : this.moveCommands) {
+	        this.currentSelectedEntity.addCommandToQueue(command);
+        }
+        this.moveCommands = new ArrayList<>();
+        this.moveLocations = new ArrayList<>();
+
+        System.out.println("Executed move command");
+    }
+//    MAKE, HEAL, ATTACK, DEFEND, POWER_UP, POWER_DOWN, CANCEL_COMMAND_QUEUE, DECOMISSION, MOVE;
+
+    public CommandEnum executeCommand() {
+	    switch(this.currentCommand) {
+            case MOVE: {
+                this.moveCommands = new ArrayList<>();
+                this.moveLocations = new ArrayList<>();
+                this.lastMoveLocation = this.currentSelectedEntity.getLocation();
+                this.moveLocations.add(this.lastMoveLocation);
+                return CommandEnum.MOVE;
+            }
+            default:
+                return null;
+        }
+    }
+
+    public void centerOnLastMoveLocation() {
+	    this.changeCenterCoordinates(this.lastMoveLocation);
     }
 }
