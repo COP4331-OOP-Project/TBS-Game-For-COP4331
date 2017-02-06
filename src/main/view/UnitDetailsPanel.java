@@ -28,7 +28,7 @@ public class UnitDetailsPanel extends DetailsPanel{
 		Font old = g.getFont();
 		//System.out.println(game.getCurrentType());
 		g.setFont(detailsFont);
-		g.drawString("unit Details", 10, height - 65);
+		g.drawString("Unit Details", 10, height - 65);
 		g.drawString("Type: ", 30, height - 35);
 		g.drawString("Health: ", 30, height - 10);
 		g.drawString("Attack: ", 430, height - 35);
