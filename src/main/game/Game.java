@@ -55,7 +55,6 @@ public class Game {
 		turnNum = 1;
 		this.currentPlayer = player0;
 		gBoard = new GameBoard(players);
-		gBoard.getPlayer(0).addRallyPoint(new RallyPoint(new Location(1,1), this.gBoard, player0.getPlayerID()));
         this.currentModeController = new ModeController(gBoard.getPlayer(0));
         this.centerCoordinatesUpdated = false;
         this.moveCommands = new ArrayList<>();
