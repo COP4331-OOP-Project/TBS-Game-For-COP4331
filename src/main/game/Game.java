@@ -103,6 +103,10 @@ public class Game {
 		ArrayList<ICommandable> playerEntities = new ArrayList<>(this.currentPlayer.getAllUnit());
 		playerEntities.addAll(this.currentPlayer.getArmyRallyPoint());
 		playerEntities.addAll(this.currentPlayer.getBases());
+
+		for (ICommandable commandable : playerEntities) {
+		    commandable.doTurn();
+        }
     }
 
 	public int getTurnNum() {
