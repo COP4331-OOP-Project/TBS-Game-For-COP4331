@@ -169,7 +169,7 @@ public class Game {
         this.currentSelectedEntity = selectedEntity;
     }
 
-    private void resetControls() {
+    public void resetControls() {
         this.moveCommands = new ArrayList<>();
         this.moveLocations = new ArrayList<>();
         this.currentSelectedEntity = null;
@@ -264,8 +264,20 @@ public class Game {
     }
 
     public void executeMoveCommand() {
-	    for (MoveCommand command : this.moveCommands) {
-	        this.currentSelectedEntity.addCommandToQueue(command);
+	    if (this.currentSelectedEntity instanceof RallyPoint) {
+	        Tile currentTile = this.gBoard.getTileWithLocation(this.currentSelectedEntity.getLocation());
+	        currentTile.getArmies().clear();
+	        currentTile.containsArmy = false;
+	        currentTile.getRallyPoints().clear();
+	        currentTile.containsRallyPoint = false;
+            RallyPoint rp = (RallyPoint) this.currentSelectedEntity;
+            Tile rallyPointTile = this.gBoard.getTileWithLocation(this.lastMoveLocation);
+            rallyPointTile.addRallyPoint(rp);
+	        this.centerOnCurrentTypeInstance();
+        } else {
+            for (MoveCommand command : this.moveCommands) {
+                this.currentSelectedEntity.addCommandToQueue(command);
+            }
         }
         this.moveCommands = new ArrayList<>();
         this.moveLocations = new ArrayList<>();
@@ -362,9 +374,11 @@ public class Game {
 	    ArrayList<Unit> tileUnits = currentTile.getUnits();
 	    RallyPoint newRallyPoint = new RallyPoint(currentLocation, this.gBoard, this.currentPlayer.getPlayerID());
 	    Army newArmy = new Army(this.currentPlayer.getPlayerID(), newRallyPoint, tileUnits);
+	    newRallyPoint.setArmy(newArmy);
 	    currentTile.removeAllUnits();
 	    currentTile.addRallyPoint(newRallyPoint);
 	    currentTile.addArmy(newArmy);
 	    this.currentPlayer.addArmy(newArmy);
+	    this.currentPlayer.addRallyPoint(newRallyPoint);
     }
 }

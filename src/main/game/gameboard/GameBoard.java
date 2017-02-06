@@ -136,6 +136,10 @@ public class GameBoard {
         }
     }
 
+    public Tile[][] getTiles() {
+        return this.gameMap;
+    }
+
     // Get entity with given player's entity id
     private <T> T getEntityWithID() {
        //Returns the entity base on the iD, may not be implemented - Shen

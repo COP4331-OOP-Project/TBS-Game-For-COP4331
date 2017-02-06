@@ -128,6 +128,16 @@ public class Tile implements ITileAccessors {
         }
     }
 
+    public boolean containsBattleGroup() {
+        boolean hasBattleGroup = false;
+        for (RallyPoint rallyPoint : this.getRallyPoints()) {
+            if (rallyPoint.hasBattleGroupAtLocation()) {
+                hasBattleGroup = true;
+            }
+        }
+        return hasBattleGroup;
+    }
+
     // Get all armies from Tile
     public ArrayList<Army> getArmies(){
         return armies;
