@@ -216,7 +216,7 @@ public class RallyPoint implements ICommandable {
 		army.setPowerState(PowerState.COMBAT);
 	}
 	public void standby() {
-		System.out.println("Army cannot be on standby");
+		System.out.println("army cannot be on standby");
 	}
 	public void decommissionEntity() {
 		army.groupDecomission(gameBoard);

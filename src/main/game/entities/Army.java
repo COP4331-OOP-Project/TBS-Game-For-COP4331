@@ -12,17 +12,17 @@ import java.util.*;
 
 public class Army{
 
-    private int armyID;                                 // Army unique id
+    private int armyID;                                 // army unique id
     private int ownerID;                                // Player id
     private int rotation = 0;
-    private Location location;                          // Army location
-    private RallyPoint rp;                              // Army Rally Point
-    private PowerState powerState;                      // Army power state
+    private Location location;                          // army location
+    private RallyPoint rp;                              // army Rally Point
+    private PowerState powerState;                      // army power state
 
     private ArrayList<Unit> battleGroup;                // Active battlegroup units
     private ArrayList<Unit> reinforcements;             // Reinforcing units
     private ArrayList<Unit> allUnits;                   // All Units in the army
-    private Queue<Command> queue;                // Army commands
+    private Queue<Command> queue;                // army commands
 
     // Constructor
     public Army(int playerId, RallyPoint rp, ArrayList<? extends Unit> units) {
