@@ -77,7 +77,6 @@ public class Game {
     }
 
 	public void updateGame() { //This is called 20 times per second
-
 	}
 
 	public void startGame() {
@@ -86,6 +85,10 @@ public class Game {
 
 	public void endGame() {
 
+	}
+	
+	public void waitASecond() {
+		
 	}
 
 	// Assign showing the make details panel
@@ -413,4 +416,6 @@ public class Game {
 	    this.currentPlayer.addArmy(newArmy);
 	    this.currentPlayer.addRallyPoint(newRallyPoint);
     }
+	
+	
 }
