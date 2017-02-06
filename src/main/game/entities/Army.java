@@ -25,9 +25,8 @@ public class Army{
     private Queue<Command> queue;                // Army commands
 
     // Constructor
-    public Army(Location loc, int playerId, RallyPoint rp, ArrayList<? extends Unit> units) {
-
-        this.location = loc;                            // Set army location
+    public Army(int playerId, RallyPoint rp, ArrayList<? extends Unit> units) {
+        this.location = rp.getLocation();                            // Set army location
         this.ownerID = playerId;                        // Set player id
         this.rp = rp;                                   // Set rally point
         this.queue = new LinkedList<>();
@@ -92,6 +91,7 @@ public class Army{
 
     // Update battleGroup and reinforcements to make sure all units in correct spot
     public void updateArmy(){
+        this.location=rp.getLocation();
         for(Iterator<Unit> iter = battleGroup.iterator(); iter.hasNext();){
             //If battlegroup unit not on rallypoint move to reinforcements
             Unit checkUnit = iter.next();
