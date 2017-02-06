@@ -24,12 +24,11 @@ public class Game {
 	private ModeController currentModeController;
 	private GameBoard gBoard;
 	private Player nextPlayer;
+	private int selectedUnit = -1; //For rendering only
 	private int turnNum;
 	private ArrayList<MoveCommand> moveCommands;
 	private Location lastMoveLocation;
 	private ArrayList<Location> moveLocations;
-
-
 
     private Location centerCoordinates;
 	private boolean centerCoordinatesUpdated;
@@ -226,7 +225,6 @@ public class Game {
 	    this.centerCoordinatesUpdated = updated;
     }
 
-
     public void addMoveToList(int direction) {
 	    MoveCommand command = new MoveCommand<>(this.gBoard, this.currentSelectedEntity, direction, 1);
 	    this.moveCommands.add(command);
@@ -262,5 +260,13 @@ public class Game {
 
     public void centerOnLastMoveLocation() {
 	    this.changeCenterCoordinates(this.lastMoveLocation);
+    }
+    
+    public void setSelectedUnit(int selectedUnit) {
+    	this.selectedUnit = selectedUnit;
+    }
+    
+    public int getSelectedUnit() {
+    	return selectedUnit;
     }
 }
