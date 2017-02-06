@@ -153,7 +153,7 @@ public class GamePanel extends Panel {
 							game.getCurrentType() == UnitEnum.COLONIST)
 						unitSelected = i;
 				}
-				if ((game.getGameBoard().gameMap[playerUnits.get(i).getLocation().getX()]
+				if (!(game.getGameBoard().gameMap[playerUnits.get(i).getLocation().getX()]
 						[playerUnits.get(i).getLocation().getY()]).containsArmy) {
 					drawUnit(playerUnits.get(i).getLocation().getX(),
 							playerUnits.get(i).getLocation().getY(),
