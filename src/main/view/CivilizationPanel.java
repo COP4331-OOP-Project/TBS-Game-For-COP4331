@@ -68,7 +68,7 @@ public class CivilizationPanel extends Panel{
 			commandString = "None";
 		}
 		
-		g.drawString("Current Command: " + commandString, width - 470, 60);
+		g.drawString("Current Command: " + commandString, width - 470, 35);
 		g.setFont(oldFont);
 		
 	}

@@ -224,10 +224,10 @@ public class Game {
         Enum currentType = typeController.getType();
         ICommandable selectedEntity = typeInstanceController.cycleForward(currentType);
         if (selectedEntity != null) {
-	        someItemSelected = true;
 	        this.currentSelectedEntity = selectedEntity;
 	        Location newLocation = selectedEntity.getLocation();
 		    this.changeCenterCoordinates(newLocation);
+	        someItemSelected = true;
         } else {
         	someItemSelected = false;
         }
@@ -276,7 +276,7 @@ public class Game {
         this.moveCommands = new ArrayList<>();
         this.moveLocations = new ArrayList<>();
 
-        System.out.println("Executed move command");
+        log.info("Executed move command");
     }
 
 	// Create chosen entity from selected command
