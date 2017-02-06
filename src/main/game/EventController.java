@@ -1,6 +1,10 @@
 package game;
 
 import controls.command.CommandEnum;
+import controls.structure.StructureEnum;
+import controls.unit.UnitEnum;
+import game.entities.structures.Structure;
+import game.entities.units.Unit;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -13,6 +17,7 @@ public class EventController implements KeyListener{
 	Game game;
 	private final static Logger log = LogManager.getLogger(EventController.class);
 	private boolean gettingMoves = false;
+	private boolean gettingMakeList = false;
 
 	public EventController(Game game) {
 		this.game = game;
@@ -20,6 +25,7 @@ public class EventController implements KeyListener{
 
 	private void controlDownActions(KeyEvent e) {
 		int key = e.getKeyCode();
+		game.setShowingMakeDetails(false);
 		switch(key) {
 			case KeyEvent.VK_UP:
 				log.debug("CTRL + Up key pressed");
@@ -67,6 +73,8 @@ public class EventController implements KeyListener{
 				CommandEnum command = this.game.executeCommand();
 				if (command == CommandEnum.MOVE) {
 					this.gettingMoves = true;
+				} else if (command == CommandEnum.MAKE) {
+					this.gettingMakeList = true;
 				}
 				break;
             case KeyEvent.VK_NUMPAD5:
@@ -138,18 +146,47 @@ public class EventController implements KeyListener{
 		}
 	}
 
+	// Handle cycle through make list
+	public void getMakeLIst(KeyEvent e) {
+		int key = e.getKeyCode();
+
+		// Cycle key mode choices for
+		switch (key) {
+			case KeyEvent.VK_UP:
+				log.debug("UP Key pressed (Make)");
+				this.game.cycleMakeOptionUp();
+				break;
+			case KeyEvent.VK_DOWN:
+				log.debug("DOWN Key pressed (Make)");
+				this.game.cycleMakeOptionDown();
+				break;
+			case KeyEvent.VK_ENTER:
+				log.debug("Enter pressed");
+				if (game.getCurrentType() == UnitEnum.COLONIST) game.executeMakeCommand(UnitEnum.COLONIST);
+				else game.executeMakeCommand(StructureEnum.BASE);
+				this.gettingMakeList = false;
+				this.game.setShowingMakeDetails(false);
+				break;
+		}
+
+	}
+
 	@Override
 	public void keyReleased(KeyEvent e) {
 		if (this.gettingMoves) {
 			this.getMoves(e);
 		}
 
-		if (e.isControlDown()) {
+		else if (this.gettingMakeList) {
+			this.getMakeLIst(e);
+		}
+
+		else if (e.isControlDown()) {
 			controlDownActions(e);
 			return;
 		}
 
-		normalKeyPressActions(e);
+		else normalKeyPressActions(e);
 	}
 
 	@Override

@@ -1,19 +1,26 @@
 package game;
 
+import com.sun.tools.javac.code.Attribute;
 import controls.*;
 import controls.command.CommandController;
 import controls.command.CommandEnum;
+import controls.structure.StructureEnum;
 import controls.typeInstance.TypeInstanceController;
+import controls.unit.UnitEnum;
 import game.commands.Command;
 import game.commands.MakeCommand;
 import game.commands.MoveCommand;
 import game.entities.ICommandable;
 import game.entities.RallyPoint;
+import game.entities.structures.Structure;
+import game.entities.units.Colonist;
+import game.entities.units.Unit;
 import game.gameboard.GameBoard;
 import game.gameboard.Location;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.sql.Struct;
 import java.util.ArrayList;
 
 public class Game {
@@ -34,6 +41,9 @@ public class Game {
 	private boolean centerCoordinatesUpdated;
 	private boolean unitOverviewVisible = false;
 	private boolean structureOverviewVisible = false;
+	private boolean showingMakeDetails = false;
+	private int makeOption = 0;
+
 	private ICommandable currentSelectedEntity;
 	private CommandEnum currentCommand;
     private final static Logger log = LogManager.getLogger(CommandController.class);
@@ -76,6 +86,13 @@ public class Game {
 	public void endGame() {
 
 	}
+
+	// Assign showing the make details panel
+	public boolean isShowingMakeDetails() { return showingMakeDetails; }
+	public void setShowingMakeDetails(boolean val) {
+    	this.makeOption = 0;
+    	this.showingMakeDetails = val;
+    }
 
 	public boolean isFinished() {
 		//TODO: determine game is finished conditions
@@ -243,6 +260,35 @@ public class Game {
 
         System.out.println("Executed move command");
     }
+
+	// Create chosen entity from selected command
+    public void executeMakeCommand(Enum type) {
+
+		if (type instanceof StructureEnum) {
+			MakeCommand<Structure> makeCmd = new MakeCommand<Structure>(this.getGameBoard(), (Structure) this.currentSelectedEntity, 1, "base");
+		}
+		else if (type instanceof UnitEnum) {
+			MakeCommand<Unit> makeCmd = new MakeCommand<Unit>(this.getGameBoard(), (Unit) this.currentSelectedEntity, 1, "base");
+			this.currentSelectedEntity.addCommandToQueue(makeCmd);
+		}
+
+
+	}
+
+	public int getCurrentMakeOption() {
+		return makeOption;
+	}
+
+	public void cycleMakeOptionUp() {
+		this.makeOption--;
+		if (this.makeOption < 0) this.makeOption = 3;
+	}
+
+	public void cycleMakeOptionDown() {
+		this.makeOption++;
+		this.makeOption%=4;
+	}
+
 //    MAKE, HEAL, ATTACK, DEFEND, POWER_UP, POWER_DOWN, CANCEL_COMMAND_QUEUE, DECOMISSION, MOVE;
 
     public CommandEnum executeCommand() {
@@ -254,6 +300,10 @@ public class Game {
                 this.moveLocations.add(this.lastMoveLocation);
                 return CommandEnum.MOVE;
             }
+			case MAKE: {
+				this.showingMakeDetails = true;
+				return CommandEnum.MAKE;
+			}
             default:
                 return null;
         }
