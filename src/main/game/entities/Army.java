@@ -18,7 +18,6 @@ public class Army{
     private Location location;                          // Army location
     private RallyPoint rp;                              // Army Rally Point
     private PowerState powerState;                      // Army power state
-    private float resourceCost;                         // Total army resource cost
 
     private ArrayList<Unit> battleGroup;                // Active battlegroup units
     private ArrayList<Unit> reinforcements;             // Reinforcing units
@@ -128,14 +127,6 @@ public class Army{
         }
     }
 
-    //Figure out total resource cost for army
-    public void totalResourceCost(){
-        float total=0;
-        for(int i = 0; i<allUnits.size();i++){
-            total=total+allUnits.get(i).getResourceCost();
-        }
-        this.resourceCost=total;
-    }
 
     // Accessors
 
@@ -226,7 +217,6 @@ public class Army{
     public ArrayList<Unit> getReinforcements() { return reinforcements; }
     public ArrayList<Unit> getAllUnits(){return allUnits;}
     public Queue<Command> getCommands(){return queue;}
-    public float getResourceCost(){return resourceCost;}
 
     public void setArmyID(int armyID)
     {
