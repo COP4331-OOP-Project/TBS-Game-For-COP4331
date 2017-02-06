@@ -42,7 +42,7 @@ public interface ITileAccessors {
     void setStructure(Structure structure);
 
     // Interaction handling
-    void attackOccupants(int damage);
+    void attackOccupants(int damage, int direction);
     void healOccupants(int value);
 
 

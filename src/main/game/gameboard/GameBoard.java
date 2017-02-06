@@ -244,7 +244,7 @@ public class GameBoard {
 
             Tile actorTile = getTileWithLocation(struct.getLocation());
             Tile targetTile = getAdjacentTile(actorTile, direction);
-            targetTile.attackOccupants(((Structure) actor).getAttackDamage());
+            targetTile.attackOccupants(((Structure) actor).getAttackDamage(), direction);
 
             // If queue is empty, pass another attack command for next turn
             if (struct.isQueueEmpty()) {
@@ -258,14 +258,14 @@ public class GameBoard {
             Tile actorTile = getTileWithLocation(unit.getLocation());
             Tile targetTile = getAdjacentTile(actorTile, direction);
             if(targetTile.hasEnemyUnit(unit.getOwnerID())){
-                targetTile.attackOccupants(unit.getAttackDamage());
+                targetTile.attackOccupants(unit.getAttackDamage(),direction);
                 for(Unit u : targetTile.getUnits()){
                     if(u.getHealth()<=0){
                         handleDecommissionCmd(u);
                     }
                 }
             }
-
+            unit.setDefenddirection(-1);
         }
 
     }
@@ -289,7 +289,8 @@ public class GameBoard {
 
         }
         else if(actor instanceof Unit) {
-            System.out.println("unit can't defend");
+            Unit unit = (Unit) actor;
+            unit.setDefenddirection(direction);
         }
     }
 
@@ -333,6 +334,8 @@ public class GameBoard {
                 actorTile.removeUnit(unit.getUnitID());
                 targetTile.addUnit(unit);
             }
+
+            unit.setDefenddirection(-1);
         }
         else if (actor instanceof Structure) {
             System.out.println("structure cannot move");

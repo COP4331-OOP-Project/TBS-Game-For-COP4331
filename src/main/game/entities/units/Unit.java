@@ -27,6 +27,7 @@ public abstract class Unit implements ICommandable
   private int speed;
   private float upkeep;
   private int baseResourceCost;
+  private int defenddirection;
 
   protected Queue<Command> queue = new LinkedList<Command>(); // unit command queue
 
@@ -35,6 +36,7 @@ public abstract class Unit implements ICommandable
     this.location = loc;
     this.ownerID = ownerID;
     this.unitType = unitType;
+    this.defenddirection = -1;
     setPowerState(PowerState.POWERED_UP);
   }
 
@@ -63,6 +65,7 @@ public abstract class Unit implements ICommandable
   public int getUnitID(){ return unitID; }
   public float getResourceCost(){ return (baseResourceCost * upkeep); }
   public Queue<Command> getQueue(){ return queue; }
+  public int getDefenddirection(){return defenddirection;}
 
 
   /* Mutators */
@@ -78,6 +81,7 @@ public abstract class Unit implements ICommandable
   public void setOwnerID(int o){ this.ownerID = o; }
   public void setUnitType(int u){ this.unitType = u; }
   public void setUnitID(int id){ this.unitID = id; }
+  public void setDefenddirection(int defenddirection) {this.defenddirection = defenddirection;}
 
   public void printUnit()
   {

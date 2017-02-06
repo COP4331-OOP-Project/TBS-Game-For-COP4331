@@ -147,12 +147,19 @@ public class Tile implements ITileAccessors {
     }
 
     // Damage all units and structure on tile
-    public void attackOccupants(int damage) {
+    public void attackOccupants(int damage, int direction) {
 
         // Damage all units
         if(containsUnit) {
+            int reduction=0;
             for (Unit u : units) {
-                u.setHealth(u.getHealth() - damage);
+                reduction=u.getArmor();
+                if((direction+180)%360==u.getDefenddirection()){
+                    reduction=reduction+u.getDefenseDamage();
+                }
+                if(damage-reduction>0) {
+                    u.setHealth(u.getHealth() - damage);
+                }
             }
         }
         // Damage structure
