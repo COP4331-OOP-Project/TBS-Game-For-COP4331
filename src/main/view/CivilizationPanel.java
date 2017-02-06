@@ -7,6 +7,9 @@ import game.Game;
 import game.Player;
 
 import java.awt.Graphics;
+
+import controls.command.CommandEnum;
+
 import java.awt.Font;
 
 public class CivilizationPanel extends Panel{
@@ -35,31 +38,31 @@ public class CivilizationPanel extends Panel{
 		g.setFont(currentCommandFont);
 		String commandString = "";
 		if (game.getCurrentCommand() != null && 
-				game.getCurrentCommand().toString() == "MAKE") {
+				game.getCurrentCommand() == CommandEnum.MAKE) {
 			commandString = "Make";
 		} else if (game.getCurrentCommand() != null && 
-				game.getCurrentCommand().toString() == "HEAL") {
+				game.getCurrentCommand() == CommandEnum.HEAL) {
 			commandString = "Heal";
 		} else if (game.getCurrentCommand() != null && 
-				game.getCurrentCommand().toString() == "ATTACK") {
+				game.getCurrentCommand() == CommandEnum.ATTACK) {
 			commandString = "Attack";
 		} else if (game.getCurrentCommand() != null && 
-				game.getCurrentCommand().toString() == "DEFEND") {
+				game.getCurrentCommand() == CommandEnum.DEFEND) {
 			commandString = "Defend";
 		} else if (game.getCurrentCommand() != null && 
-				game.getCurrentCommand().toString() == "POWER_UP") {
+				game.getCurrentCommand() == CommandEnum.POWER_UP) {
 			commandString = "Power Up";
 		} else if (game.getCurrentCommand() != null && 
-				game.getCurrentCommand().toString() == "POWER_DOWN") {
+				game.getCurrentCommand() == CommandEnum.POWER_DOWN) {
 			commandString = "Power Down";
 		} else if (game.getCurrentCommand() != null && 
-				game.getCurrentCommand().toString() == "CANCEL_COMMAND_QUEUE") {
+				game.getCurrentCommand() == CommandEnum.CANCEL_COMMAND_QUEUE) {
 			commandString = "Cancel Command Queue";
 		} else if (game.getCurrentCommand() != null && 
-				game.getCurrentCommand().toString() == "DECOMISSION") {
+				game.getCurrentCommand() == CommandEnum.DECOMISSION) {
 			commandString = "Decomission";
 		} else if (game.getCurrentCommand() != null && 
-				game.getCurrentCommand().toString() == "MOVE") {
+				game.getCurrentCommand() == CommandEnum.MOVE) {
 			commandString = "Move";
 		} else if (game.getCurrentCommand() == null) {
 			commandString = "None";
