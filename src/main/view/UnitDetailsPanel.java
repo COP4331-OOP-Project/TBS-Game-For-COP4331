@@ -20,13 +20,7 @@ public class UnitDetailsPanel extends DetailsPanel{
 	}
 
 	private void drawText(Graphics g, int height) {
-		int health = 0;
-		int attack = 0;
-		int defense = 0;
-		int armor = 0;
-		int upkeep = 0;
 		Font old = g.getFont();
-		//System.out.println(game.getCurrentType());
 		g.setFont(detailsFont);
 		g.drawString("Unit Details", 10, height - 65);
 		g.drawString("Type: ", 30, height - 35);
@@ -35,6 +29,7 @@ public class UnitDetailsPanel extends DetailsPanel{
 		g.drawString("Defense: ", 430, height - 10);
 		g.drawString("Armor: ", 830, height - 35);
 		g.drawString("Upkeep: ", 830, height - 10);
+		System.out.println(game.getSelectedUnit());
 		if (game.getSelectedUnit() != -1) {
 			if (game.getCurrentType() == UnitEnum.EXPLORER) {
 				g.drawString("Explorer", 130, height - 35);

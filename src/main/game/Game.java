@@ -41,6 +41,7 @@ public class Game {
 	private boolean unitOverviewVisible = false;
 	private boolean structureOverviewVisible = false;
 	private boolean showingMakeDetails = false;
+	private boolean someItemSelected = false;
 	private int makeOption = 0;
 
 	private ICommandable currentSelectedEntity;
@@ -222,9 +223,14 @@ public class Game {
         TypeInstanceController typeInstanceController = typeController.getTypeInstanceController();
         Enum currentType = typeController.getType();
         ICommandable selectedEntity = typeInstanceController.cycleForward(currentType);
-        this.currentSelectedEntity = selectedEntity;
-        Location newLocation = selectedEntity.getLocation();
-	    this.changeCenterCoordinates(newLocation);
+        if (selectedEntity != null) {
+	        someItemSelected = true;
+	        this.currentSelectedEntity = selectedEntity;
+	        Location newLocation = selectedEntity.getLocation();
+		    this.changeCenterCoordinates(newLocation);
+        } else {
+        	someItemSelected = false;
+        }
 	}
 
 	protected void cycleTypeInstanceBackward() {
@@ -354,6 +360,14 @@ public class Game {
 	
 	public boolean getStructureOverviewVisible() {
 		return structureOverviewVisible;
+	}
+	
+	public void setSomeItemSelected(boolean someItemSelected) {
+		this.someItemSelected = someItemSelected;
+	}
+	
+	public boolean getSomeItemSelected() {
+		return someItemSelected;
 	}
 
 	public void formArmy() {

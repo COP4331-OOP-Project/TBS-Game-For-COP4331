@@ -129,7 +129,8 @@ public class GamePanel extends Panel {
 						player, game.getPlayer(player).getBases().get(i).getRotation());
 			}
 		}
-		drawSelectedItem();
+		if (game.getCurrentPlayer().getBases().size() > 0)
+			drawSelectedItem();
 	}
 
 	private void drawUnits() {
@@ -171,7 +172,7 @@ public class GamePanel extends Panel {
 						playerUnits.get(unitSelected).getOwnerID(),
 					0);
 				drawSelectedItem();
-			} else {
+			} else if (game.getCurrentPlayer().getPlayerID() == player){
 				unitSelected = -1;
 				game.setSelectedUnit(-1);
 			}
