@@ -81,6 +81,10 @@ public class Game {
 		nextPlayer = temp;
 		if (currentPlayer.getPlayerID() == 0) {
             turnNum++;
+
+            //Test Army Band
+
+			getGameBoard().handleBandArmyCmd(players.get(0).getExplorers());
         }
         this.currentModeController = new ModeController(this.currentPlayer);
     }
@@ -111,6 +115,10 @@ public class Game {
 
 	public Enum getCurrentType() {
 		return this.currentModeController.getTypeController().getType();
+	}
+	
+	public Enum getCurrentCommand() {
+		return this.currentCommand;
 	}
 
 	private void centerOnCurrentTypeInstance() {

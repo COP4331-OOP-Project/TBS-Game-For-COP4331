@@ -49,7 +49,7 @@ public class EntityFactory {
     }
 
     // Create army given the location, the player id, the rally point for the army, and the list of units included
-    public static Army getArmy(Location location, int playerId, RallyPoint rp, ArrayList<Unit> units) {
+    public static Army getArmy(Location location, int playerId, RallyPoint rp, ArrayList<? extends Unit> units) {
         return new Army(location, playerId, rp, units);
     }
 
