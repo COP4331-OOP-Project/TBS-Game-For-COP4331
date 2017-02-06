@@ -151,6 +151,7 @@ public class Game {
         }
         Location newLocation = selectedEntity.getLocation();
         this.changeCenterCoordinates(newLocation);
+        this.currentSelectedEntity = selectedEntity;
     }
 
 	protected void cycleModeForward() {
