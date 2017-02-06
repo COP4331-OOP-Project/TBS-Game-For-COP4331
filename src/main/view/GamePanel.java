@@ -64,6 +64,10 @@ public class GamePanel extends Panel {
 	}
 	
 	public void draw(Graphics g, int width, int height) {
+		if (!game.getMovedToNewPlayer()) {
+			centerOnNextPlayer();
+			game.setMovedToNewPlayer(true);
+		}
 		g2d = (Graphics2D)g;
 		this.width = width;
 		this.height = height;
@@ -74,8 +78,25 @@ public class GamePanel extends Panel {
 		drawBases();
 		drawArmies();
 		drawUnits();
+		drawRallyPoint();
 		checkCenteringCoordinates();
-		//drawSelectedItem();
+	}
+
+	private void centerOnNextPlayer() {
+		if (game.getCurrentPlayer().getAllUnit().size() > 0) {
+		checkCentering(game.getCurrentPlayer().getAllUnit().
+				get(0).getLocation().getX(),game.getCurrentPlayer().getAllUnit().
+				get(0).getLocation().getY());
+		}
+	}
+
+	private void drawRallyPoint() {
+		if (game.getCurrentMode() == ModeEnum.RALLY_POINT) {
+			if (game.getSomeItemSelected()) {
+			//drawStaticTileElement(game.getCenterCoordinates().getX(), 
+			//		game.getCenterCoordinates().getY(), "RALLY_POINT_SELECTED");
+			}
+		}
 	}
 
 	private void drawMovingTiles() {
@@ -102,15 +123,17 @@ public class GamePanel extends Panel {
 		
 	}
 	
-	private void drawSelectedItem() {
+	private void drawSelectedItem(boolean isArmyUnit) {
 		if (!(selectedX == -1 && selectedY == -1)) {
 			int x = selectedX;
 			int y = selectedY;
-			if (game.getCurrentMode() == ModeEnum.RALLY_POINT) {
-				drawStaticTileElement(x, y, "RALLY_POINT_SELECTED");
-			}
 			if (game.getCurrentMode() == ModeEnum.UNIT) {
-				drawStaticTileElement(x, y, "UNIT_SELECTED");
+				if (isArmyUnit) {
+					drawStaticTileElement(x, y, "ARMY_SELECTED");
+				} else {
+					drawStaticTileElement(x, y, "UNIT_SELECTED");
+				}
+				
 			}
 			if (game.getCurrentMode() == ModeEnum.STRUCTURE) {
 				drawStaticTileElement(x, y, "BASE_SELECTED");
@@ -129,7 +152,8 @@ public class GamePanel extends Panel {
 						player, game.getPlayer(player).getBases().get(i).getRotation());
 			}
 		}
-		drawSelectedItem();
+		if (game.getCurrentPlayer().getBases().size() > 0)
+			drawSelectedItem(false);
 	}
 
 	private void drawUnits() {
@@ -163,15 +187,23 @@ public class GamePanel extends Panel {
 				}
 			}
 			if (game.getCurrentMode() == ModeEnum.UNIT && unitSelected != -1
-				&& game.getCurrentPlayer().getPlayerID() == player) {
+				&& game.getCurrentPlayer().getPlayerID() == player &&
+				!(game.getGameBoard().gameMap[playerUnits.get(unitSelected).getLocation().getX()]
+						[playerUnits.get(unitSelected).getLocation().getY()]).containsArmy) {
 				game.setSelectedUnit(unitSelected);
 				drawUnit(playerUnits.get(unitSelected).getLocation().getX(),
 						playerUnits.get(unitSelected).getLocation().getY(),
 						playerUnits.get(unitSelected).getUnitType(),
 						playerUnits.get(unitSelected).getOwnerID(),
 					0);
-				drawSelectedItem();
-			} else {
+				drawSelectedItem(false);
+			} else if (game.getCurrentMode() == ModeEnum.UNIT && unitSelected != -1
+				&& game.getCurrentPlayer().getPlayerID() == player &&
+				(game.getGameBoard().gameMap[playerUnits.get(unitSelected).getLocation().getX()]
+						[playerUnits.get(unitSelected).getLocation().getY()]).containsArmy) {
+				game.setSelectedUnit(unitSelected);
+				drawSelectedItem(true);
+			} else if (game.getCurrentPlayer().getPlayerID() == player){
 				unitSelected = -1;
 				game.setSelectedUnit(-1);
 			}
@@ -216,7 +248,7 @@ public class GamePanel extends Panel {
 			int numOfUnits) {
 		AffineTransform currentRotation = g2d.getTransform();
 		rotateOnTile(x, y, rotation);
-			switch (player) {
+		switch (player) {
 			case 0:
 				drawStaticTileElement(x, y, "ARMY_O");
 				break;
