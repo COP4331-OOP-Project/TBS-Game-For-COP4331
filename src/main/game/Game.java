@@ -9,11 +9,14 @@ import controls.typeInstance.TypeInstanceController;
 import controls.unit.UnitEnum;
 import game.commands.MakeCommand;
 import game.commands.MoveCommand;
+import game.entities.Army;
 import game.entities.ICommandable;
+import game.entities.RallyPoint;
 import game.entities.structures.Structure;
 import game.entities.units.Unit;
 import game.gameboard.GameBoard;
 import game.gameboard.Location;
+import game.gameboard.Tile;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -169,32 +172,32 @@ public class Game {
     private void resetControls() {
         this.moveCommands = new ArrayList<>();
         this.moveLocations = new ArrayList<>();
-
+        this.currentSelectedEntity = null;
         this.currentCommand = null;
     }
 
 	protected void cycleModeForward() {
-		this.currentModeController.cycleForward();
+        this.resetControls();
+        this.currentModeController.cycleForward();
 		this.centerOnCurrentTypeInstance();
-		this.resetControls();
 	}
 
 	protected void cycleModeBackward() {
-		this.currentModeController.cycleBackward();
-        this.centerOnCurrentTypeInstance();
         this.resetControls();
+        this.currentModeController.cycleBackward();
+        this.centerOnCurrentTypeInstance();
     }
 
 	protected void cycleTypeForward() {
-		this.currentModeController.getTypeController().cycleForward();
-        this.centerOnCurrentTypeInstance();
         this.resetControls();
+        this.currentModeController.getTypeController().cycleForward();
+        this.centerOnCurrentTypeInstance();
     }
 
 	protected void cycleTypeBackward() {
-		this.currentModeController.getTypeController().cycleBackward();
-        this.centerOnCurrentTypeInstance();
         this.resetControls();
+        this.currentModeController.getTypeController().cycleBackward();
+        this.centerOnCurrentTypeInstance();
     }
 
 	protected void cycleCommandForward() {
@@ -282,7 +285,6 @@ public class Game {
 			this.currentSelectedEntity.addCommandToQueue(makeCmd);
 		}
 
-
 	}
 
 	public int getCurrentMakeOption() {
@@ -353,4 +355,16 @@ public class Game {
 	public boolean getStructureOverviewVisible() {
 		return structureOverviewVisible;
 	}
+
+	public void formArmy() {
+	    Location currentLocation = this.currentSelectedEntity.getLocation();
+	    Tile currentTile = this.gBoard.getTileWithLocation(currentLocation);
+	    ArrayList<Unit> tileUnits = currentTile.getUnits();
+	    RallyPoint newRallyPoint = new RallyPoint(currentLocation, this.gBoard, this.currentPlayer.getPlayerID());
+	    Army newArmy = new Army(this.currentPlayer.getPlayerID(), newRallyPoint, tileUnits);
+	    currentTile.removeAllUnits();
+	    currentTile.addRallyPoint(newRallyPoint);
+	    currentTile.addArmy(newArmy);
+	    this.currentPlayer.addArmy(newArmy);
+    }
 }

@@ -93,6 +93,10 @@ public class EventController implements KeyListener{
 				log.debug("X Pressed");
 				this.game.toggleStructureOverview();
 				break;
+            case KeyEvent.VK_F:
+                log.debug("F pressed");
+                this.game.formArmy();
+                break;
 			default:
 				log.info("Invalid command");
 				break;
