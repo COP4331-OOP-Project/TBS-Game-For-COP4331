@@ -410,6 +410,8 @@ public class GameBoard {
 
                 Structure struct = (Structure) newEntity;   // Cast as struct
 
+                handleDecommissionCmd(actor);
+
                 // Add structure to owner and the tile
                 players.get(actor.getOwnerID()).addStructure(struct);
                 actorTile.setStructure(struct);

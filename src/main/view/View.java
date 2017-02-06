@@ -15,6 +15,7 @@ public class View {
 	StructureDetailsPanel structureDetailsPanel;
 	UnitDetailsPanel unitDetailsPanel;
 	MiniPanel	miniPanel;
+	MakeDetailsPanel makePanel;
 	
 	public View(Game game) {
 		this.game = game;
@@ -26,6 +27,7 @@ public class View {
 		unitDetailsPanel = new UnitDetailsPanel(game);
 		structureDetailsPanel = new StructureDetailsPanel(game);
 		miniPanel = new MiniPanel(game);
+		makePanel = new MakeDetailsPanel(game);
 	}
 	
 	public void drawVisiblePanels(Graphics g, int width, int height) {
@@ -42,6 +44,9 @@ public class View {
 			unitOverviewPanel.draw(g, width, height);
 		if (game.getStructureOverviewVisible())
 			structureOverviewPanel.draw(g, width, height);
+		//unitOverviewPanel.drawPanelBox(g, width, height);
+		if (game.isShowingMakeDetails()) makePanel.draw(g, width, height);
+
 	}
 
 	public void updateAnimationTime() {
@@ -49,6 +54,6 @@ public class View {
 		civPanel.updateAnimationCount();
 		modePanel.updateAnimationCount();
 		structureOverviewPanel.updateAnimationCount();
-		unitDetailsPanel.updateAnimationCount();	
+		unitDetailsPanel.updateAnimationCount();
 	}
 }

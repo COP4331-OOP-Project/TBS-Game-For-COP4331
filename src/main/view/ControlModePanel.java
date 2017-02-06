@@ -147,4 +147,14 @@ public class ControlModePanel extends Panel{
 			}
 		}
 	}
+
+
+	// Draw panel displayed when selecting which entity to make from current selected entity
+	private void drawMakeListPanel(Graphics g) {
+
+		g.drawImage(Assets.getInstance().getImage("GUI_MODE_PANEL"), PANEL_DISTANCE_FROM_LEFT,
+				height/2 + PANEL_DISTANCE_BOTTOM, null);
+
+	}
+
 }
