@@ -116,6 +116,10 @@ public class Game {
 	public Enum getCurrentType() {
 		return this.currentModeController.getTypeController().getType();
 	}
+	
+	public Enum getCurrentCommand() {
+		return this.currentCommand;
+	}
 
 	private void centerOnCurrentTypeInstance() {
         TypeController typeController = this.currentModeController.getTypeController();
