@@ -95,7 +95,7 @@ public class Game {
 
             //Test army Band
 
-			getGameBoard().handleBandArmyCmd(players.get(0).getExplorers());
+			//getGameBoard().handleBandArmyCmd(players.get(0).getExplorers());
         }
         this.currentModeController = new ModeController(this.currentPlayer);
 
@@ -226,7 +226,7 @@ public class Game {
     }
 
     public void addMoveToList(int direction) {
-	    MoveCommand command = new MoveCommand<>(this.gBoard, this.currentSelectedEntity, direction, 1);
+	    MoveCommand command = new MoveCommand<>(this.gBoard, this.currentSelectedEntity, direction, 0);
 	    this.moveCommands.add(command);
 	    Location newLocation = this.lastMoveLocation.directionLocation(direction);
 	    this.moveLocations.add(newLocation);
