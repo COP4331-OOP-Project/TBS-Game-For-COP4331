@@ -313,7 +313,7 @@ public class GameBoard {
             Tile actorTile = getTileWithLocation(unit.getLocation());
             Tile targetTile = getAdjacentTile(actorTile, direction);
 
-            if(!targetTile.hasEnemyUnit(unit.getOwnerID())) {
+            if(targetTile.hasEnemyUnit(unit.getOwnerID())) {
                 unit.nextCommand();
             } else if (targetTile.isImpassable()) {
                 log.error("Cannot move to tile, it is impassable!");
