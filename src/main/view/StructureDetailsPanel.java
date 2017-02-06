@@ -26,7 +26,6 @@ Font bigFont = new Font("Lucida Sans", Font.BOLD, 35);
 		Font old = g.getFont();
 		g.setFont(detailsFont);
 		g.drawString("Structure Details:", 10, height - 65);
-		System.out.println(game.getSomeItemSelected());
 		if (game.getSomeItemSelected() && game.getCurrentPlayer().getBases().size() > 0) {
 			g.drawString("Type: ", 30, height - 35);
 			g.drawString("Health: ", 30, height - 10);
