@@ -289,7 +289,11 @@ public class GameBoard {
 
         }
         else if(actor instanceof Unit) {
-            System.out.println("unit can't defend");
+            Unit unit = (Unit) actor;
+            Tile actorTile = getTileWithLocation(unit.getLocation());
+            Tile targetTile = getAdjacentTile(actorTile, direction);
+            
+
         }
     }
 
