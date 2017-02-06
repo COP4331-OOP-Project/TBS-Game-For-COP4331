@@ -179,6 +179,7 @@ public class Player {
         }
 		return count;
 	}
+	
 	public int getArmyCount()
 	{
 		return armies.size();
