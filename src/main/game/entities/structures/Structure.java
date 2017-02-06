@@ -17,7 +17,8 @@ public abstract class Structure implements ICommandable {
     private int ownerID;                                // Player ownder id for structure
     private PowerState powerState;                      // structure power state
     private Location location;                          // structure location
-
+    private int rotation = 0;
+    
     private Queue<Command> queue;                       // structure command queue
 
     // structure stats
@@ -95,7 +96,14 @@ public abstract class Structure implements ICommandable {
 
     }
 
-
+    public void setRotation(int rotation) {
+    	this.rotation = rotation;
+    }
+    
+    public int getRotation() {
+    	return rotation;
+    }
+    
     // Commandable actions
 
     public Command nextCommand() { return queue.poll(); }                       // Look at next command

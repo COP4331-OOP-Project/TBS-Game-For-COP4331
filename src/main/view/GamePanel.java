@@ -121,8 +121,13 @@ public class GamePanel extends Panel {
 	}
 
 	private void drawBases() {
-		// TODO Auto-generated method stub
-		
+		for (int player = 0; player < NUM_OF_PLAYERS; player++) {
+			for (int i = 0; i < game.getPlayer(player).getBases().size(); i++) {
+				drawBase(game.getPlayer(player).getBases().get(i).getLocation().getX(),
+						game.getPlayer(player).getBases().get(i).getLocation().getY(),
+						player, game.getPlayer(player).getBases().get(i).getRotation());
+			}
+		}
 	}
 
 	private void drawUnits() {
@@ -153,6 +158,7 @@ public class GamePanel extends Panel {
 						0);
 			}
 			if (game.getCurrentMode() == ModeEnum.UNIT && unitSelected != -1) {
+				game.setSelectedUnit(unitSelected);
 				drawUnit(playerUnits.get(unitSelected).getLocation().getX(),
 						playerUnits.get(unitSelected).getLocation().getY(),
 						playerUnits.get(unitSelected).getUnitType(),
@@ -161,6 +167,7 @@ public class GamePanel extends Panel {
 				drawSelectedItem();
 			} else {
 				unitSelected = -1;
+				game.setSelectedUnit(-1);
 			}
 		} 
 	}
@@ -190,8 +197,7 @@ public class GamePanel extends Panel {
 						player, game.getPlayer(player).getArmies().get(i).getRotation(),
 						game.getPlayer(player).getArmies().get(i).getAllUnits().size());
 			}
-		}
-		
+		}	
 	}
 	
 	private void drawArmy(int x, int y, int player, int rotation, 
