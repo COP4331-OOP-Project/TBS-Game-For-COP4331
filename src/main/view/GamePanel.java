@@ -153,11 +153,14 @@ public class GamePanel extends Panel {
 							game.getCurrentType() == UnitEnum.COLONIST)
 						unitSelected = i;
 				}
-				drawUnit(playerUnits.get(i).getLocation().getX(),
-						playerUnits.get(i).getLocation().getY(),
-						playerUnits.get(i).getUnitType(),
-						playerUnits.get(i).getOwnerID(),
-						0);
+				if (!(game.getGameBoard().gameMap[playerUnits.get(i).getLocation().getX()]
+						[playerUnits.get(i).getLocation().getY()]).containsArmy) {
+					drawUnit(playerUnits.get(i).getLocation().getX(),
+							playerUnits.get(i).getLocation().getY(),
+							playerUnits.get(i).getUnitType(),
+							playerUnits.get(i).getOwnerID(),
+							0);
+				}
 			}
 			if (game.getCurrentMode() == ModeEnum.UNIT && unitSelected != -1
 				&& game.getCurrentPlayer().getPlayerID() == player) {
