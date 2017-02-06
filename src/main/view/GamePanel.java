@@ -122,7 +122,7 @@ public class GamePanel extends Panel {
 
 	private void drawBases() {
 		for (int player = 0; player < NUM_OF_PLAYERS; player++) {
-			for (int i = 0; i < game.getPlayer(player).getBases().size(); i++) {
+			for (int i = 0; i < game.getPlayer(player).getBaseCount(); i++) {
 				drawBase(game.getPlayer(player).getBases().get(i).getLocation().getX(),
 						game.getPlayer(player).getBases().get(i).getLocation().getY(),
 						player, game.getPlayer(player).getBases().get(i).getRotation());

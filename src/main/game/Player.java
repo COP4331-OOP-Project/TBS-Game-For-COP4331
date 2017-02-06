@@ -164,7 +164,7 @@ public class Player {
 	}
 
 	public int getBaseCount(){
-		return bases.size();
+		return basesCount;
 	}
 
 	public int getStructureCount()
@@ -349,6 +349,9 @@ public class Player {
 				structure.setStructureID(i);
 				structures.set(i, structure);
 				bases.set(i,(Base)structure);
+				structuresCount++;
+				basesCount++;
+				break;
 			}
 		}
 	}
@@ -356,6 +359,8 @@ public class Player {
 	public void removeStructure(Structure strucutre) {
 		structures.set(strucutre.getStructureID(),null);
 		bases.set(strucutre.getStructureID(),null);
+		basesCount--;
+		structuresCount--;
 	}
 
 	public void addArmy(Army army) {
