@@ -162,8 +162,16 @@ public class EventController implements KeyListener{
 				break;
 			case KeyEvent.VK_ENTER:
 				log.debug("Enter pressed");
-				if (game.getCurrentType() == UnitEnum.COLONIST) game.executeMakeCommand(UnitEnum.COLONIST);
-				else game.executeMakeCommand(StructureEnum.BASE);
+				if (game.getCurrentType() == UnitEnum.COLONIST) game.executeMakeCommand(UnitEnum.COLONIST, "base");
+				else {
+					switch (this.game.getCurrentMakeOption()) {
+						case 0: game.executeMakeCommand(StructureEnum.BASE, "melee"); break;
+						case 1: game.executeMakeCommand(StructureEnum.BASE, "ranged"); break;
+						case 2: game.executeMakeCommand(StructureEnum.BASE, "colonist"); break;
+						case 3: game.executeMakeCommand(StructureEnum.BASE, "explorer"); break;
+					}
+
+				}
 				this.gettingMakeList = false;
 				this.game.setShowingMakeDetails(false);
 				break;
