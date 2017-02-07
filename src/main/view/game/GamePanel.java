@@ -57,7 +57,7 @@ public class GamePanel extends Panel {
 	
 	
 	public void draw(Graphics g, int width, int height) {
-		panelCenterer.centerOnTile(5, 5);
+		panelCenterer.checkCentering(5, 5);
 		//panelCenterer.checkWindowCentered(width, height);
 		g2d = (Graphics2D)g;
 		tileDrawer.drawTiles();
@@ -65,31 +65,11 @@ public class GamePanel extends Panel {
 		structureDrawer.drawBases();
 		armyDrawer.drawArmies();
 		unitDrawer.drawUnits();
+		drawSelectedItem(game.getCurrentMode() == ModeEnum.ARMY);
 	}
 	
 	void drawSelectedItem(boolean isArmyUnit) {
-		if (!(panelCenterer.getSelectedX() == -1 && panelCenterer.getSelectedY() == -1)) {
-			int x = panelCenterer.getSelectedX();
-			int y = panelCenterer.getSelectedY();
-			if (game.getCurrentMode() == ModeEnum.RALLY_POINT
-					&& game.getCurrentPlayer().getArmyRallyPoint().size() > 0) {
-				drawStaticTileElement(x, y, "RALLY_POINT_SELECTED");
-			}
-			if (game.getCurrentMode() == ModeEnum.UNIT) {
-				if (isArmyUnit) {
-					drawStaticTileElement(x, y, "ARMY_SELECTED");
-				} else {
-					drawStaticTileElement(x, y, "UNIT_SELECTED");
-				}
-			}
-			if (game.getCurrentMode() == ModeEnum.STRUCTURE
-					&& game.getCurrentPlayer().getBases().size() > 0) {
-				drawStaticTileElement(x, y, "BASE_SELECTED");
-			}
-			if (game.getCurrentMode() == ModeEnum.ARMY) {
-				drawStaticTileElement(x, y, "UNIT_SELECTED");
-			}
-		}
+		selectedDrawer.drawSelectedItem(isArmyUnit);
 	}
 	
 	protected void drawStaticTileElement(int x, int y, String image) {

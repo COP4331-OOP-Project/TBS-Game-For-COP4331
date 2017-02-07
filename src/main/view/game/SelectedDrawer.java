@@ -11,7 +11,8 @@ public class SelectedDrawer {
 		this.gamePanel = gamePanel;
 		this.game = game;
 	}
-	private void drawSelectedItem(boolean isArmyUnit) {
+	
+	public void drawSelectedItem(boolean isArmyUnit) {
 		if (!(gamePanel.getCenterer().getSelectedX() == -1 &&
 				gamePanel.getCenterer().getSelectedY() == -1)) {
 			int x = gamePanel.getCenterer().getSelectedX();

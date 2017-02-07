@@ -49,7 +49,7 @@ public class PanelCenterer {
 		game.setMovedToNewPlayer(true);
 	}
 	
-	private void checkCentering(int x, int y) {
+	void checkCentering(int x, int y) {
 		if (centeringOffsetX(x) != centerToX || 
 				centeringOffsetY(y) != centerToY) {
 			centerOnTile(x, y);
@@ -58,7 +58,7 @@ public class PanelCenterer {
 	}
 	
 	public void centerOnTile(int x, int y) {
-		if (!(camera.getX() == x && camera.getY() == x)) {
+		if ((camera.getX() == x && camera.getY() == y)) {
 			centerStartX = camera.getX();
 			centerStartY = camera.getY();
 			centerToX = centeringOffsetX(x);
