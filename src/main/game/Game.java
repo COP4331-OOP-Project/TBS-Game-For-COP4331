@@ -124,6 +124,8 @@ public class Game {
 		playerEntities.addAll(this.currentPlayer.getArmyRallyPoint());
 		playerEntities.addAll(this.currentPlayer.getBases());
 
+		getGameBoard().updateGameBoard();
+
 		for (ICommandable commandable : playerEntities) {
 		    commandable.doTurn();
         }
