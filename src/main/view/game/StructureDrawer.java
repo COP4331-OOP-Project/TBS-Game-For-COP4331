@@ -11,7 +11,7 @@ import game.gameboard.Tile;
 
 public class StructureDrawer {
 
-	private final static Logger log = LogManager.getLogger(GamePanel.class);
+	private final static Logger log = LogManager.getLogger(StructureDrawer.class);
 	
 	GamePanel gamePanel;
 	Game game;

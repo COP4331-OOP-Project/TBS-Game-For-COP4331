@@ -13,7 +13,7 @@ import game.entities.units.Unit;
 import game.gameboard.Tile;
 
 public class UnitDrawer {
-	private final static Logger log = LogManager.getLogger(GamePanel.class);
+	private final static Logger log = LogManager.getLogger(UnitDrawer.class);
 	private GamePanel gamePanel;
 	private Game game;
 	private ArrayList<Unit> playerUnits;
