@@ -79,9 +79,12 @@ public class UnitDrawer {
 		for (int player = 0; player < game.getAllPlayers().size(); player++) {
 			playerUnits = game.getPlayer(player).getAllUnit();
 			for (int i = 0; i < playerUnits.size(); i++) {
-				if (playerUnits.get(i).getLocation().getX() == gamePanel.getCenterer().getSelectedX()
-						&& playerUnits.get(i).getLocation().getY() == gamePanel.getCenterer().getSelectedY()
-						&& gamePanel.getCenterer().getSelectedX() != -1 && gamePanel.getCenterer().getSelectedY() != -1) {
+				if (playerUnits.get(i).getLocation().getX() == 
+						gamePanel.getCamera().getPanelCenterer().getSelectedX()
+						&& playerUnits.get(i).getLocation().getY() == 
+						gamePanel.getCamera().getPanelCenterer().getSelectedY()
+						&& gamePanel.getCamera().getPanelCenterer().getSelectedX() != -1 &&
+						gamePanel.getCamera().getPanelCenterer().getSelectedY() != -1) {
 					if (playerUnits.get(i).getUnitType() == 0 &&
 							game.getCurrentType() == UnitEnum.MELEE)
 						unitSelected = i;
