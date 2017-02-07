@@ -3,10 +3,14 @@ package view.game;
 import game.Game;
 
 public class Camera {
-	GamePanel gamePanel;
-	//This is the offset of the View
-	public Camera(GamePanel gamePanel) {
+	private GamePanel gamePanel;
+	private Game game;
+	private PanelCenterer panelCenterer;
+	
+	public Camera(GamePanel gamePanel, Game game) {
+		this.game = game;
 		this.gamePanel = gamePanel;
+		this.panelCenterer = new PanelCenterer(game, this, gamePanel);
 	}
 	
 	private int offsetX = 0;
@@ -38,5 +42,9 @@ public class Camera {
 	
 	protected int getTileLocation(int value) {
 		return value * gamePanel.getTileSize();
+	}
+	
+	protected PanelCenterer getPanelCenterer() {
+		return panelCenterer;
 	}
 }

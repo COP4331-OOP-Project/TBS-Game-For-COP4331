@@ -13,6 +13,8 @@ public class SelectedDrawer {
 	}
 	
 	public void drawSelectedItem(boolean isArmyUnit) {
+		
+		/*
 		if (!(gamePanel.getCenterer().getSelectedX() == -1 &&
 				gamePanel.getCenterer().getSelectedY() == -1)) {
 			int x = gamePanel.getCenterer().getSelectedX();
@@ -37,5 +39,6 @@ public class SelectedDrawer {
 				gamePanel.drawStaticTileElement(x, y, "UNIT_SELECTED");
 			}
 		}
+		*/
 	}
 }

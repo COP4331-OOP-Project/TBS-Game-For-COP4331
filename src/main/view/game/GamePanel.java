@@ -31,7 +31,6 @@ public class GamePanel extends Panel {
 	private static final int TILE_PIXEL_SIZE = 
 			Assets.getInstance().getImage("TERRAIN_GRASS").getWidth();
 	private Camera camera;
-	private PanelCenterer panelCenterer;
 	private TileDrawer tileDrawer;
 	private UnitDrawer unitDrawer;
 	private ArmyDrawer armyDrawer;
@@ -45,8 +44,7 @@ public class GamePanel extends Panel {
 	
 	public GamePanel(Game game) {
 		this.game = game;
-		camera = new Camera(this);
-		panelCenterer = new PanelCenterer(game, camera, this);
+		camera = new Camera(this, game);
 		tileDrawer = new TileDrawer(this, game);
 		unitDrawer = new UnitDrawer(this, game);
 		armyDrawer = new ArmyDrawer(this, game);
@@ -57,7 +55,7 @@ public class GamePanel extends Panel {
 	
 	
 	public void draw(Graphics g, int width, int height) {
-		panelCenterer.checkCentering(5, 5);
+		camera.getPanelCenterer().checkCentering(5, 5);
 		//panelCenterer.checkWindowCentered(width, height);
 		g2d = (Graphics2D)g;
 		tileDrawer.drawTiles();
@@ -107,10 +105,6 @@ public class GamePanel extends Panel {
 	
 	public Camera getCamera() {
 		return camera;
-	}
-	
-	public PanelCenterer getCenterer() {
-		return panelCenterer;
 	}
 	
 	public Graphics2D getG2D() {
