@@ -1,8 +1,9 @@
-package view;
+package view.gui;
 
 import java.awt.Graphics;
 
 import game.Assets;
+import view.Panel;
 
 public abstract class DetailsPanel extends Panel{
 	private static int GUI_PANEL_WIDTH = 

@@ -1,9 +1,10 @@
-package view;
+package view.gui;
 
 import java.awt.Font;
 import java.awt.Graphics;
 
 import game.Assets;
+import view.Panel;
 
 public abstract class OverviewPanel extends Panel{
 	Font titleFont = new Font("Lucida Sans", Font.BOLD, 35);

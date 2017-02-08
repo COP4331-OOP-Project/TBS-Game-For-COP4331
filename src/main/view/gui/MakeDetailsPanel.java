@@ -1,9 +1,10 @@
-package view;
+package view.gui;
 
 import controls.unit.UnitEnum;
 import game.Assets;
 import game.Game;
 import game.entities.units.Unit;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

@@ -1,4 +1,4 @@
-package view;
+package view.gui;
 
 import java.awt.Font;
 import java.awt.Graphics;
@@ -9,6 +9,7 @@ import controls.structure.StructureEnum;
 import controls.unit.UnitEnum;
 import game.Assets;
 import game.Game;
+import view.Panel;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

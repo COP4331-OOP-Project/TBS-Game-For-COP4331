@@ -1,5 +1,14 @@
 package view;
 import game.Game;
+import view.game.GamePanel;
+import view.gui.CivilizationPanel;
+import view.gui.ControlModePanel;
+import view.gui.MakeDetailsPanel;
+import view.gui.MiniMapPanel;
+import view.gui.StructureDetailsPanel;
+import view.gui.StructureOverviewPanel;
+import view.gui.UnitDetailsPanel;
+import view.gui.UnitOverviewPanel;
 
 import java.awt.Graphics;
 
@@ -14,7 +23,7 @@ public class View {
 	UnitOverviewPanel unitOverviewPanel;
 	StructureDetailsPanel structureDetailsPanel;
 	UnitDetailsPanel unitDetailsPanel;
-	MiniPanel	miniPanel;
+	MiniMapPanel miniPanel;
 	MakeDetailsPanel makePanel;
 	
 	public View(Game game) {
@@ -26,7 +35,7 @@ public class View {
 		unitOverviewPanel = new UnitOverviewPanel(game);
 		unitDetailsPanel = new UnitDetailsPanel(game);
 		structureDetailsPanel = new StructureDetailsPanel(game);
-		miniPanel = new MiniPanel(game);
+		miniPanel = new MiniMapPanel(game);
 		makePanel = new MakeDetailsPanel(game);
 	}
 	

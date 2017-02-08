@@ -1,10 +1,11 @@
-package view;
+package view.gui;
 
 import game.Assets;
 
 import game.Assets;
 import game.Game;
 import game.Player;
+import view.Panel;
 
 import java.awt.Graphics;
 

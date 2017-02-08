@@ -1,23 +1,24 @@
-package view;
+package view.gui;
 
 import java.awt.Graphics;
 
 import game.Assets;
 import game.Game;
+import view.Panel;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class MiniPanel extends Panel{
+public class MiniMapPanel extends Panel{
 	Game game;
 	private static final int TILE_SIZE = 12;
 	private static final int DISTANCE_FROM_RIGHT = 350;
-	private final static Logger log = LogManager.getLogger(MiniPanel.class);
+	private final static Logger log = LogManager.getLogger(MiniMapPanel.class);
 	
 	private int width;
 	private int height;
 	
-	public MiniPanel(Game game) {
+	public MiniMapPanel(Game game) {
 		this.game = game;
 	}
 	
