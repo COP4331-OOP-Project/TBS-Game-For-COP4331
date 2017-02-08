@@ -1,6 +1,7 @@
 package game;
 
 public class GameEngine {
+	private final int FPS = 60;
 	private final int GAME_UPDATES_PER_SECOND = 20;
 	private final int TIME_PER_UPDATE = 1000/GAME_UPDATES_PER_SECOND;
 	private boolean running = true;
@@ -25,22 +26,28 @@ public class GameEngine {
 	 * A main loop for updating and rendering
 	 */
 	private void mainLoop() {
-		long lastTime = System.currentTimeMillis();
-		long accumulatedTime = 0;
-		long fpsTime = 0;
-		while (running) {
-			long newTime = System.currentTimeMillis();
-			long diffTime = newTime - lastTime;
-			lastTime = newTime;
-			fpsTime += diffTime;
-			accumulatedTime += diffTime;
-			while (accumulatedTime >= TIME_PER_UPDATE) {
-				game.updateGame();
-				window.updateAnimationTime();
-				accumulatedTime -= TIME_PER_UPDATE;
+		   long lastTime = System.currentTimeMillis();
+		   int accumulatedTime = 0;
+		   long fpsTime = 1000000000 / FPS;
+		   while (running)
+		   {
+		      long newTime = System.currentTimeMillis();
+		      long diffTime = newTime - lastTime;
+		      lastTime = newTime;
+		      accumulatedTime += diffTime;
+		      if (accumulatedTime >= TIME_PER_UPDATE)
+		      {
+		         game.updateGame();
+				 window.updateAnimationTime();
+				 accumulatedTime = 0;
+		      }
+		      window.renderGame();
+		      
+		      try {
+				Thread.sleep( (lastTime - System.currentTimeMillis() + fpsTime)/1000000 );
+			} catch (InterruptedException e) {
+				e.printStackTrace();
 			}
-			window.renderGame();
-				
-		}
+		   }
 	}
 }
