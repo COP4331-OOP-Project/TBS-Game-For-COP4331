@@ -62,7 +62,7 @@ public class StructureDrawer {
 //		}
 		gamePanel.drawSelectedItem(false);
 
-		if (game.getCurrentPlayer().getBases().size() > 0)
-			gamePanel.drawSelectedItem(false);
+		//if (game.getCurrentPlayer().getBases().size() > 0)
+			//gamePanel.drawSelectedItem(false);
 	}
 }

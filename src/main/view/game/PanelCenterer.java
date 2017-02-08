@@ -4,7 +4,6 @@ import game.Game;
 import game.gameboard.Location;
 
 public class PanelCenterer {
-	Camera camera;
 	GamePanel gamePanel;
 	Game game;
 	
@@ -22,10 +21,9 @@ public class PanelCenterer {
 	
 	private static final int TIME_TO_CENTER = 50;
 	
-	public PanelCenterer(Game game , Camera camera, GamePanel gamePanel) {
+	public PanelCenterer(Game game , GamePanel gamePanel) {
 		this.game = game;
 		this.gamePanel = gamePanel;
-		this.camera = camera;
 	}
 	
 	public void checkWindowCentered(int width, int height) {
@@ -38,54 +36,15 @@ public class PanelCenterer {
 			continueCentering();
 		}
 		checkCenteringCoordinates();
-	}
-	
-	private void centerOnNextPlayer() {
-		if (game.getCurrentPlayer().getAllUnit().size() > 0) {
-		checkCentering(game.getCurrentPlayer().getAllUnit().
-				get(0).getLocation().getX(),game.getCurrentPlayer().
-				getAllUnit().get(0).getLocation().getY());
-		}
-		game.setMovedToNewPlayer(true);
-	}
-	
-	void checkCentering(int x, int y) {
-		if (centeringOffsetX(x) != centerToX || 
-				centeringOffsetY(y) != centerToY) {
-			centerOnTile(x, y);
-		}
-		
-	}
-	
-	public void centerOnTile(int x, int y) {
-		if ((camera.getX() == x && camera.getY() == y)) {
-			centerStartX = camera.getX();
-			centerStartY = camera.getY();
-			centerToX = centeringOffsetX(x);
-			centerToY = centeringOffsetY(y);
-			isCentering = true;
+		System.out.println(centeringOffsetX(1));
+		System.out.println(gamePanel.getCamera().getTileLocation(selectedY));
+		if (gamePanel.getCamera().getX() != gamePanel.getCamera().getTileLocation(selectedX) 
+				&& gamePanel.getCamera().getY() != gamePanel.getCamera().getTileLocation(selectedY)) {
+			checkCentering(selectedX, selectedY);
 		}
 	}
 	
-	private void continueCentering() {
-		if (timeCentering >= TIME_TO_CENTER - 1) {
-			camera.setX(centerToX);
-			camera.setY(centerToY);
-			timeCentering = 0;
-			isCentering = false;
-		} else {
-			camera.setX((int)((percentDoneCentering()*
-					(centerToX - centerStartX)) 
-					+ centerStartX));
-			camera.setY((int)((percentDoneCentering()*
-					(centerToY - centerStartY)) 
-					+ centerStartY));
-			timeCentering++;
-		}
-	}
-	
-
-	protected void checkCenteringCoordinates() {
+	private void checkCenteringCoordinates() {
 		if (this.game.isCenterCoordinatesUpdated()) {
 			Location loc = this.game.getCenterCoordinates();
 			selectedX = loc.getX();
@@ -95,21 +54,61 @@ public class PanelCenterer {
 		}
 	}
 	
+	public void centerOnTile(int x, int y) {
+		if (gamePanel.getCamera().getX() == x &&
+			gamePanel.getCamera().getY() == y)
+				return;
+		centerStartX = gamePanel.getCamera().getX();
+		centerStartY = gamePanel.getCamera().getY();
+		centerToX = centeringOffsetX(x);
+		centerToY = centeringOffsetY(y);
+		isCentering = true;
+	}
+	
 	//Returns the X offset based on the X Location of a tile for centering
 	private int centeringOffsetX(int x) {
-		return (width/2) - camera.getTileLocation(x) - gamePanel.getTileSize()/2;
+		return (width/2) - gamePanel.getCamera().getTileLocation(x) - gamePanel.getTileSize()/2;
 	}
 	
 	//Returns Y Offset Based on the Y Location of a Tile for centering
 	private int centeringOffsetY(int y) {
-		return (height/2) - camera.getTileLocation(y) - gamePanel.getTileSize()/2;
+		return (height/2) - gamePanel.getCamera().getTileLocation(y) - gamePanel.getTileSize()/2;
 	}
 	
+	private void continueCentering() {
+		if (timeCentering >= TIME_TO_CENTER - 1) {
+			gamePanel.getCamera().setX(centerToX);
+			gamePanel.getCamera().setX(centerToY);
+			timeCentering = 0;
+			isCentering = false;
+		} else {
+			gamePanel.getCamera().setX((int)((percentDoneCentering()*(centerToX - centerStartX)) 
+					+ centerStartX));
+			gamePanel.getCamera().setX((int)((percentDoneCentering()*(centerToY - centerStartY)) 
+					+ centerStartY));
+			timeCentering++;
+		}
+	}
+	
+	private void checkCentering(int x, int y) {
+		if (centeringOffsetX(x) != centerToX || 
+				centeringOffsetY(y) != centerToY) {
+			centerOnTile(x, y);
+		}	
+	}
+	
+	private void centerOnNextPlayer() {
+		if (game.getCurrentPlayer().getAllUnit().size() > 0) {
+		checkCentering(game.getCurrentPlayer().getAllUnit().
+				get(0).getLocation().getX(),game.getCurrentPlayer().getAllUnit().
+				get(0).getLocation().getY());
+		}
+		game.setMovedToNewPlayer(true);
+	}
 	
 	//How close to the destination the view is
 	private double percentDoneCentering() {
-		return (Math.log(((double)timeCentering/
-				(double)TIME_TO_CENTER*(19.1)) + 1)) / 3;
+		return (Math.log(((double)timeCentering/(double)TIME_TO_CENTER*(19.1)) + 1)) / 3;
 	}
 	
 	public int getSelectedX() {

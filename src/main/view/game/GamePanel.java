@@ -55,8 +55,7 @@ public class GamePanel extends Panel {
 	
 	
 	public void draw(Graphics g, int width, int height) {
-		camera.getPanelCenterer().checkCentering(5, 5);
-		//panelCenterer.checkWindowCentered(width, height);
+		camera.getPanelCenterer().checkWindowCentered(width, height);
 		g2d = (Graphics2D)g;
 		tileDrawer.drawTiles();
 		tileDrawer.drawMovingTiles();

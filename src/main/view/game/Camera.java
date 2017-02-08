@@ -4,13 +4,11 @@ import game.Game;
 
 public class Camera {
 	private GamePanel gamePanel;
-	private Game game;
 	private PanelCenterer panelCenterer;
 	
 	public Camera(GamePanel gamePanel, Game game) {
-		this.game = game;
 		this.gamePanel = gamePanel;
-		this.panelCenterer = new PanelCenterer(game, this, gamePanel);
+		this.panelCenterer = new PanelCenterer(game, gamePanel);
 	}
 	
 	private int offsetX = 0;

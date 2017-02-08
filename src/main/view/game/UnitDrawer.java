@@ -53,16 +53,15 @@ public class UnitDrawer {
 			gamePanel.drawStaticTileElement(x, y, rotation, "UNIT_EXPLORER");
 			break;
 		case 3:
-			gamePanel.drawStaticTileElement(x, y ,rotation, "UNIT_COLONIST");
+			gamePanel.drawStaticTileElement(x, y, rotation, "UNIT_COLONIST");
 			break;
 		default:
 			log.warn("Invalid unit Type :" + type
 					+ " cannot be drawn");
 		}
-		
 	}
 	
-	void drawUnits() {
+	protected void drawUnits() {
 		for (Tile[] tiles : this.game.getGameBoard().getTiles()) {
 			for (Tile tile : tiles) {
 				if (tile.containsUnit) {
@@ -79,12 +78,10 @@ public class UnitDrawer {
 		for (int player = 0; player < game.getAllPlayers().size(); player++) {
 			playerUnits = game.getPlayer(player).getAllUnit();
 			for (int i = 0; i < playerUnits.size(); i++) {
-				if (playerUnits.get(i).getLocation().getX() == 
-						gamePanel.getCamera().getPanelCenterer().getSelectedX()
-						&& playerUnits.get(i).getLocation().getY() == 
-						gamePanel.getCamera().getPanelCenterer().getSelectedY()
-						&& gamePanel.getCamera().getPanelCenterer().getSelectedX() != -1 &&
-						gamePanel.getCamera().getPanelCenterer().getSelectedY() != -1) {
+				if (playerUnits.get(i).getLocation().getX() == gamePanel.getCamera().getPanelCenterer().getSelectedX()
+						&& playerUnits.get(i).getLocation().getY() == gamePanel.getCamera().getPanelCenterer().getSelectedY()
+						&& gamePanel.getCamera().getPanelCenterer().getSelectedX() != -1 && 
+						   gamePanel.getCamera().getPanelCenterer().getSelectedY() != -1) {
 					if (playerUnits.get(i).getUnitType() == 0 &&
 							game.getCurrentType() == UnitEnum.MELEE)
 						unitSelected = i;
