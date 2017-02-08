@@ -9,6 +9,6 @@ This is the repository for the turn based strategy game project for Team 3 in Da
 * David Weng
 * Khari Ollivierre
 * Gavin Scheele
-* Jinato Shen
+* Jinatao Shen
 
 
