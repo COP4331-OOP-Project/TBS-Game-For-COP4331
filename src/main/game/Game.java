@@ -404,6 +404,10 @@ public class Game {
 	public boolean getSomeItemSelected() {
 		return someItemSelected;
 	}
+	
+	public ArrayList<Player> getAllPlayers() {
+		return players;
+	}
 
 	public void formArmy() {
 	    Location currentLocation = this.currentSelectedEntity.getLocation();
