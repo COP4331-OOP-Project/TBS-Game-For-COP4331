@@ -30,14 +30,12 @@ public class ArmyDrawer {
 					for (Army army : tile.getArmies()) {
 						drawArmy(tile.getLocation().getX(), tile.getLocation().getY(), army.getOwnerID(), 
 								army.getRotation(), army.getAllUnits().size());
-						gamePanel.drawSelectedItem(true);
 					}
 				} else if (tile.containsBattleGroup() && tile.getUnits().size() > 0) {
 					// this is so wrong but might work for demo
 					
 					drawArmy(tile.getLocation().getX(), tile.getLocation().getY(),
 							tile.getUnits().get(0).getOwnerID(), 0, tile.getUnits().size()); // lol
-					gamePanel.drawSelectedItem(true);
 				}
 			}
 		}

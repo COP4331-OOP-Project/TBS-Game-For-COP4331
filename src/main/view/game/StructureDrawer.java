@@ -1,7 +1,5 @@
 package view.game;
 
-import java.awt.geom.AffineTransform;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -42,7 +40,6 @@ public class StructureDrawer {
 	}
 	
 	void drawBases() {
-		int currentPlayerId = this.game.getCurrentPlayer().getPlayerID();
 		for (Tile[] tiles : this.game.getGameBoard().getTiles()) {
 			for (Tile tile : tiles) {
 				if (tile.containsStructure) {
@@ -52,17 +49,5 @@ public class StructureDrawer {
 				}
 			}
 		}
-
-//		for (int player = 0; player < NUM_OF_PLAYERS; player++) {
-//			for (int i = 0; i < game.getPlayer(player).getBaseCount(); i++) {
-//				drawBase(game.getPlayer(player).getBases().get(i).getLocation().getX(),
-//						game.getPlayer(player).getBases().get(i).getLocation().getY(),
-//						player, game.getPlayer(player).getBases().get(i).getRotation());
-//			}
-//		}
-		gamePanel.drawSelectedItem(false);
-
-		//if (game.getCurrentPlayer().getBases().size() > 0)
-			//gamePanel.drawSelectedItem(false);
 	}
 }

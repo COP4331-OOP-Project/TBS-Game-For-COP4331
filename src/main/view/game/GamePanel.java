@@ -55,6 +55,7 @@ public class GamePanel extends Panel {
 		structureDrawer.drawBases();
 		armyDrawer.drawArmies();
 		unitDrawer.drawUnits();
+		selectedDrawer.drawSelectedItemOutline();
 	}
 	
 	private void checkNextPlayer() {
@@ -76,10 +77,6 @@ public class GamePanel extends Panel {
 			camera.getPanelCenterer().centerOnTile(selectedX, selectedY);
 			game.setCenterCoordinatesUpdated(false);
 		}
-	}
-
-	void drawSelectedItem(boolean isArmyUnit) {
-		selectedDrawer.drawSelectedItem(isArmyUnit);
 	}
 	
 	protected void drawStaticTileElement(int x, int y, String image) {

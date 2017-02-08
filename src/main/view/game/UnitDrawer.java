@@ -114,13 +114,11 @@ public class UnitDrawer {
 				//		playerUnits.get(unitSelected).getUnitType(),
 				//		playerUnits.get(unitSelected).getOwnerID(),
 				//	0);
-				gamePanel.drawSelectedItem(false);
 			} else if (game.getCurrentMode() == ModeEnum.UNIT && unitSelected != -1
 				&& game.getCurrentPlayer().getPlayerID() == player &&
 				(game.getGameBoard().gameMap[playerUnits.get(unitSelected).getLocation().getX()]
 						[playerUnits.get(unitSelected).getLocation().getY()]).containsArmy) {
 				game.setSelectedUnit(unitSelected);
-				gamePanel.drawSelectedItem(true);
 			} else if (game.getCurrentPlayer().getPlayerID() == player){
 				unitSelected = -1;
 				game.setSelectedUnit(-1);
