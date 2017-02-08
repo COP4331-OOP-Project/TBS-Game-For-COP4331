@@ -8,7 +8,7 @@ public class Camera {
 	
 	public Camera(GamePanel gamePanel, Game game) {
 		this.gamePanel = gamePanel;
-		this.panelCenterer = new PanelCenterer(game, gamePanel);
+		this.panelCenterer = new PanelCenterer(gamePanel);
 	}
 	
 	private int offsetX = 0;
@@ -31,11 +31,11 @@ public class Camera {
 	}
 	
 	protected int offsetX(int x) {
-		return getTileLocation(x + offsetX);
+		return getTileLocation(x) + offsetX;
 	}
 	
 	protected int offsetY(int y) {
-		return getTileLocation(y + offsetY);
+		return getTileLocation(y) + offsetY;
 	}
 	
 	protected int getTileLocation(int value) {

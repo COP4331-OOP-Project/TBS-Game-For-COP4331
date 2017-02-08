@@ -86,10 +86,6 @@ public class Game {
 	public void endGame() {
 
 	}
-	
-	public void waitASecond() {
-		
-	}
 
 	// Assign showing the make details panel
 	public boolean isShowingMakeDetails() { return showingMakeDetails; }
@@ -310,11 +306,13 @@ public class Game {
     public void executeMakeCommand(Enum type, String entityCode) {
 
 		if (type instanceof StructureEnum) {
-			MakeCommand<Structure> makeCmd = new MakeCommand<Structure>(this.getGameBoard(), (Structure) this.currentSelectedEntity, 1, entityCode);
+			MakeCommand<Structure> makeCmd = new MakeCommand<Structure>(this.getGameBoard(), 
+					(Structure) this.currentSelectedEntity, 1, entityCode);
 			this.currentSelectedEntity.addCommandToQueue(makeCmd);
 		}
 		else if (type instanceof UnitEnum) {
-			MakeCommand<Unit> makeCmd = new MakeCommand<Unit>(this.getGameBoard(), (Unit) this.currentSelectedEntity, 1, entityCode);
+			MakeCommand<Unit> makeCmd = new MakeCommand<Unit>(this.getGameBoard(), 
+					(Unit) this.currentSelectedEntity, 1, entityCode);
 			this.currentSelectedEntity.addCommandToQueue(makeCmd);
 		}
 

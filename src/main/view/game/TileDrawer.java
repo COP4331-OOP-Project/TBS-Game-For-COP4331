@@ -44,8 +44,7 @@ public class TileDrawer {
 		for (int i = 0; i < game.getGameBoard().gameMap.length; i++) {
 			for (int j = 0; j < game.getGameBoard().gameMap[i].length; j++) {
 				drawTile(i, j, game.getGameBoard().gameMap[i][j].getTileType());
-				if (game.getGameBoard().gameMap[i][j].getUnits().size() > 1
-						&& !game.getGameBoard().gameMap[i][i].containsArmy) {
+				if (game.getGameBoard().gameMap[i][j].getUnits().size() > 1 && !game.getGameBoard().gameMap[i][i].containsArmy) {
 					gamePanel.getG2D().drawString("" + game.getGameBoard().gameMap[i][j].getUnits().size()
 							, gamePanel.getCamera().offsetX(i) + 5, gamePanel.getCamera().offsetY(j) + 22);
 				}

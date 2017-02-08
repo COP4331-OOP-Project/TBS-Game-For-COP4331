@@ -3,23 +3,12 @@ package view.game;
 import game.Assets;
 import game.Game;
 
-import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
-import java.util.ArrayList;
-import java.util.Random;
-import controls.ModeEnum;
-import controls.unit.UnitEnum;
-import game.commands.MoveCommand;
-import game.entities.Army;
-import game.entities.RallyPoint;
-import game.entities.structures.Structure;
-import game.entities.units.Unit;
 import game.gameboard.Location;
 
-import game.gameboard.Tile;
 import view.Panel;
 
 import org.apache.logging.log4j.LogManager;
@@ -39,7 +28,10 @@ public class GamePanel extends Panel {
 	
 	private Game game;
 	private Graphics2D g2d;
-	 
+	
+	private int selectedX = 0;
+	private int selectedY = 0;
+	
 	Font tileFont = new Font("Lucida Sans", Font.PLAIN, 20);
 	
 	public GamePanel(Game game) {
@@ -52,19 +44,40 @@ public class GamePanel extends Panel {
 		selectedDrawer = new SelectedDrawer(this, game);
 	}
 	
-	
-	
 	public void draw(Graphics g, int width, int height) {
-		camera.getPanelCenterer().checkWindowCentered(width, height);
+		checkNextPlayer();
+		camera.getPanelCenterer().recenter(width, height);
+		updateSelectedItem();
+		
 		g2d = (Graphics2D)g;
 		tileDrawer.drawTiles();
 		tileDrawer.drawMovingTiles();
 		structureDrawer.drawBases();
 		armyDrawer.drawArmies();
 		unitDrawer.drawUnits();
-		drawSelectedItem(game.getCurrentMode() == ModeEnum.ARMY);
 	}
 	
+	private void checkNextPlayer() {
+		if (!game.getMovedToNewPlayer()) {
+			if (game.getCurrentPlayer().getAllUnit().size() > 0) {
+				camera.getPanelCenterer().centerOnTile(game.getCurrentPlayer().getAllUnit().
+						get(0).getLocation().getX(),game.getCurrentPlayer().getAllUnit().
+						get(0).getLocation().getY());
+				}
+				game.setMovedToNewPlayer(true);
+		}
+	}
+	
+	private void updateSelectedItem() {
+		if (this.game.isCenterCoordinatesUpdated()) {
+			Location loc = this.game.getCenterCoordinates();
+			selectedX = loc.getX();
+			selectedY = loc.getY();
+			camera.getPanelCenterer().centerOnTile(selectedX, selectedY);
+			game.setCenterCoordinatesUpdated(false);
+		}
+	}
+
 	void drawSelectedItem(boolean isArmyUnit) {
 		selectedDrawer.drawSelectedItem(isArmyUnit);
 	}
@@ -77,8 +90,7 @@ public class GamePanel extends Panel {
 	protected void drawStaticTileElement(int x, int y, int rotation, String image) {
 		AffineTransform currentRotation = g2d.getTransform();
 		rotateOnTile(x, y, rotation);
-		g2d.drawImage(Assets.getInstance().getImage(image), camera.offsetX(x), 
-				camera.offsetY(y), null); 
+		g2d.drawImage(Assets.getInstance().getImage(image), camera.offsetX(x), camera.offsetY(y), null); 
 		g2d.setTransform(currentRotation);
 	}
 	
@@ -112,5 +124,21 @@ public class GamePanel extends Panel {
 	
 	public int getTileSize() {
 		return TILE_PIXEL_SIZE;
+	}
+	
+	public void setSelectedX(int selectedX) {
+		this.selectedX = selectedX;
+	}
+	
+	public void setSelectedY(int selectedY) {
+		this.selectedY = selectedY;
+	}
+	
+	public int getSelectedX() {
+		return selectedX;
+	}
+	
+	public int getSelectedY() {
+		return selectedY;
 	}
 }

@@ -1,6 +1,4 @@
 package view.game;
-import java.awt.Graphics2D;
-import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
 
 import org.apache.logging.log4j.LogManager;
@@ -78,10 +76,10 @@ public class UnitDrawer {
 		for (int player = 0; player < game.getAllPlayers().size(); player++) {
 			playerUnits = game.getPlayer(player).getAllUnit();
 			for (int i = 0; i < playerUnits.size(); i++) {
-				if (playerUnits.get(i).getLocation().getX() == gamePanel.getCamera().getPanelCenterer().getSelectedX()
-						&& playerUnits.get(i).getLocation().getY() == gamePanel.getCamera().getPanelCenterer().getSelectedY()
-						&& gamePanel.getCamera().getPanelCenterer().getSelectedX() != -1 && 
-						   gamePanel.getCamera().getPanelCenterer().getSelectedY() != -1) {
+				if (playerUnits.get(i).getLocation().getX() == gamePanel.getSelectedX()
+						&& playerUnits.get(i).getLocation().getY() == gamePanel.getSelectedY()
+						&& gamePanel.getSelectedX() != -1 && 
+						   gamePanel.getSelectedY() != -1) {
 					if (playerUnits.get(i).getUnitType() == 0 &&
 							game.getCurrentType() == UnitEnum.MELEE)
 						unitSelected = i;

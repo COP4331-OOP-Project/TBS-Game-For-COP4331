@@ -13,10 +13,10 @@ public class SelectedDrawer {
 	}
 	
 	public void drawSelectedItem(boolean isArmyUnit) {
-		if (!(gamePanel.getCamera().getPanelCenterer().getSelectedX() == -1 &&
-				gamePanel.getCamera().getPanelCenterer().getSelectedY() == -1)) {
-			int x = gamePanel.getCamera().getPanelCenterer().getSelectedX();
-			int y = gamePanel.getCamera().getPanelCenterer().getSelectedY();
+		if (!(gamePanel.getSelectedX() == -1 &&
+				gamePanel.getSelectedY() == -1)) {
+			int x = gamePanel.getSelectedX();
+			int y = gamePanel.getSelectedY();
 			if (game.getCurrentMode() == ModeEnum.RALLY_POINT
 					&& game.getCurrentPlayer().getArmyRallyPoint().size() > 0) {
 				gamePanel.drawStaticTileElement(x, y, "RALLY_POINT_SELECTED");
