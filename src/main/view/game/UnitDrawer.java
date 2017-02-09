@@ -93,27 +93,12 @@ public class UnitDrawer {
 							game.getCurrentType() == UnitEnum.COLONIST)
 						unitSelected = i;
 				}
-				/*
-				if (!(game.getGameBoard().gameMap[playerUnits.get(i).getLocation().getX()]
-						[playerUnits.get(i).getLocation().getY()]).containsArmy) {
-					drawUnit(playerUnits.get(i).getLocation().getX(),
-							playerUnits.get(i).getLocation().getY(),
-							playerUnits.get(i).getUnitType(),
-							playerUnits.get(i).getOwnerID(),
-							0);
-				}
-				*/
 			}
 			if (game.getCurrentMode() == ModeEnum.UNIT && unitSelected != -1
 				&& game.getCurrentPlayer().getPlayerID() == player &&
 				!(game.getGameBoard().gameMap[playerUnits.get(unitSelected).getLocation().getX()]
 						[playerUnits.get(unitSelected).getLocation().getY()]).containsArmy) {
 				game.setSelectedUnit(unitSelected);
-				//drawUnit(playerUnits.get(unitSelected).getLocation().getX(),
-				//		playerUnits.get(unitSelected).getLocation().getY(),
-				//		playerUnits.get(unitSelected).getUnitType(),
-				//		playerUnits.get(unitSelected).getOwnerID(),
-				//	0);
 			} else if (game.getCurrentMode() == ModeEnum.UNIT && unitSelected != -1
 				&& game.getCurrentPlayer().getPlayerID() == player &&
 				(game.getGameBoard().gameMap[playerUnits.get(unitSelected).getLocation().getX()]

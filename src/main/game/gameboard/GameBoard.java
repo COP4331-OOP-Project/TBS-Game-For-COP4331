@@ -113,23 +113,17 @@ public class GameBoard {
     //Get the adjecent tile
     private Tile getAdjacentTile(Tile actorTile,int direction) {
         switch(direction) {
-            case 0: //Move north
-                return gameMap[actorTile.getLocation().getX()][actorTile.getLocation().getY() - 1];
             case 45: //Move north-east
-                return gameMap[actorTile.getLocation().getX()+1][actorTile.getLocation().getY() - 1];
+                return gameMap[actorTile.getLocation().getX() + 1][actorTile.getLocation().getY() - 1];
             case 90: //move east
                 return gameMap[actorTile.getLocation().getX() + 1][actorTile.getLocation().getY()];
             case 135: //move south east
-                return gameMap[actorTile.getLocation().getX()+1][actorTile.getLocation().getY() + 1];
-            case 180: //move south
                 return gameMap[actorTile.getLocation().getX()][actorTile.getLocation().getY() + 1];
             case 225: //move south west
-                return gameMap[actorTile.getLocation().getX()-1][actorTile.getLocation().getY() + 1];
+                return gameMap[actorTile.getLocation().getX() - 1][actorTile.getLocation().getY() + 1];
             case 270: //move west
                 return gameMap[actorTile.getLocation().getX() - 1][actorTile.getLocation().getY()];
             case 315: //move north west
-                return gameMap[actorTile.getLocation().getX()-1][actorTile.getLocation().getY() - 1];
-            case 360: //move north
                 return gameMap[actorTile.getLocation().getX()][actorTile.getLocation().getY() - 1];
             default:
                 return null;
