@@ -29,11 +29,11 @@ public class Assets {
 	private static final String GUI_MODE_SELECTED3 = "assets/gui/mode/selected3.png";
 	private static final String GUI_MODE_SELECTED4 = "assets/gui/mode/selected4.png";
 	
-	private static final String TERRAIN_SAND = "assets/terrain/sand.jpg";
-	private static final String TERRAIN_GRASS = "assets/terrain/grass.jpg";
-	private static final String TERRAIN_WATER1 = "assets/terrain/water1.jpg";
-	private static final String TERRAIN_WATER2 = "assets/terrain/water2.jpg";
-	private static final String TERRAIN_WATER3 = "assets/terrain/water3.jpg";
+	private static final String TERRAIN_SAND = "assets/terrain/sand.png";
+	private static final String TERRAIN_GRASS = "assets/terrain/grass.png";
+	private static final String TERRAIN_WATER1 = "assets/terrain/water1.png";
+	private static final String TERRAIN_WATER2 = "assets/terrain/water2.png";
+	private static final String TERRAIN_WATER3 = "assets/terrain/water3.png";
 	
 	private static final String OUTLINE_MINI = "assets/small/outline.jpg";
 	private static final String GRASS_MINI = "assets/small/grassmini.jpg";
