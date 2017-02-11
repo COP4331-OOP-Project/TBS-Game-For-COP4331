@@ -1,7 +1,5 @@
 package view;
 
-import java.awt.Graphics;
-
 public abstract class Panel {
 	private static final int TICKS_PER_IMAGE = 5;
 	private static final int IMAGES_TO_LOOP = 4;

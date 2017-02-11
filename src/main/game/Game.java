@@ -420,6 +420,4 @@ public class Game {
 	    this.currentPlayer.addArmy(newArmy);
 	    this.currentPlayer.addRallyPoint(newRallyPoint);
     }
-	
-	
 }

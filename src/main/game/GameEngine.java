@@ -14,8 +14,9 @@ public class GameEngine {
 		Assets.getInstance().loadResources();
 		Thread mainThread = new Thread() {
 			public void run() {
+				window = new Window(game);
 				events = new EventController(game);
-				window = new Window(game, events);
+				window.addKeyListener(events);
 				mainLoop();
 			}
 		};
