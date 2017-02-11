@@ -35,16 +35,16 @@ public class Camera {
 		return getTileLocationX(x, y) + offsetX;
 	}
 	
-	protected int offsetY(int y) {
-		return getTileLocationY(y) + offsetY;
+	protected int offsetY(int x, int y) {
+		return getTileLocationY(x, y) + offsetY;
 	}
 	
 	protected int getTileLocationX(int x, int y) {
-		return (int)((x * HEX_W) + ((y * 0.5f) * HEX_W));
+		return (int)(((x * 0.5f) * HEX_H/2) + (x * 0.5f) * HEX_H);
 	}
 	
-	protected int getTileLocationY(int y) {
-		return (int)(((y * 0.5f) * HEX_H/2) + (y * 0.5f) * HEX_H);
+	protected int getTileLocationY(int x, int y) {
+		return (int)((y * HEX_W) + ((x * 0.5f) * HEX_W));
 	}
 	
 	protected PanelCenterer getPanelCenterer() {

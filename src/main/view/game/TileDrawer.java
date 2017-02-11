@@ -47,12 +47,12 @@ public class TileDrawer {
 			for (int j = 0; j < game.getGameBoard().gameMap[i].length; j++) {
 				if (DEBUG) {
 					gamePanel.getG2D().drawString("(" + i + " ," + j + ")", gamePanel.getCamera().offsetX(i, j) - 13,
-							gamePanel.getCamera().offsetY(j) - 13);
+							gamePanel.getCamera().offsetY(i, j) - 13);
 				}
 				drawTile(i, j, game.getGameBoard().gameMap[i][j].getTileType());
 				if (game.getGameBoard().gameMap[i][j].getUnits().size() > 1 && !game.getGameBoard().gameMap[i][i].containsArmy) {
 					gamePanel.getG2D().drawString("" + game.getGameBoard().gameMap[i][j].getUnits().size()
-							, gamePanel.getCamera().offsetX(i, j) + 5, gamePanel.getCamera().offsetY(j) + 22);
+							, gamePanel.getCamera().offsetX(i, j) + 5, gamePanel.getCamera().offsetY(i, j) + 22);
 				}
 					
 			}

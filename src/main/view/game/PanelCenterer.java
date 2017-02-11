@@ -44,7 +44,7 @@ public class PanelCenterer {
 	
 	//Returns Y Offset Based on the Y Location of a Tile for centering
 	private int centeringOffsetY(int x, int y) {
-		return (height/2) - gamePanel.getCamera().getTileLocationY(y) - gamePanel.getTileSize()/2;
+		return (height/2) - gamePanel.getCamera().getTileLocationY(x, y) - gamePanel.getTileSize()/2;
 	}
 	
 	private void continueCentering() {
