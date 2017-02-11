@@ -20,17 +20,17 @@ public class Window extends JFrame {
 	public Window(Game game) {
 		frame = new Frame(game);
 		getContentPane().add(frame);
-		//setLocationRelativeTo(null);//Centers Window
-		setSize(screenWidth, screenHeight);
-		setLocationRelativeTo(null);
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setMinimumSize(new Dimension(screenWidth, screenHeight));
 		if (FULLSCREEN_MODE) {
 			screenWidth = java.awt.Toolkit.getDefaultToolkit().getScreenSize().width;
 			screenHeight = java.awt.Toolkit.getDefaultToolkit().getScreenSize().height;
 			DisplayMode dm = new DisplayMode(screenWidth, screenHeight, 32, 60);
 			setSize(new Dimension(dm.getWidth(), dm.getHeight()));
 			setUndecorated(true);
+		} else {
+			setSize(screenWidth, screenHeight);
+			setLocationRelativeTo(null);
+			setDefaultCloseOperation(EXIT_ON_CLOSE);
+			setMinimumSize(new Dimension(screenWidth, screenHeight));
 		}
 		setVisible(true);
 	}
