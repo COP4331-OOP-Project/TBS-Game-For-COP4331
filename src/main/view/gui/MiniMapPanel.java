@@ -34,6 +34,13 @@ public class MiniMapPanel extends Panel{
 				drawSmallTile(g, i, j, game.getGameBoard().gameMap[i][j].getTileType());				
 			}
 		}
+		drawBorder(g);
+	}
+
+	private void drawBorder(Graphics g) {
+		g.drawImage(Assets.getInstance().getImage("GUI_MINI_MAP_BORDER"), width - DISTANCE_FROM_RIGHT - 27
+                , height-DISTANCE_FROM_BOTTOM + 182, null);
+		
 	}
 
 	private void drawPanel(Graphics g) {
@@ -69,15 +76,4 @@ public class MiniMapPanel extends Panel{
 		return ((int)((y * HEX_HEIGHT) + ((x * 0.5f) * HEX_HEIGHT))) + this.height - 
 				DISTANCE_FROM_BOTTOM;
 	}
-	
-	/*
- 	protected int getTileLocationX(int x, int y) {
-		return ((int)(((x * 0.5f) * HEX_SIZE/2) + (x * 0.5f) * HEX_SIZE));
-	}
-	
-	protected int getTileLocationY(int x, int y) {
-		return ((int)((y * HEX_HEIGHT) + ((x * 0.5f) * HEX_HEIGHT)));
-	}
-	 */
-
 }
