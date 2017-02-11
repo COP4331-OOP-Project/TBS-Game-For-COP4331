@@ -57,7 +57,7 @@ public class Tile implements ITileAccessors {
 
     // Test if terrain is impassable
     public boolean isImpassable() {
-        return (Terrain == 2) ? true : false;
+        return (Terrain == 2 || Terrain == -1) ? true : false;
     }
 
     // Get Tile terrain type

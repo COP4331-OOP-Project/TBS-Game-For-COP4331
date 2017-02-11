@@ -26,6 +26,7 @@ public class Assets {
 	private static final String GUI_BOTTOM_RIGHT = "assets/gui/rightBottom.png";
 	
 	private static final String GUI_COMMAND_PANEL = "assets/gui/mode/commandPanel.png";
+	private static final String GUI_MINI_MAP_PANEL = "assets/gui/mode/minimapPanel.png";
 	private static final String GUI_MODE_PANEL = "assets/gui/mode/modePanel.png";
 	private static final String GUI_MODE_SELECTED1 = "assets/gui/mode/selected1.png";
 	private static final String GUI_MODE_SELECTED2 = "assets/gui/mode/selected2.png";
@@ -38,10 +39,10 @@ public class Assets {
 	private static final String TERRAIN_WATER2 = "assets/terrain/water2.png";
 	private static final String TERRAIN_WATER3 = "assets/terrain/water3.png";
 	
-	private static final String OUTLINE_MINI = "assets/small/outline.jpg";
-	private static final String GRASS_MINI = "assets/small/grassmini.jpg";
-	private static final String SAND_MINI = "assets/small/sandmini.jpg";
-	private static final String WATER_MINI = "assets/small/watermini.jpg";
+	private static final String OUTLINE_MINI = "assets/small/outline.png";
+	private static final String GRASS_MINI = "assets/small/grassmini.png";
+	private static final String SAND_MINI = "assets/small/sandmini.png";
+	private static final String WATER_MINI = "assets/small/watermini.png";
 	
 	private static final String UNIT_SELECTED = "assets/units/selectedUnit.png";
 	private static final String UNIT_G = "assets/units/green.png";
@@ -122,6 +123,7 @@ public class Assets {
 		loadItem("GUI_BOTTOM_RIGHT", GUI_BOTTOM_RIGHT);
 		
 		loadItem("GUI_COMMAND_PANEL", GUI_COMMAND_PANEL);
+		loadItem("GUI_MINI_MAP_PANEL", GUI_MINI_MAP_PANEL);
 		loadItem("GUI_MODE_PANEL", GUI_MODE_PANEL);
 		loadItem("GUI_MODE_SELECTED1", GUI_MODE_SELECTED1);
 		loadItem("GUI_MODE_SELECTED2", GUI_MODE_SELECTED2);

@@ -5,8 +5,8 @@ import game.Game;
 public class Camera {
 	private GamePanel gamePanel;
 	private PanelCenterer panelCenterer;
-	private static final int HEX_W = 86;
-	private static final int HEX_H = 100;
+	private static final int HEX_W = 100;
+	private static final int HEX_H = 86;
 	public Camera(GamePanel gamePanel, Game game) {
 		this.gamePanel = gamePanel;
 		this.panelCenterer = new PanelCenterer(gamePanel);
@@ -40,11 +40,11 @@ public class Camera {
 	}
 	
 	protected int getTileLocationX(int x, int y) {
-		return (int)(((x * 0.5f) * HEX_H/2) + (x * 0.5f) * HEX_H);
+		return (int)(((x * 0.5f) * HEX_W/2) + (x * 0.5f) * HEX_W);
 	}
 	
 	protected int getTileLocationY(int x, int y) {
-		return (int)((y * HEX_W) + ((x * 0.5f) * HEX_W));
+		return (int)((y * HEX_H) + ((x * 0.5f) * HEX_H));
 	}
 	
 	protected PanelCenterer getPanelCenterer() {

@@ -11,8 +11,10 @@ import org.apache.logging.log4j.Logger;
 
 public class MiniMapPanel extends Panel{
 	Game game;
-	private static final int TILE_SIZE = 12;
-	private static final int DISTANCE_FROM_RIGHT = 350;
+	private static final int HEX_SIZE = 12;
+	private static final int HEX_HEIGHT = 10;
+	private static final int DISTANCE_FROM_RIGHT = 420;
+	private static final int DISTANCE_FROM_BOTTOM = 550;
 	private final static Logger log = LogManager.getLogger(MiniMapPanel.class);
 	
 	private int width;
@@ -25,80 +27,57 @@ public class MiniMapPanel extends Panel{
 	public void draw(Graphics g, int width, int height) {
 		this.width = width;
 		this.height = height;
-		drawCorners(g, game.getGameBoard().gameMap.length);
+		drawPanel(g);
 		for (int i = 0; i < game.getGameBoard().gameMap.length; i++) {
-			drawTopOutline(g, i, 0);
-			drawLeftOutline(g, 0, i);
 			for (int j = 0; j < game.getGameBoard().gameMap[i].length; j++) {
 				
-				drawSmallTile(g, i, j, game.getGameBoard().gameMap[i][j].getTileType());
-				
+				drawSmallTile(g, i, j, game.getGameBoard().gameMap[i][j].getTileType());				
 			}
-			drawRightOutline(g, game.getGameBoard().gameMap.length - 1, i);
-			drawBottomOutline(g, i, game.getGameBoard().gameMap.length - 1);
 		}
 	}
 
-	private void drawCorners(Graphics g, int length) {
-		g.drawImage(Assets.getInstance().getImage("OUTLINE_MINI"), 
-				offX(0) - TILE_SIZE, offY(0) - TILE_SIZE, null);
-		g.drawImage(Assets.getInstance().getImage("OUTLINE_MINI"), 
-				offX(0) - TILE_SIZE, offY(length), null);
-		g.drawImage(Assets.getInstance().getImage("OUTLINE_MINI"), 
-				offX(length), offY(0) - TILE_SIZE, null);
-		g.drawImage(Assets.getInstance().getImage("OUTLINE_MINI"), 
-				offX(length), offY(length), null);//Good
-		
-	}
-
-	private void drawLeftOutline(Graphics g, int x, int y) {
-		g.drawImage(Assets.getInstance().getImage("OUTLINE_MINI"), 
-				offX(x) - TILE_SIZE, offY(y), null); 
-		
-	}
-
-	private void drawRightOutline(Graphics g, int x, int y) {
-		g.drawImage(Assets.getInstance().getImage("OUTLINE_MINI"), 
-				offX(x) + TILE_SIZE, offY(y), null); 
-		
-	}
-
-	private void drawTopOutline(Graphics g, int x, int y) {
-		g.drawImage(Assets.getInstance().getImage("OUTLINE_MINI"), 
-				offX(x), offY(y) - TILE_SIZE, null); 
-	}
-	
-	private void drawBottomOutline(Graphics g, int x, int y) {
-		g.drawImage(Assets.getInstance().getImage("OUTLINE_MINI"), 
-				offX(x), offY(y) + TILE_SIZE, null); 
+	private void drawPanel(Graphics g) {
+        g.drawImage(Assets.getInstance().getImage("GUI_MINI_MAP_PANEL"), width - DISTANCE_FROM_RIGHT - 50
+                , height-DISTANCE_FROM_BOTTOM + 163, null);
 	}
 
 	private void drawSmallTile(Graphics g, int x, int y, int tileType) {
 		switch (tileType) {
 			case 0:
 				g.drawImage(Assets.getInstance().getImage("GRASS_MINI"), 
-						offX(x), offY(y), null); 
+						offX(x, y), offY(x, y), null); 
 				break;
 			case 1:
 				g.drawImage(Assets.getInstance().getImage("SAND_MINI"), 
-						offX(x), offY(y), null); 
+						offX(x, y), offY(x, y), null); 
 				break;
 			case 2:
 				g.drawImage(Assets.getInstance().getImage("WATER_MINI"), 
-						offX(x), offY(y), null); 
+						offX(x, y), offY(x, y), null); 
 				break;
 			default:
 				log.warn("Invalid tile type");
 		}
 	}
 	
-	private int offX(int x) {
-		return this.width + (TILE_SIZE * x) - 
+	private int offX(int x, int y) {
+		return this.width + ((int)(((x * 0.5f) * HEX_SIZE/2) + (x * 0.5f) * HEX_SIZE)) - 
 				DISTANCE_FROM_RIGHT;
 	}
 	
-	private int offY(int y) {
-		return (y * TILE_SIZE) + this.height - 440;
+	private int offY(int x, int y) {
+		return ((int)((y * HEX_HEIGHT) + ((x * 0.5f) * HEX_HEIGHT))) + this.height - 
+				DISTANCE_FROM_BOTTOM;
 	}
+	
+	/*
+ 	protected int getTileLocationX(int x, int y) {
+		return ((int)(((x * 0.5f) * HEX_SIZE/2) + (x * 0.5f) * HEX_SIZE));
+	}
+	
+	protected int getTileLocationY(int x, int y) {
+		return ((int)((y * HEX_HEIGHT) + ((x * 0.5f) * HEX_HEIGHT)));
+	}
+	 */
 
 }

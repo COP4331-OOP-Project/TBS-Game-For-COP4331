@@ -54,8 +54,8 @@ public class Game {
 		//TODO: initialize game with players
 		this.players = new ArrayList<Player>();
 
-		Location initLocation1 = new Location(4,4);
-		Location initLocation2 = new Location(4,10);
+		Location initLocation1 = new Location(5,28);
+		Location initLocation2 = new Location(32,11);
 		Player player0 = new Player(0,initLocation1);
 		Player player1 = new Player(1,initLocation2);
 		players.add(player0);
