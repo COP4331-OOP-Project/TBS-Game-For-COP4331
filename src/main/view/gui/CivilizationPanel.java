@@ -14,8 +14,7 @@ import controls.command.CommandEnum;
 import java.awt.Font;
 
 public class CivilizationPanel extends Panel{
-	Font currentCommandFont = new Font("Lucida Sans", Font.BOLD, 20);
-	Font civInfoFont = new Font("Lucida Sans", Font.BOLD, 20);
+	Font civInfoFont = Assets.getInstance().getFont(2);
 	private Game game;
 
 	public CivilizationPanel(Game game) {
@@ -31,54 +30,15 @@ public class CivilizationPanel extends Panel{
 		drawBar(g, screenWidth, screenHeight);
 		drawText(g);
 		drawPlayerIcon(g);
-		drawCurrentCommand(g, screenWidth, screenHeight);
 	}
 
-	private void drawCurrentCommand(Graphics g, int width, int height) {
-		Font oldFont = g.getFont();
-		g.setFont(currentCommandFont);
-		String commandString = "";
-		if (game.getCurrentCommand() != null && 
-				game.getCurrentCommand() == CommandEnum.MAKE) {
-			commandString = "Make";
-		} else if (game.getCurrentCommand() != null && 
-				game.getCurrentCommand() == CommandEnum.HEAL) {
-			commandString = "Heal";
-		} else if (game.getCurrentCommand() != null && 
-				game.getCurrentCommand() == CommandEnum.ATTACK) {
-			commandString = "Attack";
-		} else if (game.getCurrentCommand() != null && 
-				game.getCurrentCommand() == CommandEnum.DEFEND) {
-			commandString = "Defend";
-		} else if (game.getCurrentCommand() != null && 
-				game.getCurrentCommand() == CommandEnum.POWER_UP) {
-			commandString = "Power Up";
-		} else if (game.getCurrentCommand() != null && 
-				game.getCurrentCommand() == CommandEnum.POWER_DOWN) {
-			commandString = "Power Down";
-		} else if (game.getCurrentCommand() != null && 
-				game.getCurrentCommand() == CommandEnum.CANCEL_COMMAND_QUEUE) {
-			commandString = "Cancel Command Queue";
-		} else if (game.getCurrentCommand() != null && 
-				game.getCurrentCommand() == CommandEnum.DECOMISSION) {
-			commandString = "Decomission";
-		} else if (game.getCurrentCommand() != null && 
-				game.getCurrentCommand() == CommandEnum.MOVE) {
-			commandString = "Move";
-		} else if (game.getCurrentCommand() == null) {
-			commandString = "None";
-		}
-		
-		g.drawString("Current Command: " + commandString, width - 470, 35);
-		g.setFont(oldFont);
-		
-	}
+
 
 	private void drawPlayerIcon(Graphics g) {
 		if (game.getCurrentPlayer().getPlayerID() == 0) {
-			g.drawImage(Assets.getInstance().getImage("ICON_O"), 80, 17, null);
+			g.drawImage(Assets.getInstance().getImage("ICON_O"), 120, 9, null);
 		} else {
-			g.drawImage(Assets.getInstance().getImage("ICON_B"), 80, 17, null);
+			g.drawImage(Assets.getInstance().getImage("ICON_B"), 120, 9, null);
 		}
 		
 	}
@@ -86,8 +46,8 @@ public class CivilizationPanel extends Panel{
 	private void drawText(Graphics g) {
 		Font old = g.getFont();
 		g.setFont(civInfoFont);
-		g.drawString("Player: ", 5, 35);
-		g.drawString("Turn: "+ game.getTurnNum(), 5, 65);
+		g.drawString("Player: ", 10, 40);
+		g.drawString("Turn: "+ game.getTurnNum(), 10, 80);
 		g.setFont(old);
 	}
 

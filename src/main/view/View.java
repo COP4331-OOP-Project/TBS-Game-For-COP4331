@@ -11,6 +11,8 @@ import view.gui.UnitDetailsPanel;
 import view.gui.UnitOverviewPanel;
 
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 
 import controls.ModeEnum;
 
@@ -39,7 +41,10 @@ public class View {
 		makePanel = new MakeDetailsPanel(game);
 	}
 	
-	public void drawVisiblePanels(Graphics g, int width, int height) {
+	public void drawVisiblePanels(Graphics2D g, int width, int height) {
+		g.setRenderingHint(
+		        RenderingHints.KEY_TEXT_ANTIALIASING,
+		        RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 		//Add structure And unit Overview Modes
 		gamePanel.draw(g, width, height);
 		civPanel.draw(g, width, height);

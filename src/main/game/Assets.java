@@ -1,4 +1,6 @@
 package game;
+import java.awt.Font;
+import java.awt.FontFormatException;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -23,6 +25,7 @@ public class Assets {
 	private static final String GUI_BOTTOM_MIDDLE = "assets/gui/barMiddleBottom.png";
 	private static final String GUI_BOTTOM_RIGHT = "assets/gui/rightBottom.png";
 	
+	private static final String GUI_COMMAND_PANEL = "assets/gui/mode/commandPanel.png";
 	private static final String GUI_MODE_PANEL = "assets/gui/mode/modePanel.png";
 	private static final String GUI_MODE_SELECTED1 = "assets/gui/mode/selected1.png";
 	private static final String GUI_MODE_SELECTED2 = "assets/gui/mode/selected2.png";
@@ -75,12 +78,40 @@ public class Assets {
 	private static final String AOE_LOSE = "assets/areaEffect/redCross.png";
 	private static final String AOE_HEAL = "assets/areaEffect/skullDecal.png";
 	
+	private static final String FONT = "assets/fonts/coolvetica.ttf";
+	
+	private Font defaultFont;
+	private Font smallFont;
+	private Font mediumFont;
+	private Font largeFont;
+	private Font hugeFont;
+	
 	private ArrayList<BufferedImage> gameImages;
 	private int lastItemLoaded = 0;
 	
 	private Assets() {} //Constructor is Private, only one instance of Resources can be created
 
 	public void loadResources() {
+		loadImages();
+		loadFonts();
+	}
+	
+	private void loadFonts() {
+		try {
+			defaultFont = Font.createFont(Font.TRUETYPE_FONT, new File(FONT));
+		} catch (FontFormatException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			defaultFont = new Font("Lucida Sans", Font.BOLD, 20);
+			e.printStackTrace();
+		}
+		smallFont = defaultFont.deriveFont(22f);
+		mediumFont = defaultFont.deriveFont(26f);
+		largeFont = defaultFont.deriveFont(40f);
+		hugeFont = defaultFont.deriveFont(60f);
+	}
+
+	private void loadImages() {
 		gameImages = new ArrayList<BufferedImage>();
 		loadItem("GUI_TOP_LEFT", GUI_TOP_LEFT);
 		loadItem("GUI_TOP_MIDDLE", GUI_TOP_MIDDLE);
@@ -90,6 +121,7 @@ public class Assets {
 		loadItem("GUI_BOTTOM_MIDDLE", GUI_BOTTOM_MIDDLE);
 		loadItem("GUI_BOTTOM_RIGHT", GUI_BOTTOM_RIGHT);
 		
+		loadItem("GUI_COMMAND_PANEL", GUI_COMMAND_PANEL);
 		loadItem("GUI_MODE_PANEL", GUI_MODE_PANEL);
 		loadItem("GUI_MODE_SELECTED1", GUI_MODE_SELECTED1);
 		loadItem("GUI_MODE_SELECTED2", GUI_MODE_SELECTED2);
@@ -142,7 +174,6 @@ public class Assets {
 		loadItem("AOE_DIE", AOE_DIE);
 		loadItem("AOE_LOSE", AOE_LOSE);
 		loadItem("AOE_HEAL", AOE_HEAL);
-		
 	}
 	
 	private void loadItem(String name, String path) {
@@ -160,6 +191,21 @@ public class Assets {
 	
 	public BufferedImage getImage(String image) {
 		return gameImages.get(assets.get(image));
+	}
+	
+	public Font getFont(int size) {
+		switch (size) {
+		case 0:
+			return smallFont;
+		case 1:
+			return mediumFont;
+		case 2:
+			return largeFont;
+		case 3:
+			return hugeFont;
+		default:
+			return defaultFont;
+		}
 	}
 	
 	public static Assets getInstance() {

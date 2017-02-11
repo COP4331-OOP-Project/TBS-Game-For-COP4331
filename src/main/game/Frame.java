@@ -17,7 +17,7 @@ public class Frame extends JPanel{
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		view.drawVisiblePanels(g, getSize().width, getSize().height);
+		view.drawVisiblePanels((Graphics2D)g, getSize().width, getSize().height);
 	}
 
 	public void updateAnimationTime() {

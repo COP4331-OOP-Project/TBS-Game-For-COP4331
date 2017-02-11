@@ -8,8 +8,8 @@ public class Window extends JFrame {
 	private static final boolean FULLSCREEN_MODE = false;
 	static final long serialVersionUID = 1L;
 	private Frame frame;
-	private int defaultScreenWidth = 800;
-	private int defaultScreenHeight = 600;
+	private int defaultScreenWidth = 1366;
+	private int defaultScreenHeight = 768;
 	private int screenWidth = defaultScreenWidth;
 			//java.awt.Toolkit.getDefaultToolkit().getScreenSize().width;
 	private int screenHeight = defaultScreenHeight;
@@ -22,6 +22,7 @@ public class Window extends JFrame {
 		getContentPane().add(frame);
 		//setLocationRelativeTo(null);//Centers Window
 		setSize(screenWidth, screenHeight);
+		setLocationRelativeTo(null);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setMinimumSize(new Dimension(screenWidth, screenHeight));
 		if (FULLSCREEN_MODE) {
