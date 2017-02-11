@@ -106,7 +106,7 @@ public class Assets {
 			defaultFont = new Font("Lucida Sans", Font.BOLD, 20);
 			e.printStackTrace();
 		}
-		smallFont = defaultFont.deriveFont(22f);
+		smallFont = defaultFont.deriveFont(23f);
 		mediumFont = defaultFont.deriveFont(26f);
 		largeFont = defaultFont.deriveFont(40f);
 		hugeFont = defaultFont.deriveFont(60f);
