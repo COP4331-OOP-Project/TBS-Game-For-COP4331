@@ -51,6 +51,9 @@ public class Assets {
 	private static final String UNIT_Y = "assets/units/yellow.png";
 	private static final String UNIT_O = "assets/units/orange.png";
 	
+	private static final String UNIT_O_SMALL = "assets/small/orange.png";
+	private static final String UNIT_B_SMALL = "assets/small/blue.png";
+	
 	private static final String UNIT_MELEE = "assets/units/decal/Melee.png";
 	private static final String UNIT_RANGED = "assets/units/decal/Ranged.png";
 	private static final String UNIT_EXPLORER = "assets/units/decal/Explorer.png";
@@ -62,6 +65,9 @@ public class Assets {
 	private static final String BASE_B = "assets/structure/baseBlue.png";
 	private static final String BASE_Y = "assets/structure/baseYellow.png";
 	private static final String BASE_O = "assets/structure/baseOrange.png";
+
+	private static final String BASE_B_SMALL = "assets/small/baseblue.png";
+	private static final String BASE_O_SMALL = "assets/small/baseorange.png";
 	
 	private static final String ARMY_SELECTED = "assets/army/selectedArmy.png";
 	private static final String ARMY_G = "assets/army/GreenArmy.png";
@@ -137,12 +143,16 @@ public class Assets {
 		loadItem("TERRAIN_WATER1", TERRAIN_WATER1);
 		loadItem("TERRAIN_WATER2", TERRAIN_WATER2);
 		loadItem("TERRAIN_WATER3", TERRAIN_WATER3);
-		
 
 		loadItem("OUTLINE_MINI", OUTLINE_MINI);
 		loadItem("GRASS_MINI", GRASS_MINI);
 		loadItem("SAND_MINI", SAND_MINI);
 		loadItem("WATER_MINI", WATER_MINI);
+
+		loadItem("BASE_O_SMALL", BASE_O_SMALL);
+		loadItem("BASE_B_SMALL", BASE_B_SMALL);
+		loadItem("UNIT_O_SMALL", UNIT_O_SMALL);
+		loadItem("UNIT_B_SMALL", UNIT_B_SMALL);
 		
 		loadItem("UNIT_SELECTED", UNIT_SELECTED);
 		loadItem("UNIT_MELEE", UNIT_MELEE);

@@ -19,8 +19,7 @@ import java.util.ArrayList;
  * */
 public class GameBoard {
 
-    public Tile[][] gameMap;     // Map for game tiles
-                                 // 0 is grass, 1 is sand, 2 is water
+    private Tile[][] gameMap;     // Map for game tiles  // 0 is grass, 1 is sand, 2 is water
     private ArrayList<Player> players;              // Players for game
     private static final int BOARD_SIZE = 42;
     private final static Logger log = LogManager.getLogger(ModeController.class);

@@ -47,15 +47,15 @@ public class TileDrawer {
 		Font oldFont = gamePanel.getG2D().getFont();
 		gamePanel.getG2D().setFont(numFont);
 		gamePanel.getG2D().setColor(Color.BLACK);
-		for (int i = 0; i < game.getGameBoard().gameMap.length; i++) {
-			for (int j = 0; j < game.getGameBoard().gameMap[i].length; j++) {
+		for (int i = 0; i < game.getGameBoard().getTiles().length; i++) {
+			for (int j = 0; j < game.getGameBoard().getTiles()[i].length; j++) {
 				if (DEBUG) {
 					gamePanel.getG2D().drawString("(" + i + " ," + j + ")", gamePanel.getCamera().offsetX(i, j) - 13,
 							gamePanel.getCamera().offsetY(i, j) - 13);
 				}
-				drawTile(i, j, game.getGameBoard().gameMap[i][j].getTileType());
-				if (game.getGameBoard().gameMap[i][j].getUnits().size() > 1 && !game.getGameBoard().gameMap[i][i].containsArmy) {
-					gamePanel.getG2D().drawString("" + game.getGameBoard().gameMap[i][j].getUnits().size()
+				drawTile(i, j, game.getGameBoard().getTiles()[i][j].getTileType());
+				if (game.getGameBoard().getTiles()[i][j].getUnits().size() > 1 && !game.getGameBoard().getTiles()[i][i].containsArmy) {
+					gamePanel.getG2D().drawString("" + game.getGameBoard().getTiles()[i][j].getUnits().size()
 							, gamePanel.getCamera().offsetX(i, j) + 5, gamePanel.getCamera().offsetY(i, j) + 22);
 				}
 					

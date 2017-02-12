@@ -96,12 +96,12 @@ public class UnitDrawer {
 			}
 			if (game.getCurrentMode() == ModeEnum.UNIT && unitSelected != -1
 				&& game.getCurrentPlayer().getPlayerID() == player &&
-				!(game.getGameBoard().gameMap[playerUnits.get(unitSelected).getLocation().getX()]
+				!(game.getGameBoard().getTiles()[playerUnits.get(unitSelected).getLocation().getX()]
 						[playerUnits.get(unitSelected).getLocation().getY()]).containsArmy) {
 				game.setSelectedUnit(unitSelected);
 			} else if (game.getCurrentMode() == ModeEnum.UNIT && unitSelected != -1
 				&& game.getCurrentPlayer().getPlayerID() == player &&
-				(game.getGameBoard().gameMap[playerUnits.get(unitSelected).getLocation().getX()]
+				(game.getGameBoard().getTiles()[playerUnits.get(unitSelected).getLocation().getX()]
 						[playerUnits.get(unitSelected).getLocation().getY()]).containsArmy) {
 				game.setSelectedUnit(unitSelected);
 			} else if (game.getCurrentPlayer().getPlayerID() == player){

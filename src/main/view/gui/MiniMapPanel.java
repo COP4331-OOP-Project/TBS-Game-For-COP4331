@@ -4,6 +4,7 @@ import java.awt.Graphics;
 
 import game.Assets;
 import game.Game;
+import game.entities.units.Unit;
 import view.Panel;
 
 import org.apache.logging.log4j.LogManager;
@@ -28,13 +29,45 @@ public class MiniMapPanel extends Panel{
 		this.width = width;
 		this.height = height;
 		drawPanel(g);
-		for (int i = 0; i < game.getGameBoard().gameMap.length; i++) {
-			for (int j = 0; j < game.getGameBoard().gameMap[i].length; j++) {
-				
-				drawSmallTile(g, i, j, game.getGameBoard().gameMap[i][j].getTileType());				
+		for (int i = 0; i < game.getGameBoard().getTiles().length; i++) {
+			for (int j = 0; j < game.getGameBoard().getTiles()[i].length; j++) {
+				drawSmallTile(g, i, j, game.getGameBoard().getTiles()[i][j].getTileType());
+
+				if (game.getGameBoard().getTiles()[i][j].containsStructure) {
+					drawSmallStructure(game.getGameBoard().getTiles()[i][j].getStructure().getLocation().getX(), 
+							game.getGameBoard().getTiles()[i][j].getStructure().getLocation().getY(), 
+							game.getGameBoard().getTiles()[i][j].getStructure().getOwnerID(), g);
+				}
+				if (game.getGameBoard().getTiles()[i][j].containsUnit) {
+					for (Unit unit : game.getGameBoard().getTiles()[i][j].getUnits()) {
+						if (!game.getGameBoard().getTiles()[i][j].containsArmy && !game.getGameBoard().getTiles()[i][j].containsBattleGroup()) {
+							drawSmallUnit(game.getGameBoard().getTiles()[i][j].getLocation().getX(), 
+									game.getGameBoard().getTiles()[i][j].getLocation().getY(), 
+									unit.getUnitType(), unit.getOwnerID(), g);
+						}
+					}
+				}
 			}
 		}
 		drawBorder(g);
+	}
+
+	private void drawSmallStructure(int x, int y, int ownerID, Graphics g) {
+		if (ownerID == 0) {
+			g.drawImage(Assets.getInstance().getImage("BASE_O_SMALL"), offX(x, y), offY(x, y), null);
+			
+			} else {
+				g.drawImage(Assets.getInstance().getImage("BASE_B_SMALL"), offX(x, y), offY(x, y), null);
+			}
+	}
+
+	private void drawSmallUnit(int x, int y, int unitType, int ownerID, Graphics g) {
+		if (ownerID == 0) {
+		g.drawImage(Assets.getInstance().getImage("UNIT_O_SMALL"), offX(x, y), offY(x, y), null);
+		
+		} else {
+			g.drawImage(Assets.getInstance().getImage("UNIT_B_SMALL"), offX(x, y), offY(x, y), null);
+		}
 	}
 
 	private void drawBorder(Graphics g) {
