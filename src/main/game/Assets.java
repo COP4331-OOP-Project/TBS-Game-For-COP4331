@@ -80,7 +80,8 @@ public class Assets {
 	
 	private static final String RALLY_POINT_SELECTED = "assets/rallyPoint/selectedRallyPoint.png";
 	private static final String DETAILS_PANEL = "assets/detailsPanel/detailsPanel.png";
-	private static final String MOVE_SELECTED = "assets/move/moveSelected.png";
+	
+	private static final String MOVE_SELECTED = "assets/tileCovering/moveSelected.png";
 	
 	private static final String AOE_DIE = "assets/areaEffect/loseHealth.png";
 	private static final String AOE_LOSE = "assets/areaEffect/redCross.png";
@@ -166,7 +167,7 @@ public class Assets {
 		loadItem("UNIT_O", UNIT_O);
 		
 		loadItem("BASE_SELECTED", BASE_SELECTED);
-		loadItem("BASE_ARROW", BASE_ARROW);loadItem("MOVE_SELECTED", MOVE_SELECTED);
+		loadItem("BASE_ARROW", BASE_ARROW);
 		loadItem("BASE_G", BASE_G);
 		loadItem("BASE_B", BASE_B);
 		loadItem("BASE_Y", BASE_Y);
