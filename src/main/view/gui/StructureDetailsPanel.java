@@ -4,10 +4,8 @@ import java.awt.Font;
 import java.awt.Graphics;
 
 import controls.structure.StructureEnum;
-import controls.unit.UnitEnum;
 import game.Assets;
 import game.Game;
-import game.entities.PowerState;
 
 public class StructureDetailsPanel extends DetailsPanel{
 	private Game game;

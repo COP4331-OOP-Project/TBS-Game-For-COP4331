@@ -1,16 +1,10 @@
 package view.gui;
 
 import game.Assets;
-
-import game.Assets;
 import game.Game;
-import game.Player;
 import view.Panel;
 
 import java.awt.Graphics;
-
-import controls.command.CommandEnum;
-
 import java.awt.Font;
 
 public class CivilizationPanel extends Panel{
