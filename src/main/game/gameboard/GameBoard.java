@@ -111,13 +111,13 @@ public class GameBoard {
             {
                 Location l = new Location(i,j);
                 if(map[i][j] == -1)
-                    gameMap[i][j] = new Tile(-1,l);
+                    gameMap[i][j] = new Tile(TerrainEnum.INVISIBLE ,l);
                 if(map[i][j] == 0)
-                    gameMap[i][j] = new Tile(0,l);
+                    gameMap[i][j] = new Tile(TerrainEnum.GRASS,l);
                 if(map[i][j] == 1)
-                    gameMap[i][j] = new Tile(1,l);
+                    gameMap[i][j] = new Tile(TerrainEnum.SAND,l);
                 if(map[i][j] == 2)
-                    gameMap[i][j] = new Tile(2,l);
+                    gameMap[i][j] = new Tile(TerrainEnum.WATER,l);
             }
         }
     }

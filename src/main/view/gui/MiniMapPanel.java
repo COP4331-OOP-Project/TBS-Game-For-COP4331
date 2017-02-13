@@ -5,6 +5,7 @@ import java.awt.Graphics;
 import game.Assets;
 import game.Game;
 import game.entities.units.Unit;
+import game.gameboard.TerrainEnum;
 import view.Panel;
 
 import org.apache.logging.log4j.LogManager;
@@ -75,17 +76,17 @@ public class MiniMapPanel extends Panel{
 		
 	}
 
-	private void drawSmallTile(Graphics g, int x, int y, int tileType) {
+	private void drawSmallTile(Graphics g, int x, int y, TerrainEnum tileType) {
 		switch (tileType) {
-			case 0:
+			case GRASS:
 				g.drawImage(Assets.getInstance().getImage("GRASS_MINI"), 
 						offX(x, y), offY(x, y), null); 
 				break;
-			case 1:
+			case SAND:
 				g.drawImage(Assets.getInstance().getImage("SAND_MINI"), 
 						offX(x, y), offY(x, y), null); 
 				break;
-			case 2:
+			case WATER:
 				g.drawImage(Assets.getInstance().getImage("WATER_MINI"), 
 						offX(x, y), offY(x, y), null); 
 				break;

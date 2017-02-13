@@ -8,6 +8,7 @@ import game.commands.MoveCommand;
 import game.entities.units.Unit;
 import game.gameboard.GameBoard;
 import game.gameboard.Location;
+import game.gameboard.TerrainEnum;
 
 public class RallyPoint implements ICommandable {
 	private int rallyID;
@@ -166,7 +167,7 @@ public class RallyPoint implements ICommandable {
 		/**Return true if tile is not a river tile and
 		 * 				There are no enemies on it
 		 */
-		if(gameBoard.getTiles()[location.getX()][location.getY()].getTileType()!=2 ){
+		if(gameBoard.getTiles()[location.getX()][location.getY()].getTileType() != TerrainEnum.WATER){
 			if(!gameBoard.getTiles()[location.getX()][location.getY()].hasEnemyUnit(army.getOwnerID())){
 				return true;
 			}
