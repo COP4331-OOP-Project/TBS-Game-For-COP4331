@@ -85,7 +85,7 @@ public class Assets {
 	private static final String AOE_LOSE = "assets/areaEffect/redCross.png";
 	private static final String AOE_HEAL = "assets/areaEffect/skullDecal.png";
 	
-	private static final String FONT = "assets/fonts/coolvetica.ttf";
+	private static final String FONT = "assets/fonts/Lato-Black.ttf";
 	
 	private Font defaultFont;
 	private Font smallFont;
@@ -112,10 +112,10 @@ public class Assets {
 			defaultFont = new Font("Lucida Sans", Font.BOLD, 20);
 			e.printStackTrace();
 		}
-		smallFont = defaultFont.deriveFont(23f);
-		mediumFont = defaultFont.deriveFont(26f);
-		largeFont = defaultFont.deriveFont(40f);
-		hugeFont = defaultFont.deriveFont(60f);
+		smallFont = defaultFont.deriveFont(18f);
+		mediumFont = defaultFont.deriveFont(21f);
+		largeFont = defaultFont.deriveFont(35f);
+		hugeFont = defaultFont.deriveFont(55f);
 	}
 
 	private void loadImages() {
