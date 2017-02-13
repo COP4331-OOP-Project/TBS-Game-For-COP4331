@@ -24,6 +24,9 @@ public class GamePanel extends Panel {
 	private StructureDrawer structureDrawer;
 	private SelectedDrawer selectedDrawer;
 	
+	private int previousX = -1;
+	private int previousY = -1;
+	
 	private Game game;
 	private Graphics2D g2d;
 	
@@ -40,7 +43,9 @@ public class GamePanel extends Panel {
 	}
 	
 	public void draw(Graphics g, int width, int height) {
-		camera.getPanelCenterer().recenter(width, height);
+		if (game.getSelectedX() != previousX || game.getSelectedX() != previousY) {
+			camera.getPanelCenterer().recenter(width, height);
+		}
 		if (game.getSelectedX() != 0 && game.getSelectedY() != 0) {
 			camera.getPanelCenterer().centerOnTile(game.getSelectedX(), game.getSelectedY());
 		}
@@ -55,8 +60,12 @@ public class GamePanel extends Panel {
 		for (int i = 0; i < game.getGameBoard().getTiles().length; i++) {
 			for (int j = 0; j < game.getGameBoard().getTiles()[i].length; j++) {
 				Tile tile = game.getGameBoard().getTiles()[i][j];
+				int x = tile.getLocation().getX();
+				int y = tile.getLocation().getY();
+				
 				//Draw Tiles
 				tileDrawer.drawTile(i, j, tile.getTileType());
+				
 				if (tile.getUnits().size() > 1 && !tile.containsArmy) {
 					getG2D().drawString("" + tile.getUnits().size()
 							, getCamera().offsetX(i, j) + 5, getCamera().offsetY(i, j) + 22);
@@ -65,27 +74,24 @@ public class GamePanel extends Panel {
 				//Draw Structures
 				if (tile.containsStructure) {
 					Structure structure = tile.getStructure();
-					structureDrawer.drawBase(tile.getLocation().getX(), tile.getLocation().getY(), 
-							structure.getOwnerID(), structure.getRotation());
+					structureDrawer.drawBase(x, y, structure.getOwnerID(), structure.getRotation());
 				}
-				
 				//Draw Armies
 				if (tile.containsArmy) {
 					for (Army army : tile.getArmies()) {
-						armyDrawer.drawArmy(tile.getLocation().getX(), tile.getLocation().getY(), army.getOwnerID(), 
+						armyDrawer.drawArmy(x, y, army.getOwnerID(), 
 								army.getRotation(), army.getAllUnits().size());
 					}
 				} else if (tile.containsBattleGroup() && tile.getUnits().size() > 0) {
 					// this is so wrong but might work for demo
-						armyDrawer.drawArmy(tile.getLocation().getX(), tile.getLocation().getY(),
-							tile.getUnits().get(0).getOwnerID(), 0, tile.getUnits().size()); // lol
+						armyDrawer.drawArmy(x, y, tile.getUnits().get(0).getOwnerID(), 
+								0, tile.getUnits().size()); // lol
 				}
-				
 				//Draw Units
 				if (tile.containsUnit) {
 					for (Unit unit : tile.getUnits()) {
 						if (!tile.containsArmy && !tile.containsBattleGroup()) {
-							unitDrawer.drawUnit(tile.getLocation().getX(), tile.getLocation().getY(), unit.getUnitType(), unit.getOwnerID(), 0);
+							unitDrawer.drawUnit(x, y, unit.getUnitType(), unit.getOwnerID(), 0);
 						}
 					}
 				}
