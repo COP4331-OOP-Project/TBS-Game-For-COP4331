@@ -27,7 +27,7 @@ public class StructureDetailsPanel extends DetailsPanel{
 		Font old = g.getFont();
 		g.setFont(detailsFont);
 		g.drawString("Structure Details:", 10, height - 65);
-		if (game.getSomeItemSelected() && game.getCurrentPlayer().getBases().size() > 0) {
+		if (game.getCurrentPlayer().getBases().size() > 0) {
 			g.drawString("Type: ", 30, height - 35);
 			g.drawString("Health: ", 30, height - 10);
 			g.drawString("Attack: ", 430, height - 35);

@@ -42,8 +42,7 @@ public class Game {
 	private boolean unitOverviewVisible = false;
 	private boolean structureOverviewVisible = false;
 	private boolean showingMakeDetails = false;
-	private boolean someItemSelected = false;
-	private boolean movedToNewPlayer = true;
+	
 	private int makeOption = 0;
 
 	private int selectedX = 0;
@@ -131,8 +130,13 @@ public class Game {
 		    commandable.doTurn();
         }
 		centerOnCurrentTypeInstance();
-		movedToNewPlayer = false;
+		moveToNextPlayer();
     }
+
+	private void moveToNextPlayer() {
+		selectedX = getCurrentPlayer().getAllUnit().get(0).getLocation().getX();
+		selectedY = getCurrentPlayer().getAllUnit().get(0).getLocation().getY();
+	}
 
 	public int getTurnNum() {
 		return turnNum;
@@ -173,8 +177,6 @@ public class Game {
         if (selectedEntity == null) {
             log.error("Cannot center on instance because it does not exist");
             return;
-        } else {
-        	someItemSelected = true;
         }
         Location newLocation = selectedEntity.getLocation();
         this.changeCenterCoordinates(newLocation);
@@ -235,12 +237,9 @@ public class Game {
         Enum currentType = typeController.getType();
         ICommandable selectedEntity = typeInstanceController.cycleForward(currentType);
         if (selectedEntity != null) {
-        	someItemSelected = true;
 	        this.currentSelectedEntity = selectedEntity;
 	        Location newLocation = selectedEntity.getLocation();
 		    this.changeCenterCoordinates(newLocation);
-        } else {
-        	someItemSelected = false;
         }
 	}
 
@@ -251,12 +250,9 @@ public class Game {
         Enum currentType = typeController.getType();
         ICommandable selectedEntity = typeInstanceController.cycleBackward(currentType);
         if (selectedEntity != null) {
-        	someItemSelected = true;
 	        this.currentSelectedEntity = selectedEntity;
 	        Location newLocation = selectedEntity.getLocation();
 		    this.changeCenterCoordinates(newLocation);
-        } else {
-        	someItemSelected = false;
         }
 	}
 
@@ -384,28 +380,12 @@ public class Game {
 		
 	}
 	
-	public void setMovedToNewPlayer(boolean movedToNewPlayer) {
-		this.movedToNewPlayer = movedToNewPlayer;
-	}
-	
-	public boolean getMovedToNewPlayer() {
-		return this.movedToNewPlayer;
-	}
-	
 	public boolean getUnitOverviewVisible() {
 		return unitOverviewVisible;
 	}
 	
 	public boolean getStructureOverviewVisible() {
 		return structureOverviewVisible;
-	}
-	
-	public void setSomeItemSelected(boolean someItemSelected) {
-		this.someItemSelected = someItemSelected;
-	}
-	
-	public boolean getSomeItemSelected() {
-		return someItemSelected;
 	}
 	
 	public ArrayList<Player> getAllPlayers() {
@@ -440,7 +420,6 @@ public class Game {
 		int unitSelected = -1;
 		int unitSelectedX = 0;
 		int unitSelectedY = 0;
-		System.out.println(selectedUnit);
 		for (int player = 0; player < getAllPlayers().size(); player++) {
 			ArrayList<Unit> playerUnits = getPlayer(player).getAllUnit();
 			int playerID = getCurrentPlayer().getPlayerID();
@@ -490,5 +469,13 @@ public class Game {
 	
 	public int getSelectedY() {
 		return selectedY;
+	}
+	
+	public void setSelectedX(int x) {
+		this.selectedX = x;
+	}
+	
+	public void setSelectedY(int y) {
+		this.selectedY = y;
 	}
 }

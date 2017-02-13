@@ -41,7 +41,6 @@ public class GamePanel extends Panel {
 	}
 	
 	public void draw(Graphics g, int width, int height) {
-		checkNextPlayer();
 		camera.getPanelCenterer().recenter(width, height);
 		if (game.getSelectedX() != 0 && game.getSelectedY() != 0) {
 			camera.getPanelCenterer().centerOnTile(game.getSelectedX(), game.getSelectedY());
@@ -54,19 +53,6 @@ public class GamePanel extends Panel {
 		unitDrawer.drawUnits();
 		selectedDrawer.drawSelectedItemOutline();
 	}
-	
-	private void checkNextPlayer() {
-		if (!game.getMovedToNewPlayer()) {
-			if (game.getCurrentPlayer().getAllUnit().size() > 0) {
-				camera.getPanelCenterer().centerOnTile(game.getCurrentPlayer().getAllUnit().
-						get(0).getLocation().getX(),game.getCurrentPlayer().getAllUnit().
-						get(0).getLocation().getY());
-				}
-				game.setMovedToNewPlayer(true);
-		}
-	}
-	
-
 	
 	protected void drawStaticTileElement(int x, int y, String image) {
 		g2d.drawImage(Assets.getInstance().getImage(image), camera.offsetX(x, y), 
