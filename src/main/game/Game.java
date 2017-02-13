@@ -424,26 +424,11 @@ public class Game {
 			ArrayList<Unit> playerUnits = getPlayer(player).getAllUnit();
 			int playerID = getCurrentPlayer().getPlayerID();
 			for (int i = 0; i < playerUnits.size(); i++) {
+				UnitEnum currentPlayerType = playerUnits.get(i).getUnitType();
 				int x = playerUnits.get(i).getLocation().getX();
 				int y = playerUnits.get(i).getLocation().getY();
-				int typeInt = playerUnits.get(i).getUnitType();
 				if (x == selectedX && y == selectedY && selectedX != -1 && selectedY != -1) {
-					if (typeInt == 0 && getCurrentType() == UnitEnum.MELEE) {
-						unitSelected = i;
-						unitSelectedX = playerUnits.get(i).getLocation().getX();
-						unitSelectedY = playerUnits.get(i).getLocation().getY();
-					}
-					if (typeInt == 1 && getCurrentType() == UnitEnum.RANGED) {
-						unitSelected = i;
-						unitSelectedX = playerUnits.get(i).getLocation().getX();
-						unitSelectedY = playerUnits.get(i).getLocation().getY();
-					}
-					if (typeInt == 2 && getCurrentType() == UnitEnum.EXPLORER) {
-						unitSelected = i;
-						unitSelectedX = playerUnits.get(i).getLocation().getX();
-						unitSelectedY = playerUnits.get(i).getLocation().getY();
-					}
-					if (typeInt == 3 && getCurrentType() == UnitEnum.COLONIST) {
+					if (getCurrentType() == currentPlayerType) {
 						unitSelected = i;
 						unitSelectedX = playerUnits.get(i).getLocation().getX();
 						unitSelectedY = playerUnits.get(i).getLocation().getY();

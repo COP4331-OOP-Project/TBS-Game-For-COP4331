@@ -24,16 +24,17 @@ public class UnitOverviewPanel extends OverviewPanel{
 		g.drawString("Unit Overview", width/2 - 370, height/2 - 245);
 		for (int i = 0; i < game.getCurrentPlayer().getAllUnit().size(); i++) {
 			String unitString = "";
-			if (game.getCurrentPlayer().getAllUnit().get(i).getUnitType() == 0) {
+			UnitEnum unit = game.getCurrentPlayer().getAllUnit().get(i).getUnitType();
+			if (unit == UnitEnum.MELEE) {
 				unitString = "Melee";
 			}
-			if (game.getCurrentPlayer().getAllUnit().get(i).getUnitType() == 1) {
+			if (unit == UnitEnum.RANGED) {
 				unitString = "Ranged";
 			}
-			if (game.getCurrentPlayer().getAllUnit().get(i).getUnitType() == 2) {
+			if (unit == UnitEnum.EXPLORER) {
 				unitString = "Explorer";
 			}
-			if (game.getCurrentPlayer().getAllUnit().get(i).getUnitType() == 3) {
+			if (unit == UnitEnum.COLONIST) {
 				unitString = "Colonist";
 			}
 			if (game.getSelectedUnit() == i) {

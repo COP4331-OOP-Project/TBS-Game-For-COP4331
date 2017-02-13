@@ -42,7 +42,7 @@ public class MiniMapPanel extends Panel{
 						if (!game.getGameBoard().getTiles()[i][j].containsArmy && !game.getGameBoard().getTiles()[i][j].containsBattleGroup()) {
 							drawSmallUnit(game.getGameBoard().getTiles()[i][j].getLocation().getX(), 
 									game.getGameBoard().getTiles()[i][j].getLocation().getY(), 
-									unit.getUnitType(), unit.getOwnerID(), g);
+									 unit.getOwnerID(), g);
 						}
 					}
 				}
@@ -60,7 +60,7 @@ public class MiniMapPanel extends Panel{
 			}
 	}
 
-	private void drawSmallUnit(int x, int y, int unitType, int ownerID, Graphics g) {
+	private void drawSmallUnit(int x, int y, int ownerID, Graphics g) {
 		if (ownerID == 0) {
 		g.drawImage(Assets.getInstance().getImage("UNIT_O_SMALL"), offX(x, y), offY(x, y), null);
 		

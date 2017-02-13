@@ -19,7 +19,7 @@ public class UnitDrawer {
 		this.game = game;
 	}
 	
-	private void drawUnit(int x, int y, int type, int player, 
+	private void drawUnit(int x, int y, UnitEnum type, int player, 
 			int rotation) {
 		switch (player) {
 			case 0:
@@ -40,16 +40,16 @@ public class UnitDrawer {
 		}
 		
 		switch (type) {
-		case 0:
+		case MELEE:
 			gamePanel.drawStaticTileElement(x, y, rotation, "UNIT_MELEE");
 			break;
-		case 1:
+		case RANGED:
 			gamePanel.drawStaticTileElement(x, y, rotation, "UNIT_RANGED");
 			break;
-		case 2:
+		case EXPLORER:
 			gamePanel.drawStaticTileElement(x, y, rotation, "UNIT_EXPLORER");
 			break;
-		case 3:
+		case COLONIST:
 			gamePanel.drawStaticTileElement(x, y, rotation, "UNIT_COLONIST");
 			break;
 		default:
