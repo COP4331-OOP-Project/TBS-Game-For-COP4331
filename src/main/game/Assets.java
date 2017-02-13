@@ -39,7 +39,6 @@ public class Assets {
 	private static final String TERRAIN_WATER2 = "assets/terrain/water2.png";
 	private static final String TERRAIN_WATER3 = "assets/terrain/water3.png";
 	
-	private static final String OUTLINE_MINI = "assets/small/outline.png";
 	private static final String GRASS_MINI = "assets/small/grassmini.png";
 	private static final String SAND_MINI = "assets/small/sandmini.png";
 	private static final String WATER_MINI = "assets/small/watermini.png";
@@ -143,7 +142,6 @@ public class Assets {
 		loadItem("TERRAIN_WATER2", TERRAIN_WATER2);
 		loadItem("TERRAIN_WATER3", TERRAIN_WATER3);
 
-		loadItem("OUTLINE_MINI", OUTLINE_MINI);
 		loadItem("GRASS_MINI", GRASS_MINI);
 		loadItem("SAND_MINI", SAND_MINI);
 		loadItem("WATER_MINI", WATER_MINI);
