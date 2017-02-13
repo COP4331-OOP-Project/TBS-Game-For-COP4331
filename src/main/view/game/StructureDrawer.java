@@ -4,8 +4,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import game.Game;
-import game.entities.structures.Structure;
-import game.gameboard.Tile;
 
 public class StructureDrawer {
 
@@ -19,7 +17,7 @@ public class StructureDrawer {
 		this.game = game;
 	}
 	
-	private void drawBase(int x, int y, int player, int rotation) {
+	protected void drawBase(int x, int y, int player, int rotation) {
 		switch(player) {
 			case 0:
 				gamePanel.drawStaticTileElement(x, y, "BASE_O");
@@ -37,17 +35,5 @@ public class StructureDrawer {
 				log.warn("Invalid player specific for drawing base");
 		}
 		gamePanel.drawStaticTileElement(x, y, rotation, "BASE_ARROW");
-	}
-	
-	void drawBases() {
-		for (Tile[] tiles : this.game.getGameBoard().getTiles()) {
-			for (Tile tile : tiles) {
-				if (tile.containsStructure) {
-					Structure structure = tile.getStructure();
-					drawBase(tile.getLocation().getX(), tile.getLocation().getY(), 
-							structure.getOwnerID(), structure.getRotation());
-				}
-			}
-		}
 	}
 }
