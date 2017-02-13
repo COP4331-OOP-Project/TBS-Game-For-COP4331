@@ -10,6 +10,7 @@ import view.gui.StructureOverviewPanel;
 import view.gui.UnitDetailsPanel;
 import view.gui.UnitOverviewPanel;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
@@ -45,6 +46,7 @@ public class View {
 		g.setRenderingHint(
 		        RenderingHints.KEY_TEXT_ANTIALIASING,
 		        RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+		g.setColor(Color.BLACK);
 		//Add structure And unit Overview Modes
 		gamePanel.draw(g, width, height);
 		civPanel.draw(g, width, height);
