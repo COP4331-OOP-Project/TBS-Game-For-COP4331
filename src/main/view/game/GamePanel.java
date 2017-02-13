@@ -41,12 +41,17 @@ public class GamePanel extends Panel {
 	
 	public void draw(Graphics g, int width, int height) {
 		camera.getPanelCenterer().recenter(width, height);
-		if (game.getSelectedX() != 0 && game.getSelectedY() != 0) {
-			camera.getPanelCenterer().centerOnTile(game.getSelectedX(), game.getSelectedY());
+		int selX = game.getCenterCoordinates().getX();
+		int selY = game.getCenterCoordinates().getY();
+		if (selX != 0 && selY != 0) {
+			camera.getPanelCenterer().centerOnTile(selX, selY);
 		}
+
 		g2d = (Graphics2D)g;
 		drawAllItems();
 		selectedDrawer.drawSelectedItemOutline();
+	    //Draw Moving Tiles
+		tileDrawer.drawMovingTiles();
 	}
 	
 	private void drawAllItems() {
@@ -59,8 +64,6 @@ public class GamePanel extends Panel {
 					getG2D().drawString("" + tile.getUnits().size()
 							, getCamera().offsetX(i, j) + 5, getCamera().offsetY(i, j) + 22);
 				}
-			    //Draw Moving Tiles
-				tileDrawer.drawMovingTiles();
 				
 				//Draw Structures
 				if (tile.containsStructure) {
