@@ -43,7 +43,7 @@ public class GamePanel extends Panel {
 	public void draw(Graphics g, int width, int height) {
 		checkNextPlayer();
 		camera.getPanelCenterer().recenter(width, height);
-		if (game.getSelectedX() != -1 && game.getSelectedY() != -1) {
+		if (game.getSelectedX() != 0 && game.getSelectedY() != 0) {
 			camera.getPanelCenterer().centerOnTile(game.getSelectedX(), game.getSelectedY());
 		}
 		g2d = (Graphics2D)g;

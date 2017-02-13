@@ -46,8 +46,8 @@ public class Game {
 	private boolean movedToNewPlayer = true;
 	private int makeOption = 0;
 
-	private int selectedX = -1;
-	private int selectedY = -1;
+	private int selectedX = 0;
+	private int selectedY = 0;
 
 	private ICommandable currentSelectedEntity;
 	private CommandEnum currentCommand;
@@ -431,6 +431,7 @@ public class Game {
 			Location loc = getCenterCoordinates();
 			selectedX = loc.getX();
 			selectedY = loc.getY();
+			updateSelectedUnit();
 			setCenterCoordinatesUpdated(false);
 		}
 	}
@@ -439,6 +440,7 @@ public class Game {
 		int unitSelected = -1;
 		int unitSelectedX = 0;
 		int unitSelectedY = 0;
+		System.out.println(selectedUnit);
 		for (int player = 0; player < getAllPlayers().size(); player++) {
 			ArrayList<Unit> playerUnits = getPlayer(player).getAllUnit();
 			int playerID = getCurrentPlayer().getPlayerID();
