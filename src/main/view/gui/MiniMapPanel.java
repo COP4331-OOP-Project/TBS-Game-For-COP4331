@@ -14,8 +14,8 @@ public class MiniMapPanel extends Panel{
 	Game game;
 	private static final int HEX_SIZE = 12;
 	private static final int HEX_HEIGHT = 10;
-	private static final int DISTANCE_FROM_RIGHT = 420;
-	private static final int DISTANCE_FROM_BOTTOM = 550;
+	private static final int DISTANCE_FROM_RIGHT = 400;
+	private static final int DISTANCE_FROM_BOTTOM = 530;
 	private final static Logger log = LogManager.getLogger(MiniMapPanel.class);
 	
 	private int width;
@@ -28,7 +28,6 @@ public class MiniMapPanel extends Panel{
 	public void draw(Graphics g, int width, int height) {
 		this.width = width;
 		this.height = height;
-		drawPanel(g);
 		for (int i = 0; i < game.getGameBoard().getTiles().length; i++) {
 			for (int j = 0; j < game.getGameBoard().getTiles()[i].length; j++) {
 				drawSmallTile(g, i, j, game.getGameBoard().getTiles()[i][j].getTileType());
@@ -74,11 +73,6 @@ public class MiniMapPanel extends Panel{
 		g.drawImage(Assets.getInstance().getImage("GUI_MINI_MAP_BORDER"), width - DISTANCE_FROM_RIGHT - 27
                 , height-DISTANCE_FROM_BOTTOM + 182, null);
 		
-	}
-
-	private void drawPanel(Graphics g) {
-        g.drawImage(Assets.getInstance().getImage("GUI_MINI_MAP_PANEL"), width - DISTANCE_FROM_RIGHT - 50
-                , height-DISTANCE_FROM_BOTTOM + 163, null);
 	}
 
 	private void drawSmallTile(Graphics g, int x, int y, int tileType) {

@@ -26,7 +26,6 @@ public class Assets {
 	private static final String GUI_BOTTOM_RIGHT = "assets/gui/rightBottom.png";
 	
 	private static final String GUI_COMMAND_PANEL = "assets/gui/mode/commandPanel.png";
-	private static final String GUI_MINI_MAP_PANEL = "assets/gui/mode/minimapPanel.png";
 	private static final String GUI_MINI_MAP_BORDER = "assets/gui/miniBorder.png";
 	private static final String GUI_MODE_PANEL = "assets/gui/mode/modePanel.png";
 	private static final String GUI_MODE_SELECTED1 = "assets/gui/mode/selected1.png";
@@ -131,7 +130,6 @@ public class Assets {
 		loadItem("GUI_BOTTOM_RIGHT", GUI_BOTTOM_RIGHT);
 		
 		loadItem("GUI_COMMAND_PANEL", GUI_COMMAND_PANEL);
-		loadItem("GUI_MINI_MAP_PANEL", GUI_MINI_MAP_PANEL);
 		loadItem("GUI_MINI_MAP_BORDER", GUI_MINI_MAP_BORDER);
 		loadItem("GUI_MODE_PANEL", GUI_MODE_PANEL);
 		loadItem("GUI_MODE_SELECTED1", GUI_MODE_SELECTED1);
