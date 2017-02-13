@@ -1,12 +1,10 @@
 package view.game;
 
-import game.Game;
-
 public class Camera {
 	private PanelCenterer panelCenterer;
 	private static final int HEX_W = 100;
 	private static final int HEX_H = 86;
-	public Camera(GamePanel gamePanel, Game game) {
+	public Camera(GamePanel gamePanel) {
 		this.panelCenterer = new PanelCenterer(gamePanel);
 	}
 	

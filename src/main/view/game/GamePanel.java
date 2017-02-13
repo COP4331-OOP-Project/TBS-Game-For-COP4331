@@ -7,7 +7,6 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
-import game.gameboard.Location;
 
 import view.Panel;
 
@@ -29,14 +28,11 @@ public class GamePanel extends Panel {
 	private Game game;
 	private Graphics2D g2d;
 	
-	private int selectedX = 0;
-	private int selectedY = 0;
-	
 	Font tileFont = new Font("Lucida Sans", Font.PLAIN, 20);
 	
 	public GamePanel(Game game) {
 		this.game = game;
-		camera = new Camera(this, game);
+		camera = new Camera(this);
 		tileDrawer = new TileDrawer(this, game);
 		unitDrawer = new UnitDrawer(this, game);
 		armyDrawer = new ArmyDrawer(this, game);
@@ -47,8 +43,9 @@ public class GamePanel extends Panel {
 	public void draw(Graphics g, int width, int height) {
 		checkNextPlayer();
 		camera.getPanelCenterer().recenter(width, height);
-		updateSelectedItem();
-		
+		if (game.getSelectedX() != -1 && game.getSelectedY() != -1) {
+			camera.getPanelCenterer().centerOnTile(game.getSelectedX(), game.getSelectedY());
+		}
 		g2d = (Graphics2D)g;
 		tileDrawer.drawTiles();
 		tileDrawer.drawMovingTiles();
@@ -69,15 +66,7 @@ public class GamePanel extends Panel {
 		}
 	}
 	
-	private void updateSelectedItem() {
-		if (this.game.isCenterCoordinatesUpdated()) {
-			Location loc = this.game.getCenterCoordinates();
-			selectedX = loc.getX();
-			selectedY = loc.getY();
-			camera.getPanelCenterer().centerOnTile(selectedX, selectedY);
-			game.setCenterCoordinatesUpdated(false);
-		}
-	}
+
 	
 	protected void drawStaticTileElement(int x, int y, String image) {
 		g2d.drawImage(Assets.getInstance().getImage(image), camera.offsetX(x, y), 
@@ -121,21 +110,5 @@ public class GamePanel extends Panel {
 	
 	public int getTileSize() {
 		return TILE_PIXEL_SIZE;
-	}
-	
-	public void setSelectedX(int selectedX) {
-		this.selectedX = selectedX;
-	}
-	
-	public void setSelectedY(int selectedY) {
-		this.selectedY = selectedY;
-	}
-	
-	public int getSelectedX() {
-		return selectedX;
-	}
-	
-	public int getSelectedY() {
-		return selectedY;
 	}
 }

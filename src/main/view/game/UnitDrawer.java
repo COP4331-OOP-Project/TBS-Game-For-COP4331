@@ -14,7 +14,6 @@ public class UnitDrawer {
 	private final static Logger log = LogManager.getLogger(UnitDrawer.class);
 	private GamePanel gamePanel;
 	private Game game;
-	private ArrayList<Unit> playerUnits;
 	public UnitDrawer(GamePanel gamePanel, Game game) {
 		this.gamePanel = gamePanel;
 		this.game = game;
@@ -69,44 +68,6 @@ public class UnitDrawer {
 						}
 					}
 				}
-			}
-		}
-				
-		int unitSelected = -1;
-		for (int player = 0; player < game.getAllPlayers().size(); player++) {
-			playerUnits = game.getPlayer(player).getAllUnit();
-			for (int i = 0; i < playerUnits.size(); i++) {
-				if (playerUnits.get(i).getLocation().getX() == gamePanel.getSelectedX()
-						&& playerUnits.get(i).getLocation().getY() == gamePanel.getSelectedY()
-						&& gamePanel.getSelectedX() != -1 && 
-						   gamePanel.getSelectedY() != -1) {
-					if (playerUnits.get(i).getUnitType() == 0 &&
-							game.getCurrentType() == UnitEnum.MELEE)
-						unitSelected = i;
-					if (playerUnits.get(i).getUnitType() == 1 &&
-							game.getCurrentType() == UnitEnum.RANGED)
-						unitSelected = i;
-					if (playerUnits.get(i).getUnitType() == 2 &&
-							game.getCurrentType() == UnitEnum.EXPLORER)
-						unitSelected = i;
-					if (playerUnits.get(i).getUnitType() == 3 &&
-							game.getCurrentType() == UnitEnum.COLONIST)
-						unitSelected = i;
-				}
-			}
-			if (game.getCurrentMode() == ModeEnum.UNIT && unitSelected != -1
-				&& game.getCurrentPlayer().getPlayerID() == player &&
-				!(game.getGameBoard().getTiles()[playerUnits.get(unitSelected).getLocation().getX()]
-						[playerUnits.get(unitSelected).getLocation().getY()]).containsArmy) {
-				game.setSelectedUnit(unitSelected);
-			} else if (game.getCurrentMode() == ModeEnum.UNIT && unitSelected != -1
-				&& game.getCurrentPlayer().getPlayerID() == player &&
-				(game.getGameBoard().getTiles()[playerUnits.get(unitSelected).getLocation().getX()]
-						[playerUnits.get(unitSelected).getLocation().getY()]).containsArmy) {
-				game.setSelectedUnit(unitSelected);
-			} else if (game.getCurrentPlayer().getPlayerID() == player){
-				unitSelected = -1;
-				game.setSelectedUnit(-1);
 			}
 		}
 	}
