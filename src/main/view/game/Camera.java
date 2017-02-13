@@ -1,15 +1,17 @@
 package view.game;
 
+import game.Assets;
+
 public class Camera {
 	private PanelCenterer panelCenterer;
-	private static final int HEX_W = 100;
-	private static final int HEX_H = 86;
+	private static final int HEX_W = Assets.getInstance().getImage("TERRAIN_GRASS").getWidth();
+	private static final int HEX_H = (int)(HEX_W * 0.86);
 	public Camera(GamePanel gamePanel) {
 		this.panelCenterer = new PanelCenterer(gamePanel);
 	}
 	
 	private int offsetX = 180;
-	private int offsetY = -2340;
+	private int offsetY = -3050;
 	
 	protected void setX(int x) {
 		offsetX = x;
