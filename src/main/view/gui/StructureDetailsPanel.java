@@ -4,14 +4,13 @@ import java.awt.Font;
 import java.awt.Graphics;
 
 import controls.structure.StructureEnum;
-import controls.unit.UnitEnum;
+import game.Assets;
 import game.Game;
-import game.entities.PowerState;
 
 public class StructureDetailsPanel extends DetailsPanel{
-private Game game;
-Font detailsFont = new Font("Lucida Sans", Font.BOLD, 20);
-Font bigFont = new Font("Lucida Sans", Font.BOLD, 35);
+	private Game game;
+	Font detailsFont = Assets.getInstance().getFont(0);
+	Font bigFont = Assets.getInstance().getFont(3);
 
 	public StructureDetailsPanel(Game game) {
 		this.game = game;
@@ -26,7 +25,7 @@ Font bigFont = new Font("Lucida Sans", Font.BOLD, 35);
 		Font old = g.getFont();
 		g.setFont(detailsFont);
 		g.drawString("Structure Details:", 10, height - 65);
-		if (game.getSomeItemSelected() && game.getCurrentPlayer().getBases().size() > 0) {
+		if (game.getCurrentPlayer().getBases().size() > 0) {
 			g.drawString("Type: ", 30, height - 35);
 			g.drawString("Health: ", 30, height - 10);
 			g.drawString("Attack: ", 430, height - 35);
@@ -44,7 +43,7 @@ Font bigFont = new Font("Lucida Sans", Font.BOLD, 35);
 			g.drawString(game.getCurrentPlayer().getBases().get(0).getUpkeep() + "", 930, height - 10);
 		} else {
 			g.setFont(bigFont);
-			g.drawString("You Have No Structures", 35, height - 25);
+			g.drawString("You Have No Structures", 35, height - 17);
 		}
 		g.setFont(old);
 	}

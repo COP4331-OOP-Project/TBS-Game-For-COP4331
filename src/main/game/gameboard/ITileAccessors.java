@@ -14,7 +14,7 @@ public interface ITileAccessors {
 
     // Tile attribute accessors
     Location getLocation();
-    int getTileType();
+    TerrainEnum getTileType();
     int getOwnerID();
 
     // Tile attribute setters

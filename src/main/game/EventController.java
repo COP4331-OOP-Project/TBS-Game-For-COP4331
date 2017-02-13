@@ -119,17 +119,9 @@ public class EventController implements KeyListener{
 				log.debug("Numpad 3 pressed");
 				this.game.addMoveToList(135);
 				break;
-			case KeyEvent.VK_NUMPAD4:
-				log.debug("Numpad 4 pressed");
-				this.game.addMoveToList(270);
-				break;
 			case KeyEvent.VK_NUMPAD5:
 				log.debug("Numpad 5 pressed");
 				this.game.centerOnLastMoveLocation();
-				break;
-			case KeyEvent.VK_NUMPAD6:
-				log.debug("Numpad 6 pressed");
-				this.game.addMoveToList(90);
 				break;
 			case KeyEvent.VK_NUMPAD7:
 				log.debug("Numpad 7 pressed");
