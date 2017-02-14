@@ -20,7 +20,7 @@ public class UnitDrawer {
 		this.game = game;
 	}
 	
-	private void drawUnit(int x, int y, int type, int player, 
+	private void drawUnit(int x, int y, UnitEnum type, int player, 
 			int rotation) {
 		switch (player) {
 			case 0:
@@ -41,16 +41,16 @@ public class UnitDrawer {
 		}
 		
 		switch (type) {
-		case 0:
+		case MELEE:
 			gamePanel.drawStaticTileElement(x, y, rotation, "UNIT_MELEE");
 			break;
-		case 1:
+		case RANGED:
 			gamePanel.drawStaticTileElement(x, y, rotation, "UNIT_RANGED");
 			break;
-		case 2:
+		case EXPLORER:
 			gamePanel.drawStaticTileElement(x, y, rotation, "UNIT_EXPLORER");
 			break;
-		case 3:
+		case COLONIST:
 			gamePanel.drawStaticTileElement(x, y, rotation, "UNIT_COLONIST");
 			break;
 		default:
@@ -80,16 +80,16 @@ public class UnitDrawer {
 						&& playerUnits.get(i).getLocation().getY() == gamePanel.getSelectedY()
 						&& gamePanel.getSelectedX() != -1 && 
 						   gamePanel.getSelectedY() != -1) {
-					if (playerUnits.get(i).getUnitType() == 0 &&
+					if (playerUnits.get(i).getUnitType() == UnitEnum.MELEE &&
 							game.getCurrentType() == UnitEnum.MELEE)
 						unitSelected = i;
-					if (playerUnits.get(i).getUnitType() == 1 &&
+					if (playerUnits.get(i).getUnitType() == UnitEnum.RANGED &&
 							game.getCurrentType() == UnitEnum.RANGED)
 						unitSelected = i;
-					if (playerUnits.get(i).getUnitType() == 2 &&
+					if (playerUnits.get(i).getUnitType() == UnitEnum.EXPLORER &&
 							game.getCurrentType() == UnitEnum.EXPLORER)
 						unitSelected = i;
-					if (playerUnits.get(i).getUnitType() == 3 &&
+					if (playerUnits.get(i).getUnitType() == UnitEnum.COLONIST &&
 							game.getCurrentType() == UnitEnum.COLONIST)
 						unitSelected = i;
 				}
@@ -106,7 +106,7 @@ public class UnitDrawer {
 			}
 			if (game.getCurrentMode() == ModeEnum.UNIT && unitSelected != -1
 				&& game.getCurrentPlayer().getPlayerID() == player &&
-				!(game.getGameBoard().gameMap[playerUnits.get(unitSelected).getLocation().getX()]
+				!(game.getGameBoard().getTiles()[playerUnits.get(unitSelected).getLocation().getX()]
 						[playerUnits.get(unitSelected).getLocation().getY()]).containsArmy) {
 				game.setSelectedUnit(unitSelected);
 				//drawUnit(playerUnits.get(unitSelected).getLocation().getX(),
@@ -116,7 +116,7 @@ public class UnitDrawer {
 				//	0);
 			} else if (game.getCurrentMode() == ModeEnum.UNIT && unitSelected != -1
 				&& game.getCurrentPlayer().getPlayerID() == player &&
-				(game.getGameBoard().gameMap[playerUnits.get(unitSelected).getLocation().getX()]
+				(game.getGameBoard().getTiles()[playerUnits.get(unitSelected).getLocation().getX()]
 						[playerUnits.get(unitSelected).getLocation().getY()]).containsArmy) {
 				game.setSelectedUnit(unitSelected);
 			} else if (game.getCurrentPlayer().getPlayerID() == player){

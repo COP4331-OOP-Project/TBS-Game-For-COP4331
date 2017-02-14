@@ -12,10 +12,8 @@ import java.util.ArrayList;
  * Created by David on 2/1/2017.
  */
 public class Tile implements ITileAccessors {
-
-    //0 Grass, 1 Sand, 2 Rivers(Impassable)
-    private int Terrain;
     //Leave out AreaOfEffect, Resources, Item for iteration 1
+	private TerrainEnum Terrain;
     private ArrayList<Unit> units;
     private ArrayList<Army> armies;
     private ArrayList<RallyPoint> rallyPoints;
@@ -29,7 +27,7 @@ public class Tile implements ITileAccessors {
     private int ownerID;
 
     //Constructors
-    Tile(int tileType, Location location){
+    Tile(TerrainEnum tileType, Location location){
         Terrain=tileType;
         units=new ArrayList<Unit>();
         armies=new ArrayList<Army>();
@@ -57,11 +55,11 @@ public class Tile implements ITileAccessors {
 
     // Test if terrain is impassable
     public boolean isImpassable() {
-        return (Terrain == 2) ? true : false;
+        return (Terrain == TerrainEnum.INVISIBLE || Terrain == TerrainEnum.WATER) ? true : false;
     }
 
     // Get Tile terrain type
-    public int getTileType()
+    public TerrainEnum getTileType()
     {
         return Terrain;
     }

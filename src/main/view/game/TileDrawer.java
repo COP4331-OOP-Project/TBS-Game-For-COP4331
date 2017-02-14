@@ -5,6 +5,7 @@ import java.awt.Font;
 
 import game.Game;
 import game.gameboard.Location;
+import game.gameboard.TerrainEnum;
 
 public class TileDrawer {
 	private GamePanel gamePanel;
@@ -16,15 +17,15 @@ public class TileDrawer {
 		this.game = game;
 	}
 	
-	private void drawTile(int x, int y, int type) {
-		switch(type) {
-			case 0:
+	private void drawTile(int x, int y, TerrainEnum terrainEnum) {
+		switch(terrainEnum) {
+			case GRASS:
 				gamePanel.drawStaticTileElement(x, y, "TERRAIN_GRASS");
 				break;
-			case 1:
+			case SAND:
 				gamePanel.drawStaticTileElement(x, y, "TERRAIN_SAND");
 				break;
-			case 2:
+			case WATER:
 				gamePanel.drawAnimatedTileElement(x, y, "TERRAIN_WATER1", "TERRAIN_WATER2", "TERRAIN_WATER3");
 				break;
 		}
@@ -41,12 +42,12 @@ public class TileDrawer {
 		Font oldFont = gamePanel.getG2D().getFont();
 		gamePanel.getG2D().setFont(numFont);
 		gamePanel.getG2D().setColor(Color.BLACK);
-		for (int i = 0; i < game.getGameBoard().gameMap.length; i++) {
-			for (int j = 0; j < game.getGameBoard().gameMap[i].length; j++) {
-				drawTile(i, j, game.getGameBoard().gameMap[i][j].getTileType());
-				if (game.getGameBoard().gameMap[i][j].getUnits().size() > 1 && !game.getGameBoard().gameMap[i][i].containsArmy) {
-					gamePanel.getG2D().drawString("" + game.getGameBoard().gameMap[i][j].getUnits().size()
-							, gamePanel.getCamera().offsetX(i) + 5, gamePanel.getCamera().offsetY(j) + 22);
+		for (int i = 0; i < game.getGameBoard().getTiles().length; i++) {
+			for (int j = 0; j < game.getGameBoard().getTiles()[i].length; j++) {
+				drawTile(i, j, game.getGameBoard().getTiles()[i][j].getTileType());
+				if (game.getGameBoard().getTiles()[i][j].getUnits().size() > 1 && !game.getGameBoard().getTiles()[i][i].containsArmy) {
+					gamePanel.getG2D().drawString("" + game.getGameBoard().getTiles()[i][j].getUnits().size()
+							, gamePanel.getCamera().offsetX(i, j) + 5, gamePanel.getCamera().offsetY(i, j) + 22);
 				}
 					
 			}

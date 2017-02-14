@@ -222,7 +222,7 @@ public class Player {
 			return;
 		}
 		switch (unit.getUnitType()) {
-			case 0: {
+			case MELEE: {
 				for (int i = 0; i < melees.size(); i++) {
 					if (melees.get(i) == null) {
 						melees.set(i, (Melee) unit);
@@ -236,7 +236,7 @@ public class Player {
 					log.info("Melee list full");
 				break;
 			}
-			case 1: {
+			case RANGED: {
 				for (int i = 0; i < ranges.size(); i++) {
 					if (ranges.get(i) == null) {
 						ranges.set(i, (Ranged) unit);
@@ -250,7 +250,7 @@ public class Player {
 					log.info("Range list full");
 				break;
 			}
-			case 2: {
+			case EXPLORER: {
 				for (int i = 0; i < explorers.size(); i++) {
 					if (explorers.get(i) == null) {
 						explorers.set(i, (Explorer) unit);
@@ -264,7 +264,7 @@ public class Player {
 					log.info("Explorers list full");
 				break;
 			}
-			case 3: {
+			case COLONIST: {
 				for (int i = 0; i < colonists.size(); i++) {
 					if (colonists.get(i) == null) {
 						colonists.set(i, (Colonist) unit);
@@ -278,6 +278,7 @@ public class Player {
 					log.info("Colonists list full");
 				break;
 			}
+			/*
 			case 4: {
 				for (int i = 0; i < workers.size(); i++) {
 					if (workers.get(i) == null) {
@@ -292,6 +293,7 @@ public class Player {
 					log.info("Worker list full");
 				break;
 			}
+			*/
 			default:
 				break;
 		}
@@ -307,26 +309,28 @@ public class Player {
 
 	public void removeUnit(Unit unit) {
 		switch(unit.getUnitType()) {
-			case 0: {
+			case MELEE: {
 				melees.set(unit.getUnitID(),null);
 				break;
 			}
-			case 1: {
+			case RANGED: {
 				ranges.set(unit.getUnitID(),null);
 				break;
 			}
-			case 2: {
+			case EXPLORER: {
 				explorers.set(unit.getUnitID(),null);
 				break;
 			}
-			case 3: {
+			case COLONIST: {
 				colonists.set(unit.getUnitID(),null);
 				break;
 			}
+			/*
 			case 4: {
 				workers.set(unit.getUnitID(),null);
 				break;
 			}
+			*/
 			default:
 				break;
 

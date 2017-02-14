@@ -36,7 +36,7 @@ public class GamePanel extends Panel {
 	
 	public GamePanel(Game game) {
 		this.game = game;
-		camera = new Camera(this, game);
+		camera = new Camera(this);
 		tileDrawer = new TileDrawer(this, game);
 		unitDrawer = new UnitDrawer(this, game);
 		armyDrawer = new ArmyDrawer(this, game);
@@ -80,34 +80,34 @@ public class GamePanel extends Panel {
 	}
 	
 	protected void drawStaticTileElement(int x, int y, String image) {
-		g2d.drawImage(Assets.getInstance().getImage(image), camera.offsetX(x), 
-				camera.offsetY(y), null); 
+		g2d.drawImage(Assets.getInstance().getImage(image), camera.offsetX(x, y), 
+				camera.offsetY(x, y), null); 
 	}
 	
 	protected void drawStaticTileElement(int x, int y, int rotation, String image) {
 		AffineTransform currentRotation = g2d.getTransform();
 		rotateOnTile(x, y, rotation);
-		g2d.drawImage(Assets.getInstance().getImage(image), camera.offsetX(x), camera.offsetY(y), null); 
+		g2d.drawImage(Assets.getInstance().getImage(image), camera.offsetX(x, y), camera.offsetY(x, y), null); 
 		g2d.setTransform(currentRotation);
 	}
 	
 	private void rotateOnTile(int x, int y, int degrees) {
 		g2d.rotate(Math.toRadians(degrees), 
-				camera.getTileLocation(x) + TILE_PIXEL_SIZE/2, 
-				camera.getTileLocation(y) + TILE_PIXEL_SIZE/2);
+				camera.getTileLocationX(x , y) + TILE_PIXEL_SIZE/2, 
+				camera.getTileLocationY(x,  y) + TILE_PIXEL_SIZE/2);
 	}
 	
 	protected void drawAnimatedTileElement(int x, int y, 
 			String image1, String image2, String image3) {
 		switch (getAnimationImage()) {
 		case 0:
-			g2d.drawImage(Assets.getInstance().getImage(image1), camera.offsetX(x), camera.offsetY(y), null);
+			g2d.drawImage(Assets.getInstance().getImage(image1), camera.offsetX(x, y), camera.offsetY(x, y), null);
 			break;
 		case 2:
-			g2d.drawImage(Assets.getInstance().getImage(image2), camera.offsetX(x), camera.offsetY(y), null);
+			g2d.drawImage(Assets.getInstance().getImage(image2), camera.offsetX(x, y), camera.offsetY(x, y), null);
 			break;
 		default:
-			g2d.drawImage(Assets.getInstance().getImage(image3), camera.offsetX(x), camera.offsetY(y), null);
+			g2d.drawImage(Assets.getInstance().getImage(image3), camera.offsetX(x, y), camera.offsetY(x, y), null);
 		}
 	}
 	

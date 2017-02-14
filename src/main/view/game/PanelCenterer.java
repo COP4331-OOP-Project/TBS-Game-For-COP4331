@@ -27,24 +27,24 @@ public class PanelCenterer {
 	}
 	
 	public void centerOnTile(int x, int y) {
-		if (centeringOffsetX(x) != centerToX || 
-				centeringOffsetY(y) != centerToY) {
+		if (centeringOffsetX(x, y) != centerToX || 
+				centeringOffsetY(x, y) != centerToY) {
 			centerStartX = gamePanel.getCamera().getX();
 			centerStartY = gamePanel.getCamera().getY();
-			centerToX = centeringOffsetX(x);
-			centerToY = centeringOffsetY(y);
+			centerToX = centeringOffsetX(x, y);
+			centerToY = centeringOffsetY(x, y);
 			isCentering = true;
 		}
 	}
 	
 	//Returns the X offset based on the X Location of a tile for centering
-	private int centeringOffsetX(int x) {
-		return (width/2) - gamePanel.getCamera().getTileLocation(x) - gamePanel.getTileSize()/2;
+	private int centeringOffsetX(int x, int y) {
+		return (width/2) - gamePanel.getCamera().getTileLocationX(x, y) - gamePanel.getTileSize()/2;
 	}
 	
 	//Returns Y Offset Based on the Y Location of a Tile for centering
-	private int centeringOffsetY(int y) {
-		return (height/2) - gamePanel.getCamera().getTileLocation(y) - gamePanel.getTileSize()/2;
+	private int centeringOffsetY(int x, int y) {
+		return (height/2) - gamePanel.getCamera().getTileLocationY(x, y) - gamePanel.getTileSize()/2;
 	}
 	
 	private void continueCentering() {
