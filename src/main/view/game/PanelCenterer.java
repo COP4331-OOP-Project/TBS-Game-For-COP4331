@@ -31,7 +31,7 @@ public class PanelCenterer {
 				centeringOffsetY(x, y) != centerToY) {
 			centerStartX = gamePanel.getCamera().getX();
 			centerStartY = gamePanel.getCamera().getY();
-			centerToX = centeringOffsetX(x ,y);
+			centerToX = centeringOffsetX(x, y);
 			centerToY = centeringOffsetY(x, y);
 			isCentering = true;
 		}

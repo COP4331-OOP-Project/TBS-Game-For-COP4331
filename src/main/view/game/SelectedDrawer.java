@@ -13,8 +13,8 @@ public class SelectedDrawer {
 	}
 	
 	public void drawSelectedItemOutline() {
-		int x = game.getCenterCoordinates().getX();
-		int y = game.getCenterCoordinates().getY();
+		int x = gamePanel.getSelectedX();
+		int y = gamePanel.getSelectedY();
 		if (game.getCurrentMode() == ModeEnum.RALLY_POINT) {
 			drawSelectedRallyPointOutline(x, y);
 		} else if (game.getCurrentMode() == ModeEnum.STRUCTURE) {
