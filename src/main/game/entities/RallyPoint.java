@@ -8,6 +8,7 @@ import game.commands.MoveCommand;
 import game.entities.units.Unit;
 import game.gameboard.GameBoard;
 import game.gameboard.Location;
+import game.gameboard.TerrainEnum;
 
 public class RallyPoint implements ICommandable {
 	private int rallyID;
@@ -57,7 +58,7 @@ public class RallyPoint implements ICommandable {
 			/**Check 8 spaces around to see if not visited yet. If not check if it is a valid move, if valid move
 			*   update the direction map
 			**/
-			if(current.getX()>=0 && current.getY()-1>=0 && current.getX()<gameBoard.gameMap.length && current.getY()-1<gameBoard.gameMap.length){
+			if(current.getX()>=0 && current.getY()-1>=0 && current.getX()<gameBoard.getTiles().length && current.getY()-1<gameBoard.getTiles().length){
 				Location up = current.directionLocation(0);
 				if(!closed.contains(up)){
 					closed.add(up);
@@ -67,7 +68,7 @@ public class RallyPoint implements ICommandable {
 					}
 				}
 			}
-			if(current.getX()+1>=0 && current.getY()-1>=0 && current.getX()+1<gameBoard.gameMap.length && current.getY()-1<gameBoard.gameMap.length){
+			if(current.getX()+1>=0 && current.getY()-1>=0 && current.getX()+1<gameBoard.getTiles().length && current.getY()-1<gameBoard.getTiles().length){
 				Location upright = current.directionLocation(45);
 				if(!closed.contains(upright)){
 					closed.add(upright);
@@ -77,7 +78,7 @@ public class RallyPoint implements ICommandable {
 					}
 				}
 			}
-			if(current.getX()+1>=0 && current.getY()>=0 && current.getX()+1<gameBoard.gameMap.length && current.getY()<gameBoard.gameMap.length){
+			if(current.getX()+1>=0 && current.getY()>=0 && current.getX()+1<gameBoard.getTiles().length && current.getY()<gameBoard.getTiles().length){
 				Location right = current.directionLocation(90);
 				if(!closed.contains(right)){
 					closed.add(right);
@@ -87,7 +88,7 @@ public class RallyPoint implements ICommandable {
 					}
 				}
 			}
-			if(current.getX()+1>=0 && current.getY()+1>=0 && current.getX()+1<gameBoard.gameMap.length && current.getY()+1<gameBoard.gameMap.length){
+			if(current.getX()+1>=0 && current.getY()+1>=0 && current.getX()+1<gameBoard.getTiles().length && current.getY()+1<gameBoard.getTiles().length){
 				Location downright = current.directionLocation(135);
 				if(!closed.contains(downright)){
 					closed.add(downright);
@@ -97,7 +98,7 @@ public class RallyPoint implements ICommandable {
 					}
 				}
 			}
-			if(current.getX()>=0 && current.getY()+1>=0 && current.getX()<gameBoard.gameMap.length && current.getY()+1<gameBoard.gameMap.length){
+			if(current.getX()>=0 && current.getY()+1>=0 && current.getX()<gameBoard.getTiles().length && current.getY()+1<gameBoard.getTiles().length){
 				Location down = current.directionLocation(180);
 				if(!closed.contains(down)){
 					closed.add(down);
@@ -107,7 +108,7 @@ public class RallyPoint implements ICommandable {
 					}
 				}
 			}
-			if(current.getX()-1>=0 && current.getY()+1>=0 && current.getX()-1<gameBoard.gameMap.length && current.getY()+1<gameBoard.gameMap.length){
+			if(current.getX()-1>=0 && current.getY()+1>=0 && current.getX()-1<gameBoard.getTiles().length && current.getY()+1<gameBoard.getTiles().length){
 				Location downleft = current.directionLocation(225);
 				if(!closed.contains(downleft)){
 					closed.add(downleft);
@@ -117,7 +118,7 @@ public class RallyPoint implements ICommandable {
 					}
 				}
 			}
-			if(current.getX()-1>=0 && current.getY()>=0 && current.getX()-1<gameBoard.gameMap.length && current.getY()<gameBoard.gameMap.length){
+			if(current.getX()-1>=0 && current.getY()>=0 && current.getX()-1<gameBoard.getTiles().length && current.getY()<gameBoard.getTiles().length){
 				Location left = current.directionLocation(270);
 				if(!closed.contains(left)){
 					closed.add(left);
@@ -127,7 +128,7 @@ public class RallyPoint implements ICommandable {
 					}
 				}
 			}
-			if(current.getX()-1>=0 && current.getY()-1>=0 && current.getX()-1<gameBoard.gameMap.length && current.getY()-1<gameBoard.gameMap.length){
+			if(current.getX()-1>=0 && current.getY()-1>=0 && current.getX()-1<gameBoard.getTiles().length && current.getY()-1<gameBoard.getTiles().length){
 				Location upleft = current.directionLocation(315);
 				if(!closed.contains(upleft)){
 					closed.add(upleft);
@@ -166,8 +167,8 @@ public class RallyPoint implements ICommandable {
 		/**Return true if tile is not a river tile and
 		 * 				There are no enemies on it
 		 */
-		if(gameBoard.gameMap[location.getX()][location.getY()].getTileType()!=2 ){
-			if(!gameBoard.gameMap[location.getX()][location.getY()].hasEnemyUnit(army.getOwnerID())){
+		if(gameBoard.getTiles()[location.getX()][location.getY()].getTileType() != TerrainEnum.WATER){
+			if(!gameBoard.getTiles()[location.getX()][location.getY()].hasEnemyUnit(army.getOwnerID())){
 				return true;
 			}
 		}

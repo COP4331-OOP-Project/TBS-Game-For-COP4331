@@ -4,6 +4,8 @@ import java.awt.Graphics;
 
 import game.Assets;
 import game.Game;
+import game.entities.units.Unit;
+import game.gameboard.TerrainEnum;
 import view.Panel;
 
 import org.apache.logging.log4j.LogManager;
@@ -11,8 +13,10 @@ import org.apache.logging.log4j.Logger;
 
 public class MiniMapPanel extends Panel{
 	Game game;
-	private static final int TILE_SIZE = 12;
-	private static final int DISTANCE_FROM_RIGHT = 350;
+	private static final int HEX_SIZE = 12;
+	private static final int HEX_HEIGHT = 10;
+	private static final int DISTANCE_FROM_RIGHT = 400;
+	private static final int DISTANCE_FROM_BOTTOM = 530;
 	private final static Logger log = LogManager.getLogger(MiniMapPanel.class);
 	
 	private int width;
@@ -25,80 +29,79 @@ public class MiniMapPanel extends Panel{
 	public void draw(Graphics g, int width, int height) {
 		this.width = width;
 		this.height = height;
-		drawCorners(g, game.getGameBoard().gameMap.length);
-		for (int i = 0; i < game.getGameBoard().gameMap.length; i++) {
-			drawTopOutline(g, i, 0);
-			drawLeftOutline(g, 0, i);
-			for (int j = 0; j < game.getGameBoard().gameMap[i].length; j++) {
-				
-				drawSmallTile(g, i, j, game.getGameBoard().gameMap[i][j].getTileType());
-				
+		for (int i = 0; i < game.getGameBoard().getTiles().length; i++) {
+			for (int j = 0; j < game.getGameBoard().getTiles()[i].length; j++) {
+				drawSmallTile(g, i, j, game.getGameBoard().getTiles()[i][j].getTileType());
+
+				if (game.getGameBoard().getTiles()[i][j].containsStructure) {
+					drawSmallStructure(game.getGameBoard().getTiles()[i][j].getStructure().getLocation().getX(), 
+							game.getGameBoard().getTiles()[i][j].getStructure().getLocation().getY(), 
+							game.getGameBoard().getTiles()[i][j].getStructure().getOwnerID(), g);
+				}
+				if (game.getGameBoard().getTiles()[i][j].containsUnit) {
+					for (Unit unit : game.getGameBoard().getTiles()[i][j].getUnits()) {
+						if (!game.getGameBoard().getTiles()[i][j].containsArmy && !game.getGameBoard().getTiles()[i][j].containsBattleGroup()) {
+							drawSmallUnit(game.getGameBoard().getTiles()[i][j].getLocation().getX(), 
+									game.getGameBoard().getTiles()[i][j].getLocation().getY(), 
+									 unit.getOwnerID(), g);
+						}
+					}
+				}
 			}
-			drawRightOutline(g, game.getGameBoard().gameMap.length - 1, i);
-			drawBottomOutline(g, i, game.getGameBoard().gameMap.length - 1);
+		}
+		drawBorder(g);
+	}
+
+	private void drawSmallStructure(int x, int y, int ownerID, Graphics g) {
+		if (ownerID == 0) {
+			g.drawImage(Assets.getInstance().getImage("BASE_O_SMALL"), offX(x, y), offY(x, y), null);
+			
+			} else {
+				g.drawImage(Assets.getInstance().getImage("BASE_B_SMALL"), offX(x, y), offY(x, y), null);
+			}
+	}
+
+	private void drawSmallUnit(int x, int y, int ownerID, Graphics g) {
+		if (ownerID == 0) {
+		g.drawImage(Assets.getInstance().getImage("UNIT_O_SMALL"), offX(x, y), offY(x, y), null);
+		
+		} else {
+			g.drawImage(Assets.getInstance().getImage("UNIT_B_SMALL"), offX(x, y), offY(x, y), null);
 		}
 	}
 
-	private void drawCorners(Graphics g, int length) {
-		g.drawImage(Assets.getInstance().getImage("OUTLINE_MINI"), 
-				offX(0) - TILE_SIZE, offY(0) - TILE_SIZE, null);
-		g.drawImage(Assets.getInstance().getImage("OUTLINE_MINI"), 
-				offX(0) - TILE_SIZE, offY(length), null);
-		g.drawImage(Assets.getInstance().getImage("OUTLINE_MINI"), 
-				offX(length), offY(0) - TILE_SIZE, null);
-		g.drawImage(Assets.getInstance().getImage("OUTLINE_MINI"), 
-				offX(length), offY(length), null);//Good
+	private void drawBorder(Graphics g) {
+		g.drawImage(Assets.getInstance().getImage("GUI_MINI_MAP_BORDER"), width - DISTANCE_FROM_RIGHT - 27
+                , height-DISTANCE_FROM_BOTTOM + 182, null);
 		
 	}
 
-	private void drawLeftOutline(Graphics g, int x, int y) {
-		g.drawImage(Assets.getInstance().getImage("OUTLINE_MINI"), 
-				offX(x) - TILE_SIZE, offY(y), null); 
-		
-	}
-
-	private void drawRightOutline(Graphics g, int x, int y) {
-		g.drawImage(Assets.getInstance().getImage("OUTLINE_MINI"), 
-				offX(x) + TILE_SIZE, offY(y), null); 
-		
-	}
-
-	private void drawTopOutline(Graphics g, int x, int y) {
-		g.drawImage(Assets.getInstance().getImage("OUTLINE_MINI"), 
-				offX(x), offY(y) - TILE_SIZE, null); 
-	}
-	
-	private void drawBottomOutline(Graphics g, int x, int y) {
-		g.drawImage(Assets.getInstance().getImage("OUTLINE_MINI"), 
-				offX(x), offY(y) + TILE_SIZE, null); 
-	}
-
-	private void drawSmallTile(Graphics g, int x, int y, int tileType) {
+	private void drawSmallTile(Graphics g, int x, int y, TerrainEnum tileType) {
 		switch (tileType) {
-			case 0:
+			case GRASS:
 				g.drawImage(Assets.getInstance().getImage("GRASS_MINI"), 
-						offX(x), offY(y), null); 
+						offX(x, y), offY(x, y), null); 
 				break;
-			case 1:
+			case SAND:
 				g.drawImage(Assets.getInstance().getImage("SAND_MINI"), 
-						offX(x), offY(y), null); 
+						offX(x, y), offY(x, y), null); 
 				break;
-			case 2:
+			case WATER:
 				g.drawImage(Assets.getInstance().getImage("WATER_MINI"), 
-						offX(x), offY(y), null); 
+						offX(x, y), offY(x, y), null); 
 				break;
 			default:
 				log.warn("Invalid tile type");
 		}
 	}
 	
-	private int offX(int x) {
-		return this.width + (TILE_SIZE * x) - 
+	private int offX(int x, int y) {
+		return this.width + ((int)(((x * 0.5f) * HEX_SIZE/2) + (x * 0.5f) * HEX_SIZE)) - 
 				DISTANCE_FROM_RIGHT;
 	}
 	
-	private int offY(int y) {
-		return (y * TILE_SIZE) + this.height - 440;
+	private int offY(int x, int y) {
+		return ((int)((y * HEX_HEIGHT) + ((x * 0.5f) * HEX_HEIGHT))) + this.height - 
+				DISTANCE_FROM_BOTTOM;
 	}
-
 }

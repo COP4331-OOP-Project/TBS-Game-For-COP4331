@@ -7,7 +7,7 @@ import org.junit.Test;
  */
 public class TileTest {
 
-    private Tile tile = new Tile(2, new Location(0, 0));
+    private Tile tile = new Tile(TerrainEnum.WATER, new Location(0, 0));
 
     @Test
     public void testTimeImpassable() {

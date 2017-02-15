@@ -9,6 +9,8 @@ import game.gameboard.Location;
 import java.util.LinkedList;
 import java.util.Queue;
 
+import controls.unit.UnitEnum;
+
 public abstract class Unit implements ICommandable
 {
 
@@ -16,7 +18,7 @@ public abstract class Unit implements ICommandable
   private int ownerID;              // Player's id
   private Location location;        // unit location
   private PowerState powerState;    // unit power state
-  private int unitType;             // unit's type
+  private UnitEnum unitType;             // unit's type
 
   // unit stats
   private int attackDamage;
@@ -32,7 +34,7 @@ public abstract class Unit implements ICommandable
   protected Queue<Command> queue = new LinkedList<Command>(); // unit command queue
 
   // Constructor
-  public Unit(Location loc, int ownerID, int unitType) {
+  public Unit(Location loc, int ownerID, UnitEnum unitType) {
     this.location = loc;
     this.ownerID = ownerID;
     this.unitType = unitType;
@@ -60,13 +62,12 @@ public abstract class Unit implements ICommandable
   public int getSpeed(){ return speed; }
   public float getUpkeep(){ return upkeep; }
   public int getBaseResourceCost() { return baseResourceCost; }
-  public int getUnitType(){ return unitType; }
   public PowerState getPowerState(){ return powerState; }
   public int getUnitID(){ return unitID; }
   public float getResourceCost(){ return (baseResourceCost * upkeep); }
   public Queue<Command> getQueue(){ return queue; }
   public int getDefenddirection(){return defenddirection;}
-
+  public UnitEnum getUnitType(){ return unitType; }
 
   /* Mutators */
   public void setAttackDamage(int attackDamage) {this.attackDamage = attackDamage; }
@@ -79,13 +80,13 @@ public abstract class Unit implements ICommandable
   public void setBaseResourceCost(int cost) { this.baseResourceCost = cost; }
   public void setLocation(Location loc){ this.location = loc; }
   public void setOwnerID(int o){ this.ownerID = o; }
-  public void setUnitType(int u){ this.unitType = u; }
   public void setUnitID(int id){ this.unitID = id; }
   public void setDefenddirection(int defenddirection) {this.defenddirection = defenddirection;}
-
+  public void setUnitType(UnitEnum u){ this.unitType = u; }
+  
   public void printUnit()
   {
-    System.out.println("    unit type: " + getUnitType());
+    System.out.println("    Unit Type: " + getUnitType());
     System.out.println("	Armor: " + getArmor());
     System.out.println("	Health: " + getHealth());
     System.out.println("	Orientation: " + getOrientation());

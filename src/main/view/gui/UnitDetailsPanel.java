@@ -4,12 +4,13 @@ import java.awt.Font;
 import java.awt.Graphics;
 
 import controls.unit.UnitEnum;
+import game.Assets;
 import game.Game;
 
 public class UnitDetailsPanel extends DetailsPanel{
 	private Game game;
-	Font detailsFont = new Font("Lucida Sans", Font.BOLD, 20);
-	Font bigFont = new Font("Lucida Sans", Font.BOLD, 35);
+	Font detailsFont = Assets.getInstance().getFont(0);
+	Font bigFont = Assets.getInstance().getFont(3);
 	
 	public UnitDetailsPanel(Game game) {
 		this.game = game;
@@ -51,16 +52,16 @@ public class UnitDetailsPanel extends DetailsPanel{
 		} else {
 			g.setFont(bigFont);
 			if (game.getCurrentType() == UnitEnum.EXPLORER) {
-				g.drawString("You Have No Explorer Units", 35, height - 25);
+				g.drawString("You Have No Explorer Units", 35, height - 17);
 			}
 			if (game.getCurrentType() == UnitEnum.COLONIST) {
-				g.drawString("You Have No Colonist Units", 35, height - 25);
+				g.drawString("You Have No Colonist Units", 35, height - 17);
 			}
 			if (game.getCurrentType() == UnitEnum.MELEE) {
-				g.drawString("You Have No Melee Units", 35, height - 25);
+				g.drawString("You Have No Melee Units", 35, height - 17);
 			}
 			if (game.getCurrentType() == UnitEnum.RANGED) {
-				g.drawString("You Have No Ranged Units", 35, height - 25);
+				g.drawString("You Have No Ranged Units", 35, height - 17);
 			}
 		}
 		g.setFont(old);
