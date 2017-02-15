@@ -13,12 +13,16 @@ public class GameEngine {
 	Window window;
 	
 	public GameEngine() {
-		Assets.getInstance().loadResources();
 		Thread mainThread = new Thread() {
 			public void run() {
-				window = new Window(game);
+				window = new Window();
+
+				System.out.println("Rendering");
+				window.show();
+
+				window.startGame(game);
 				events = new EventController(game);
-				window.addKeyListener(events);
+				//window.addKeyListener(events);
 				mainLoop();
 			}
 		};

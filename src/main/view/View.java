@@ -1,5 +1,6 @@
 package view;
 import game.Game;
+import javafx.scene.canvas.GraphicsContext;
 import view.game.GamePanel;
 import view.gui.CivilizationPanel;
 import view.gui.ControlModePanel;
@@ -42,26 +43,22 @@ public class View {
 		makePanel = new MakeDetailsPanel(game);
 	}
 	
-	public void drawVisiblePanels(Graphics2D g, int width, int height) {
-		g.setRenderingHint(
-		        RenderingHints.KEY_TEXT_ANTIALIASING,
-		        RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-		g.setColor(Color.BLACK);
+	public void drawVisiblePanels(GraphicsContext gc, int width, int height) {
 		//Add structure And unit Overview Modes
-		gamePanel.draw(g, width, height);
-		civPanel.draw(g, width, height);
-		modePanel.draw(g, width, height);
+		gamePanel.draw(gc, width, height);
+		civPanel.draw(gc, width, height);
+		modePanel.draw(gc, width, height);
 		if (game.getCurrentMode() == ModeEnum.UNIT)
-			unitDetailsPanel.draw(g, width, height);
+			unitDetailsPanel.draw(gc, width, height);
 		if (game.getCurrentMode() == ModeEnum.STRUCTURE)
-			structureDetailsPanel.draw(g, width, height);
-		miniPanel.draw(g, width, height);
+			structureDetailsPanel.draw(gc, width, height);
+		miniPanel.draw(gc, width, height);
 		if (game.getUnitOverviewVisible())
-			unitOverviewPanel.draw(g, width, height);
+			unitOverviewPanel.draw(gc, width, height);
 		if (game.getStructureOverviewVisible())
-			structureOverviewPanel.draw(g, width, height);
+			structureOverviewPanel.draw(gc, width, height);
 		//unitOverviewPanel.drawPanelBox(g, width, height);
-		if (game.isShowingMakeDetails()) makePanel.draw(g, width, height);
+		if (game.isShowingMakeDetails()) makePanel.draw(gc, width, height);
 
 	}
 

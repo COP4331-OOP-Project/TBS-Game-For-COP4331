@@ -4,7 +4,7 @@ import game.Assets;
 
 public class Camera {
 	private PanelCenterer panelCenterer;
-	private static final int HEX_W = Assets.getInstance().getImage("TERRAIN_GRASS").getWidth();
+	private static final int HEX_W = (int)Assets.getInstance().getImage("TERRAIN_GRASS").getWidth();
 	private static final int HEX_H = (int)(HEX_W * 0.86);
 	public Camera(GamePanel gamePanel) {
 		this.panelCenterer = new PanelCenterer(gamePanel);

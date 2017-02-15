@@ -1,11 +1,10 @@
 package view.gui;
 
-import java.awt.Graphics;
-
 import game.Assets;
 import game.Game;
 import game.entities.units.Unit;
 import game.gameboard.TerrainEnum;
+import javafx.scene.canvas.GraphicsContext;
 import view.Panel;
 
 import org.apache.logging.log4j.LogManager;
@@ -26,69 +25,69 @@ public class MiniMapPanel extends Panel{
 		this.game = game;
 	}
 	
-	public void draw(Graphics g, int width, int height) {
+	public void draw(GraphicsContext gc, int width, int height) {
 		this.width = width;
 		this.height = height;
 		for (int i = 0; i < game.getGameBoard().getTiles().length; i++) {
 			for (int j = 0; j < game.getGameBoard().getTiles()[i].length; j++) {
-				drawSmallTile(g, i, j, game.getGameBoard().getTiles()[i][j].getTileType());
+				drawSmallTile(gc, i, j, game.getGameBoard().getTiles()[i][j].getTileType());
 
 				if (game.getGameBoard().getTiles()[i][j].containsStructure) {
 					drawSmallStructure(game.getGameBoard().getTiles()[i][j].getStructure().getLocation().getX(), 
 							game.getGameBoard().getTiles()[i][j].getStructure().getLocation().getY(), 
-							game.getGameBoard().getTiles()[i][j].getStructure().getOwnerID(), g);
+							game.getGameBoard().getTiles()[i][j].getStructure().getOwnerID(), gc);
 				}
 				if (game.getGameBoard().getTiles()[i][j].containsUnit) {
 					for (Unit unit : game.getGameBoard().getTiles()[i][j].getUnits()) {
 						if (!game.getGameBoard().getTiles()[i][j].containsArmy && !game.getGameBoard().getTiles()[i][j].containsBattleGroup()) {
 							drawSmallUnit(game.getGameBoard().getTiles()[i][j].getLocation().getX(), 
 									game.getGameBoard().getTiles()[i][j].getLocation().getY(), 
-									 unit.getOwnerID(), g);
+									 unit.getOwnerID(), gc);
 						}
 					}
 				}
 			}
 		}
-		drawBorder(g);
+		drawBorder(gc);
 	}
 
-	private void drawSmallStructure(int x, int y, int ownerID, Graphics g) {
+	private void drawSmallStructure(int x, int y, int ownerID, GraphicsContext gc) {
 		if (ownerID == 0) {
-			g.drawImage(Assets.getInstance().getImage("BASE_O_SMALL"), offX(x, y), offY(x, y), null);
+			gc.drawImage(Assets.getInstance().getImage("BASE_O_SMALL"), offX(x, y), offY(x, y));
 			
 			} else {
-				g.drawImage(Assets.getInstance().getImage("BASE_B_SMALL"), offX(x, y), offY(x, y), null);
+				gc.drawImage(Assets.getInstance().getImage("BASE_B_SMALL"), offX(x, y), offY(x, y));
 			}
 	}
 
-	private void drawSmallUnit(int x, int y, int ownerID, Graphics g) {
+	private void drawSmallUnit(int x, int y, int ownerID, GraphicsContext gc) {
 		if (ownerID == 0) {
-		g.drawImage(Assets.getInstance().getImage("UNIT_O_SMALL"), offX(x, y), offY(x, y), null);
+		gc.drawImage(Assets.getInstance().getImage("UNIT_O_SMALL"), offX(x, y), offY(x, y));
 		
 		} else {
-			g.drawImage(Assets.getInstance().getImage("UNIT_B_SMALL"), offX(x, y), offY(x, y), null);
+			gc.drawImage(Assets.getInstance().getImage("UNIT_B_SMALL"), offX(x, y), offY(x, y));
 		}
 	}
 
-	private void drawBorder(Graphics g) {
-		g.drawImage(Assets.getInstance().getImage("GUI_MINI_MAP_BORDER"), width - DISTANCE_FROM_RIGHT - 27
-                , height-DISTANCE_FROM_BOTTOM + 182, null);
+	private void drawBorder(GraphicsContext gc) {
+		gc.drawImage(Assets.getInstance().getImage("GUI_MINI_MAP_BORDER"), width - DISTANCE_FROM_RIGHT - 27
+                , height-DISTANCE_FROM_BOTTOM + 182);
 		
 	}
 
-	private void drawSmallTile(Graphics g, int x, int y, TerrainEnum tileType) {
+	private void drawSmallTile(GraphicsContext gc, int x, int y, TerrainEnum tileType) {
 		switch (tileType) {
 			case GRASS:
-				g.drawImage(Assets.getInstance().getImage("GRASS_MINI"), 
-						offX(x, y), offY(x, y), null); 
+				gc.drawImage(Assets.getInstance().getImage("GRASS_MINI"), 
+						offX(x, y), offY(x, y)); 
 				break;
 			case SAND:
-				g.drawImage(Assets.getInstance().getImage("SAND_MINI"), 
-						offX(x, y), offY(x, y), null); 
+				gc.drawImage(Assets.getInstance().getImage("SAND_MINI"), 
+						offX(x, y), offY(x, y)); 
 				break;
 			case WATER:
-				g.drawImage(Assets.getInstance().getImage("WATER_MINI"), 
-						offX(x, y), offY(x, y), null); 
+				gc.drawImage(Assets.getInstance().getImage("WATER_MINI"), 
+						offX(x, y), offY(x, y)); 
 				break;
 			default:
 				log.warn("Invalid tile type");

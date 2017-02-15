@@ -1,9 +1,8 @@
 package game;
-import java.awt.Font;
-import java.awt.FontFormatException;
-import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.Hashtable;
 
@@ -11,6 +10,11 @@ import javax.imageio.ImageIO;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import javafx.embed.swing.SwingFXUtils;
+import javafx.scene.image.Image;
+import javafx.scene.image.WritableImage;
+import javafx.scene.text.Font;
 
 public class Assets {
 	private final static Logger log = LogManager.getLogger(Assets.class);
@@ -93,7 +97,7 @@ public class Assets {
 	private Font largeFont;
 	private Font hugeFont;
 	
-	private ArrayList<BufferedImage> gameImages;
+	private ArrayList<Image> gameImages;
 	private int lastItemLoaded = 0;
 	
 	private Assets() {} //Constructor is Private, only one instance of Resources can be created
@@ -105,21 +109,23 @@ public class Assets {
 	
 	private void loadFonts() {
 		try {
-			defaultFont = Font.createFont(Font.TRUETYPE_FONT, new File(FONT));
-		} catch (FontFormatException e) {
-			e.printStackTrace();
+			defaultFont = Font.loadFont(new FileInputStream(new File(FONT)), 20);
+			smallFont = Font.loadFont(new FileInputStream(new File(FONT)), 18);
+			mediumFont = Font.loadFont(new FileInputStream(new File(FONT)), 21);
+			largeFont = Font.loadFont(new FileInputStream(new File(FONT)), 35);
+			hugeFont = Font.loadFont(new FileInputStream(new File(FONT)), 55);
 		} catch (IOException e) {
-			defaultFont = new Font("Lucida Sans", Font.BOLD, 20);
+			defaultFont = new Font("Lucida Sans", 20);
+			smallFont = new Font("Lucida Sans", 18);
+			mediumFont = new Font("Lucida Sans", 21);
+			largeFont = new Font("Lucida Sans", 35);
+			hugeFont = new Font("Lucida Sans", 55);
 			e.printStackTrace();
 		}
-		smallFont = defaultFont.deriveFont(18f);
-		mediumFont = defaultFont.deriveFont(21f);
-		largeFont = defaultFont.deriveFont(35f);
-		hugeFont = defaultFont.deriveFont(55f);
 	}
 
 	private void loadImages() {
-		gameImages = new ArrayList<BufferedImage>();
+		gameImages = new ArrayList<Image>();
 		loadItem("GUI_TOP_LEFT", GUI_TOP_LEFT);
 		loadItem("GUI_TOP_MIDDLE", GUI_TOP_MIDDLE);
 		loadItem("GUI_TOP_RIGHT", GUI_TOP_RIGHT);
@@ -188,19 +194,20 @@ public class Assets {
 	}
 	
 	private void loadItem(String name, String path) {
+		File file = new File(path);
+		String localUrl = "";
 		try {
-			gameImages.add(ImageIO.read(new File(path)));
-			assets.put(name, lastItemLoaded);
-			log.debug("File Loaded: " + path);
-			
-			lastItemLoaded++;
-		} catch (IOException e) {
-			log.warn("File Not Found: " + path);
+			localUrl = file.toURI().toURL().toString();
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		gameImages.add(new Image(localUrl));
+		assets.put(name, lastItemLoaded);
+		lastItemLoaded++;
 	}
 	
-	public BufferedImage getImage(String image) {
+	public Image getImage(String image) {
 		return gameImages.get(assets.get(image));
 	}
 	

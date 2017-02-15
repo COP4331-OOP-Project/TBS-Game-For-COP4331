@@ -1,14 +1,14 @@
 package view.game;
 
-import java.awt.Color;
-import java.awt.Font;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+
 public class ArmyDrawer {
 	private final static Logger log = LogManager.getLogger(GamePanel.class);
-	Font armyFont = new Font("Lucida Sans", Font.BOLD, 40);
+	Font armyFont = new Font("Lucida Sans", 40);
 	
 	private GamePanel gamePanel;
 	
@@ -35,28 +35,28 @@ public class ArmyDrawer {
 				log.warn("Invalid Player :" + player
 						+ " cannot have units drawn");
 		}
-		gamePanel.getG2D().setFont(armyFont);
-		Color original = gamePanel.getG2D().getColor();
+		gamePanel.getgc().setFont(armyFont);
+		Color original = (Color)gamePanel.getgc().getFill();
 		
 		if (numOfUnits < 10) {
-			gamePanel.getG2D().setColor(Color.BLACK);
-			gamePanel.getG2D().drawString("" + numOfUnits, gamePanel.getCamera().offsetX(x , y) + 
+			gamePanel.getgc().setFill(Color.BLACK);
+			gamePanel.getgc().strokeText("" + numOfUnits, gamePanel.getCamera().offsetX(x , y) + 
 					gamePanel.getTileSize()/2 - 15, gamePanel.getCamera().offsetY(x, y) + 
 					gamePanel.getTileSize()/2 + 18);
-			gamePanel.getG2D().setColor(Color.WHITE);
-			gamePanel.getG2D().drawString("" + numOfUnits, gamePanel.getCamera().offsetX(x, y) + 
+			gamePanel.getgc().setFill(Color.WHITE);
+			gamePanel.getgc().strokeText("" + numOfUnits, gamePanel.getCamera().offsetX(x, y) + 
 					gamePanel.getTileSize()/2 - 17, gamePanel.getCamera().offsetY(x, y) + 
 					gamePanel.getTileSize()/2 + 17);
 		} else {
-			gamePanel.getG2D().setColor(Color.BLACK);
-			gamePanel.getG2D().drawString("" + numOfUnits, gamePanel.getCamera().offsetX(x, y) + 
+			gamePanel.getgc().setFill(Color.BLACK);
+			gamePanel.getgc().strokeText("" + numOfUnits, gamePanel.getCamera().offsetX(x, y) + 
 					gamePanel.getTileSize()/2 - 23, gamePanel.getCamera().offsetY(x, y) + 
 					gamePanel.getTileSize()/2 + 18);
-			gamePanel.getG2D().setColor(Color.WHITE);
-			gamePanel.getG2D().drawString("" + numOfUnits, gamePanel.getCamera().offsetX(x, y) + 
+			gamePanel.getgc().setFill(Color.WHITE);
+			gamePanel.getgc().strokeText("" + numOfUnits, gamePanel.getCamera().offsetX(x, y) + 
 					gamePanel.getTileSize()/2 - 25, gamePanel.getCamera().offsetY(x, y) + 
 					gamePanel.getTileSize()/2 + 17);
 		}
-		gamePanel.getG2D().setColor(original);
+		gamePanel.getgc().setFill(original);
 	}
 }

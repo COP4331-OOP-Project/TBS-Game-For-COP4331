@@ -4,12 +4,20 @@ import java.awt.DisplayMode;
 
 import javax.swing.JFrame;
 
+import game.Assets;
 import game.Game;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
-public class Window extends JFrame {
+public class Window extends Application {
 	private static final boolean FULLSCREEN_MODE = false;
 	static final long serialVersionUID = 1L;
-	private Frame frame;
+	private View view;
+	GraphicsContext gc;
 	private int defaultScreenWidth = 1366;
 	private int defaultScreenHeight = 768;
 	private int screenWidth = defaultScreenWidth;
@@ -19,29 +27,36 @@ public class Window extends JFrame {
 	public int viewOffsetY = 0;
 	public int viewOffsetX = 0;
 
-	public Window(Game game) {
-		frame = new Frame(game);
-		getContentPane().add(frame);
-		if (FULLSCREEN_MODE) {
-			screenWidth = java.awt.Toolkit.getDefaultToolkit().getScreenSize().width;
-			screenHeight = java.awt.Toolkit.getDefaultToolkit().getScreenSize().height;
-			DisplayMode dm = new DisplayMode(screenWidth, screenHeight, 32, 60);
-			setSize(new Dimension(dm.getWidth(), dm.getHeight()));
-			setUndecorated(true);
-		} else {
-			setSize(screenWidth, screenHeight);
-			setLocationRelativeTo(null);
-			setDefaultCloseOperation(EXIT_ON_CLOSE);
-			setMinimumSize(new Dimension(screenWidth, screenHeight));
-		}
-		setVisible(true);
+	
+	public void startGame(Game game) {
+		Assets.getInstance().loadResources();
+		view = new View(game);
 	}
 	
 	public void renderGame() {
-		frame.repaint();
+		view.drawVisiblePanels(gc, screenWidth, screenHeight);
+		
 	}
 
 	public void updateAnimationTime() {
-		frame.updateAnimationTime();
+		view.updateAnimationTime();
+	}
+	
+	public void show() {
+		launch();
+	}
+	
+	@Override
+	public void start(Stage stage) throws Exception {
+		Assets.getInstance().loadResources();
+		Canvas canvas = new Canvas(screenWidth, screenHeight);
+		canvas.setWidth(screenWidth);
+		canvas.setHeight(screenHeight);
+		gc = canvas.getGraphicsContext2D();
+		Pane root = new Pane();
+		root.getChildren().add(canvas);
+		Scene scene = new Scene(root);
+		stage.setScene(scene);
+		stage.show();
 	}
 }
