@@ -1,8 +1,10 @@
-package game;
+package view;
 import java.awt.Dimension;
 import java.awt.DisplayMode;
 
 import javax.swing.JFrame;
+
+import game.Game;
 
 public class Window extends JFrame {
 	private static final boolean FULLSCREEN_MODE = false;

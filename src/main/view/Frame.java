@@ -1,7 +1,9 @@
-package game;
+package view;
 
-import view.View;
 import javax.swing.*;
+
+import game.Game;
+
 import java.awt.*;
 
 public class Frame extends JPanel{

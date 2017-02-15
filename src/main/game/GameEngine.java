@@ -1,5 +1,7 @@
 package game;
 
+import view.Window;
+
 public class GameEngine {
 	private final int FPS = 60;
 	private final int GAME_UPDATES_PER_SECOND = 20;
