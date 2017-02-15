@@ -30,9 +30,9 @@ public class CivilizationPanel extends Panel{
 
 	private void drawPlayerIcon(Graphics g) {
 		if (game.getCurrentPlayer().getPlayerID() == 0) {
-			g.drawImage(Assets.getInstance().getImage("ICON_O"), 120, 9, null);
+			g.drawImage(Assets.getInstance().getImage("ICON_O"), 120, 7, null);
 		} else {
-			g.drawImage(Assets.getInstance().getImage("ICON_B"), 120, 9, null);
+			g.drawImage(Assets.getInstance().getImage("ICON_B"), 120, 7, null);
 		}
 		
 	}
@@ -40,8 +40,8 @@ public class CivilizationPanel extends Panel{
 	private void drawText(Graphics g) {
 		Font old = g.getFont();
 		g.setFont(civInfoFont);
-		g.drawString("Player: ", 10, 40);
-		g.drawString("Turn: "+ game.getTurnNum(), 10, 80);
+		g.drawString("Player: ", 10, 37);
+		g.drawString("Turn: "+ game.getTurnNum(), 180, 37);
 		g.setFont(old);
 	}
 

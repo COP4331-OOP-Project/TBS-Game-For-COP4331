@@ -21,8 +21,9 @@ public class ControlModePanel extends Panel{
 	private static final int PANEL_HEIGHT = 114;
 	private static final int PANEL_DISTANCE_MODE = 78;
 	private static final int PANEL_DISTANCE_SUBMODE = 35;
-	private static final int PANEL_DISTANCE_COMMAND = 95;
+	private static final int PANEL_DISTANCE_COMMAND = 45;
 	private static final int PANEL_DISTANCE_FROM_LEFT = 5;
+	private static final int COMMAND_PANEL_DISTANCE_FROM_LEFT = -18;
 	private static final int TEXT_SPACING = 48;
 	private static final int TEXT1_LOCATION = 58;
 	private static final int TEXT2_LOCATION = -125;
@@ -59,7 +60,7 @@ public class ControlModePanel extends Panel{
 	}
 	
 	private void drawCommandPanel(Graphics g) {
-		g.drawImage(Assets.getInstance().getImage("GUI_COMMAND_PANEL"), PANEL_DISTANCE_FROM_LEFT - 20
+		g.drawImage(Assets.getInstance().getImage("GUI_COMMAND_PANEL"), COMMAND_PANEL_DISTANCE_FROM_LEFT - 20
 				, PANEL_DISTANCE_COMMAND, null);
 	}
 
@@ -194,7 +195,7 @@ public class ControlModePanel extends Panel{
 			commandString = "None";
 		}
 		
-		g.drawString(commandString, PANEL_DISTANCE_FROM_LEFT + 30, PANEL_DISTANCE_COMMAND + 48);
+		g.drawString(commandString, COMMAND_PANEL_DISTANCE_FROM_LEFT + 30, PANEL_DISTANCE_COMMAND + 48);
 	}
 
 }
