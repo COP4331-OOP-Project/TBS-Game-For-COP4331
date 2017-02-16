@@ -17,10 +17,10 @@ public class StructureOverviewPanel extends OverviewPanel{
 		Font oldFont = gc.getFont();
 		gc.setFill(Color.WHITE);
 		gc.setFont(Assets.getInstance().getFont(2));
-		gc.strokeText("Structure Overview", width/2 - 370, height/2 - 245);
+		gc.fillText("Structure Overview", width/2 - 370, height/2 - 245);
 		gc.setFont(Assets.getInstance().getFont(1));
 		for (int i = 0; i < game.getCurrentPlayer().getBaseCount(); i++) {
-			gc.strokeText("Base", width/2 - 370, height/2 + (i * 30) - 200);
+			gc.fillText("Base", width/2 - 370, height/2 + (i * 30) - 200);
 		}
 		gc.setFill(Color.BLACK);
 		gc.setFont(oldFont);

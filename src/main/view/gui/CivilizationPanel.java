@@ -41,8 +41,8 @@ public class CivilizationPanel extends Panel{
 	private void drawText(GraphicsContext g) {
 		Font old = g.getFont();
 		g.setFont(civInfoFont);
-		g.strokeText("Player: ", 10, 40);
-		g.strokeText("Turn: "+ game.getTurnNum(), 10, 80);
+		g.fillText("Player: ", 10, 40);
+		g.fillText("Turn: "+ game.getTurnNum(), 10, 80);
 		g.setFont(old);
 	}
 

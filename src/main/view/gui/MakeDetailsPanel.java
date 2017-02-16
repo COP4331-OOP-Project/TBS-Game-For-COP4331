@@ -87,10 +87,10 @@ public class MakeDetailsPanel {
 
     // Draw make list strings
     private void drawTypeStrings(GraphicsContext g) {
-		g.strokeText(makeList[type][0], PANEL_DISTANCE_FROM_LEFT + TEXT_OFFSET, height/2 - PANEL_DISTANCE - TEXT_LOCATION);
-		g.strokeText(makeList[type][1], PANEL_DISTANCE_FROM_LEFT + TEXT_OFFSET, height/2 - PANEL_DISTANCE - TEXT_LOCATION + TEXT_SPACING);
-		g.strokeText(makeList[type][2], PANEL_DISTANCE_FROM_LEFT + TEXT_OFFSET, height/2 - PANEL_DISTANCE - TEXT_LOCATION + 2*TEXT_SPACING);
-		g.strokeText(makeList[type][3], PANEL_DISTANCE_FROM_LEFT + TEXT_OFFSET, height/2 - PANEL_DISTANCE - TEXT_LOCATION + 3*TEXT_SPACING);
+		g.fillText(makeList[type][0], PANEL_DISTANCE_FROM_LEFT + TEXT_OFFSET, height/2 - PANEL_DISTANCE - TEXT_LOCATION);
+		g.fillText(makeList[type][1], PANEL_DISTANCE_FROM_LEFT + TEXT_OFFSET, height/2 - PANEL_DISTANCE - TEXT_LOCATION + TEXT_SPACING);
+		g.fillText(makeList[type][2], PANEL_DISTANCE_FROM_LEFT + TEXT_OFFSET, height/2 - PANEL_DISTANCE - TEXT_LOCATION + 2*TEXT_SPACING);
+		g.fillText(makeList[type][3], PANEL_DISTANCE_FROM_LEFT + TEXT_OFFSET, height/2 - PANEL_DISTANCE - TEXT_LOCATION + 3*TEXT_SPACING);
     }
 
 }

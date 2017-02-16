@@ -63,7 +63,7 @@ public class GamePanel extends Panel {
 				//Draw Tiles
 				tileDrawer.drawTile(i, j, tile.getTileType());
 				if (tile.getUnits().size() > 1 && !tile.containsArmy) {
-					getgc().strokeText("" + tile.getUnits().size()
+					getgc().fillText("" + tile.getUnits().size()
 							, getCamera().offsetX(i, j) + 5, getCamera().offsetY(i, j) + 22);
 				}
 				

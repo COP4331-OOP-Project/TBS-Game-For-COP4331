@@ -19,7 +19,7 @@ public class UnitOverviewPanel extends OverviewPanel{
 		Font oldFont = gc.getFont();
 		gc.setFill(Color.WHITE);
 		gc.setFont(Assets.getInstance().getFont(2));
-		gc.strokeText("Unit Overview", width/2 - 370, height/2 - 245);
+		gc.fillText("Unit Overview", width/2 - 370, height/2 - 245);
 		for (int i = 0; i < game.getCurrentPlayer().getAllUnit().size(); i++) {
 			String unitString = "";
 			UnitEnum unit = game.getCurrentPlayer().getAllUnit().get(i).getUnitType();
@@ -40,7 +40,7 @@ public class UnitOverviewPanel extends OverviewPanel{
 			//} else {
 				gc.setFont(Assets.getInstance().getFont(1));
 			//}
-			gc.strokeText(unitString, width/2 - 370, height/2 + (i * 30) - 200);
+			gc.fillText(unitString, width/2 - 370, height/2 + (i * 30) - 200);
 		}
 		gc.setFill(Color.BLACK);
 		gc.setFont(oldFont);

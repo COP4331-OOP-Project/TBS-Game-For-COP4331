@@ -23,26 +23,26 @@ public class StructureDetailsPanel extends DetailsPanel{
 	private void drawText(GraphicsContext g, int height) {
 		Font old = g.getFont();
 		g.setFont(detailsFont);
-		g.strokeText("Structure Details:", 10, height - 65);
+		g.fillText("Structure Details:", 10, height - 65);
 		if (game.getCurrentPlayer().getBases().size() > 0) {
-			g.strokeText("Type: ", 30, height - 35);
-			g.strokeText("Health: ", 30, height - 10);
-			g.strokeText("Attack: ", 430, height - 35);
-			g.strokeText("Defense: ", 430, height - 10);
-			g.strokeText("Armor: ", 830, height - 35);
-			g.strokeText("Upkeep: ", 830, height - 10);
+			g.fillText("Type: ", 30, height - 35);
+			g.fillText("Health: ", 30, height - 10);
+			g.fillText("Attack: ", 430, height - 35);
+			g.fillText("Defense: ", 430, height - 10);
+			g.fillText("Armor: ", 830, height - 35);
+			g.fillText("Upkeep: ", 830, height - 10);
 		
 			if (game.getCurrentType() == StructureEnum.BASE) {
-				g.strokeText("Base", 130, height - 35);
+				g.fillText("Base", 130, height - 35);
 			}
-			g.strokeText(game.getCurrentPlayer().getBases().get(0).getHealth() + "", 130, height - 10);
-			g.strokeText(game.getCurrentPlayer().getBases().get(0).getAttackDamage() + "", 530, height - 35);
-			g.strokeText(game.getCurrentPlayer().getBases().get(0).getDefenseDamage() + "", 530, height - 10);
-			g.strokeText(game.getCurrentPlayer().getBases().get(0).getArmor() + "", 930, height - 35);
-			g.strokeText(game.getCurrentPlayer().getBases().get(0).getUpkeep() + "", 930, height - 10);
+			g.fillText(game.getCurrentPlayer().getBases().get(0).getHealth() + "", 130, height - 10);
+			g.fillText(game.getCurrentPlayer().getBases().get(0).getAttackDamage() + "", 530, height - 35);
+			g.fillText(game.getCurrentPlayer().getBases().get(0).getDefenseDamage() + "", 530, height - 10);
+			g.fillText(game.getCurrentPlayer().getBases().get(0).getArmor() + "", 930, height - 35);
+			g.fillText(game.getCurrentPlayer().getBases().get(0).getUpkeep() + "", 930, height - 10);
 		} else {
 			g.setFont(bigFont);
-			g.strokeText("You Have No Structures", 35, height - 17);
+			g.fillText("You Have No Structures", 35, height - 17);
 		}
 		g.setFont(old);
 	}

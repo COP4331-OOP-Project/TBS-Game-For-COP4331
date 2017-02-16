@@ -95,17 +95,17 @@ public class ControlModePanel extends Panel{
 	}
 
 	private void drawModeStrings(GraphicsContext g) {
-		g.strokeText(modeString[0], 30, height/2 - PANEL_DISTANCE_MODE - TEXT1_LOCATION);
-		g.strokeText(modeString[1], 30, height/2 - PANEL_DISTANCE_MODE - TEXT1_LOCATION + TEXT_SPACING);
-		g.strokeText(modeString[2], 30, height/2 - PANEL_DISTANCE_MODE - TEXT1_LOCATION + 2*TEXT_SPACING);
-		g.strokeText(modeString[3], 30, height/2 - PANEL_DISTANCE_MODE - TEXT1_LOCATION + 3*TEXT_SPACING);
+		g.fillText(modeString[0], 30, height/2 - PANEL_DISTANCE_MODE - TEXT1_LOCATION);
+		g.fillText(modeString[1], 30, height/2 - PANEL_DISTANCE_MODE - TEXT1_LOCATION + TEXT_SPACING);
+		g.fillText(modeString[2], 30, height/2 - PANEL_DISTANCE_MODE - TEXT1_LOCATION + 2*TEXT_SPACING);
+		g.fillText(modeString[3], 30, height/2 - PANEL_DISTANCE_MODE - TEXT1_LOCATION + 3*TEXT_SPACING);
 	}
 	
 	private void drawSubmodeStrings(GraphicsContext g) { 
-		g.strokeText(submodeString[mode][0], 30, height/2 - PANEL_DISTANCE_SUBMODE - TEXT2_LOCATION);
-		g.strokeText(submodeString[mode][1], 30, height/2 - PANEL_DISTANCE_SUBMODE - TEXT2_LOCATION + TEXT_SPACING);
-		g.strokeText(submodeString[mode][2], 30, height/2 - PANEL_DISTANCE_SUBMODE - TEXT2_LOCATION + 2*TEXT_SPACING);
-		g.strokeText(submodeString[mode][3], 30, height/2 - PANEL_DISTANCE_SUBMODE - TEXT2_LOCATION + 3*TEXT_SPACING);
+		g.fillText(submodeString[mode][0], 30, height/2 - PANEL_DISTANCE_SUBMODE - TEXT2_LOCATION);
+		g.fillText(submodeString[mode][1], 30, height/2 - PANEL_DISTANCE_SUBMODE - TEXT2_LOCATION + TEXT_SPACING);
+		g.fillText(submodeString[mode][2], 30, height/2 - PANEL_DISTANCE_SUBMODE - TEXT2_LOCATION + 2*TEXT_SPACING);
+		g.fillText(submodeString[mode][3], 30, height/2 - PANEL_DISTANCE_SUBMODE - TEXT2_LOCATION + 3*TEXT_SPACING);
 	}
 	
 	private void drawModePanel(GraphicsContext g) {
@@ -193,7 +193,7 @@ public class ControlModePanel extends Panel{
 			commandString = "None";
 		}
 		
-		g.strokeText(commandString, PANEL_DISTANCE_FROM_LEFT + 30, PANEL_DISTANCE_COMMAND + 48);
+		g.fillText(commandString, PANEL_DISTANCE_FROM_LEFT + 30, PANEL_DISTANCE_COMMAND + 48);
 	}
 
 }
