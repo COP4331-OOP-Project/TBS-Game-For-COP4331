@@ -53,6 +53,7 @@ public class Game {
    
 
     Game() {
+    	Assets.getInstance().loadResources();
 		//TODO: initialize game with players
 		this.players = new ArrayList<Player>();
 		centerCoordinates = new Location(0,0);

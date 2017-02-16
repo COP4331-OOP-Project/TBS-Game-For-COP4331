@@ -11,11 +11,6 @@ import view.gui.StructureOverviewPanel;
 import view.gui.UnitDetailsPanel;
 import view.gui.UnitOverviewPanel;
 
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
-
 import controls.ModeEnum;
 
 public class View {
@@ -29,8 +24,10 @@ public class View {
 	UnitDetailsPanel unitDetailsPanel;
 	MiniMapPanel miniPanel;
 	MakeDetailsPanel makePanel;
+	GraphicsContext gc;
 	
-	public View(Game game) {
+	public View(Game game, GraphicsContext gc) {
+		this.gc = gc;
 		this.game = game;
 		civPanel = new CivilizationPanel(game);
 		modePanel = new ControlModePanel(game);
@@ -43,7 +40,7 @@ public class View {
 		makePanel = new MakeDetailsPanel(game);
 	}
 	
-	public void drawVisiblePanels(GraphicsContext gc, int width, int height) {
+	public void drawVisiblePanels(int width, int height) {
 		//Add structure And unit Overview Modes
 		gamePanel.draw(gc, width, height);
 		civPanel.draw(gc, width, height);
@@ -68,5 +65,11 @@ public class View {
 		modePanel.updateAnimationCount();
 		structureOverviewPanel.updateAnimationCount();
 		unitDetailsPanel.updateAnimationCount();
+	}
+
+	public void renderGame(int width, int height) {
+		updateAnimationTime();
+		gc.clearRect(0, 0, width, height);
+		drawVisiblePanels(width, height);
 	}
 }

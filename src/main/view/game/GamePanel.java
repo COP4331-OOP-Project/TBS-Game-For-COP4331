@@ -42,6 +42,7 @@ public class GamePanel extends Panel {
 	}
 	
 	public void draw(GraphicsContext gc, int width, int height) {
+		this.gc = gc;
 		camera.getPanelCenterer().recenter(width, height);
 		int selX = game.getCenterCoordinates().getX();
 		int selY = game.getCenterCoordinates().getY();

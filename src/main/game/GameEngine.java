@@ -1,60 +1,74 @@
 package game;
 
-import view.Window;
+import javafx.animation.AnimationTimer;
+import javafx.application.Application;
+import javafx.event.EventHandler;
+import javafx.scene.Group;
+import javafx.scene.Scene;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.paint.Color;
+import javafx.stage.Stage;
+import view.View;
 
-public class GameEngine {
-	private final int FPS = 60;
-	private final int GAME_UPDATES_PER_SECOND = 20;
-	private final int TIME_PER_UPDATE = 1000/GAME_UPDATES_PER_SECOND;
-	private boolean running = true;
+public class GameEngine extends Application{
+	private int defaultScreenWidth = 1366;
+	private int defaultScreenHeight = 768;
 	
 	Game game = new Game();
-	EventController events;
-	Window window;
 	
-	public GameEngine() {
-		Thread mainThread = new Thread() {
-			public void run() {
-				window = new Window();
+	private EventController events;
+	private View view;
+	
+	
+    @Override
+    public void start(Stage primaryStage) {
+        primaryStage.setTitle("Game");
+        Group root = new Group();
+        Canvas canvas = new Canvas(defaultScreenWidth, defaultScreenHeight);
+        GraphicsContext gc = canvas.getGraphicsContext2D();
+    	view = new View(game, gc);
 
-				System.out.println("Rendering");
-				window.show();
+    	Scene scene = new Scene(root, Color.BLACK);
+		events = new EventController(game, scene);
+    	
+		sendEventsToController(scene);
 
-				window.startGame(game);
-				events = new EventController(game);
-				//window.addKeyListener(events);
-				mainLoop();
+		//This is new game loop using JavaFX timer.
+		AnimationTimer timer = new AnimationTimer() {
+			@Override
+			public void handle(long now) {
+				game.updateGame();
+				view.renderGame(defaultScreenWidth, defaultScreenHeight);
 			}
 		};
-		mainThread.start();
-	}
-	
-	/**
-	 * A main loop for updating and rendering
-	 */
-	private void mainLoop() {
-		   long lastTime = System.currentTimeMillis();
-		   int accumulatedTime = 0;
-		   long fpsTime = 1000000000 / FPS;
-		   while (running)
-		   {
-		      long newTime = System.currentTimeMillis();
-		      long diffTime = newTime - lastTime;
-		      lastTime = newTime;
-		      accumulatedTime += diffTime;
-		      if (accumulatedTime >= TIME_PER_UPDATE)
-		      {
-		         game.updateGame();
-				 window.updateAnimationTime();
-				 accumulatedTime = 0;
-		      }
-		      window.renderGame();
-		      
-		      try {
-				Thread.sleep( (lastTime - System.currentTimeMillis() + fpsTime)/1000000 );
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-		   }
-	}
+		timer.start();
+        root.getChildren().add(canvas);
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
+
+    public void sendEventsToController(Scene scene) {
+    	scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+               events.keyPressed(event);
+            }
+        });
+    	
+        scene.setOnKeyReleased(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+               events.keyReleased(event);
+            }
+        });
+        
+        scene.setOnKeyTyped(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+               events.keyTyped(event);
+            }
+        });
+    }
 }
