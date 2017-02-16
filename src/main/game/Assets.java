@@ -9,7 +9,11 @@ import java.util.Hashtable;
 import javafx.scene.image.Image;
 import javafx.scene.text.Font;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 public class Assets {
+	private final static Logger log = LogManager.getLogger(Assets.class);
 	private static final Assets INSTANCE = new Assets(); //This is the one instance of resources (singleton)
 	private Hashtable<String, Integer> assets = new Hashtable<String, Integer>();
 	
@@ -213,7 +217,7 @@ public class Assets {
 		}
 		gameImages.add(new Image(localUrl));
 		assets.put(name, lastItemLoaded);
-		System.out.println("Loaded Item: " + name);
+		log.info("Loaded Item: " + name);
 		lastItemLoaded++;
 	}
 	
