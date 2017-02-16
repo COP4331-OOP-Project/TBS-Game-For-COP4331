@@ -31,18 +31,17 @@ public class CivilizationPanel extends Panel{
 
 	private void drawPlayerIcon(GraphicsContext g) {
 		if (game.getCurrentPlayer().getPlayerID() == 0) {
-			g.drawImage(Assets.getInstance().getImage("ICON_O"), 120, 9);
+			g.drawImage(Assets.getInstance().getImage("ICON_O"), 120, 7);
 		} else {
-			g.drawImage(Assets.getInstance().getImage("ICON_B"), 120, 9);
+			g.drawImage(Assets.getInstance().getImage("ICON_B"), 120, 7);
 		}
-		
 	}
 
 	private void drawText(GraphicsContext g) {
 		Font old = g.getFont();
 		g.setFont(civInfoFont);
-		g.fillText("Player: ", 10, 40);
-		g.fillText("Turn: "+ game.getTurnNum(), 10, 80);
+		g.fillText("Player: ", 10, 37);
+		g.fillText("Turn: "+ game.getTurnNum(), 180, 37);
 		g.setFont(old);
 	}
 
