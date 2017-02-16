@@ -39,8 +39,10 @@ public class GameEngine extends Application{
 		AnimationTimer timer = new AnimationTimer() {
 			@Override
 			public void handle(long now) {
+		    	canvas.setWidth(scene.getWidth());
+		    	canvas.setHeight(scene.getHeight());
 				game.updateGame();
-				view.renderGame(defaultScreenWidth, defaultScreenHeight);
+				view.renderGame((int)canvas.getWidth(), (int)canvas.getHeight());
 			}
 		};
 		timer.start();
