@@ -90,8 +90,8 @@ public class View {
 		dragY = y;
 	}
 
-	public void zoom(double deltaY, double mouseX, double mouseY) {
-		gamePanel.zoom(deltaY, mouseX, mouseY);
+	public void zoom(double deltaY) {
+		gamePanel.zoom(deltaY);
 	}
 
 	public void clickedOn(double x, double y) {

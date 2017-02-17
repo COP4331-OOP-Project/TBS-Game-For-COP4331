@@ -43,7 +43,7 @@ public class MouseEventController {
 	}
 
 	public void mouseScrolled(ScrollEvent event) {
-		view.zoom(event.getDeltaY(), mouseX, mouseY);
+		view.zoom(event.getDeltaY());
 	}
 
 	

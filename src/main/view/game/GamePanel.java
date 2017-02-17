@@ -33,6 +33,8 @@ public class GamePanel extends Panel {
 	private boolean zooming = false;
 	private int zoomCounter = -1;
 	Point mouseZoomStart = new Point(0,0);
+	private int width;
+	private int height;
 
     public GamePanel(Game game) {
         this.game = game;
@@ -45,6 +47,8 @@ public class GamePanel extends Panel {
     }
 
     public void draw(GraphicsContext gc, int width, int height) {
+    	this.width = width;
+    	this.height = height;
         this.gc = gc;
         checkZooming();
         if (!zooming) {
@@ -65,7 +69,7 @@ public class GamePanel extends Panel {
 	private void checkZooming() {
     	if (zoomCounter != -1) {
     		zoomCounter++;
-    		if (zoomCounter > 40) {
+    		if (zoomCounter > 20) {
     			zoomCounter = -1;
     			zooming = false;
     			camera.getPanelCenterer().stopCentering();
@@ -171,8 +175,8 @@ public class GamePanel extends Panel {
 				(camera.getOffset().y - (int)diffY)));
 	}
 
-	public void zoom(double deltaY, double mouseX, double mouseY) {
-		Point p = new Point((int)mouseX, (int)mouseY);
+	public void zoom(double deltaY) {
+		Point p = new Point((int)width/2, (int)height/2);
 		zoomCounter = 0;
 		if (!zooming) {
 			mouseZoomStart = camera.getTileLocation(p);
