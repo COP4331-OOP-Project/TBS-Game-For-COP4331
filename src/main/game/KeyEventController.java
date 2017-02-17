@@ -9,14 +9,14 @@ import javafx.scene.input.KeyEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class EventController {
+public class KeyEventController {
 
-    private final static Logger log = LogManager.getLogger(EventController.class);
+    private final static Logger log = LogManager.getLogger(KeyEventController.class);
     Game game;
     private boolean gettingMoves = false;
     private boolean gettingMakeList = false;
 
-    public EventController(Game game, Scene scene) {
+    public KeyEventController(Game game, Scene scene) {
         this.game = game;
     }
 

@@ -16,7 +16,7 @@ public class GameEngine extends Application {
     Game game = new Game();
     private int defaultScreenWidth = 1366;
     private int defaultScreenHeight = 768;
-    private EventController events;
+    private KeyEventController events;
     private View view;
 
 
@@ -29,7 +29,7 @@ public class GameEngine extends Application {
         view = new View(game, gc);
 
         Scene scene = new Scene(root, Color.BLACK);
-        events = new EventController(game, scene);
+        events = new KeyEventController(game, scene);
 
         sendEventsToController(scene);
 
