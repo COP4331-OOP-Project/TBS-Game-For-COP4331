@@ -1,5 +1,6 @@
 package game;
 
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
@@ -10,8 +11,9 @@ public class MouseEventController {
 	
 	private boolean isDragging;
 	
-	public MouseEventController(Game game) {
+	public MouseEventController(Game game, Scene scene) {
 		this.game = game;
+		this.scene = scene;
 	}
 
 	public void mouseDragged(MouseEvent event) {
@@ -36,5 +38,42 @@ public class MouseEventController {
 	public void mouseDragStop(MouseEvent event) {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	public void handleEvents() {
+		scene.setOnMouseDragged(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                mouseDragged(event);
+            }
+        });
+    	
+    	scene.setOnMouseDragEntered(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                mouseDragStart(event);
+            }
+        });
+    	
+    	scene.setOnMouseDragExited(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                mouseDragStop(event);
+            }
+        });
+    	
+    	scene.setOnScroll(new EventHandler<ScrollEvent>() {
+            @Override
+            public void handle(ScrollEvent event) {
+               mouseScrolled(event);
+            }
+        });
+    	
+    	scene.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                mouseClicked(event);
+            }
+        });
 	}
 }

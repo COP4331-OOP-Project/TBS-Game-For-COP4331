@@ -14,7 +14,8 @@ public class GameEngine extends Application {
     Game game = new Game();
     private int defaultScreenWidth = 1366;
     private int defaultScreenHeight = 768;
-    private SceneEventController sceneEvents;
+    private KeyEventController keyEvents;
+    private MouseEventController mouseEvents;
     private View view;
 
     @Override
@@ -26,9 +27,12 @@ public class GameEngine extends Application {
         view = new View(game, gc);
 
         Scene scene = new Scene(root, Color.BLACK);
-    	sceneEvents = new SceneEventController(game, scene);
-        sceneEvents.handleEvents();
+    	keyEvents = new KeyEventController(game, scene);
+    	mouseEvents = new MouseEventController(game, scene);
 
+    	keyEvents.handleEvents();
+    	mouseEvents.handleEvents();
+    	
         //This is new game loop using JavaFX timer.
         AnimationTimer timer = new AnimationTimer() {
             @Override

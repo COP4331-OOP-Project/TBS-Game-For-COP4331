@@ -3,6 +3,7 @@ package game;
 import controls.command.CommandEnum;
 import controls.structure.StructureEnum;
 import controls.unit.UnitEnum;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -13,11 +14,13 @@ public class KeyEventController {
 
     private final static Logger log = LogManager.getLogger(KeyEventController.class);
     Game game;
+    Scene scene;
     private boolean gettingMoves = false;
     private boolean gettingMakeList = false;
 
-    public KeyEventController(Game game) {
+    public KeyEventController(Game game, Scene scene) {
         this.game = game;
+        this.scene = scene;
     }
 
     private void controlDownActions(KeyEvent e) {
@@ -195,13 +198,14 @@ public class KeyEventController {
             return;
         } else normalKeyPressActions(e);
     }
-
-    public void keyPressed(KeyEvent e) {
-    }
-
-
-    public void keyTyped(KeyEvent e) {
-        // TODO Auto-generated method stub
+    
+    public void handleEvents() {
+        scene.setOnKeyReleased(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                keyReleased(event);
+            }
+        });
     }
 
 }
