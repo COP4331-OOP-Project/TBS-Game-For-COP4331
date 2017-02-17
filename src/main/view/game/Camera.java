@@ -10,7 +10,7 @@ public class Camera {
     private Point offset = new Point(180, -3050);
     private double scale = 1;
 	private static final double SCALE_AMOUNT = 0.04;
-	private static final double MIN_SCALE = 0.02;
+	private static final double MIN_SCALE = 0.4;
 	private static final double MAX_SCALE = 1.5;
     public Camera(GamePanel gamePanel) {
         this.panelCenterer = new PanelCenterer(gamePanel);
