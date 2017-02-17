@@ -174,7 +174,6 @@ public class GamePanel extends Panel {
 	public void zoom(double deltaY, double mouseX, double mouseY) {
 		Point p = new Point((int)mouseX, (int)mouseY);
 		zoomCounter = 0;
-		System.out.println(zooming);
 		if (!zooming) {
 			mouseZoomStart = camera.getTileLocation(p);
 		}
