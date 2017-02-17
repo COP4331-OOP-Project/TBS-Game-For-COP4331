@@ -2,6 +2,7 @@ package view.game;
 
 import controls.ModeEnum;
 import game.Game;
+import view.Point;
 
 public class SelectedDrawer {
     Game game;
@@ -13,40 +14,39 @@ public class SelectedDrawer {
     }
 
     public void drawSelectedItemOutline() {
-        int x = game.getCenterCoordinates().getX();
-        int y = game.getCenterCoordinates().getY();
+    	Point p = new Point(game.getCenterCoordinates().getX(), game.getCenterCoordinates().getY());
         if (game.getCurrentMode() == ModeEnum.RALLY_POINT) {
-            drawSelectedRallyPointOutline(x, y);
+            drawSelectedRallyPointOutline(p);
         } else if (game.getCurrentMode() == ModeEnum.STRUCTURE) {
-            drawSelectedStructureOutline(x, y);
+            drawSelectedStructureOutline(p);
         } else if (game.getCurrentMode() == ModeEnum.UNIT) {
-            drawSelectedUnitOutline(x, y);
+            drawSelectedUnitOutline(p);
         } else if (game.getCurrentMode() == ModeEnum.ARMY) {
-            drawSelectedArmyOutline(x, y);
+            drawSelectedArmyOutline(p);
         }
     }
 
-    private void drawSelectedRallyPointOutline(int x, int y) {
+    private void drawSelectedRallyPointOutline(Point p) {
         if (game.getCurrentPlayer().getArmyRallyPoint().size() > 0)
-            gamePanel.drawStaticTileElement(x, y, "RALLY_POINT_SELECTED");
+            gamePanel.drawStaticTileElement(p, "RALLY_POINT_SELECTED");
     }
 
-    private void drawSelectedStructureOutline(int x, int y) {
+    private void drawSelectedStructureOutline(Point p) {
         if (game.getCurrentPlayer().getBases().size() > 0)
-            gamePanel.drawStaticTileElement(x, y, "BASE_SELECTED");
+            gamePanel.drawStaticTileElement(p, "BASE_SELECTED");
     }
 
-    private void drawSelectedArmyOutline(int x, int y) {
-        if (game.getGameBoard().getTiles()[x][y].containsArmy) {
-            gamePanel.drawStaticTileElement(x, y, "ARMY_SELECTED");
+    private void drawSelectedArmyOutline(Point p) {
+        if (game.getGameBoard().getTiles()[p.x][p.y].containsArmy) {
+            gamePanel.drawStaticTileElement(p, "ARMY_SELECTED");
         }
     }
 
-    private void drawSelectedUnitOutline(int x, int y) {
-        if (game.getGameBoard().getTiles()[x][y].containsArmy) {
-            gamePanel.drawStaticTileElement(x, y, "ARMY_SELECTED");
+    private void drawSelectedUnitOutline(Point p) {
+        if (game.getGameBoard().getTiles()[p.x][p.y].containsArmy) {
+            gamePanel.drawStaticTileElement(p, "ARMY_SELECTED");
         } else if (game.getCurrentPlayer().getAllUnit().size() > 0) {
-            gamePanel.drawStaticTileElement(x, y, "UNIT_SELECTED");
+            gamePanel.drawStaticTileElement(p, "UNIT_SELECTED");
         }
     }
 

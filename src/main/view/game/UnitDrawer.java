@@ -1,6 +1,8 @@
 package view.game;
 
 import controls.unit.UnitEnum;
+import view.Point;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -12,20 +14,20 @@ public class UnitDrawer {
         this.gamePanel = gamePanel;
     }
 
-    protected void drawUnit(int x, int y, UnitEnum type, int player,
+    protected void drawUnit(Point p, UnitEnum type, int player,
                             int rotation) {
         switch (player) {
             case 0:
-                gamePanel.drawStaticTileElement(x, y, rotation, "UNIT_O");
+                gamePanel.drawStaticTileElement(p, rotation, "UNIT_O");
                 break;
             case 1:
-                gamePanel.drawStaticTileElement(x, y, rotation, "UNIT_B");
+                gamePanel.drawStaticTileElement(p, rotation, "UNIT_B");
                 break;
             case 2:
-                gamePanel.drawStaticTileElement(x, y, rotation, "UNIT_Y");
+                gamePanel.drawStaticTileElement(p, rotation, "UNIT_Y");
                 break;
             case 3:
-                gamePanel.drawStaticTileElement(x, y, rotation, "UNIT_G");
+                gamePanel.drawStaticTileElement(p, rotation, "UNIT_G");
                 break;
             default:
                 log.warn("Invalid Player :" + player
@@ -34,16 +36,16 @@ public class UnitDrawer {
 
         switch (type) {
             case MELEE:
-                gamePanel.drawStaticTileElement(x, y, rotation, "UNIT_MELEE");
+                gamePanel.drawStaticTileElement(p, rotation, "UNIT_MELEE");
                 break;
             case RANGED:
-                gamePanel.drawStaticTileElement(x, y, rotation, "UNIT_RANGED");
+                gamePanel.drawStaticTileElement(p, rotation, "UNIT_RANGED");
                 break;
             case EXPLORER:
-                gamePanel.drawStaticTileElement(x, y, rotation, "UNIT_EXPLORER");
+                gamePanel.drawStaticTileElement(p, rotation, "UNIT_EXPLORER");
                 break;
             case COLONIST:
-                gamePanel.drawStaticTileElement(x, y, rotation, "UNIT_COLONIST");
+                gamePanel.drawStaticTileElement(p, rotation, "UNIT_COLONIST");
                 break;
             default:
                 log.warn("Invalid unit Type :" + type

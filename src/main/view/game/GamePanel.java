@@ -12,6 +12,7 @@ import javafx.scene.text.Font;
 import javafx.scene.transform.Affine;
 import javafx.scene.transform.Rotate;
 import view.Panel;
+import view.Point;
 
 public class GamePanel extends Panel {
     private static final int TILE_PIXEL_SIZE =
@@ -45,10 +46,10 @@ public class GamePanel extends Panel {
         if (!zooming) {
         	camera.getPanelCenterer().recenter(width, height);
         }
-        int selX = game.getCenterCoordinates().getX();
-        int selY = game.getCenterCoordinates().getY();
-        if (selX != 0 && selY != 0) {
-            camera.getPanelCenterer().centerOnTile(selX, selY);
+        Point selected = new Point(game.getCenterCoordinates().getX(),
+        						   game.getCenterCoordinates().getY());
+        if (selected.x != 0 && selected.y != 0) {
+            camera.getPanelCenterer().centerOnTile(selected);
         }
 
         drawAllItems();
@@ -63,7 +64,7 @@ public class GamePanel extends Panel {
     		if (zoomCounter > 20) {
     			zoomCounter = -1;
     			zooming = false;
-    			camera.doNotCenter();
+    			camera.getPanelCenterer().stopCentering();
     		}
     	}
 	}
@@ -72,37 +73,36 @@ public class GamePanel extends Panel {
         for (int i = 0; i < game.getGameBoard().getTiles().length; i++) {
             for (int j = 0; j < game.getGameBoard().getTiles()[i].length; j++) {
                 Tile tile = game.getGameBoard().getTiles()[i][j];
-                int x = tile.getLocation().getX();
-                int y = tile.getLocation().getY();
+                Point p = new Point(tile.getLocation().getX(), tile.getLocation().getY());
                 //Draw Tiles
-                tileDrawer.drawTile(i, j, tile.getTileType());
+                tileDrawer.drawTile(p, tile.getTileType());
                 if (tile.getUnits().size() > 1 && !tile.containsArmy) {
                     getgc().fillText("" + tile.getUnits().size()
-                            , getCamera().offsetX(i, j) + 5, getCamera().offsetY(i, j) + 22);
+                            , getCamera().offset(p).x + 5, getCamera().offset(p).y + 22);
                 }
                 //Draw Structures
                 if (tile.containsStructure) {
                     Structure structure = tile.getStructure();
-                    structureDrawer.drawBase(x, y,
+                    structureDrawer.drawBase(p,
                             structure.getOwnerID(), structure.getRotation());
                 }
 
                 //Draw Armies
                 if (tile.containsArmy) {
                     for (Army army : tile.getArmies()) {
-                        armyDrawer.drawArmy(x, y, army.getOwnerID(),
+                        armyDrawer.drawArmy(p, army.getOwnerID(),
                                 army.getRotation(), army.getAllUnits().size());
                     }
                 } else if (tile.containsArmy && tile.getUnits().size() > 0) {
                     // this is so wrong but might work for demo
-                    armyDrawer.drawArmy(x, y,
+                    armyDrawer.drawArmy(p,
                             tile.getUnits().get(0).getOwnerID(), 0, tile.getUnits().size()); // lol
                 }
                 //Draw Units
                 if (tile.containsUnit) {
                     for (Unit unit : tile.getUnits()) {
                         if (!tile.containsArmy) {
-                            unitDrawer.drawUnit(x, y, unit.getUnitType(), unit.getOwnerID(), 0);
+                            unitDrawer.drawUnit(p, unit.getUnitType(), unit.getOwnerID(), 0);
                         }
                     }
                 }
@@ -110,29 +110,29 @@ public class GamePanel extends Panel {
         }
     }
 
-    protected void drawStaticTileElement(int x, int y, String image) {
+    protected void drawStaticTileElement(Point p, String image) {
     	Image img = Assets.getInstance().getImage(image);
-    	gc.drawImage(img, camera.offsetX(x, y), camera.offsetY(x, y), camera.getScale() * img.getWidth(), 
+    	gc.drawImage(img, camera.offset(p).x, camera.offset(p).y, camera.getScale() * img.getWidth(), 
         		camera.getScale() * img.getHeight());
     }
 
-    protected void drawStaticTileElement(int x, int y, int rotation, String image) {
+    protected void drawStaticTileElement(Point p, int rotation, String image) {
         Image img = Assets.getInstance().getImage(image);
     	Affine currentRotation = gc.getTransform();
-        rotateOnTile(x, y, rotation);
-        gc.drawImage(img, camera.offsetX(x, y), camera.offsetY(x, y), camera.getScale() * img.getWidth(), 
+        rotateOnTile(p, rotation);
+        gc.drawImage(img, camera.offset(p).x, camera.offset(p).y, camera.getScale() * img.getWidth(), 
         		camera.getScale() * img.getHeight());
         gc.setTransform(currentRotation);
     }
 
-    private void rotateOnTile(int x, int y, int degrees) {
+    private void rotateOnTile(Point p, int degrees) {
         Rotate rotate = new Rotate(degrees,
-                (double) (camera.getTileLocationX(x, y) + TILE_PIXEL_SIZE / 2),
-                (double) (camera.getTileLocationY(x, y) + TILE_PIXEL_SIZE / 2));
+                (double) (camera.getTileLocation(p).x + TILE_PIXEL_SIZE / 2),
+                (double) (camera.getTileLocation(p).y + TILE_PIXEL_SIZE / 2));
         gc.getTransform().setToTransform(rotate);
     }
 
-    protected void drawAnimatedTileElement(int x, int y, String image1, String image2, String image3) {
+    protected void drawAnimatedTileElement(Point p, String image1, String image2, String image3) {
         Image img;   
     	switch (getAnimationImage()) { 
 	        	case 0:
@@ -145,7 +145,7 @@ public class GamePanel extends Panel {
 	            	img = Assets.getInstance().getImage(image3);
         }
     	
-        gc.drawImage(img, camera.offsetX(x, y), camera.offsetY(x, y), camera.getScale() * img.getWidth(), 
+        gc.drawImage(img, camera.offset(p).x, camera.offset(p).y, camera.getScale() * img.getWidth(), 
         		camera.getScale() * img.getHeight());
     }
 
@@ -162,8 +162,8 @@ public class GamePanel extends Panel {
     }
 
 	public void moveCamera(double diffX, double diffY) {
-		camera.setX(camera.getX() - (int)diffX);
-		camera.setY(camera.getY() - (int)diffY);
+		camera.setOffset(new Point(camera.getOffset().x - (int)diffX,
+				(camera.getOffset().y - (int)diffY)));
 	}
 
 	public void zoom(double deltaY, double mouseX, double mouseY) {
