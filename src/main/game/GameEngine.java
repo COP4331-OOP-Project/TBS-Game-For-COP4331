@@ -27,8 +27,8 @@ public class GameEngine extends Application {
         view = new View(game, gc);
 
         Scene scene = new Scene(root, Color.BLACK);
-    	keyEvents = new KeyEventController(game, scene);
-    	mouseEvents = new MouseEventController(game, scene);
+    	keyEvents = new KeyEventController(game, view, scene);
+    	mouseEvents = new MouseEventController(game, view, scene);
 
     	keyEvents.handleEvents();
     	mouseEvents.handleEvents();

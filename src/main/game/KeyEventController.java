@@ -7,6 +7,8 @@ import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import view.View;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -14,12 +16,14 @@ public class KeyEventController {
 
     private final static Logger log = LogManager.getLogger(KeyEventController.class);
     Game game;
+    View view;
     Scene scene;
     private boolean gettingMoves = false;
     private boolean gettingMakeList = false;
 
-    public KeyEventController(Game game, Scene scene) {
+    public KeyEventController(Game game, View view, Scene scene) {
         this.game = game;
+        this.view = view;
         this.scene = scene;
     }
 

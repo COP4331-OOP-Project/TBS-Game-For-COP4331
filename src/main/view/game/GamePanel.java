@@ -136,4 +136,9 @@ public class GamePanel extends Panel {
     public int getTileSize() {
         return TILE_PIXEL_SIZE;
     }
+
+	public void moveCamera(double diffX, double diffY) {
+		camera.setX(camera.getX() - (int)diffX);
+		camera.setY(camera.getY() - (int)diffY);
+	}
 }

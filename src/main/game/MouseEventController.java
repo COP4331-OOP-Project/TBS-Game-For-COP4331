@@ -4,37 +4,40 @@ import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
+import view.View;
 
 public class MouseEventController {
 	Game game;
+	View view;
 	Scene scene;
 	
-	public MouseEventController(Game game, Scene scene) {
+	public MouseEventController(Game game, View view,  Scene scene) {
 		this.game = game;
+		this.view = view;
 		this.scene = scene;
 	}
 
 	public void mouseDragged(MouseEvent event) {
-		game.updateViewLocation(event.getX(),
+		view.updateViewLocation(event.getX(),
 				event.getY());
 	}
 
 	public void mouseClicked(MouseEvent event) {
-		// TODO Auto-generated method stub
+		view.setStoppedDragging();
+	}
+	
+	protected void mouseReleased(MouseEvent event) {
+	}
+
+	protected void mousePressed(MouseEvent event) {
 		
+		view.setDragging(event.getSceneX(), event.getSceneY());
 	}
 
 	public void mouseScrolled(ScrollEvent event) {
 		
 	}
 
-	public void mouseDragStart(MouseEvent event) {
-		game.setIsDragging(true);
-	}
-
-	public void mouseDragStop(MouseEvent event) {
-		game.setIsDragging(false);
-	}
 	
 	public void handleEvents() {
 		scene.setOnMouseDragged(new EventHandler<MouseEvent>() {
@@ -44,17 +47,24 @@ public class MouseEventController {
             }
         });
     	
-    	scene.setOnMouseDragEntered(new EventHandler<MouseEvent>() {
+    	scene.setOnMousePressed(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                mouseDragStart(event);
+                mousePressed(event);
             }
         });
     	
-    	scene.setOnMouseDragExited(new EventHandler<MouseEvent>() {
+    	scene.setOnMouseReleased(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                mouseDragStop(event);
+                mouseReleased(event);
+            }
+        });
+    	
+    	scene.setOnMouseReleased(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                mouseClicked(event);
             }
         });
     	
@@ -72,4 +82,6 @@ public class MouseEventController {
             }
         });
 	}
+
+
 }

@@ -18,7 +18,11 @@ public class View {
     MiniMapPanel miniPanel;
     MakeDetailsPanel makePanel;
     GraphicsContext gc;
-
+    
+    private boolean isDragging = false;
+    private double dragX = 0;
+    private double dragY = 0;
+    
     public View(Game game, GraphicsContext gc) {
         this.gc = gc;
         this.game = game;
@@ -67,4 +71,23 @@ public class View {
         gc.clearRect(0, 0, width, height);
         drawVisiblePanels(width, height);
     }
+    
+	public void setDragging(double x, double y) {
+		dragX = x;
+		dragY = y;
+		isDragging = true;
+	}
+
+	public void setStoppedDragging() {
+		isDragging = false;
+	}
+
+	public void updateViewLocation(double x, double y) {
+		double diffX = dragX - x;
+		double diffY = dragY - y;
+		gamePanel.moveCamera(diffX, diffY);
+		dragX = x;
+		dragY = y;
+	}
+	
 }
