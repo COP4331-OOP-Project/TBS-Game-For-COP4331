@@ -54,13 +54,13 @@ public class Camera {
 			if (scale < MAX_SCALE) {
 			 scale += SCALE_AMOUNT;
 			 //offsetX -= offsetX - (offsetX * scale); //- mouseX/10;
-			 offset.y -= (150 * scale);
+			 //offset.y += (150);
 			}
 		} else {
 			if (scale > MIN_SCALE) {
 			scale -= SCALE_AMOUNT;
 			//offsetX += offsetX - (offsetX * scale); //- mouseX/10;
-			offset.y += (150 * scale);;
+			//offset.y -= (150);;
 			}
 		}
 	}
