@@ -23,8 +23,6 @@ dependencies {
 }
 
 sourceSets {
-    sourceCompatibility = 1.8
-    targetCompatibility = 1.8
     main {
         java {
             srcDirs = ["src/main"]
