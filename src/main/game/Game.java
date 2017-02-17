@@ -430,4 +430,8 @@ public class Game {
     public void setSelectedUnit(int selectedUnit) {
         this.selectedUnit = selectedUnit;
     }
+
+	public void updateViewLocation(double x, double y) {
+		System.out.println(x + " " + y);
+	}
 }
