@@ -43,8 +43,10 @@ public class Game {
     private boolean showingMakeDetails = false;
     private int selectedUnit;
     private int makeOption = 0;
+    
     private ICommandable currentSelectedEntity;
     private CommandEnum currentCommand;
+    private boolean isDragging = false;
 
 
     Game() {
@@ -75,7 +77,7 @@ public class Game {
     }
 
     public void updateGame() { //This is called 20 times per second
-        //updateSelectedUnit();
+    	updateSelectedUnit();
     }
 
     public void startGame() {
@@ -396,7 +398,7 @@ public class Game {
         this.currentPlayer.addArmy(newArmy);
         this.currentPlayer.addRallyPoint(newRallyPoint);
     }
-
+    
     public void updateSelectedUnit() {
         int unitSelected = -1;
         ArrayList<Unit> playerUnits = getCurrentPlayer().getAllUnit();
@@ -422,7 +424,7 @@ public class Game {
             setSelectedUnit(-1);
         }
     }
-
+	
     public int getSelectedUnit() {
         return selectedUnit;
     }
@@ -432,6 +434,10 @@ public class Game {
     }
 
 	public void updateViewLocation(double x, double y) {
-		System.out.println(x + " " + y);
+		System.out.println(x + " " + y + isDragging);
+	}
+	
+	public void setIsDragging(boolean dragging) {
+		isDragging = dragging;
 	}
 }

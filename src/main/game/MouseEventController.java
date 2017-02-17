@@ -9,8 +9,6 @@ public class MouseEventController {
 	Game game;
 	Scene scene;
 	
-	private boolean isDragging;
-	
 	public MouseEventController(Game game, Scene scene) {
 		this.game = game;
 		this.scene = scene;
@@ -31,13 +29,11 @@ public class MouseEventController {
 	}
 
 	public void mouseDragStart(MouseEvent event) {
-		// TODO Auto-generated method stub
-		
+		game.setIsDragging(true);
 	}
 
 	public void mouseDragStop(MouseEvent event) {
-		// TODO Auto-generated method stub
-		
+		game.setIsDragging(false);
 	}
 	
 	public void handleEvents() {
