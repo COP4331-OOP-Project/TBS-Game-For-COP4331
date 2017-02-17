@@ -40,20 +40,20 @@ public class ArmyDrawer {
 		
 		if (numOfUnits < 10) {
 			gamePanel.getgc().setFill(Color.BLACK);
-			gamePanel.getgc().strokeText("" + numOfUnits, gamePanel.getCamera().offsetX(x , y) + 
+			gamePanel.getgc().fillText("" + numOfUnits, gamePanel.getCamera().offsetX(x , y) + 
 					gamePanel.getTileSize()/2 - 15, gamePanel.getCamera().offsetY(x, y) + 
 					gamePanel.getTileSize()/2 + 18);
 			gamePanel.getgc().setFill(Color.WHITE);
-			gamePanel.getgc().strokeText("" + numOfUnits, gamePanel.getCamera().offsetX(x, y) + 
+			gamePanel.getgc().fillText("" + numOfUnits, gamePanel.getCamera().offsetX(x, y) + 
 					gamePanel.getTileSize()/2 - 17, gamePanel.getCamera().offsetY(x, y) + 
 					gamePanel.getTileSize()/2 + 17);
 		} else {
 			gamePanel.getgc().setFill(Color.BLACK);
-			gamePanel.getgc().strokeText("" + numOfUnits, gamePanel.getCamera().offsetX(x, y) + 
+			gamePanel.getgc().fillText("" + numOfUnits, gamePanel.getCamera().offsetX(x, y) + 
 					gamePanel.getTileSize()/2 - 23, gamePanel.getCamera().offsetY(x, y) + 
 					gamePanel.getTileSize()/2 + 18);
 			gamePanel.getgc().setFill(Color.WHITE);
-			gamePanel.getgc().strokeText("" + numOfUnits, gamePanel.getCamera().offsetX(x, y) + 
+			gamePanel.getgc().fillText("" + numOfUnits, gamePanel.getCamera().offsetX(x, y) + 
 					gamePanel.getTileSize()/2 - 25, gamePanel.getCamera().offsetY(x, y) + 
 					gamePanel.getTileSize()/2 + 17);
 		}
