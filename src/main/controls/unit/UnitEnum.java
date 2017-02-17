@@ -15,6 +15,6 @@ public enum UnitEnum {
     public UnitEnum getPrevious() {
         return this.ordinal() > 0
                 ? UnitEnum.values()[this.ordinal() - 1]
-                : UnitEnum.values()[UnitEnum.values().length-1];
+                : UnitEnum.values()[UnitEnum.values().length - 1];
     }
 }

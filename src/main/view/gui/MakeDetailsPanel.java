@@ -5,7 +5,6 @@ import game.Assets;
 import game.Game;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.text.Font;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -15,17 +14,16 @@ import org.apache.logging.log4j.Logger;
  */
 public class MakeDetailsPanel {
 
-    Game game;
     private final static Logger log = LogManager.getLogger(ControlModePanel.class);
     private static final int PANEL_HEIGHT = 114;
     private static final int PANEL_DISTANCE = 78;
     private static final int PANEL_DISTANCE_FROM_LEFT = 210;
-	private static final int TEXT_SPACING = 48;
-	private static final int TEXT_LOCATION = 58;
+    private static final int TEXT_SPACING = 48;
+    private static final int TEXT_LOCATION = 58;
     private static final int COLONIST_LIST = 0;
     private static final int BASE_LIST = 1;
-	private static final int TEXT_OFFSET = 28;
-
+    private static final int TEXT_OFFSET = 28;
+    Game game;
     private int width;
     private int height;
 
@@ -57,24 +55,24 @@ public class MakeDetailsPanel {
         updateType();
 
         gc.drawImage(Assets.getInstance().getImage("GUI_MODE_PANEL"), PANEL_DISTANCE_FROM_LEFT
-                , height/2 - PANEL_DISTANCE - PANEL_HEIGHT);
+                , height / 2 - PANEL_DISTANCE - PANEL_HEIGHT);
 
-        switch(mode) {
+        switch (mode) {
             case 0:
                 gc.drawImage(Assets.getInstance().getImage("GUI_MODE_SELECTED1"), PANEL_DISTANCE_FROM_LEFT
-                        , height/2 - PANEL_DISTANCE - PANEL_HEIGHT);
+                        , height / 2 - PANEL_DISTANCE - PANEL_HEIGHT);
                 break;
             case 1:
                 gc.drawImage(Assets.getInstance().getImage("GUI_MODE_SELECTED2"), PANEL_DISTANCE_FROM_LEFT
-                        , height/2 - PANEL_DISTANCE - PANEL_HEIGHT);
+                        , height / 2 - PANEL_DISTANCE - PANEL_HEIGHT);
                 break;
             case 2:
                 gc.drawImage(Assets.getInstance().getImage("GUI_MODE_SELECTED3"), PANEL_DISTANCE_FROM_LEFT
-                        , height/2 - PANEL_DISTANCE - PANEL_HEIGHT);
+                        , height / 2 - PANEL_DISTANCE - PANEL_HEIGHT);
                 break;
             case 3:
                 gc.drawImage(Assets.getInstance().getImage("GUI_MODE_SELECTED4"), PANEL_DISTANCE_FROM_LEFT
-                        , height/2 - PANEL_DISTANCE - PANEL_HEIGHT);
+                        , height / 2 - PANEL_DISTANCE - PANEL_HEIGHT);
                 break;
             default:
                 log.warn("Invalid Mode to display");
@@ -87,10 +85,10 @@ public class MakeDetailsPanel {
 
     // Draw make list strings
     private void drawTypeStrings(GraphicsContext g) {
-		g.fillText(makeList[type][0], PANEL_DISTANCE_FROM_LEFT + TEXT_OFFSET, height/2 - PANEL_DISTANCE - TEXT_LOCATION);
-		g.fillText(makeList[type][1], PANEL_DISTANCE_FROM_LEFT + TEXT_OFFSET, height/2 - PANEL_DISTANCE - TEXT_LOCATION + TEXT_SPACING);
-		g.fillText(makeList[type][2], PANEL_DISTANCE_FROM_LEFT + TEXT_OFFSET, height/2 - PANEL_DISTANCE - TEXT_LOCATION + 2*TEXT_SPACING);
-		g.fillText(makeList[type][3], PANEL_DISTANCE_FROM_LEFT + TEXT_OFFSET, height/2 - PANEL_DISTANCE - TEXT_LOCATION + 3*TEXT_SPACING);
+        g.fillText(makeList[type][0], PANEL_DISTANCE_FROM_LEFT + TEXT_OFFSET, height / 2 - PANEL_DISTANCE - TEXT_LOCATION);
+        g.fillText(makeList[type][1], PANEL_DISTANCE_FROM_LEFT + TEXT_OFFSET, height / 2 - PANEL_DISTANCE - TEXT_LOCATION + TEXT_SPACING);
+        g.fillText(makeList[type][2], PANEL_DISTANCE_FROM_LEFT + TEXT_OFFSET, height / 2 - PANEL_DISTANCE - TEXT_LOCATION + 2 * TEXT_SPACING);
+        g.fillText(makeList[type][3], PANEL_DISTANCE_FROM_LEFT + TEXT_OFFSET, height / 2 - PANEL_DISTANCE - TEXT_LOCATION + 3 * TEXT_SPACING);
     }
 
 }

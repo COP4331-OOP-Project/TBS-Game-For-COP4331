@@ -15,6 +15,6 @@ public enum ModeEnum {
     public ModeEnum getPrevious() {
         return this.ordinal() > 0
                 ? ModeEnum.values()[this.ordinal() - 1]
-                : ModeEnum.values()[ModeEnum.values().length-1];
+                : ModeEnum.values()[ModeEnum.values().length - 1];
     }
 }

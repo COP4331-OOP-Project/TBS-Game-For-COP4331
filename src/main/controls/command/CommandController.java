@@ -23,7 +23,7 @@ public class CommandController {
     }
 
     private boolean canExecuteCommand(CommandEnum command) {
-        switch(command) {
+        switch (command) {
             case MAKE:
                 return this.commandable.canMake();
             case HEAL:

@@ -40,7 +40,7 @@ public class UnitEntityTest {
         PowerDownCommand<Unit> pdc = new PowerDownCommand<Unit>(new GameBoard(new ArrayList<Player>()), melee);
         melee.addCommandToQueue(pdc);
         melee.doTurn();
-        assert(melee.getPowerState() == PowerState.POWERED_DOWN);
+        assert (melee.getPowerState() == PowerState.POWERED_DOWN);
 
     }
 
@@ -60,9 +60,9 @@ public class UnitEntityTest {
 
         PowerDownCommand<Unit> pdc = new PowerDownCommand<Unit>(new GameBoard(new ArrayList<Player>()), melee);
         melee.addCommandToQueue(pdc);
-        assert(!melee.isQueueEmpty());
+        assert (!melee.isQueueEmpty());
         melee.cancelQueuedCommands();
-        assert(melee.isQueueEmpty());
+        assert (melee.isQueueEmpty());
 
     }
 
@@ -85,19 +85,19 @@ public class UnitEntityTest {
     @Test
     public void testStateChanging() {
 
-        assert(melee.getPowerState() == PowerState.POWERED_UP);
+        assert (melee.getPowerState() == PowerState.POWERED_UP);
         assertEquals(10f, melee.getResourceCost(), 0);
         melee.powerDown();
-        assert(melee.getPowerState() == PowerState.POWERED_DOWN);
+        assert (melee.getPowerState() == PowerState.POWERED_DOWN);
         assertEquals(2.5f, melee.getResourceCost(), 0);
         melee.powerUp();
-        assert(melee.getPowerState() == PowerState.POWERED_UP);
+        assert (melee.getPowerState() == PowerState.POWERED_UP);
         assertEquals(10f, melee.getResourceCost(), 0);
         melee.combatState();
-        assert(melee.getPowerState() == PowerState.COMBAT);
+        assert (melee.getPowerState() == PowerState.COMBAT);
         assertEquals(12.5f, melee.getResourceCost(), 0);
         melee.standby();
-        assert(melee.getPowerState() == PowerState.STANDBY);
+        assert (melee.getPowerState() == PowerState.STANDBY);
         assertEquals(7.5f, melee.getResourceCost(), 0);
 
     }

@@ -11,7 +11,7 @@ public class TileTest {
 
     @Test
     public void testTimeImpassable() {
-        assert(tile.isImpassable());
+        assert (tile.isImpassable());
     }
 
 }

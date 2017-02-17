@@ -8,9 +8,12 @@ import game.entities.units.Unit;
 import game.gameboard.GameBoard;
 import game.gameboard.Location;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.Queue;
 
-public class Army{
+public class Army {
 
     private int armyID;                                 // army unique id
     private int ownerID;                                // Player id
@@ -35,12 +38,11 @@ public class Army{
         this.allUnits = new ArrayList<Unit>();          // Initialize allUnits
         setPowerState(PowerState.POWERED_UP);
 
-        for(int i=0;i<units.size();i++){
+        for (int i = 0; i < units.size(); i++) {
             //If unit is at rallypoint, they are in battlegroup, if not they are reinforcements. All will still be put into allUnits arraylist
-            if(units.get(i).getLocation().getX()==this.rp.getLocation().getX() && units.get(i).getLocation().getY()==this.rp.getLocation().getY()){
+            if (units.get(i).getLocation().getX() == this.rp.getLocation().getX() && units.get(i).getLocation().getY() == this.rp.getLocation().getY()) {
                 battleGroup.add(units.get(i));
-            }
-            else{
+            } else {
                 reinforcements.add(units.get(i));
             }
             allUnits.add(units.get(i));
@@ -50,10 +52,10 @@ public class Army{
 
     // TODO: Setup function to filter all received commands to all units
 
-    public void passCommandToUnit(Command command, Unit unit){
+    public void passCommandToUnit(Command command, Unit unit) {
         command.setDuration(0);
-        for(int i = 0; i<allUnits.size(); i++){
-            if(allUnits.get(i).getUnitID()==unit.getUnitID()) {
+        for (int i = 0; i < allUnits.size(); i++) {
+            if (allUnits.get(i).getUnitID() == unit.getUnitID()) {
                 allUnits.get(i).cancelQueuedCommands();
                 allUnits.get(i).addCommandToQueue(command);
             }
@@ -61,7 +63,7 @@ public class Army{
 
     }
 
-    public void disbandArmy(){
+    public void disbandArmy() {
         setPowerState(PowerState.STANDBY);
     }
 
@@ -90,21 +92,21 @@ public class Army{
     }
 
     // Update battleGroup and reinforcements to make sure all units in correct spot
-    public void updateArmy(){
-        this.location=rp.getLocation();
-        for(Iterator<Unit> iter = battleGroup.iterator(); iter.hasNext();){
+    public void updateArmy() {
+        this.location = rp.getLocation();
+        for (Iterator<Unit> iter = battleGroup.iterator(); iter.hasNext(); ) {
             //If battlegroup unit not on rallypoint move to reinforcements
             Unit checkUnit = iter.next();
-            if(!checkUnit.getLocation().equals(rp.getLocation())){
+            if (!checkUnit.getLocation().equals(rp.getLocation())) {
                 reinforcements.add(checkUnit);
                 iter.remove();
             }
         }
 
-        for(Iterator<Unit> iter = reinforcements.iterator(); iter.hasNext();){
+        for (Iterator<Unit> iter = reinforcements.iterator(); iter.hasNext(); ) {
             //If reinforcement unit already on rallypoint move to battlegroup
             Unit checkUnit = iter.next();
-            if(checkUnit.getLocation().equals(rp.getLocation())){
+            if (checkUnit.getLocation().equals(rp.getLocation())) {
                 battleGroup.add(checkUnit);
                 iter.remove();
             }
@@ -118,11 +120,11 @@ public class Army{
     public void setPowerState(PowerState state) {
         this.powerState = state;            // Set state
         //Give Battlegroup combat state
-        for(int i = 0; i<battleGroup.size(); i++){
+        for (int i = 0; i < battleGroup.size(); i++) {
             battleGroup.get(i).setPowerState(state);
         }
         //Give reinforcements normal moving state
-        for(int i = 0; i<reinforcements.size(); i++){
+        for (int i = 0; i < reinforcements.size(); i++) {
             reinforcements.get(i).setPowerState(PowerState.POWERED_UP);
         }
     }
@@ -150,10 +152,10 @@ public class Army{
 
     }
 
-    public void battlegroupDefend(GameBoard gameBoard, int direction){
+    public void battlegroupDefend(GameBoard gameBoard, int direction) {
         //Filter army commands down to each unit in battlegroup
         setPowerState(PowerState.COMBAT);
-        for(Unit u : battleGroup){
+        for (Unit u : battleGroup) {
             u.cancelQueuedCommands();
             DefendCommand<Unit> bgDefendCmd = new DefendCommand<Unit>(gameBoard, u, direction, 0);
             u.addCommandToQueue(bgDefendCmd);
@@ -161,20 +163,20 @@ public class Army{
         }
     }
 
-    public void groupDecomission(GameBoard gameBoard){
-        for(Unit u : reinforcements){
+    public void groupDecomission(GameBoard gameBoard) {
+        for (Unit u : reinforcements) {
             u.cancelQueuedCommands();
-            DecommissionCommand<Unit> groupDecom = new DecommissionCommand<Unit>(gameBoard,u);
+            DecommissionCommand<Unit> groupDecom = new DecommissionCommand<Unit>(gameBoard, u);
             u.addCommandToQueue(groupDecom);
             u.doTurn();
         }
     }
 
-    public void powerUp(){
+    public void powerUp() {
         setPowerState(PowerState.POWERED_UP);
     }
 
-    public void powerDown(){
+    public void powerDown() {
         setPowerState(PowerState.POWERED_DOWN);
     }
 
@@ -183,16 +185,15 @@ public class Army{
 
         updateArmy();
         //Make sure has commands and powered state is not powered down
-        if (!queue.isEmpty()&&powerState.getUpkeep()!=0.25f) {
+        if (!queue.isEmpty() && powerState.getUpkeep() != 0.25f) {
             if (peekCommand().getDuration() == 0) {                               // Test if next cmd can fire
                 nextCommand().exec();                                      // Send commands to units
-            }
-            else peekCommand().iterateDuration();
+            } else peekCommand().iterateDuration();
         }
 
         getRp().PathToRallyPoint();
 
-        for(int i = 0; i < reinforcements.size(); i++){
+        for (int i = 0; i < reinforcements.size(); i++) {
             reinforcements.get(i).doTurn();
         }
 
@@ -201,48 +202,79 @@ public class Army{
 
     }
 
-    public Command nextCommand() { return queue.poll(); }                     // Pop off next command
-    public Command peekCommand() { return queue.peek(); }                     // Look next command
-    public boolean isQueueEmpty() { return queue.isEmpty(); }                 // check if empty
-    public void addCommandToQueue(Command command){ queue.add(command); }     // Add next cmd to queue
-    public void cancelQueuedCommands() { queue.clear(); }                     // Clear queue
+    public Command nextCommand() {
+        return queue.poll();
+    }                     // Pop off next command
 
+    public Command peekCommand() {
+        return queue.peek();
+    }                     // Look next command
+
+    public boolean isQueueEmpty() {
+        return queue.isEmpty();
+    }                 // check if empty
+
+    public void addCommandToQueue(Command command) {
+        queue.add(command);
+    }     // Add next cmd to queue
+
+    public void cancelQueuedCommands() {
+        queue.clear();
+    }                     // Clear queue
 
 
     // Getters
-    public int getOwnerID() { return ownerID; }
-    public Location getLocation() { return location; }
-    public RallyPoint getRp() { return rp; }
-    public ArrayList<Unit> getBattleGroup() { return battleGroup; }
-    public ArrayList<Unit> getReinforcements() { return reinforcements; }
-    public ArrayList<Unit> getAllUnits(){return allUnits;}
-    public Queue<Command> getCommands(){return queue;}
-
-    public void setArmyID(int armyID)
-    {
-        this.armyID = armyID;
+    public int getOwnerID() {
+        return ownerID;
     }
 
-    public int getArmyID()
-    {
+    public Location getLocation() {
+        return location;
+    }
+
+    public RallyPoint getRp() {
+        return rp;
+    }
+
+    public ArrayList<Unit> getBattleGroup() {
+        return battleGroup;
+    }
+
+    public ArrayList<Unit> getReinforcements() {
+        return reinforcements;
+    }
+
+    public ArrayList<Unit> getAllUnits() {
+        return allUnits;
+    }
+
+    public Queue<Command> getCommands() {
+        return queue;
+    }
+
+    public int getArmyID() {
         return this.armyID;
     }
 
-    public int getRotation() {
-    	return rotation;
+    public void setArmyID(int armyID) {
+        this.armyID = armyID;
     }
-    
+
+    public int getRotation() {
+        return rotation;
+    }
+
     public void setRotation(int rotation) {
-    	this.rotation = rotation;
+        this.rotation = rotation;
     }
 
     // Print all units in an army
-    public void printArmy(){
+    public void printArmy() {
         Unit temp;
         Iterator<? super Unit> i = this.battleGroup.iterator();
         System.out.println("Owner: " + this.ownerID);
-        while(i.hasNext()){
-            temp = (Unit)i.next();
+        while (i.hasNext()) {
+            temp = (Unit) i.next();
             System.out.println("    Soldier: " + temp.getUnitType());
         }
     }

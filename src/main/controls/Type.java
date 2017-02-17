@@ -5,6 +5,8 @@ package controls;
  */
 public interface Type {
     Enum getType();
+
     Enum cycleForward();
+
     Enum cycleBackward();
 }

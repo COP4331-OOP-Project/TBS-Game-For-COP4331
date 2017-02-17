@@ -1,4 +1,5 @@
 package game.gameboard;
+
 /**
  * Created by David on 2/1/2017.
  */
@@ -6,9 +7,9 @@ public class Location {
     private int xIndex;
     private int yIndex;
 
-    public Location(int xIndex, int yIndex){
-        this.xIndex=xIndex;
-        this.yIndex=yIndex;
+    public Location(int xIndex, int yIndex) {
+        this.xIndex = xIndex;
+        this.yIndex = yIndex;
     }
 
     public int getX() {
@@ -30,8 +31,8 @@ public class Location {
         return xIndex == loc.xIndex && yIndex == loc.yIndex;
     }
 
-    public Location directionLocation(int direction){
-        switch (direction){
+    public Location directionLocation(int direction) {
+        switch (direction) {
             case 0:
                 return new Location(xIndex, yIndex - 1);
 
