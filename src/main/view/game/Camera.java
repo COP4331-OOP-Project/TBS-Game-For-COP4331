@@ -8,6 +8,8 @@ public class Camera {
     private PanelCenterer panelCenterer;
     private int offsetX = 180;
     private int offsetY = -3050;
+    private double scale = 1;
+	private static final double SCALE_AMOUNT = 0.02;
     public Camera(GamePanel gamePanel) {
         this.panelCenterer = new PanelCenterer(gamePanel);
     }
@@ -23,6 +25,10 @@ public class Camera {
     protected int getY() {
         return offsetY;
     }
+    
+    protected double getScale() {
+    	return scale;
+    }
 
     protected void setY(int y) {
         offsetY = y;
@@ -35,16 +41,30 @@ public class Camera {
     protected int offsetY(int x, int y) {
         return getTileLocationY(x, y) + offsetY;
     }
-
+    
     protected int getTileLocationX(int x, int y) {
-        return (int) (((x * 0.5f) * HEX_W / 2) + (x * 0.5f) * HEX_W);
+        return (int) (0.75f * scale * HEX_W * x);
     }
 
     protected int getTileLocationY(int x, int y) {
-        return (int) ((y * HEX_H) + ((x * 0.5f) * HEX_H));
+        return (int) ((y * (HEX_H * scale)) + ((x * 0.5f) * (HEX_H * scale)));
     }
 
     protected PanelCenterer getPanelCenterer() {
         return panelCenterer;
     }
+
+	public void zoom(double deltaY, double mouseX, double mouseY) {
+		if (deltaY > 0) {
+			scale += SCALE_AMOUNT;
+		} else {
+			scale -= SCALE_AMOUNT;
+		}
+		
+		//offsetX
+	}
+
+	public void doNotCenter() {
+		panelCenterer.stopCentering();
+	}
 }

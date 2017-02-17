@@ -63,5 +63,10 @@ public class PanelCenterer {
     private double percentDoneCentering() {
         return (Math.log(((double) timeCentering / (double) TIME_TO_CENTER * (19.1)) + 1)) / 3;
     }
+    
+   	public void stopCentering() {
+    	isCentering = false;
+    	timeCentering = 0;
+    }
 
 }

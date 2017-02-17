@@ -10,6 +10,8 @@ public class MouseEventController {
 	Game game;
 	View view;
 	Scene scene;
+	double mouseX = 0;
+	double mouseY = 0;
 	
 	public MouseEventController(Game game, View view,  Scene scene) {
 		this.game = game;
@@ -26,6 +28,11 @@ public class MouseEventController {
 		view.setStoppedDragging();
 	}
 	
+	private void mouseMoved(MouseEvent event) {
+		mouseX = event.getX();
+		mouseY = event.getY();
+	}
+	
 	protected void mouseReleased(MouseEvent event) {
 	}
 
@@ -35,7 +42,7 @@ public class MouseEventController {
 	}
 
 	public void mouseScrolled(ScrollEvent event) {
-		
+		view.zoom(event.getDeltaY(), mouseX, mouseY);
 	}
 
 	
@@ -61,10 +68,10 @@ public class MouseEventController {
             }
         });
     	
-    	scene.setOnMouseReleased(new EventHandler<MouseEvent>() {
+    	scene.setOnMouseMoved(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                mouseClicked(event);
+                mouseMoved(event);
             }
         });
     	

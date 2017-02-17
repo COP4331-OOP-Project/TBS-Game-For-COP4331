@@ -7,6 +7,7 @@ import game.entities.structures.Structure;
 import game.entities.units.Unit;
 import game.gameboard.Tile;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import javafx.scene.text.Font;
 import javafx.scene.transform.Affine;
 import javafx.scene.transform.Rotate;
@@ -24,6 +25,9 @@ public class GamePanel extends Panel {
     private SelectedDrawer selectedDrawer;
     private GraphicsContext gc;
     private Game game;
+    
+	private boolean zooming = false;
+	private int zoomCounter = -1;
 
     public GamePanel(Game game) {
         this.game = game;
@@ -37,7 +41,10 @@ public class GamePanel extends Panel {
 
     public void draw(GraphicsContext gc, int width, int height) {
         this.gc = gc;
-        camera.getPanelCenterer().recenter(width, height);
+        checkZooming();
+        if (!zooming) {
+        	camera.getPanelCenterer().recenter(width, height);
+        }
         int selX = game.getCenterCoordinates().getX();
         int selY = game.getCenterCoordinates().getY();
         if (selX != 0 && selY != 0) {
@@ -50,7 +57,18 @@ public class GamePanel extends Panel {
         tileDrawer.drawMovingTiles();
     }
 
-    private void drawAllItems() {
+    private void checkZooming() {
+    	if (zoomCounter != -1) {
+    		zoomCounter++;
+    		if (zoomCounter > 20) {
+    			zoomCounter = -1;
+    			zooming = false;
+    			camera.doNotCenter();
+    		}
+    	}
+	}
+
+	private void drawAllItems() {
         for (int i = 0; i < game.getGameBoard().getTiles().length; i++) {
             for (int j = 0; j < game.getGameBoard().getTiles()[i].length; j++) {
                 Tile tile = game.getGameBoard().getTiles()[i][j];
@@ -93,14 +111,17 @@ public class GamePanel extends Panel {
     }
 
     protected void drawStaticTileElement(int x, int y, String image) {
-        gc.drawImage(Assets.getInstance().getImage(image), camera.offsetX(x, y),
-                camera.offsetY(x, y));
+    	Image img = Assets.getInstance().getImage(image);
+    	gc.drawImage(img, camera.offsetX(x, y), camera.offsetY(x, y), camera.getScale() * img.getWidth(), 
+        		camera.getScale() * img.getHeight());
     }
 
     protected void drawStaticTileElement(int x, int y, int rotation, String image) {
-        Affine currentRotation = gc.getTransform();
+        Image img = Assets.getInstance().getImage(image);
+    	Affine currentRotation = gc.getTransform();
         rotateOnTile(x, y, rotation);
-        gc.drawImage(Assets.getInstance().getImage(image), camera.offsetX(x, y), camera.offsetY(x, y));
+        gc.drawImage(img, camera.offsetX(x, y), camera.offsetY(x, y), camera.getScale() * img.getWidth(), 
+        		camera.getScale() * img.getHeight());
         gc.setTransform(currentRotation);
     }
 
@@ -111,18 +132,21 @@ public class GamePanel extends Panel {
         gc.getTransform().setToTransform(rotate);
     }
 
-    protected void drawAnimatedTileElement(int x, int y,
-                                           String image1, String image2, String image3) {
-        switch (getAnimationImage()) {
-            case 0:
-                gc.drawImage(Assets.getInstance().getImage(image1), camera.offsetX(x, y), camera.offsetY(x, y));
-                break;
-            case 2:
-                gc.drawImage(Assets.getInstance().getImage(image2), camera.offsetX(x, y), camera.offsetY(x, y));
-                break;
-            default:
-                gc.drawImage(Assets.getInstance().getImage(image3), camera.offsetX(x, y), camera.offsetY(x, y));
+    protected void drawAnimatedTileElement(int x, int y, String image1, String image2, String image3) {
+        Image img;   
+    	switch (getAnimationImage()) { 
+	        	case 0:
+	            	img = Assets.getInstance().getImage(image1);
+	                break;
+	            case 2:
+	            	img = Assets.getInstance().getImage(image2);
+	                break;
+	            default:
+	            	img = Assets.getInstance().getImage(image3);
         }
+    	
+        gc.drawImage(img, camera.offsetX(x, y), camera.offsetY(x, y), camera.getScale() * img.getWidth(), 
+        		camera.getScale() * img.getHeight());
     }
 
     public Camera getCamera() {
@@ -140,5 +164,11 @@ public class GamePanel extends Panel {
 	public void moveCamera(double diffX, double diffY) {
 		camera.setX(camera.getX() - (int)diffX);
 		camera.setY(camera.getY() - (int)diffY);
+	}
+
+	public void zoom(double deltaY, double mouseX, double mouseY) {
+		zooming = true;
+		zoomCounter = 0;
+		camera.zoom(deltaY, mouseX, mouseY);
 	}
 }

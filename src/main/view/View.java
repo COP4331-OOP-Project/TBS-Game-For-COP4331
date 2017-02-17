@@ -89,5 +89,9 @@ public class View {
 		dragX = x;
 		dragY = y;
 	}
+
+	public void zoom(double deltaY, double mouseX, double mouseY) {
+		gamePanel.zoom(deltaY, mouseX, mouseY);
+	}
 	
 }
