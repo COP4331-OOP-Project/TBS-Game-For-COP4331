@@ -93,5 +93,9 @@ public class View {
 	public void zoom(double deltaY, double mouseX, double mouseY) {
 		gamePanel.zoom(deltaY, mouseX, mouseY);
 	}
+
+	public void clickedOn(double x, double y) {
+		Point p = new Point((int)x, (int)y);
+	}
 	
 }

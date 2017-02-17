@@ -1,5 +1,7 @@
 package view.game;
 
+import java.util.ArrayList;
+
 import game.Assets;
 import game.Game;
 import game.entities.Army;
@@ -8,6 +10,7 @@ import game.entities.units.Unit;
 import game.gameboard.Tile;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.transform.Affine;
 import javafx.scene.transform.Rotate;
@@ -29,6 +32,7 @@ public class GamePanel extends Panel {
     
 	private boolean zooming = false;
 	private int zoomCounter = -1;
+	Point mouseZoomStart = new Point(0,0);
 
     public GamePanel(Game game) {
         this.game = game;
@@ -58,10 +62,10 @@ public class GamePanel extends Panel {
         tileDrawer.drawMovingTiles();
     }
 
-    private void checkZooming() {
+	private void checkZooming() {
     	if (zoomCounter != -1) {
     		zoomCounter++;
-    		if (zoomCounter > 20) {
+    		if (zoomCounter > 40) {
     			zoomCounter = -1;
     			zooming = false;
     			camera.getPanelCenterer().stopCentering();
@@ -74,6 +78,7 @@ public class GamePanel extends Panel {
             for (int j = 0; j < game.getGameBoard().getTiles()[i].length; j++) {
                 Tile tile = game.getGameBoard().getTiles()[i][j];
                 Point p = new Point(tile.getLocation().getX(), tile.getLocation().getY());
+
                 //Draw Tiles
                 tileDrawer.drawTile(p, tile.getTileType());
                 if (tile.getUnits().size() > 1 && !tile.containsArmy) {
@@ -110,13 +115,13 @@ public class GamePanel extends Panel {
         }
     }
 
-    protected void drawStaticTileElement(Point p, String image) {
+    public void drawStaticTileElement(Point p, String image) {
     	Image img = Assets.getInstance().getImage(image);
     	gc.drawImage(img, camera.offset(p).x, camera.offset(p).y, camera.getScale() * img.getWidth(), 
         		camera.getScale() * img.getHeight());
     }
 
-    protected void drawStaticTileElement(Point p, int rotation, String image) {
+    public void drawStaticTileElement(Point p, int rotation, String image) {
         Image img = Assets.getInstance().getImage(image);
     	Affine currentRotation = gc.getTransform();
         rotateOnTile(p, rotation);
@@ -127,12 +132,12 @@ public class GamePanel extends Panel {
 
     private void rotateOnTile(Point p, int degrees) {
         Rotate rotate = new Rotate(degrees,
-                (double) (camera.getTileLocation(p).x + TILE_PIXEL_SIZE / 2),
-                (double) (camera.getTileLocation(p).y + TILE_PIXEL_SIZE / 2));
+                (double) (camera.getTileCenter(p).x),
+                (double) (camera.getTileCenter(p).y));
         gc.getTransform().setToTransform(rotate);
     }
 
-    protected void drawAnimatedTileElement(Point p, String image1, String image2, String image3) {
+    public void drawAnimatedTileElement(Point p, String image1, String image2, String image3) {
         Image img;   
     	switch (getAnimationImage()) { 
 	        	case 0:
@@ -167,8 +172,13 @@ public class GamePanel extends Panel {
 	}
 
 	public void zoom(double deltaY, double mouseX, double mouseY) {
-		zooming = true;
+		Point p = new Point((int)mouseX, (int)mouseY);
 		zoomCounter = 0;
-		camera.zoom(deltaY, mouseX, mouseY);
+		System.out.println(zooming);
+		if (!zooming) {
+			mouseZoomStart = camera.getTileLocation(p);
+		}
+		zooming = true;
+		camera.zoom(deltaY, mouseZoomStart);
 	}
 }

@@ -26,17 +26,19 @@ public class PanelCenterer {
     public void centerOnTile(Point p) {
         if (centeringOffset(p).x != centerTo.x ||
                 centeringOffset(p).y != centerTo.y) {
-            centerStart.x = gamePanel.getCamera().getOffset().x;
-            centerStart.y = gamePanel.getCamera().getOffset().y;
-            centerTo.x = centeringOffset(p).x;
-            centerTo.y = centeringOffset(p).y;
+            centerStart = gamePanel.getCamera().getOffset();
+            centerTo = centeringOffset(p);
             isCentering = true;
         }
     }
     
+	public void quickCenter(Point position) {
+		gamePanel.getCamera().setOffset(centeringOffset(position));
+	}
+    
     private Point centeringOffset(Point p) {
-        return new Point((width / 2) - gamePanel.getCamera().getTileLocation(p).x - gamePanel.getTileSize() / 2,
-        				((height / 2) - gamePanel.getCamera().getTileLocation(p).y - gamePanel.getTileSize() / 2));
+        return new Point((width / 2) - gamePanel.getCamera().getTileCenter(p).x,
+        				((height / 2) - gamePanel.getCamera().getTileCenter(p).y));
     }
 
 
