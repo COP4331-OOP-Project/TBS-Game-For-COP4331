@@ -80,7 +80,7 @@ public class Game {
     }
 
 	public void updateGame() { //This is called 20 times per second
-		updateSelectedUnit();
+		//updateSelectedUnit();
 	}
 
 	public void startGame() {

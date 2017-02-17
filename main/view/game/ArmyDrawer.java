@@ -31,7 +31,7 @@ public class ArmyDrawer {
 						drawArmy(tile.getLocation().getX(), tile.getLocation().getY(), army.getOwnerID(), 
 								army.getRotation(), army.getAllUnits().size());
 					}
-				} else if (tile.containsBattleGroup() && tile.getUnits().size() > 0) {
+				} else if (tile.containsArmy && tile.getUnits().size() > 0) {
 					// this is so wrong but might work for demo
 					
 					drawArmy(tile.getLocation().getX(), tile.getLocation().getY(),

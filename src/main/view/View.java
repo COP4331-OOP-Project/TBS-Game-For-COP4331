@@ -43,6 +43,7 @@ public class View {
 	public void drawVisiblePanels(int width, int height) {
 		//Add structure And unit Overview Modes
 		gamePanel.draw(gc, width, height);
+		
 		civPanel.draw(gc, width, height);
 		modePanel.draw(gc, width, height);
 		if (game.getCurrentMode() == ModeEnum.UNIT)
@@ -56,6 +57,7 @@ public class View {
 			structureOverviewPanel.draw(gc, width, height);
 		//unitOverviewPanel.drawPanelBox(g, width, height);
 		if (game.isShowingMakeDetails()) makePanel.draw(gc, width, height);
+		
 
 	}
 

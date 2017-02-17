@@ -39,7 +39,7 @@ public class MiniMapPanel extends Panel{
 				}
 				if (game.getGameBoard().getTiles()[i][j].containsUnit) {
 					for (Unit unit : game.getGameBoard().getTiles()[i][j].getUnits()) {
-						if (!game.getGameBoard().getTiles()[i][j].containsArmy && !game.getGameBoard().getTiles()[i][j].containsBattleGroup()) {
+						if (!game.getGameBoard().getTiles()[i][j].containsArmy && !game.getGameBoard().getTiles()[i][j].containsArmy) {
 							drawSmallUnit(game.getGameBoard().getTiles()[i][j].getLocation().getX(), 
 									game.getGameBoard().getTiles()[i][j].getLocation().getY(), 
 									 unit.getOwnerID(), gc);
@@ -89,8 +89,10 @@ public class MiniMapPanel extends Panel{
 				gc.drawImage(Assets.getInstance().getImage("WATER_MINI"), 
 						offX(x, y), offY(x, y)); 
 				break;
+			case INVISIBLE:
+				break;
 			default:
-				log.warn("Invalid tile type");
+				log.warn("Invalid tile type on minimap: " + tileType);
 		}
 	}
 	
