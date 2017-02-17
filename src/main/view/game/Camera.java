@@ -10,6 +10,8 @@ public class Camera {
     private Point offset = new Point(180, -3050);
     private double scale = 1;
 	private static final double SCALE_AMOUNT = 0.04;
+	private static final double MIN_SCALE = 0.02;
+	private static final double MAX_SCALE = 1.5;
     public Camera(GamePanel gamePanel) {
         this.panelCenterer = new PanelCenterer(gamePanel);
     }
@@ -48,15 +50,18 @@ public class Camera {
 	public void zoom(double deltaY, double mouseX, double mouseY) {
 		int posX = (int) (mouseX - offset.x);
 		int posY = (int) (mouseY - offset.y);
-		System.out.println(posX + " " + posY);
 		if (deltaY > 0) {
-			scale += SCALE_AMOUNT;
-			//offsetX -= offsetX - (offsetX * scale); //- mouseX/10;
-			//offsetY -= offsetY - (offsetY * scale); //- mouseY/10;
+			if (scale < MAX_SCALE) {
+			 scale += SCALE_AMOUNT;
+			 //offsetX -= offsetX - (offsetX * scale); //- mouseX/10;
+			 offset.y -= (150 * scale);
+			}
 		} else {
+			if (scale > MIN_SCALE) {
 			scale -= SCALE_AMOUNT;
 			//offsetX += offsetX - (offsetX * scale); //- mouseX/10;
-			//offsetY += offsetY - (offsetY * scale); //- mouseY/10;
+			offset.y += (150 * scale);;
+			}
 		}
 	}
 }
