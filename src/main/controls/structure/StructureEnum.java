@@ -15,6 +15,6 @@ public enum StructureEnum {
     public StructureEnum getPrevious() {
         return this.ordinal() > 0
                 ? StructureEnum.values()[this.ordinal() - 1]
-                : StructureEnum.values()[StructureEnum.values().length-1];
+                : StructureEnum.values()[StructureEnum.values().length - 1];
     }
 }

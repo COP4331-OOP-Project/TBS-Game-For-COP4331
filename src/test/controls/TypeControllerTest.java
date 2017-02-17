@@ -6,9 +6,9 @@ import controls.structure.StructureEnum;
 import controls.unit.UnitEnum;
 import game.Player;
 import game.gameboard.Location;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.Assert;
 
 /**
  * Created by gavin on 2/4/17.
@@ -22,7 +22,7 @@ public class TypeControllerTest {
     @Before
     public void setUp() {
         this.mode = ModeEnum.STRUCTURE;
-        Location l = new Location(0,0);
+        Location l = new Location(0, 0);
         this.player = new Player(0, l);
         this.typeController = new TypeController(this.mode, this.player);
     }

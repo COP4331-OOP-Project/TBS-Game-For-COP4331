@@ -3,8 +3,6 @@ package game.factories;
 import game.entities.factories.EntityFactory;
 import game.entities.factories.UnknownEntityCodeException;
 import game.gameboard.Location;
-
-import org.junit.*;
 import org.junit.Test;
 
 /**
@@ -20,16 +18,17 @@ public class EntityFactoryTest {
         try {
 
             Object entity = EntityFactory.getEntity(loc, 0, "Colonist");
-            assert(!entity.equals(null));
+            assert (!entity.equals(null));
             entity = EntityFactory.getEntity(loc, 0, "colonist");
-            assert(!entity.equals(null));
+            assert (!entity.equals(null));
 
-        } catch (UnknownEntityCodeException e) {}
+        } catch (UnknownEntityCodeException e) {
+        }
 
 
     }
 
-    @Test(expected=UnknownEntityCodeException.class)
+    @Test(expected = UnknownEntityCodeException.class)
     public void testUnknownEntityCode() throws UnknownEntityCodeException {
         Object entity = EntityFactory.getEntity(loc, 0, "unknownEntityType");
     }

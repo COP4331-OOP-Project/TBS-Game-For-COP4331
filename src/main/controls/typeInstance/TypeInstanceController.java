@@ -87,6 +87,7 @@ public class TypeInstanceController {
     public CommandController getCommandController() {
         return this.commandController;
     }
+
     // This is private on purpose!
     private void setCurrentTypeInstance(ICommandable commandable) {
         this.currentTypeInstance = commandable;
@@ -146,13 +147,13 @@ public class TypeInstanceController {
         if (list.isEmpty()) return null;
         Integer newIndex = index - 1;
         if (newIndex < 0) {
-            return new ItemWithIndex(list.get(list.size()-1), list.size()-1);
+            return new ItemWithIndex(list.get(list.size() - 1), list.size() - 1);
         }
         return new ItemWithIndex(list.get(newIndex), newIndex);
     }
 
     private Unit cycleUnitEnum(UnitEnum unit, boolean forward) {
-        switch(unit) {
+        switch (unit) {
             case MELEE: {
                 ItemWithIndex item;
                 if (forward) {
@@ -206,7 +207,7 @@ public class TypeInstanceController {
     }
 
     private Structure cycleStructureEnum(StructureEnum structure, boolean forward) {
-        switch(structure) {
+        switch (structure) {
             case BASE: {
                 ItemWithIndex item;
                 if (forward) {
@@ -224,7 +225,7 @@ public class TypeInstanceController {
     }
 
     private Unit cycleArmyEnum(ArmyEnum army, boolean forward) {
-        switch(army) {
+        switch (army) {
             case ENTIRE_ARMY: {
                 ItemWithIndex item;
                 if (forward) {

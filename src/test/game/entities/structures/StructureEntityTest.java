@@ -37,11 +37,11 @@ public class StructureEntityTest {
     public void testDoTurn() {
 
         base.powerUp();
-        assert(base.getPowerState() == PowerState.POWERED_UP);
+        assert (base.getPowerState() == PowerState.POWERED_UP);
         PowerDownCommand<Structure> pdc = new PowerDownCommand<Structure>(new GameBoard(new ArrayList<Player>()), base);
         base.addCommandToQueue(pdc);
         base.doTurn();
-        assert(base.getPowerState() == PowerState.POWERED_DOWN);
+        assert (base.getPowerState() == PowerState.POWERED_DOWN);
 
     }
 
@@ -61,9 +61,9 @@ public class StructureEntityTest {
 
         PowerDownCommand<Structure> pdc = new PowerDownCommand<Structure>(new GameBoard(new ArrayList<Player>()), base);
         base.addCommandToQueue(pdc);
-        assert(!base.isQueueEmpty());
+        assert (!base.isQueueEmpty());
         base.cancelQueuedCommands();
-        assert(base.isQueueEmpty());
+        assert (base.isQueueEmpty());
 
     }
 
@@ -80,19 +80,19 @@ public class StructureEntityTest {
     @Test
     public void testStateChanging() {
 
-        assert(base.getPowerState() == PowerState.POWERED_UP);
+        assert (base.getPowerState() == PowerState.POWERED_UP);
         assertEquals(10f, base.getResourceCost(), 0);
         base.powerDown();
-        assert(base.getPowerState() == PowerState.POWERED_DOWN);
+        assert (base.getPowerState() == PowerState.POWERED_DOWN);
         assertEquals(2.5f, base.getResourceCost(), 0);
         base.powerUp();
-        assert(base.getPowerState() == PowerState.POWERED_UP);
+        assert (base.getPowerState() == PowerState.POWERED_UP);
         assertEquals(10f, base.getResourceCost(), 0);
         base.combatState();
-        assert(base.getPowerState() == PowerState.COMBAT);
+        assert (base.getPowerState() == PowerState.COMBAT);
         assertEquals(12.5f, base.getResourceCost(), 0);
         base.standby();
-        assert(base.getPowerState() == PowerState.STANDBY);
+        assert (base.getPowerState() == PowerState.STANDBY);
         assertEquals(7.5f, base.getResourceCost(), 0);
 
     }

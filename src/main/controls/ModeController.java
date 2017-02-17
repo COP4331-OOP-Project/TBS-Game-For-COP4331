@@ -1,8 +1,6 @@
 package controls;
 
 import game.Player;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger; 
 
 /**
  * Created by gavin on 2/1/17.
