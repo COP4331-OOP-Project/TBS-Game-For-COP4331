@@ -16,7 +16,7 @@ public class KeyEventController {
     private boolean gettingMoves = false;
     private boolean gettingMakeList = false;
 
-    public KeyEventController(Game game, Scene scene) {
+    public KeyEventController(Game game) {
         this.game = game;
     }
 

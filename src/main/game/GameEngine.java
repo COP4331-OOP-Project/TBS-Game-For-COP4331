@@ -2,14 +2,10 @@ package game;
 
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
-import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.input.ScrollEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import view.View;
@@ -18,8 +14,7 @@ public class GameEngine extends Application {
     Game game = new Game();
     private int defaultScreenWidth = 1366;
     private int defaultScreenHeight = 768;
-    private KeyEventController keyEvents;
-    private MouseEventController mouseEvents;
+    private SceneEventController sceneEvents;
     private View view;
 
     @Override
@@ -31,10 +26,8 @@ public class GameEngine extends Application {
         view = new View(game, gc);
 
         Scene scene = new Scene(root, Color.BLACK);
-        keyEvents = new KeyEventController(game, scene);
-        mouseEvents = new MouseEventController(game, scene);
-        
-        sendEventsToController(scene);
+    	sceneEvents = new SceneEventController(game, scene);
+        sceneEvents.handleEvents();
 
         //This is new game loop using JavaFX timer.
         AnimationTimer timer = new AnimationTimer() {
@@ -52,51 +45,5 @@ public class GameEngine extends Application {
         primaryStage.show();
     }
 
-    public void sendEventsToController(Scene scene) {
-        //Mouse Events
-    	scene.setOnMouseDragged(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                mouseEvents.mouseDragged(event);
-            }
-        });
-    	
-    	scene.setOnScroll(new EventHandler<ScrollEvent>() {
-            @Override
-            public void handle(ScrollEvent event) {
-                mouseEvents.mouseScrolled(event);
-            }
-        });
-    	
-    	scene.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                mouseEvents.mouseClicked(event);
-            }
-        });
-    	
-
-    	
-    	//Key Events
-    	scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent event) {
-                keyEvents.keyPressed(event);
-            }
-        });
-
-        scene.setOnKeyReleased(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent event) {
-                keyEvents.keyReleased(event);
-            }
-        });
-
-        scene.setOnKeyTyped(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent event) {
-                keyEvents.keyTyped(event);
-            }
-        });
-    }
+ 
 }
