@@ -4,7 +4,6 @@ import game.Assets;
 import game.Game;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.text.Font;
-import view.Panel;
 import view.Point;
 
 

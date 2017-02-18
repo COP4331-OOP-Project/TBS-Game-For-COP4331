@@ -2,7 +2,6 @@ package view.gui;
 
 import game.Assets;
 import javafx.scene.canvas.GraphicsContext;
-import view.Panel;
 import view.Point;
 
 public abstract class DetailsPanel extends Panel {

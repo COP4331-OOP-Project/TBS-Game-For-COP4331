@@ -1,4 +1,4 @@
-package view;
+package view.gui;
 
 public abstract class Panel {
     private static final int TICKS_PER_IMAGE = 20;

@@ -8,7 +8,7 @@ import game.gameboard.Tile;
 import javafx.scene.canvas.GraphicsContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import view.Panel;
+
 import view.Point;
 
 public class MiniMapPanel extends Panel {

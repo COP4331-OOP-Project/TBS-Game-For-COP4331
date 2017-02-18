@@ -11,8 +11,8 @@ import javafx.scene.image.Image;
 import javafx.scene.text.Font;
 import javafx.scene.transform.Affine;
 import javafx.scene.transform.Rotate;
-import view.Panel;
 import view.Point;
+import view.gui.Panel;
 
 public class GamePanel extends Panel {
     private static final int TILE_PIXEL_SIZE =
@@ -113,7 +113,8 @@ public class GamePanel extends Panel {
         Rotate rotate = new Rotate(degrees,
                 (double) (camera.getTileCenter(p).x),
                 (double) (camera.getTileCenter(p).y));
-        gc.getTransform().setToTransform(rotate);
+        gc.setTransform(rotate.getMxx(), rotate.getMyx(), rotate.getMxy(), rotate.getMyy(), 
+        		rotate.getTx(), rotate.getTy());
     }
 
     public void drawAnimatedTileElement(Point p, String image1, String image2, String image3) {
