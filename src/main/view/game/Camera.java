@@ -13,8 +13,8 @@ public class Camera {
 	
     private CameraCenterer panelCenterer;
     private Point screenDimensions;
-    private Point offset = new Point(180, -3050);
-    private double scale = 1;
+    private Point offset = new Point(180, -2350);
+    private double scale = 0.8;
     
     //These values are used when zooming the Camera.
 	private boolean zooming = false;
