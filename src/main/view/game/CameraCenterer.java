@@ -2,18 +2,19 @@ package view.game;
 
 import view.Point;
 
-public class PanelCenterer {
+public class CameraCenterer {
     private static final int TIME_TO_CENTER = 50;
-    GamePanel gamePanel;
+    //GamePanel gamePanel;
     private int timeCentering = 0;
     private boolean isCentering = false;
     private Point centerStart = new Point(-1,-1);
     private Point centerTo = new Point(-1,-1);
     private int width = 0;
     private int height = 0;
+    private Camera camera;
 
-    public PanelCenterer(GamePanel gamePanel) {
-        this.gamePanel = gamePanel;
+    public CameraCenterer(Camera camera) {
+        this.camera = camera;
     }
 
     public void recenter(int width, int height) {
@@ -26,31 +27,34 @@ public class PanelCenterer {
     public void centerOnTile(Point p) {
         if (centeringOffset(p).x != centerTo.x ||
                 centeringOffset(p).y != centerTo.y) {
-            centerStart = gamePanel.getCamera().getOffset();
+            centerStart = camera.getOffset();
             centerTo = centeringOffset(p);
             isCentering = true;
         }
     }
     
-	public void quickCenter(Point position) {
-		gamePanel.getCamera().setOffset(centeringOffset(position));
+	public void quickCenter(Point tile) {
+		camera.setOffset(centeringOffset(tile));
 	}
     
+	
     private Point centeringOffset(Point p) {
-        return new Point((width / 2) - gamePanel.getCamera().getTileCenter(p).x,
-        				((height / 2) - gamePanel.getCamera().getTileCenter(p).y));
+        return new Point((width / 2) - camera.getTileCenter(p).x,
+        				((height / 2) - camera.getTileCenter(p).y));
     }
 
 
     private void continueCentering() {
         if (timeCentering >= TIME_TO_CENTER - 1) {
-            gamePanel.getCamera().setOffset(new Point(centerTo.x, centerTo.y));
+            camera.setOffset(new Point(centerTo.x, centerTo.y));
             timeCentering = 0;
             isCentering = false;
         } else {
-            gamePanel.getCamera().setOffset(new Point((int)((percentDoneCentering() * (centerTo.x - centerStart.x)) + centerStart.x), 
-            									       (int)(percentDoneCentering() * (centerTo.y - centerStart.y) + centerStart.y)));
-            timeCentering++;
+           Point offset = new Point();
+           offset.x = (int)((percentDoneCentering() * (centerTo.x - centerStart.x)) + centerStart.x);
+           offset.y = (int)(percentDoneCentering() * (centerTo.y - centerStart.y) + centerStart.y);
+           camera.setOffset(offset);
+           timeCentering++;
         }
     }
 

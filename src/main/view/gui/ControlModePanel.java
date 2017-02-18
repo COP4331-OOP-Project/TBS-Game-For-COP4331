@@ -12,6 +12,7 @@ import javafx.scene.text.Font;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import view.Panel;
+import view.Point;
 
 public class ControlModePanel extends Panel {
     private final static Logger log = LogManager.getLogger(ControlModePanel.class);
@@ -26,8 +27,7 @@ public class ControlModePanel extends Panel {
     private static final int TEXT_SPACING2 = 48;
     private static final int TEXT1_LOCATION = 13;
     private static final int TEXT2_LOCATION = -54;
-    private int width;
-    private int height;
+    private Point screenDimensions;
     private Font modeFont = Assets.getInstance().getFont(1);
     private String[] modeString = {"Rally Point", "Structure", "Unit", "Army"};
     private String[][] submodeString = {{"", "", "", ""},
@@ -42,9 +42,8 @@ public class ControlModePanel extends Panel {
         this.game = game;
     }
 
-    public void draw(GraphicsContext gc, int width, int height) {
-        this.width = width;
-        this.height = height;
+    public void draw(GraphicsContext gc, Point screenDimensions) {
+        this.screenDimensions = screenDimensions;
         updateModes();
 
         drawModePanel(gc);
@@ -60,7 +59,7 @@ public class ControlModePanel extends Panel {
 
 
     private void drawCommandPanel(GraphicsContext g) {
-        g.drawImage(Assets.getInstance().getImage("GUI_COMMAND_PANEL"), width - COMMAND_PANEL_DISTANCE_FROM_RIGHT
+        g.drawImage(Assets.getInstance().getImage("GUI_COMMAND_PANEL"), screenDimensions.x - COMMAND_PANEL_DISTANCE_FROM_RIGHT
                 , PANEL_DISTANCE_COMMAND);
     }
 
@@ -104,10 +103,10 @@ public class ControlModePanel extends Panel {
     }
 
     private void drawSubmodeStrings(GraphicsContext g) {
-        g.fillText(submodeString[mode][0], 10, height - PANEL_DISTANCE_SUBMODE - TEXT2_LOCATION);
-        g.fillText(submodeString[mode][1], 10, height - PANEL_DISTANCE_SUBMODE - TEXT2_LOCATION + TEXT_SPACING2);
-        g.fillText(submodeString[mode][2], 10, height - PANEL_DISTANCE_SUBMODE - TEXT2_LOCATION + 2 * TEXT_SPACING2);
-        g.fillText(submodeString[mode][3], 10, height - PANEL_DISTANCE_SUBMODE - TEXT2_LOCATION + 3 * TEXT_SPACING2);
+        g.fillText(submodeString[mode][0], 10, screenDimensions.y - PANEL_DISTANCE_SUBMODE - TEXT2_LOCATION);
+        g.fillText(submodeString[mode][1], 10, screenDimensions.y - PANEL_DISTANCE_SUBMODE - TEXT2_LOCATION + TEXT_SPACING2);
+        g.fillText(submodeString[mode][2], 10, screenDimensions.y - PANEL_DISTANCE_SUBMODE - TEXT2_LOCATION + 2 * TEXT_SPACING2);
+        g.fillText(submodeString[mode][3], 10, screenDimensions.y - PANEL_DISTANCE_SUBMODE - TEXT2_LOCATION + 3 * TEXT_SPACING2);
     }
 
     private void drawModePanel(GraphicsContext g) {
@@ -138,24 +137,24 @@ public class ControlModePanel extends Panel {
 
     private void drawSubmodePanel(GraphicsContext g) {
         g.drawImage(Assets.getInstance().getImage("GUI_MODE_PANEL"), PANEL_DISTANCE_FROM_LEFT,
-                height - PANEL_DISTANCE_SUBMODE);
+                screenDimensions.y - PANEL_DISTANCE_SUBMODE);
         if (mode != 0) {
             switch (submode) {
                 case 0:
                     g.drawImage(Assets.getInstance().getImage("GUI_MODE_SELECTED1"), PANEL_DISTANCE_FROM_LEFT
-                            , height - PANEL_DISTANCE_SUBMODE);
+                            , screenDimensions.y - PANEL_DISTANCE_SUBMODE);
                     break;
                 case 1:
                     g.drawImage(Assets.getInstance().getImage("GUI_MODE_SELECTED2"), PANEL_DISTANCE_FROM_LEFT
-                            , height - PANEL_DISTANCE_SUBMODE);
+                            , screenDimensions.y - PANEL_DISTANCE_SUBMODE);
                     break;
                 case 2:
                     g.drawImage(Assets.getInstance().getImage("GUI_MODE_SELECTED3"), PANEL_DISTANCE_FROM_LEFT
-                            , height - PANEL_DISTANCE_SUBMODE);
+                            , screenDimensions.y - PANEL_DISTANCE_SUBMODE);
                     break;
                 case 3:
                     g.drawImage(Assets.getInstance().getImage("GUI_MODE_SELECTED4"), PANEL_DISTANCE_FROM_LEFT
-                            , height - PANEL_DISTANCE_SUBMODE);
+                            , screenDimensions.y - PANEL_DISTANCE_SUBMODE);
                 default:
                     log.warn("Invalid Submode to display");
             }
@@ -195,7 +194,7 @@ public class ControlModePanel extends Panel {
             commandString = "None";
         }
 
-        g.fillText(commandString, width - COMMAND_PANEL_DISTANCE_FROM_RIGHT + 73, PANEL_DISTANCE_COMMAND + 49);
+        g.fillText(commandString, screenDimensions.x - COMMAND_PANEL_DISTANCE_FROM_RIGHT + 73, PANEL_DISTANCE_COMMAND + 49);
     }
 
 }

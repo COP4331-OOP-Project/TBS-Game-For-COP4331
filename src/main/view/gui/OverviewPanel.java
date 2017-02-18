@@ -3,10 +3,11 @@ package view.gui;
 import game.Assets;
 import javafx.scene.canvas.GraphicsContext;
 import view.Panel;
+import view.Point;
 
 public abstract class OverviewPanel extends Panel {
-    public void drawPanelBox(GraphicsContext gc, int width, int height) {
+    public void drawPanelBox(GraphicsContext gc, Point screenDimensions) {
         gc.drawImage(Assets.getInstance().getImage("DETAILS_PANEL"),
-                width / 2 - 400, height / 2 - 300);
+                screenDimensions.x / 2 - 400, screenDimensions.y / 2 - 300);
     }
 }

@@ -26,7 +26,6 @@ public class MouseEventController {
 
 	public void mouseClicked(MouseEvent event) {
 		view.setStoppedDragging();
-		view.clickedOn(event.getX(), event.getY());
 	}
 	
 	private void mouseMoved(MouseEvent event) {

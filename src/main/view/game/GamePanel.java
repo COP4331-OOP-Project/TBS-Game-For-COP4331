@@ -1,7 +1,5 @@
 package view.game;
 
-import java.util.ArrayList;
-
 import game.Assets;
 import game.Game;
 import game.entities.Army;
@@ -10,7 +8,6 @@ import game.entities.units.Unit;
 import game.gameboard.Tile;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.transform.Affine;
 import javafx.scene.transform.Rotate;
@@ -29,16 +26,12 @@ public class GamePanel extends Panel {
     private SelectedDrawer selectedDrawer;
     private GraphicsContext gc;
     private Game game;
-    
-	private boolean zooming = false;
-	private int zoomCounter = -1;
-	Point mouseZoomStart = new Point(0,0);
-	private int width;
-	private int height;
+	private Point screenDimensions;
 
-    public GamePanel(Game game) {
+    public GamePanel(Game game, Camera camera) {
         this.game = game;
-        camera = new Camera(this);
+        this.camera = camera;
+        screenDimensions = new Point();
         tileDrawer = new TileDrawer(this, game);
         unitDrawer = new UnitDrawer(this);
         armyDrawer = new ArmyDrawer(this);
@@ -46,36 +39,18 @@ public class GamePanel extends Panel {
         selectedDrawer = new SelectedDrawer(this, game);
     }
 
-    public void draw(GraphicsContext gc, int width, int height) {
-    	this.width = width;
-    	this.height = height;
+    public void draw(GraphicsContext gc, Point screenDimensions) {
+    	this.screenDimensions = screenDimensions;
         this.gc = gc;
-        checkZooming();
-        if (!zooming) {
-        	camera.getPanelCenterer().recenter(width, height);
-        }
         Point selected = new Point(game.getCenterCoordinates().getX(),
-        						   game.getCenterCoordinates().getY());
-        if (selected.x != 0 && selected.y != 0) {
-            camera.getPanelCenterer().centerOnTile(selected);
-        }
-
+				   game.getCenterCoordinates().getY());
+        camera.reAlign(selected);
         drawAllItems();
         selectedDrawer.drawSelectedItemOutline();
-        //Draw Moving Tiles
         tileDrawer.drawMovingTiles();
     }
 
-	private void checkZooming() {
-    	if (zoomCounter != -1) {
-    		zoomCounter++;
-    		if (zoomCounter > 20) {
-    			zoomCounter = -1;
-    			zooming = false;
-    			camera.getPanelCenterer().stopCentering();
-    		}
-    	}
-	}
+
 
 	private void drawAllItems() {
         for (int i = 0; i < game.getGameBoard().getTiles().length; i++) {
@@ -173,15 +148,5 @@ public class GamePanel extends Panel {
 	public void moveCamera(double diffX, double diffY) {
 		camera.setOffset(new Point(camera.getOffset().x - (int)diffX,
 				(camera.getOffset().y - (int)diffY)));
-	}
-
-	public void zoom(double deltaY) {
-		Point p = new Point((int)width/2, (int)height/2);
-		zoomCounter = 0;
-		if (!zooming) {
-			mouseZoomStart = camera.getTileLocation(p);
-		}
-		zooming = true;
-		camera.zoom(deltaY, mouseZoomStart);
 	}
 }

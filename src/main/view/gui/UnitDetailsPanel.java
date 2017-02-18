@@ -5,6 +5,7 @@ import game.Assets;
 import game.Game;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.text.Font;
+import view.Point;
 
 public class UnitDetailsPanel extends DetailsPanel {
     Font detailsFont = Assets.getInstance().getFont(0);
@@ -15,9 +16,9 @@ public class UnitDetailsPanel extends DetailsPanel {
         this.game = game;
     }
 
-    public void draw(GraphicsContext gc, int width, int height) {
-        drawBar(gc, width, height);
-        drawText(gc, height);
+    public void draw(GraphicsContext gc, Point screenDimensions) {
+        drawBar(gc, screenDimensions);
+        drawText(gc, screenDimensions.y);
     }
 
     private void drawText(GraphicsContext g, int height) {

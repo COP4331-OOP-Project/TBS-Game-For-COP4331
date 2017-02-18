@@ -4,10 +4,12 @@ import game.Assets;
 import game.Game;
 import game.entities.units.Unit;
 import game.gameboard.TerrainEnum;
+import game.gameboard.Tile;
 import javafx.scene.canvas.GraphicsContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import view.Panel;
+import view.Point;
 
 public class MiniMapPanel extends Panel {
     private static final int HEX_SIZE = 12;
@@ -16,30 +18,29 @@ public class MiniMapPanel extends Panel {
     private static final int DISTANCE_FROM_BOTTOM = 530;
     private final static Logger log = LogManager.getLogger(MiniMapPanel.class);
     Game game;
-    private int width;
-    private int height;
+    private Point screenDimensions;
 
     public MiniMapPanel(Game game) {
         this.game = game;
     }
 
-    public void draw(GraphicsContext gc, int width, int height) {
-        this.width = width;
-        this.height = height;
+    public void draw(GraphicsContext gc, Point screenDimensions) {
+        this.screenDimensions = screenDimensions;
         for (int i = 0; i < game.getGameBoard().getTiles().length; i++) {
             for (int j = 0; j < game.getGameBoard().getTiles()[i].length; j++) {
-                drawSmallTile(gc, i, j, game.getGameBoard().getTiles()[i][j].getTileType());
+            	Point loc = new Point(i, j);
+            	Tile tile = game.getGameBoard().getTiles()[i][j];
+                drawSmallTile(gc, loc, tile.getTileType());
 
-                if (game.getGameBoard().getTiles()[i][j].containsStructure) {
-                    drawSmallStructure(game.getGameBoard().getTiles()[i][j].getStructure().getLocation().getX(),
-                            game.getGameBoard().getTiles()[i][j].getStructure().getLocation().getY(),
-                            game.getGameBoard().getTiles()[i][j].getStructure().getOwnerID(), gc);
+                if (tile.containsStructure) {
+                    drawSmallStructure(new Point(tile.getStructure().getLocation().getX(),
+                            tile.getStructure().getLocation().getY()),
+                            tile.getStructure().getOwnerID(), gc);
                 }
-                if (game.getGameBoard().getTiles()[i][j].containsUnit) {
-                    for (Unit unit : game.getGameBoard().getTiles()[i][j].getUnits()) {
-                        if (!game.getGameBoard().getTiles()[i][j].containsArmy && !game.getGameBoard().getTiles()[i][j].containsArmy) {
-                            drawSmallUnit(game.getGameBoard().getTiles()[i][j].getLocation().getX(),
-                                    game.getGameBoard().getTiles()[i][j].getLocation().getY(),
+                if (tile.containsUnit) {
+                    for (Unit unit : tile.getUnits()) {
+                        if (!tile.containsArmy && !tile.containsArmy) {
+                            drawSmallUnit(new Point(tile.getLocation().getX(), tile.getLocation().getY()),
                                     unit.getOwnerID(), gc);
                         }
                     }
@@ -49,43 +50,43 @@ public class MiniMapPanel extends Panel {
         drawBorder(gc);
     }
 
-    private void drawSmallStructure(int x, int y, int ownerID, GraphicsContext gc) {
+    private void drawSmallStructure(Point tileLoc, int ownerID, GraphicsContext gc) {
         if (ownerID == 0) {
-            gc.drawImage(Assets.getInstance().getImage("BASE_O_SMALL"), offX(x, y), offY(x, y));
+            gc.drawImage(Assets.getInstance().getImage("BASE_O_SMALL"), offsetMini(tileLoc).x, offsetMini(tileLoc).y);
 
         } else {
-            gc.drawImage(Assets.getInstance().getImage("BASE_B_SMALL"), offX(x, y), offY(x, y));
+            gc.drawImage(Assets.getInstance().getImage("BASE_B_SMALL"), offsetMini(tileLoc).x, offsetMini(tileLoc).y);
         }
     }
 
-    private void drawSmallUnit(int x, int y, int ownerID, GraphicsContext gc) {
+    private void drawSmallUnit(Point tileLoc, int ownerID, GraphicsContext gc) {
         if (ownerID == 0) {
-            gc.drawImage(Assets.getInstance().getImage("UNIT_O_SMALL"), offX(x, y), offY(x, y));
+            gc.drawImage(Assets.getInstance().getImage("UNIT_O_SMALL"), offsetMini(tileLoc).x, offsetMini(tileLoc).y);
 
         } else {
-            gc.drawImage(Assets.getInstance().getImage("UNIT_B_SMALL"), offX(x, y), offY(x, y));
+            gc.drawImage(Assets.getInstance().getImage("UNIT_B_SMALL"), offsetMini(tileLoc).x, offsetMini(tileLoc).y);
         }
     }
 
     private void drawBorder(GraphicsContext gc) {
-        gc.drawImage(Assets.getInstance().getImage("GUI_MINI_MAP_BORDER"), width - DISTANCE_FROM_RIGHT - 27
-                , height - DISTANCE_FROM_BOTTOM + 182);
+        gc.drawImage(Assets.getInstance().getImage("GUI_MINI_MAP_BORDER"), screenDimensions.x - DISTANCE_FROM_RIGHT - 27
+                , screenDimensions.y - DISTANCE_FROM_BOTTOM + 182);
 
     }
 
-    private void drawSmallTile(GraphicsContext gc, int x, int y, TerrainEnum tileType) {
+    private void drawSmallTile(GraphicsContext gc, Point tileLoc, TerrainEnum tileType) {
         switch (tileType) {
             case GRASS:
                 gc.drawImage(Assets.getInstance().getImage("GRASS_MINI"),
-                        offX(x, y), offY(x, y));
+                        offsetMini(tileLoc).x, offsetMini(tileLoc).y);
                 break;
             case SAND:
                 gc.drawImage(Assets.getInstance().getImage("SAND_MINI"),
-                        offX(x, y), offY(x, y));
+                		offsetMini(tileLoc).x, offsetMini(tileLoc).y);
                 break;
             case WATER:
                 gc.drawImage(Assets.getInstance().getImage("WATER_MINI"),
-                        offX(x, y), offY(x, y));
+                		offsetMini(tileLoc).x, offsetMini(tileLoc).y);
                 break;
             case INVISIBLE:
                 break;
@@ -94,13 +95,12 @@ public class MiniMapPanel extends Panel {
         }
     }
 
-    private int offX(int x, int y) {
-        return this.width + ((int) (((x * 0.5f) * HEX_SIZE / 2) + (x * 0.5f) * HEX_SIZE)) -
+    private Point offsetMini(Point p) {
+        Point offsetPoint = new Point();
+        offsetPoint.x = screenDimensions.x + ((int) (((p.x * 0.5f) * HEX_SIZE / 2) + (p.x * 0.5f) * HEX_SIZE)) -
                 DISTANCE_FROM_RIGHT;
-    }
-
-    private int offY(int x, int y) {
-        return ((int) ((y * HEX_HEIGHT) + ((x * 0.5f) * HEX_HEIGHT))) + this.height -
+        offsetPoint.y = ((int) ((p.y * HEX_HEIGHT) + ((p.x * 0.5f) * HEX_HEIGHT))) + screenDimensions.y -
                 DISTANCE_FROM_BOTTOM;
+        return offsetPoint;
     }
 }

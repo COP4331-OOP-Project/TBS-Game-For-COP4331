@@ -5,6 +5,7 @@ import game.Game;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.text.Font;
 import view.Panel;
+import view.Point;
 
 
 public class CivilizationPanel extends Panel {
@@ -18,8 +19,9 @@ public class CivilizationPanel extends Panel {
         this.game = game;
     }
 
-    public void draw(GraphicsContext gc, int screenWidth, int screenHeight) {
-        drawBar(gc, screenWidth, screenHeight);
+    
+    public void draw(GraphicsContext gc, Point screenDimensions) {
+        drawBar(gc, screenDimensions);
         drawText(gc);
         drawPlayerIcon(gc);
     }
@@ -42,11 +44,11 @@ public class CivilizationPanel extends Panel {
     }
 
     //Draw the blue panel itself
-    private void drawBar(GraphicsContext g, int screenWidth, int screenHeight) {
+    private void drawBar(GraphicsContext g, Point screenDimensions) {
         g.drawImage(Assets.getInstance().getImage("GUI_TOP_LEFT"), 0, 0);
         g.drawImage(Assets.getInstance().getImage("GUI_TOP_RIGHT"),
-                screenWidth - GUI_PANEL_WIDTH, 0);
-        int distanceFromRight = screenWidth - GUI_PANEL_WIDTH;
+                screenDimensions.x - GUI_PANEL_WIDTH, 0);
+        int distanceFromRight = screenDimensions.x - GUI_PANEL_WIDTH;
         for (int i = GUI_PANEL_WIDTH; i < distanceFromRight; i++) {
             g.drawImage(Assets.getInstance().getImage("GUI_TOP_MIDDLE"), i, 0);
         }
