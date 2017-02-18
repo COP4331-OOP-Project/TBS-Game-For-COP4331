@@ -105,7 +105,7 @@ public class Camera {
 	private void checkZooming() {
     	if (zoomCounter != -1) {
     		zoomCounter++;
-    		if (zoomCounter > 20) {
+    		if (zoomCounter > 40) {
     			zoomCounter = -1;
     			zooming = false;
     			panelCenterer.stopCentering();
