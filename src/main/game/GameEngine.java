@@ -1,53 +1,53 @@
 package game;
 
-public class GameEngine {
-	private final int FPS = 60;
-	private final int GAME_UPDATES_PER_SECOND = 20;
-	private final int TIME_PER_UPDATE = 1000/GAME_UPDATES_PER_SECOND;
-	private boolean running = true;
-	
-	Game game = new Game();
-	EventController events;
-	Window window;
-	
-	public GameEngine() {
-		Assets.getInstance().loadResources();
-		Thread mainThread = new Thread() {
-			public void run() {
-				events = new EventController(game);
-				window = new Window(game, events);
-				mainLoop();
-			}
-		};
-		mainThread.start();
-	}
-	
-	/**
-	 * A main loop for updating and rendering
-	 */
-	private void mainLoop() {
-		   long lastTime = System.currentTimeMillis();
-		   int accumulatedTime = 0;
-		   long fpsTime = 1000000000 / FPS;
-		   while (running)
-		   {
-		      long newTime = System.currentTimeMillis();
-		      long diffTime = newTime - lastTime;
-		      lastTime = newTime;
-		      accumulatedTime += diffTime;
-		      if (accumulatedTime >= TIME_PER_UPDATE)
-		      {
-		         game.updateGame();
-				 window.updateAnimationTime();
-				 accumulatedTime = 0;
-		      }
-		      window.renderGame();
-		      
-		      try {
-				Thread.sleep( (lastTime - System.currentTimeMillis() + fpsTime)/1000000 );
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-		   }
-	}
+import javafx.animation.AnimationTimer;
+import javafx.application.Application;
+import javafx.scene.Group;
+import javafx.scene.Scene;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
+import javafx.stage.Stage;
+import view.View;
+
+public class GameEngine extends Application {
+    Game game = new Game();
+    private int defaultScreenWidth = 1366;
+    private int defaultScreenHeight = 768;
+    private KeyEventController keyEvents;
+    private MouseEventController mouseEvents;
+    private View view;
+
+    @Override
+    public void start(Stage primaryStage) {
+        primaryStage.setTitle("Game");
+        Group root = new Group();
+        Canvas canvas = new Canvas(defaultScreenWidth, defaultScreenHeight);
+        GraphicsContext gc = canvas.getGraphicsContext2D();
+        view = new View(game, gc);
+
+        Scene scene = new Scene(root, Color.BLACK);
+    	keyEvents = new KeyEventController(game, view, scene);
+    	mouseEvents = new MouseEventController(game, view, scene);
+
+    	keyEvents.handleEvents();
+    	mouseEvents.handleEvents();
+    	
+        //This is new game loop using JavaFX timer.
+        AnimationTimer timer = new AnimationTimer() {
+            @Override
+            public void handle(long now) {
+                canvas.setWidth(scene.getWidth());
+                canvas.setHeight(scene.getHeight());
+                game.updateGame();
+                view.renderGame((int) canvas.getWidth(), (int) canvas.getHeight());
+            }
+        };
+        timer.start();
+        root.getChildren().add(canvas);
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
+
+ 
 }

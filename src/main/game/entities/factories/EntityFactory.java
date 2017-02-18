@@ -2,7 +2,7 @@ package game.entities.factories;
 
 import game.entities.Army;
 import game.entities.RallyPoint;
-import game.entities.structures.*;
+import game.entities.structures.Base;
 import game.entities.units.*;
 import game.gameboard.GameBoard;
 import game.gameboard.Location;

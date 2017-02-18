@@ -15,6 +15,6 @@ public enum CommandEnum {
     public CommandEnum getPrevious() {
         return this.ordinal() > 0
                 ? CommandEnum.values()[this.ordinal() - 1]
-                : CommandEnum.values()[CommandEnum.values().length-1];
+                : CommandEnum.values()[CommandEnum.values().length - 1];
     }
 }

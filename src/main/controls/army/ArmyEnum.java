@@ -15,6 +15,6 @@ public enum ArmyEnum {
     public ArmyEnum getPrevious() {
         return this.ordinal() > 0
                 ? ArmyEnum.values()[this.ordinal() - 1]
-                : ArmyEnum.values()[ArmyEnum.values().length-1];
+                : ArmyEnum.values()[ArmyEnum.values().length - 1];
     }
 }

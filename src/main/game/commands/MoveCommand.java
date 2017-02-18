@@ -19,7 +19,9 @@ public class MoveCommand<T> extends Command {
     }
 
     //Getter
-    public int getDirection(){return this.direction;}
+    public int getDirection() {
+        return this.direction;
+    }
 
     // Execute move from Gameboard function
     public void exec() {

@@ -6,7 +6,8 @@ package game.gameboard;
 public class EntityNotFoundException extends Exception {
 
     // Constructor
-    public EntityNotFoundException() {}
+    public EntityNotFoundException() {
+    }
 
     // Constructor w/ Message
     public EntityNotFoundException(String msg) {

@@ -1,49 +1,50 @@
 package view.gui;
 
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Graphics;
-
 import controls.unit.UnitEnum;
+import game.Assets;
 import game.Game;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import view.Point;
 
-public class UnitOverviewPanel extends OverviewPanel{
-	private Game game;
-	
-	public UnitOverviewPanel(Game game) {
-		this.game = game;
-	}
+public class UnitOverviewPanel extends OverviewPanel {
+    private Game game;
 
-	public void draw(Graphics g, int width, int height) {
-		drawPanelBox(g, width, height);
-		Font oldFont = g.getFont();
-		Color oldColor = g.getColor();
-		g.setColor(Color.WHITE);
-		g.setFont(titleFont);
-		g.drawString("Unit Overview", width/2 - 370, height/2 - 245);
-		for (int i = 0; i < game.getCurrentPlayer().getAllUnit().size(); i++) {
-			String unitString = "";
-			if (game.getCurrentPlayer().getAllUnit().get(i).getUnitType() == 0) {
-				unitString = "Melee";
-			}
-			if (game.getCurrentPlayer().getAllUnit().get(i).getUnitType() == 1) {
-				unitString = "Ranged";
-			}
-			if (game.getCurrentPlayer().getAllUnit().get(i).getUnitType() == 2) {
-				unitString = "Explorer";
-			}
-			if (game.getCurrentPlayer().getAllUnit().get(i).getUnitType() == 3) {
-				unitString = "Colonist";
-			}
-			if (game.getSelectedUnit() == i) {
-				g.setFont(boldFont);
-			} else {
-				g.setFont(plainFont);
-			}
-			g.drawString(unitString, width/2 - 370, height/2 + (i * 30) - 200);
-		}
-		g.setColor(oldColor);
-		g.setFont(oldFont);
-	}
+    public UnitOverviewPanel(Game game) {
+        this.game = game;
+    }
+
+    public void draw(GraphicsContext gc, Point screenDimensions) {
+        drawPanelBox(gc, screenDimensions);
+        Font oldFont = gc.getFont();
+        gc.setFill(Color.WHITE);
+        gc.setFont(Assets.getInstance().getFont(2));
+        gc.fillText("Unit Overview", screenDimensions.x / 2 - 370, screenDimensions.y / 2 - 245);
+        for (int i = 0; i < game.getCurrentPlayer().getAllUnit().size(); i++) {
+            String unitString = "";
+            UnitEnum unit = game.getCurrentPlayer().getAllUnit().get(i).getUnitType();
+            if (unit == UnitEnum.MELEE) {
+                unitString = "Melee";
+            }
+            if (unit == UnitEnum.RANGED) {
+                unitString = "Ranged";
+            }
+            if (unit == UnitEnum.EXPLORER) {
+                unitString = "Explorer";
+            }
+            if (unit == UnitEnum.COLONIST) {
+                unitString = "Colonist";
+            }
+            //if (game.getSelectedUnit() == i) {
+            //	gc.setFont(Assets.getInstance().getFont(1).deriveFont(Font.BOLD));
+            //} else {
+            gc.setFont(Assets.getInstance().getFont(1));
+            //}
+            gc.fillText(unitString, screenDimensions.x / 2 - 370, screenDimensions.y / 2 + (i * 30) - 200);
+        }
+        gc.setFill(Color.BLACK);
+        gc.setFont(oldFont);
+    }
 
 }

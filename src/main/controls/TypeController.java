@@ -19,12 +19,12 @@ import org.apache.logging.log4j.Logger;
  */
 public class TypeController {
 
+    private final static Logger log = LogManager.getLogger(ModeController.class);
     // TODO: save progress in each category
     private Type currentType;
     private ModeEnum mode;
     private TypeInstanceController typeInstanceController;
     private Player player;
-    private final static Logger log = LogManager.getLogger(ModeController.class);
 
 
     public TypeController(ModeEnum mode, Player p) {
@@ -33,7 +33,7 @@ public class TypeController {
         this.setMode(this.mode);
         // TODO: change start type to actual
         this.typeInstanceController = new TypeInstanceController(p, UnitEnum.MELEE);
-        switch(mode) {
+        switch (mode) {
             case STRUCTURE:
                 this.typeInstanceController = new TypeInstanceController(p, StructureEnum.BASE);
                 break;
@@ -61,7 +61,7 @@ public class TypeController {
     }
 
     protected void setMode(ModeEnum mode) {
-        switch(mode) {
+        switch (mode) {
             case STRUCTURE:
                 this.currentType = new StructureType();
                 this.typeInstanceController = new TypeInstanceController(this.player, StructureEnum.BASE);

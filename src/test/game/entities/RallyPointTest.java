@@ -1,15 +1,7 @@
 package game.entities;
 
-import game.commands.Command;
 import game.commands.MoveCommand;
-import game.entities.units.Unit;
 import game.gameboard.GameBoard;
-import game.gameboard.Location;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-
-import java.util.ArrayList;
 
 
 /**

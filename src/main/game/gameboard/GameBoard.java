@@ -14,17 +14,16 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
+
 /**
  * Gameboard class containing 2D Tile array for board and interaction handler functions
- * */
+ */
 public class GameBoard {
 
-    public Tile[][] gameMap;     // Map for game tiles
-                                 // 0 is grass, 1 is sand, 2 is water
-    private ArrayList<Player> players;              // Players for game
-    private static final int BOARD_SIZE = 25;
+    private static final int BOARD_SIZE = 42;
     private final static Logger log = LogManager.getLogger(ModeController.class);
-
+    private Tile[][] gameMap;     // Map for game tiles  // 0 is grass, 1 is sand, 2 is water
+    private ArrayList<Player> players;              // Players for game
 
 
     // Constructor
@@ -36,16 +35,16 @@ public class GameBoard {
     }
 */
     public GameBoard(ArrayList<Player> players) {
-    	
+
         this.players = players;                     // Set players
         setupMap();                                 // Setup gameMap
         init();                                     // Set initial units to initial tiles
     }
 
-    private void init(){
-        for(int i = 0; i<players.size();i++){
+    private void init() {
+        for (int i = 0; i < players.size(); i++) {
             ArrayList<Unit> playerUnit = players.get(i).getAllUnit();
-            for(int n = 0; n<playerUnit.size();n++){
+            for (int n = 0; n < playerUnit.size(); n++) {
                 gameMap[playerUnit.get(n).getLocation().getX()][playerUnit.get(n).getLocation().getY()].addUnit(playerUnit.get(n));
             }
         }
@@ -58,48 +57,65 @@ public class GameBoard {
 
     // Setup the gameMap array wit5h valid Tiles
     private void setupMap() {
-        int[][] map = new int[][] {
-                {2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2},
-                {2,2,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2},
-                {2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2},
-                {2,1,0,1,1,1,0,0,0,0,0,1,1,1,1,1,0,0,0,2,2,2,2,2,2},
-                {2,1,1,1,0,1,1,0,1,0,0,1,1,1,1,1,1,1,1,0,0,0,2,2,2},
-                {2,2,1,1,1,1,1,0,0,0,0,1,1,0,1,0,0,0,0,1,1,2,2,2,2},
-                {2,2,2,2,1,1,0,0,0,0,0,0,1,1,1,0,1,0,0,0,0,1,2,2,2},
-                {2,2,2,2,1,1,0,0,1,1,0,1,0,1,1,0,0,0,0,0,0,1,2,2,2},
-                {2,2,2,1,1,1,0,1,2,1,0,1,1,0,1,0,0,1,0,1,0,2,2,2,2},
-                {2,2,1,1,1,0,1,2,2,2,1,1,1,0,0,0,0,0,0,0,1,2,2,2,2},
-                {2,1,1,1,1,0,2,2,2,2,2,2,2,2,0,1,0,0,0,0,1,2,2,2,2},
-                {2,1,1,0,0,0,2,2,2,2,2,2,2,2,2,0,0,0,0,1,1,2,2,2,2},
-                {2,2,2,2,2,2,2,2,1,1,1,1,1,2,2,1,0,0,0,0,1,2,2,2,2},
-                {2,2,2,2,2,2,2,2,1,1,0,0,0,2,0,0,0,0,0,1,1,2,2,2,2},
-                {2,2,2,2,2,2,1,1,1,1,1,1,1,1,0,0,2,0,0,1,1,2,2,2,2},
-                {2,2,2,2,1,1,0,0,1,1,0,0,1,0,1,2,2,0,0,1,1,2,2,2,2},
-                {2,2,2,1,1,1,0,0,1,1,0,1,1,0,0,0,2,2,0,1,1,2,2,2,2},
-                {2,2,1,1,1,0,0,0,0,0,0,1,0,0,0,1,2,2,0,1,1,2,2,2,2},
-                {2,1,1,1,1,0,0,1,0,0,0,0,1,0,0,0,2,2,2,2,2,2,2,2,2},
-                {2,1,1,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,2,2,2,2,2,2,2},
-                {2,0,0,0,1,1,0,0,1,1,0,1,1,0,0,0,0,1,2,2,2,2,2,2,2},
-                {2,1,1,1,1,1,0,0,1,1,0,0,0,0,0,0,0,0,1,2,2,2,2,2,2},
-                {2,2,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,2,2,2,2,2},
-                {2,1,1,1,1,1,0,0,1,1,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2},
-                {2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2}
+        int[][] map = new int[][]{
+                {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, -1},
+                {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, -1},
+                {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 2, 2, 2, 2, 2, 1, 0, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, -1, -1},
+                {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 2, 2, 2, 2, 2, 1, 1, 1, 0, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, -1, -1},
+                {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 2, 2, 2, 2, 2, 2, 1, 1, 0, 1, 0, 1, 1, 2, 2, 2, 2, 2, 2, 2, -1, -1, -1},
+                {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 2, 2, 2, 2, 2, 1, 1, 0, 0, 0, 0, 0, 1, 2, 2, 2, 2, 2, 2, 2, -1, -1, -1},
+                {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 2, 2, 2, 2, 2, 2, 1, 1, 0, 1, 0, 0, 0, 1, 2, 2, 2, 2, 2, 2, -1, -1, -1, -1},
+                {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 2, 2, 2, 2, 2, 2, 1, 1, 0, 0, 1, 0, 0, 1, 2, 2, 2, 2, 2, 2, -1, -1, -1, -1},
+                {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 0, 0, 0, 1, 2, 2, 2, 2, -1, -1, -1, -1, -1},
+                {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 0, 0, 1, 0, 1, 2, 2, 2, 2, -1, -1, -1, -1, -1},
+                {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 2, 2, 2, 1, 1, 1, 2, 2, 2, 2, 2, 0, 1, 0, 1, 0, 0, 1, 2, 2, -1, -1, -1, -1, -1, -1},
+                {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 2, 2, 2, 1, 0, 1, 1, 1, 2, 2, 0, 1, 1, 0, 0, 0, 0, 2, 2, 2, -1, -1, -1, -1, -1, -1},
+                {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 2, 2, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 1, 1, 0, 0, 0, 1, 2, 2, -1, -1, -1, -1, -1, -1, -1},
+                {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 2, 1, 1, 0, 1, 1, 0, 0, 0, 0, 1, 1, 0, 1, 1, 1, 1, 2, 2, 2, -1, -1, -1, -1, -1, -1, -1},
+                {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 2, 2, 1, 1, 0, 1, 1, 1, 0, 0, 0, 1, 0, 1, 2, 2, 2, 2, 2, 2, -1, -1, -1, -1, -1, -1, -1, -1},
+                {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 2, 2, 1, 1, 1, 0, 2, 2, 0, 1, 0, 1, 0, 0, 1, 2, 2, 2, 2, 2, -1, -1, -1, -1, -1, -1, -1, -1},
+                {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 2, 2, 2, 2, 1, 0, 2, 2, 2, 2, 0, 0, 1, 0, 0, 1, 2, 2, 2, 2, -1, -1, -1, -1, -1, -1, -1, -1, -1},
+                {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 2, 2, 2, 2, 1, 0, 2, 2, 2, 2, 0, 0, 1, 0, 0, 1, 2, 2, 2, 2, -1, -1, -1, -1, -1, -1, -1, -1, -1},
+                {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 2, 2, 2, 2, 0, 1, 0, 2, 2, 2, 2, 0, 1, 0, 0, 1, 1, 2, 2, 2, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1},
+                {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 2, 2, 1, 1, 0, 1, 0, 2, 0, 1, 0, 1, 0, 0, 0, 1, 1, 2, 2, 2, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1},
+                {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 2, 2, 1, 1, 1, 1, 1, 0, 2, 0, 0, 0, 0, 0, 0, 0, 1, 2, 2, 2, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1},
+                {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 2, 2, 1, 1, 0, 0, 0, 1, 2, 2, 2, 0, 0, 1, 1, 1, 2, 2, 2, 2, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1},
+                {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 2, 2, 1, 1, 0, 0, 0, 0, 1, 0, 0, 2, 0, 0, 1, 0, 1, 2, 2, 2, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1},
+                {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 2, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 2, 1, 1, 1, 1, 2, 2, 2, 2, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1},
+                {-1, -1, -1, -1, -1, -1, -1, -1, -1, 2, 2, 0, 1, 1, 0, 0, 1, 0, 0, 1, 0, 2, 1, 0, 1, 1, 2, 2, 2, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1},
+                {-1, -1, -1, -1, -1, -1, -1, -1, -1, 2, 1, 1, 0, 0, 0, 1, 0, 2, 2, 2, 2, 0, 1, 0, 1, 2, 2, 2, 2, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1},
+                {-1, -1, -1, -1, -1, -1, -1, -1, 2, 2, 1, 1, 0, 1, 0, 1, 2, 2, 0, 0, 0, 0, 1, 1, 1, 2, 2, 2, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1},
+                {-1, -1, -1, -1, -1, -1, -1, -1, 2, 2, 1, 1, 0, 0, 0, 1, 2, 0, 1, 0, 0, 1, 1, 1, 2, 2, 2, 2, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1},
+                {-1, -1, -1, -1, -1, -1, -1, 2, 2, 2, 2, 1, 0, 1, 0, 1, 2, 0, 0, 1, 0, 1, 1, 1, 2, 2, 2, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1},
+                {-1, -1, -1, -1, -1, -1, -1, 2, 2, 2, 2, 1, 0, 0, 0, 1, 2, 2, 2, 0, 0, 1, 2, 2, 2, 2, 2, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1},
+                {-1, -1, -1, -1, -1, -1, 2, 2, 2, 2, 2, 1, 0, 1, 1, 1, 1, 0, 2, 2, 0, 1, 2, 2, 2, 2, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1},
+                {-1, -1, -1, -1, -1, -1, 2, 2, 2, 1, 1, 0, 1, 0, 0, 0, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1},
+                {-1, -1, -1, -1, -1, 2, 2, 2, 1, 1, 0, 0, 0, 1, 0, 0, 1, 1, 1, 2, 2, 2, 2, 2, 2, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1},
+                {-1, -1, -1, -1, -1, 2, 2, 1, 0, 1, 1, 1, 0, 0, 2, 2, 0, 1, 1, 2, 2, 2, 2, 2, 2, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1},
+                {-1, -1, -1, -1, 2, 2, 2, 0, 0, 1, 0, 0, 0, 0, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1},
+                {-1, -1, -1, -1, 2, 2, 1, 0, 0, 1, 0, 1, 0, 0, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1},
+                {-1, -1, -1, 2, 2, 2, 1, 1, 0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 1, 2, 2, 2, 2, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1},
+                {-1, -1, -1, 2, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 1, 2, 2, 2, 2, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1},
+                {-1, -1, 2, 2, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 1, 1, 1, 1, 2, 2, 2, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1},
+                {-1, -1, 2, 2, 2, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1},
+                {-1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1},
+                {-1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1}
         };
 
 
-      gameMap = new Tile[BOARD_SIZE][];
-      for (int i = 0; i < BOARD_SIZE; i++)
-        {
+        gameMap = new Tile[BOARD_SIZE][];
+        for (int i = 0; i < BOARD_SIZE; i++) {
             gameMap[i] = new Tile[BOARD_SIZE];
-            for (int j = 0; j < BOARD_SIZE;j++)
-            {
-                Location l = new Location(i,j);
-                if(map[i][j] == 0)
-                    gameMap[i][j] = new Tile(0,l);
-                if(map[i][j] == 1)
-                    gameMap[i][j] = new Tile(1,l);
-                if(map[i][j] == 2)
-                    gameMap[i][j] = new Tile(2,l);
+            for (int j = 0; j < BOARD_SIZE; j++) {
+                Location l = new Location(i, j);
+                if (map[i][j] == -1)
+                    gameMap[i][j] = new Tile(TerrainEnum.INVISIBLE, l);
+                if (map[i][j] == 0)
+                    gameMap[i][j] = new Tile(TerrainEnum.GRASS, l);
+                if (map[i][j] == 1)
+                    gameMap[i][j] = new Tile(TerrainEnum.SAND, l);
+                if (map[i][j] == 2)
+                    gameMap[i][j] = new Tile(TerrainEnum.WATER, l);
             }
         }
     }
@@ -111,26 +127,20 @@ public class GameBoard {
     }
 
     //Get the adjecent tile
-    private Tile getAdjacentTile(Tile actorTile,int direction) {
-        switch(direction) {
+    private Tile getAdjacentTile(Tile actorTile, int direction) {
+        switch (direction) {
             case 0: //Move north
                 return gameMap[actorTile.getLocation().getX()][actorTile.getLocation().getY() - 1];
-            case 45: //Move north-east
-                return gameMap[actorTile.getLocation().getX()+1][actorTile.getLocation().getY() - 1];
-            case 90: //move east
-                return gameMap[actorTile.getLocation().getX() + 1][actorTile.getLocation().getY()];
+            case 45: //move north east
+                return gameMap[actorTile.getLocation().getX() + 1][actorTile.getLocation().getY() - 1];
             case 135: //move south east
-                return gameMap[actorTile.getLocation().getX()+1][actorTile.getLocation().getY() + 1];
+                return gameMap[actorTile.getLocation().getX() + 1][actorTile.getLocation().getY()];
             case 180: //move south
                 return gameMap[actorTile.getLocation().getX()][actorTile.getLocation().getY() + 1];
             case 225: //move south west
-                return gameMap[actorTile.getLocation().getX()-1][actorTile.getLocation().getY() + 1];
-            case 270: //move west
-                return gameMap[actorTile.getLocation().getX() - 1][actorTile.getLocation().getY()];
+                return gameMap[actorTile.getLocation().getX() - 1][actorTile.getLocation().getY() + 1];
             case 315: //move north west
-                return gameMap[actorTile.getLocation().getX()-1][actorTile.getLocation().getY() - 1];
-            case 360: //move north
-                return gameMap[actorTile.getLocation().getX()][actorTile.getLocation().getY() - 1];
+                return gameMap[actorTile.getLocation().getX() - 1][actorTile.getLocation().getY()];
             default:
                 return null;
         }
@@ -142,7 +152,7 @@ public class GameBoard {
 
     // Get entity with given player's entity id
     private <T> T getEntityWithID() {
-       //Returns the entity base on the iD, may not be implemented - Shen
+        //Returns the entity base on the iD, may not be implemented - Shen
         return null;
     }
 
@@ -152,12 +162,12 @@ public class GameBoard {
         boolean isUnit = entity instanceof Unit;
         boolean isStructure = entity instanceof Structure;
 
-        if(isArmy)
-            return gameMap[((Army)entity).getLocation().getX()][((Army)entity).getLocation().getY()];
-        else if(isUnit)
-            return gameMap[((Unit)entity).getLocation().getX()][((Unit)entity).getLocation().getY()];
-        else if(isStructure)
-            return gameMap[((Structure)entity).getLocation().getX()][((Structure)entity).getLocation().getY()];
+        if (isArmy)
+            return gameMap[((Army) entity).getLocation().getX()][((Army) entity).getLocation().getY()];
+        else if (isUnit)
+            return gameMap[((Unit) entity).getLocation().getX()][((Unit) entity).getLocation().getY()];
+        else if (isStructure)
+            return gameMap[((Structure) entity).getLocation().getX()][((Structure) entity).getLocation().getY()];
 
         return null;
     }
@@ -166,21 +176,19 @@ public class GameBoard {
     public <T> void handleDecommissionCmd(T actor) {
 
         // Find instance type and call remove command on unit
-        if(actor instanceof Army){
+        if (actor instanceof Army) {
             Army army = ((Army) actor);
             army.getBattleGroup().clear();
             army.getReinforcements().clear();
             army.groupDecomission(this);
             army.getAllUnits().clear();
             handleDisbandArmyCmd(((Army) actor));
-        }
-        else if(actor instanceof Unit){
-            players.get(((Unit) actor).getOwnerID()).removeUnit(((Unit)actor));
-            Tile actorTile = getTileWithLocation( ( (Unit) actor ).getLocation());
-            actorTile.removeUnit( ( (Unit) actor ).getUnitID());
-        }
-        else if(actor instanceof Structure){
-            Tile actorTile = getTileWithLocation( ( (Structure) actor ).getLocation());
+        } else if (actor instanceof Unit) {
+            players.get(((Unit) actor).getOwnerID()).removeUnit(((Unit) actor));
+            Tile actorTile = getTileWithLocation(((Unit) actor).getLocation());
+            actorTile.removeUnit(((Unit) actor).getUnitID());
+        } else if (actor instanceof Structure) {
+            Tile actorTile = getTileWithLocation(((Structure) actor).getLocation());
             actorTile.removeStructure();
         }
     }
@@ -189,14 +197,12 @@ public class GameBoard {
     public <T> void handlePowerUpCmd(T actor) {
 
         // Find instance type and call actor's command
-        if(actor instanceof Army){
-            ( (Army) actor ).powerUp();
-        }
-        else if(actor instanceof Unit){
-            ( (Unit) actor ).powerUp();
-        }
-        else if(actor instanceof Structure){
-            ( (Structure) actor ).powerUp();
+        if (actor instanceof Army) {
+            ((Army) actor).powerUp();
+        } else if (actor instanceof Unit) {
+            ((Unit) actor).powerUp();
+        } else if (actor instanceof Structure) {
+            ((Structure) actor).powerUp();
         }
     }
 
@@ -204,14 +210,12 @@ public class GameBoard {
     public <T> void handlePowerDownCmd(T actor) {
 
         // Find instance type and call actor's command
-        if(actor instanceof Army){
-            ( (Army) actor ).powerDown();
-        }
-        else if(actor instanceof Unit){
-            ( (Unit) actor ).powerDown();
-        }
-        else if(actor instanceof Structure){
-            ( (Structure) actor ).powerDown();
+        if (actor instanceof Army) {
+            ((Army) actor).powerDown();
+        } else if (actor instanceof Unit) {
+            ((Unit) actor).powerDown();
+        } else if (actor instanceof Structure) {
+            ((Structure) actor).powerDown();
         }
     }
 
@@ -219,14 +223,12 @@ public class GameBoard {
     public <T> void handleCancelQueueCmd(T actor) {
 
         // Find instance type and call cancel command queue on it
-        if(actor instanceof Army){
-            ( (Army) actor ).cancelQueuedCommands();
-        }
-        else if(actor instanceof Unit){
-            ( (Unit) actor ).cancelQueuedCommands();
-        }
-        else if(actor instanceof Structure){
-            ( (Structure) actor ).cancelQueuedCommands();
+        if (actor instanceof Army) {
+            ((Army) actor).cancelQueuedCommands();
+        } else if (actor instanceof Unit) {
+            ((Unit) actor).cancelQueuedCommands();
+        } else if (actor instanceof Structure) {
+            ((Structure) actor).cancelQueuedCommands();
         }
 
     }
@@ -235,14 +237,13 @@ public class GameBoard {
     public <T> void handleAttackCmd(T actor, int direction) {
 
         // Find instance type and perform attack handle
-        if(actor instanceof Army) {
+        if (actor instanceof Army) {
 
             Army army = (Army) actor;
             //Call army to give attack command to all its units
-            army.battlegroupAttack(this,direction);
+            army.battlegroupAttack(this, direction);
 
-        }
-        else if(actor instanceof Structure) {
+        } else if (actor instanceof Structure) {
 
             Structure struct = (Structure) actor;
 
@@ -256,15 +257,14 @@ public class GameBoard {
                 struct.addCommandToQueue(atkCmd);
             }
 
-        }
-        else if(actor instanceof Unit) {
+        } else if (actor instanceof Unit) {
             Unit unit = (Unit) actor;
             Tile actorTile = getTileWithLocation(unit.getLocation());
             Tile targetTile = getAdjacentTile(actorTile, direction);
-            if(targetTile.hasEnemyUnit(unit.getOwnerID())){
-                targetTile.attackOccupants(unit.getAttackDamage(),direction);
-                for(Unit u : targetTile.getUnits()){
-                    if(u.getHealth()<=0){
+            if (targetTile.hasEnemyUnit(unit.getOwnerID())) {
+                targetTile.attackOccupants(unit.getAttackDamage(), direction);
+                for (Unit u : targetTile.getUnits()) {
+                    if (u.getHealth() <= 0) {
                         handleDecommissionCmd(u);
                     }
                 }
@@ -278,21 +278,19 @@ public class GameBoard {
     public <T> void handleDefendCmd(T actor, int direction) {
 
         // Find instance type and execute defense
-        if(actor instanceof Army) {
+        if (actor instanceof Army) {
 
             Army army = (Army) actor;
 
             army.battlegroupDefend(this, direction);
-        }
-        else if(actor instanceof Structure) {
+        } else if (actor instanceof Structure) {
 
             Structure struct = (Structure) actor;
 
             Tile actorTile = getTileWithLocation(struct.getLocation());
             Tile targetTile = getAdjacentTile(actorTile, direction);
 
-        }
-        else if(actor instanceof Unit) {
+        } else if (actor instanceof Unit) {
             Unit unit = (Unit) actor;
             unit.setDefenddirection(direction);
         }
@@ -303,45 +301,40 @@ public class GameBoard {
 
 
         // Find instance type and then execute move
-        if(actor instanceof Army) {
+        if (actor instanceof Army) {
 
             Army army = (Army) actor;
             Tile actorTile = getTileWithLocation(army.getLocation());
             Tile targetTile = getAdjacentTile(actorTile, direction);
 
-            if(targetTile.hasEnemyUnit(army.getOwnerID())) {
+            if (targetTile.hasEnemyUnit(army.getOwnerID())) {
                 //(army)actor.nextCommand();
-            }
-            else if (targetTile.isImpassable()) {
+            } else if (targetTile.isImpassable()) {
                 log.error("Cannot move to tile, it is impassable!");
                 // Clear army commands
-            }
-            else  {
+            } else {
                 actorTile.removeArmy(army.getArmyID());
                 targetTile.addArmy(army);
             }
-        }
-        else if(actor instanceof Unit) {
+        } else if (actor instanceof Unit) {
 
             Unit unit = (Unit) actor;
 
             Tile actorTile = getTileWithLocation(unit.getLocation());
             Tile targetTile = getAdjacentTile(actorTile, direction);
 
-            if(targetTile.hasEnemyUnit(unit.getOwnerID())) {
+            if (targetTile.hasEnemyUnit(unit.getOwnerID())) {
                 unit.nextCommand();
             } else if (targetTile.isImpassable()) {
                 log.error("Cannot move to tile, it is impassable!");
                 unit.cancelQueuedCommands();
-            }
-            else {
+            } else {
                 actorTile.removeUnit(unit.getUnitID());
                 targetTile.addUnit(unit);
             }
 
             unit.setDefenddirection(-1);
-        }
-        else if (actor instanceof Structure) {
+        } else if (actor instanceof Structure) {
             System.out.println("structure cannot move");
         }
     }
@@ -350,7 +343,7 @@ public class GameBoard {
     public <T> void handleHealCmd(T actor, int direction) {
 
         // Find instance type and exec heal command
-        if(actor instanceof Army) {
+        if (actor instanceof Army) {
 
             Army army = (Army) actor;   // Cast army
 
@@ -361,8 +354,7 @@ public class GameBoard {
             // Todo: Find amount to heal by
             targetTile.healOccupants(10);     // Heal occupants of tile
 
-        }
-        else if(actor instanceof Unit) {
+        } else if (actor instanceof Unit) {
 
             Unit unit = (Unit) actor;             // Cast
 
@@ -373,8 +365,7 @@ public class GameBoard {
             // Todo: Find amount to heal by
             targetTile.healOccupants(10);         // Heal occupants of tile
 
-        }
-        else if (actor instanceof Structure) {
+        } else if (actor instanceof Structure) {
 
             Structure struct = (Structure) actor;   // Cast
 
@@ -404,7 +395,7 @@ public class GameBoard {
             actorTile = getTileWithLocation(actor.getLocation());   // Get postion to add new unit on
 
             // Test new entity instance type and add to same tile as actor
-            if(newEntity instanceof Unit) {
+            if (newEntity instanceof Unit) {
 
                 Unit unit = (Unit) newEntity;               // Cast as unit
 
@@ -412,8 +403,7 @@ public class GameBoard {
                 players.get(actor.getOwnerID()).addUnit(unit);
                 actorTile.addUnit(unit);
 
-            }
-            else if (newEntity instanceof Structure) {
+            } else if (newEntity instanceof Structure) {
 
                 Structure struct = (Structure) newEntity;   // Cast as struct
 
@@ -466,14 +456,14 @@ public class GameBoard {
         gameMap[location.getX()][location.getY()].addRallyPoint(rp);
     }
 
-    public void updateGameBoard(){
-        for(int i = 0; i<gameMap.length;i++){
-            for(int j = 0; j<gameMap.length;j++){
+    public void updateGameBoard() {
+        for (int i = 0; i < gameMap.length; i++) {
+            for (int j = 0; j < gameMap.length; j++) {
                 gameMap[i][j].setOwnerID(-1);
             }
         }
 
-        for(int a = 0; a<2;a++) {
+        for (int a = 0; a < 2; a++) {
             ArrayList<Unit> playerUnit = players.get(a).getAllUnit();
             for (int i = 0; i < playerUnit.size(); i++) {
                 gameMap[playerUnit.get(i).getLocation().getX()][playerUnit.get(i).getLocation().getY()].setOwnerID(players.get(a).getPlayerID());

@@ -2,55 +2,53 @@ package view.game;
 
 import controls.ModeEnum;
 import game.Game;
+import view.Point;
 
 public class SelectedDrawer {
-	Game game;
-	GamePanel gamePanel;
-	
-	public SelectedDrawer(GamePanel gamePanel, Game game) {
-		this.gamePanel = gamePanel;
-		this.game = game;
-	}
-	
-	public void drawSelectedItemOutline() {
-		int x = gamePanel.getSelectedX();
-		int y = gamePanel.getSelectedY();
-		if (game.getCurrentMode() == ModeEnum.RALLY_POINT) {
-			drawSelectedRallyPointOutline(x, y);
-		} else if (game.getCurrentMode() == ModeEnum.STRUCTURE) {
-			drawSelectedStructureOutline(x, y);
-		} else if (game.getCurrentMode() == ModeEnum.UNIT) {
-			drawSelectedUnitOutline(x, y);
-		} else if (game.getCurrentMode() == ModeEnum.ARMY) {
-			drawSelectedArmyOutline(x, y);
-		}
-	}
+    Game game;
+    GamePanel gamePanel;
 
-	private void drawSelectedRallyPointOutline(int x, int y) {
-		if (game.getCurrentPlayer().getArmyRallyPoint().size() > 0)
-			gamePanel.drawStaticTileElement(x, y, "RALLY_POINT_SELECTED");
-	}
-	
-	private void drawSelectedStructureOutline(int x, int y) {
-		if (game.getCurrentPlayer().getBases().size() > 0)
-			gamePanel.drawStaticTileElement(x, y, "BASE_SELECTED");
-	}
-	
-	private void drawSelectedArmyOutline(int x, int y) {
-		if (game.getGameBoard().getTiles()[x][y].containsArmy) {
-			gamePanel.drawStaticTileElement(x, y, "ARMY_SELECTED");
-		}
-	}
+    public SelectedDrawer(GamePanel gamePanel, Game game) {
+        this.gamePanel = gamePanel;
+        this.game = game;
+    }
 
-	private void drawSelectedUnitOutline(int x, int y) {
-		if (game.getGameBoard().getTiles()[x][y].containsArmy) {
-			gamePanel.drawStaticTileElement(x, y, "ARMY_SELECTED");
-		} else if (game.getCurrentPlayer().getAllUnit().size() > 0){
-			gamePanel.drawStaticTileElement(x, y, "UNIT_SELECTED");
-		}
-	}
+    public void drawSelectedItemOutline() {
+    	Point p = new Point(game.getCenterCoordinates().getX(), game.getCenterCoordinates().getY());
+        if (game.getCurrentMode() == ModeEnum.RALLY_POINT) {
+            drawSelectedRallyPointOutline(p);
+        } else if (game.getCurrentMode() == ModeEnum.STRUCTURE) {
+            drawSelectedStructureOutline(p);
+        } else if (game.getCurrentMode() == ModeEnum.UNIT) {
+            drawSelectedUnitOutline(p);
+        } else if (game.getCurrentMode() == ModeEnum.ARMY) {
+            drawSelectedArmyOutline(p);
+        }
+    }
 
+    private void drawSelectedRallyPointOutline(Point p) {
+        if (game.getCurrentPlayer().getArmyRallyPoint().size() > 0)
+            gamePanel.drawStaticTileElement(p, "RALLY_POINT_SELECTED");
+    }
 
+    private void drawSelectedStructureOutline(Point p) {
+        if (game.getCurrentPlayer().getBases().size() > 0)
+            gamePanel.drawStaticTileElement(p, "BASE_SELECTED");
+    }
+
+    private void drawSelectedArmyOutline(Point p) {
+        if (game.getGameBoard().getTiles()[p.x][p.y].containsArmy) {
+            gamePanel.drawStaticTileElement(p, "ARMY_SELECTED");
+        }
+    }
+
+    private void drawSelectedUnitOutline(Point p) {
+        if (game.getGameBoard().getTiles()[p.x][p.y].containsArmy) {
+            gamePanel.drawStaticTileElement(p, "ARMY_SELECTED");
+        } else if (game.getCurrentPlayer().getAllUnit().size() > 0) {
+            gamePanel.drawStaticTileElement(p, "UNIT_SELECTED");
+        }
+    }
 
 
 }

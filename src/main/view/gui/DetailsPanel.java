@@ -1,24 +1,24 @@
 package view.gui;
 
-import java.awt.Graphics;
-
 import game.Assets;
+import javafx.scene.canvas.GraphicsContext;
 import view.Panel;
+import view.Point;
 
-public abstract class DetailsPanel extends Panel{
-	private static int GUI_PANEL_WIDTH = 
-			Assets.getInstance().getImage("GUI_BOTTOM_LEFT").getWidth();
-	private static int GUI_PANEL_HEIGHT = 
-			Assets.getInstance().getImage("GUI_BOTTOM_LEFT").getHeight();
+public abstract class DetailsPanel extends Panel {
+    private static int GUI_PANEL_WIDTH =
+            (int) Assets.getInstance().getImage("GUI_BOTTOM_LEFT").getWidth();
+    private static int GUI_PANEL_HEIGHT =
+            (int) Assets.getInstance().getImage("GUI_BOTTOM_LEFT").getHeight();
 
-	void drawBar(Graphics g, int width, int height) {
-		g.drawImage(Assets.getInstance().getImage("GUI_BOTTOM_LEFT"), 0, height - GUI_PANEL_HEIGHT, null);
-		g.drawImage(Assets.getInstance().getImage("GUI_BOTTOM_RIGHT"), 
-				width - GUI_PANEL_WIDTH, height - GUI_PANEL_HEIGHT, null);
-		int distanceFromRight = width - GUI_PANEL_WIDTH;
-		for(int i = GUI_PANEL_WIDTH; i < distanceFromRight; i++) {
-			g.drawImage(Assets.getInstance().getImage("GUI_BOTTOM_MIDDLE"), i, height - GUI_PANEL_HEIGHT, null); 
-		}
-	}
+    void drawBar(GraphicsContext gc, Point screenDimensions) {
+        gc.drawImage(Assets.getInstance().getImage("GUI_BOTTOM_LEFT"), 0, screenDimensions.y - GUI_PANEL_HEIGHT);
+        gc.drawImage(Assets.getInstance().getImage("GUI_BOTTOM_RIGHT"),
+                screenDimensions.x - GUI_PANEL_WIDTH, screenDimensions.y - GUI_PANEL_HEIGHT);
+        int distanceFromRight = screenDimensions.x - GUI_PANEL_WIDTH;
+        for (int i = GUI_PANEL_WIDTH; i < distanceFromRight; i++) {
+            gc.drawImage(Assets.getInstance().getImage("GUI_BOTTOM_MIDDLE"), i, screenDimensions.y - GUI_PANEL_HEIGHT);
+        }
+    }
 
 }
