@@ -11,6 +11,7 @@ public class StructureOverviewPanel extends OverviewPanel {
     private Game game;
 
     public StructureOverviewPanel(Game game) {
+    	this.setIsVisible(false);
         this.game = game;
     }
 

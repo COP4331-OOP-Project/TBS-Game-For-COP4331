@@ -12,6 +12,7 @@ public class UnitOverviewPanel extends OverviewPanel {
     private Game game;
 
     public UnitOverviewPanel(Game game) {
+    	this.setIsVisible(false);
         this.game = game;
     }
 

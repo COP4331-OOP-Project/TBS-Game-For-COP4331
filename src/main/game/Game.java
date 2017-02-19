@@ -38,8 +38,6 @@ public class Game {
     private ArrayList<Location> moveLocations;
     private Location centerCoordinates;
     private boolean centerCoordinatesUpdated;
-    private boolean unitOverviewVisible = false;
-    private boolean structureOverviewVisible = false;
     private boolean showingMakeDetails = false;
     private int selectedUnit;
     private int makeOption = 0;
@@ -356,29 +354,6 @@ public class Game {
 
     public void centerOnLastMoveLocation() {
         this.changeCenterCoordinates(this.lastMoveLocation);
-    }
-
-    public void toggleUnitOverview() {
-        if (structureOverviewVisible) {
-            structureOverviewVisible = !structureOverviewVisible;
-        }
-        unitOverviewVisible = !unitOverviewVisible;
-    }
-
-    public void toggleStructureOverview() {
-        if (unitOverviewVisible) {
-            unitOverviewVisible = !unitOverviewVisible;
-        }
-        structureOverviewVisible = !structureOverviewVisible;
-
-    }
-
-    public boolean getUnitOverviewVisible() {
-        return unitOverviewVisible;
-    }
-
-    public boolean getStructureOverviewVisible() {
-        return structureOverviewVisible;
     }
 
     public ArrayList<Player> getAllPlayers() {

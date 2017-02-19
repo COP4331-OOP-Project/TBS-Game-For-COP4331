@@ -10,7 +10,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
-import java.util.Hashtable;
+import java.util.HashMap;
 
 public class Assets {
     private final static Logger log = LogManager.getLogger(Assets.class);
@@ -74,7 +74,7 @@ public class Assets {
     private static final String AOE_LOSE = "assets/areaEffect/redCross.png";
     private static final String AOE_HEAL = "assets/areaEffect/skullDecal.png";
     private static final String FONT = "assets/fonts/Lato-Black.ttf";
-    private Hashtable<String, Integer> assets = new Hashtable<String, Integer>();
+    private HashMap<String, Integer> assets = new HashMap<String, Integer>();
     private Font defaultFont;
     private Font smallFont;
     private Font mediumFont;

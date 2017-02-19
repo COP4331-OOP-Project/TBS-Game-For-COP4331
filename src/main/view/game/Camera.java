@@ -8,7 +8,7 @@ public class Camera {
     private static final int HEX_H = (int)(HEX_W * 0.86);
     private static final int TILE_SIZE = HEX_W;
 	private static final double SCALE_AMOUNT = 0.05; //The amount change per zoom
-	private static final double MIN_SCALE = 0.2; //Min amount to be zoomed in
+	private static final double MIN_SCALE = 0.4; //Min amount to be zoomed in
 	private static final double MAX_SCALE = 1.0; //Max amount to be zoomed in
 	
     private CameraCenterer panelCenterer;

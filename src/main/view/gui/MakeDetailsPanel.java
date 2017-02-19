@@ -14,7 +14,7 @@ import org.apache.logging.log4j.Logger;
 /**
  * Created by Alex on 2/5/17.
  */
-public class MakeDetailsPanel {
+public class MakeDetailsPanel extends Panel{
 
     private final static Logger log = LogManager.getLogger(ControlModePanel.class);
     private static final int PANEL_HEIGHT = 114;
@@ -37,6 +37,7 @@ public class MakeDetailsPanel {
 
     // Constructor
     public MakeDetailsPanel(Game game) {
+    	this.setIsVisible(false);
         this.game = game;
     }
 

@@ -1,5 +1,7 @@
 package view;
 
+import java.util.ArrayList;
+
 import controls.ModeEnum;
 import game.Game;
 import javafx.scene.canvas.GraphicsContext;
@@ -19,6 +21,8 @@ public class View {
     private UnitDetailsPanel unitDetailsPanel;
     private MiniMapPanel miniMapPanel;
     private MakeDetailsPanel makePanel;
+    
+    private ArrayList<Panel> panels;
     private GraphicsContext gc;
     private Point screenDimensions;
     private boolean isDragging = false;
@@ -28,8 +32,10 @@ public class View {
     public View(Game game, GraphicsContext gc) {
         this.gc = gc;
         this.game = game;
+        panels = new ArrayList<Panel>();
         screenDimensions = new Point();
         camera = new Camera(screenDimensions);
+        
         civPanel = new CivilizationPanel(game);
         modePanel = new ControlModePanel(game);
         gamePanel = new GamePanel(game, camera);
@@ -39,32 +45,38 @@ public class View {
         structureDetailsPanel = new StructureDetailsPanel(game);
         miniMapPanel = new MiniMapPanel(game);
         makePanel = new MakeDetailsPanel(game);
+
+        panels.add(gamePanel);
+        panels.add(civPanel);
+        panels.add(modePanel);
+        panels.add(structureOverviewPanel);
+        panels.add(unitOverviewPanel);
+        panels.add(unitDetailsPanel);
+        panels.add(structureDetailsPanel);
+        panels.add(miniMapPanel);
+        panels.add(makePanel);
     }
 
     public void drawVisiblePanels(int width, int height) {
     	screenDimensions.x = width;
     	screenDimensions.y = height;
-        //Add structure And unit Overview Modes
-        gamePanel.draw(gc, screenDimensions);
-
-        civPanel.draw(gc, screenDimensions);
-        modePanel.draw(gc, screenDimensions);
-        if (game.getCurrentMode() == ModeEnum.UNIT)
-            unitDetailsPanel.draw(gc, screenDimensions);
-        if (game.getCurrentMode() == ModeEnum.STRUCTURE)
-            structureDetailsPanel.draw(gc, screenDimensions);
-        miniMapPanel.draw(gc, screenDimensions);
-        if (game.getUnitOverviewVisible())
-            unitOverviewPanel.draw(gc, screenDimensions);
-        if (game.getStructureOverviewVisible())
-            structureOverviewPanel.draw(gc, screenDimensions);
-        //unitOverviewPanel.drawPanelBox(g, width, height);
-        if (game.isShowingMakeDetails()) makePanel.draw(gc, screenDimensions);
-
-
+    	checkVisibility();
+    	for (Panel panel : panels) {
+    		if (panel.getIsVisible()) {
+    			panel.draw(gc, screenDimensions);
+    		}
+    	}
     }
 
-    public void updateAnimationTime() {
+    private void checkVisibility() {
+		if (game.isShowingMakeDetails()) {
+			makePanel.setIsVisible(true);
+		} else {
+			makePanel.setIsVisible(false);
+		}
+	}
+
+	public void updateAnimationTime() {
         gamePanel.updateAnimationCount();
         civPanel.updateAnimationCount();
         modePanel.updateAnimationCount();
@@ -99,4 +111,24 @@ public class View {
 	public void zoom(double deltaY) {
 		camera.zoom(deltaY);
 	}
+	
+
+    public void toggleUnitOverview() {
+        if (structureOverviewPanel.getIsVisible()) {
+            structureOverviewPanel.setIsVisible(false);
+        }
+        unitOverviewPanel.setIsVisible(!unitOverviewPanel.getIsVisible());
+    }
+
+    public void toggleStructureOverview() {
+    	if (unitOverviewPanel.getIsVisible()) {
+            unitOverviewPanel.setIsVisible(false);
+        }
+        structureOverviewPanel.setIsVisible(!structureOverviewPanel.getIsVisible());
+    }
+    
+    // Assign showing the make details panel
+
+
+
 }
