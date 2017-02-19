@@ -28,7 +28,6 @@ public class MouseEventController {
 	}
 
 	public void mouseClicked(MouseEvent event) {
-		view.setStoppedDragging();
 		if (!event.isShiftDown()) {
 			view.paintMap(event.getX(), event.getY());
 		} else {

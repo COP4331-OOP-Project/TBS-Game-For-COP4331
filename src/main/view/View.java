@@ -2,9 +2,7 @@ package view;
 
 import java.util.ArrayList;
 
-import controls.ModeEnum;
 import game.Game;
-import javafx.scene.Scene;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.StackPane;
 import view.game.Camera;
@@ -24,21 +22,20 @@ public class View {
     private MiniMapPanel miniMapPanel;
     private MakeDetailsPanel makePanel;
     private MapMakerPanel mapMakerPanel;
+    private MainMenuPanel mainMenuPanel;
+    private SettingsPanel settingsPanel;
     private ArrayList<Panel> panels;
     private GraphicsContext gc;
-    private StackPane guiElements;
     private Point screenDimensions;
-    private boolean isDragging = false;
     private double dragX = 0;
     private double dragY = 0;
     private ViewEnum viewMode;
     
     private void startView() {
-    	mapMakerMode();
+    	mainGameMode();
     }
     
     public View(Game game, GraphicsContext gc, StackPane guiElements) {
-    	this.guiElements = guiElements;
         this.gc = gc;
         this.game = game;
         panels = new ArrayList<Panel>();
@@ -54,6 +51,8 @@ public class View {
         miniMapPanel = new MiniMapPanel(game);
         makePanel = new MakeDetailsPanel(game);
         mapMakerPanel = new MapMakerPanel(guiElements);
+        mainMenuPanel = new MainMenuPanel(guiElements);
+        settingsPanel = new SettingsPanel(guiElements);
 
         panels.add(gamePanel);
         panels.add(civPanel);
@@ -65,6 +64,8 @@ public class View {
         panels.add(miniMapPanel);
         panels.add(makePanel);
         panels.add(mapMakerPanel);
+        panels.add(mainMenuPanel);
+        panels.add(settingsPanel);
         
         startView();
     }
@@ -106,13 +107,8 @@ public class View {
 	public void setDragging(double x, double y) {
 		dragX = x;
 		dragY = y;
-		isDragging = true;
 	}
-
-	public void setStoppedDragging() {
-		isDragging = false;
-	}
-
+	
 	public void updateViewLocation(double x, double y) {
 		double diffX = dragX - x;
 		double diffY = dragY - y;
@@ -152,6 +148,8 @@ public class View {
         unitDetailsPanel.setIsVisible(true);
         miniMapPanel.setIsVisible(true);
         makePanel.setIsVisible(true);
+        mainMenuPanel.setIsVisible(false);
+        settingsPanel.setIsVisible(false);
         mapMakerPanel.setIsVisible(false);
     }
 
@@ -166,6 +164,8 @@ public class View {
         unitDetailsPanel.setIsVisible(false);
         miniMapPanel.setIsVisible(false);
         makePanel.setIsVisible(false);
+        mainMenuPanel.setIsVisible(false);
+        settingsPanel.setIsVisible(false);
         mapMakerPanel.setIsVisible(true);
     }
     
@@ -181,6 +181,8 @@ public class View {
         miniMapPanel.setIsVisible(false);
         makePanel.setIsVisible(false);
         mapMakerPanel.setIsVisible(false);
+        mainMenuPanel.setIsVisible(true);
+        settingsPanel.setIsVisible(false);
     }
     
     private void settingsMode() {
@@ -195,6 +197,8 @@ public class View {
         miniMapPanel.setIsVisible(false);
         makePanel.setIsVisible(false);
         mapMakerPanel.setIsVisible(false);
+        mainMenuPanel.setIsVisible(false);
+        settingsPanel.setIsVisible(true);
     }
 
 	public void paintMap(double x, double y) {
