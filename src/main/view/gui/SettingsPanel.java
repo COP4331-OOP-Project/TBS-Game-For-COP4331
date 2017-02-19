@@ -3,11 +3,13 @@ package view.gui;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.StackPane;
 import view.Point;
+import view.View;
 
 public class SettingsPanel extends Panel{
-
-	public SettingsPanel(StackPane guiElements) {
-		// TODO Auto-generated constructor stub
+	View view;
+	
+	public SettingsPanel(StackPane guiElements, View view) {
+		this.view = view;
 	}
 
 	@Override

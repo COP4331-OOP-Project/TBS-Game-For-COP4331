@@ -9,6 +9,7 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import view.Point;
+import view.View;
 import view.game.Camera;
 
 import java.io.BufferedWriter;
@@ -31,36 +32,52 @@ public class MapMakerPanel extends Panel{
 	StackPane guiElements;
 	Button loadMapButton = new Button("Load Map");
 	Button saveMapButton = new Button("Save Map");
+	Button exitToMenuButton = new Button("Exit To Main Menu");
+	View view;
 	int currentDrawingType = 0;
 	int[][] map;
 	
-	public MapMakerPanel(StackPane guiElements) {
+	public MapMakerPanel(StackPane guiElements, View view) {
+		this.view = view;
 		this.guiElements = guiElements;
 		camera.setScale(0.3);
 		camera.setOffset(offset);
 		map = mapLoader.getMap(BOARD_SIZE, waterMap);
+		setUpButtons();
+	}
+	
+	private void setUpButtons() {
 		loadMapButton.setTranslateX(300);
 		loadMapButton.setTranslateY(8);
-		saveMapButton.setTranslateX(450);
-		saveMapButton.setTranslateY(8);
 		loadMapButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 loadMap();
             }
         });
+		saveMapButton.setTranslateX(450);
+		saveMapButton.setTranslateY(8);
 		saveMapButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 saveMap();
             }
         });
+		exitToMenuButton.setTranslateY(8);
 		guiElements.getChildren().add(loadMapButton);
 		guiElements.getChildren().add(saveMapButton);
+		guiElements.getChildren().add(exitToMenuButton);
+		exitToMenuButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                view.mainMenuMode();
+            }
+        });
 	}
-	
+
 	@Override
 	public void draw(GraphicsContext gc, Point screenDimensions) {
+		exitToMenuButton.setTranslateX(screenDimensions.x - 230);
 		this.screenDimensions.x = screenDimensions.x;
 		this.screenDimensions.y = screenDimensions.y;
 		this.offset.x = screenDimensions.x/2 -620;
@@ -196,12 +213,14 @@ public class MapMakerPanel extends Panel{
 
 	@Override
 	public void hideGUIElements() {
+		exitToMenuButton.setVisible(false);
 		loadMapButton.setVisible(false);
 		saveMapButton.setVisible(false);
 	}
 
 	@Override
 	public void showGUIElements() {
+		exitToMenuButton.setVisible(true);
 		loadMapButton.setVisible(true);
 		saveMapButton.setVisible(true);
 	}

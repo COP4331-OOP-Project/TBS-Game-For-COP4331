@@ -32,7 +32,7 @@ public class View {
     private ViewEnum viewMode;
     
     private void startView() {
-    	mainGameMode();
+    	mapMakerMode();
     }
     
     public View(Game game, GraphicsContext gc, StackPane guiElements) {
@@ -50,9 +50,9 @@ public class View {
         structureDetailsPanel = new StructureDetailsPanel(game);
         miniMapPanel = new MiniMapPanel(game);
         makePanel = new MakeDetailsPanel(game);
-        mapMakerPanel = new MapMakerPanel(guiElements);
-        mainMenuPanel = new MainMenuPanel(guiElements);
-        settingsPanel = new SettingsPanel(guiElements);
+        mapMakerPanel = new MapMakerPanel(guiElements, this);
+        mainMenuPanel = new MainMenuPanel(guiElements, this);
+        settingsPanel = new SettingsPanel(guiElements, this);
 
         panels.add(gamePanel);
         panels.add(civPanel);
@@ -71,7 +71,6 @@ public class View {
     }
 
     public void drawVisiblePanels(int width, int height) {
-    	//mapMakerMode();
     	screenDimensions.x = width;
     	screenDimensions.y = height;
     	checkVisibility();
@@ -137,7 +136,7 @@ public class View {
     }
     
     // Assign showing the make details panel
-    private void mainGameMode() {
+    public void mainGameMode() {
     	viewMode = ViewEnum.MAIN_GAME;
         civPanel.setIsVisible(true);
         modePanel.setIsVisible(true);
@@ -153,7 +152,7 @@ public class View {
         mapMakerPanel.setIsVisible(false);
     }
 
-    private void mapMakerMode() {
+    public void mapMakerMode() {
     	viewMode = ViewEnum.MAP_MAKER;
         civPanel.setIsVisible(false);
         modePanel.setIsVisible(false);
@@ -169,7 +168,7 @@ public class View {
         mapMakerPanel.setIsVisible(true);
     }
     
-    private void mainMenuMode() {
+    public void mainMenuMode() {
     	viewMode = ViewEnum.MAIN_MENU;
         civPanel.setIsVisible(false);
         modePanel.setIsVisible(false);
@@ -185,7 +184,7 @@ public class View {
         settingsPanel.setIsVisible(false);
     }
     
-    private void settingsMode() {
+    public void settingsMode() {
     	viewMode = ViewEnum.SETTINGS;
         civPanel.setIsVisible(false);
         modePanel.setIsVisible(false);

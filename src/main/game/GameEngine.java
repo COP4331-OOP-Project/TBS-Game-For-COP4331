@@ -32,7 +32,7 @@ public class GameEngine extends Application {
         File buttonStyle = new File("assets/buttonStyle.css");
         scene.getStylesheets().clear();
         scene.getStylesheets().add("file:///" + buttonStyle.getAbsolutePath().replace("\\", "/"));;
-        primaryStage.setFullScreen(true);
+        //primaryStage.setFullScreen(true);
         primaryStage.setMaximized(true);
         StackPane guiElements = new StackPane();
         view = new View(game, gc, guiElements);
