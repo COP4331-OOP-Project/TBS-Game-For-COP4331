@@ -197,4 +197,16 @@ public class ControlModePanel extends Panel {
         g.fillText(commandString, screenDimensions.x - COMMAND_PANEL_DISTANCE_FROM_RIGHT + 73, PANEL_DISTANCE_COMMAND + 49);
     }
 
+	@Override
+	public void hideGUIElements() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void showGUIElements() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

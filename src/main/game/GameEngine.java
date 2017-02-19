@@ -1,12 +1,15 @@
 package game;
 
 
+import java.io.File;
+
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import view.View;
@@ -25,9 +28,12 @@ public class GameEngine extends Application {
         Group root = new Group();
         Canvas canvas = new Canvas(defaultScreenWidth, defaultScreenHeight);
         GraphicsContext gc = canvas.getGraphicsContext2D();
-        view = new View(game, gc);
-
         Scene scene = new Scene(root, Color.BLACK);
+        File buttonStyle = new File("assets/buttonStyle.css");
+        scene.getStylesheets().clear();
+        scene.getStylesheets().add("file:///" + buttonStyle.getAbsolutePath().replace("\\", "/"));;
+        StackPane guiElements = new StackPane();
+        view = new View(game, gc, guiElements);
     	keyEvents = new KeyEventController(game, view, scene);
     	mouseEvents = new MouseEventController(game, view, scene);
 
@@ -46,6 +52,7 @@ public class GameEngine extends Application {
         };
         timer.start();
         root.getChildren().add(canvas);
+        root.getChildren().add(guiElements);
         primaryStage.setScene(scene);
         primaryStage.show();
     }

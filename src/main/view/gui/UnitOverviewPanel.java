@@ -48,4 +48,16 @@ public class UnitOverviewPanel extends OverviewPanel {
         gc.setFont(oldFont);
     }
 
+	@Override
+	public void hideGUIElements() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void showGUIElements() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

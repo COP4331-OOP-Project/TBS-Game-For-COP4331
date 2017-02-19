@@ -100,7 +100,7 @@ public class KeyEventController {
             this.game.formArmy();
             this.game.resetControls();
             
-        }else {
+        } else {
             log.info("Invalid command");
         }
     }

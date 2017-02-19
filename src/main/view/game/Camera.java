@@ -89,15 +89,19 @@ public class Camera {
     	return offset;
     }
     
-    protected void setOffset(Point point) {
+    public void setOffset(Point point) {
         offset = point;
     }
     
-    protected double getScale() {
+    public void setScale(double scale) {
+    	this.scale = scale;
+    }
+    
+    public double getScale() {
     	return scale;
     }
 
-    protected Point offset(Point p) {
+    public Point offset(Point p) {
         return new Point(getPixelLocation(p).x + offset.x,
         		getPixelLocation(p).y + offset.y);
     }

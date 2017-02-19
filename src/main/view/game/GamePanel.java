@@ -150,4 +150,16 @@ public class GamePanel extends Panel {
 		camera.setOffset(new Point(camera.getOffset().x - (int)diffX,
 				(camera.getOffset().y - (int)diffY)));
 	}
+
+	@Override
+	public void hideGUIElements() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void showGUIElements() {
+		// TODO Auto-generated method stub
+		
+	}
 }

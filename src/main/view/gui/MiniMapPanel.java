@@ -103,4 +103,15 @@ public class MiniMapPanel extends Panel {
                 DISTANCE_FROM_BOTTOM;
         return offsetPoint;
     }
+
+	@Override
+	public void hideGUIElements() {
+		
+	}
+
+	@Override
+	public void showGUIElements() {
+		// TODO Auto-generated method stub
+		
+	}
 }

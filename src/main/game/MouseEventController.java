@@ -22,10 +22,18 @@ public class MouseEventController {
 	public void mouseDragged(MouseEvent event) {
 		view.updateViewLocation(event.getX(),
 				event.getY());
+		if (!event.isShiftDown()) {
+			view.paintMap(event.getX(), event.getY());
+		}
 	}
 
 	public void mouseClicked(MouseEvent event) {
 		view.setStoppedDragging();
+		if (!event.isShiftDown()) {
+			view.paintMap(event.getX(), event.getY());
+		} else {
+			view.changePaintColor();
+		}
 	}
 	
 	private void mouseMoved(MouseEvent event) {
@@ -37,7 +45,6 @@ public class MouseEventController {
 	}
 
 	protected void mousePressed(MouseEvent event) {
-		
 		view.setDragging(event.getSceneX(), event.getSceneY());
 	}
 

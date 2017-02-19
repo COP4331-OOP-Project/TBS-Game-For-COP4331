@@ -52,4 +52,18 @@ public class CivilizationPanel extends Panel {
             g.drawImage(Assets.getInstance().getImage("GUI_TOP_MIDDLE"), i, 0);
         }
     }
+
+
+	@Override
+	public void hideGUIElements() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void showGUIElements() {
+		// TODO Auto-generated method stub
+		
+	}
 }

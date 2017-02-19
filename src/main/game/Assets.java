@@ -197,7 +197,6 @@ public class Assets {
         try {
             localUrl = file.toURI().toURL().toString();
         } catch (MalformedURLException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         gameImages.add(new Image(localUrl));

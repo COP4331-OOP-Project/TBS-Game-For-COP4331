@@ -48,4 +48,16 @@ public class StructureDetailsPanel extends DetailsPanel {
         g.setFont(old);
     }
 
+	@Override
+	public void hideGUIElements() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void showGUIElements() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

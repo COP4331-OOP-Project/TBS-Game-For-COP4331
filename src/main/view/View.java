@@ -4,7 +4,9 @@ import java.util.ArrayList;
 
 import controls.ModeEnum;
 import game.Game;
+import javafx.scene.Scene;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.layout.StackPane;
 import view.game.Camera;
 import view.game.GamePanel;
 import view.gui.*;
@@ -21,21 +23,27 @@ public class View {
     private UnitDetailsPanel unitDetailsPanel;
     private MiniMapPanel miniMapPanel;
     private MakeDetailsPanel makePanel;
-    
+    private MapMakerPanel mapMakerPanel;
     private ArrayList<Panel> panels;
     private GraphicsContext gc;
+    private StackPane guiElements;
     private Point screenDimensions;
     private boolean isDragging = false;
     private double dragX = 0;
     private double dragY = 0;
+    private ViewEnum viewMode;
     
-    public View(Game game, GraphicsContext gc) {
+    private void startView() {
+    	mapMakerMode();
+    }
+    
+    public View(Game game, GraphicsContext gc, StackPane guiElements) {
+    	this.guiElements = guiElements;
         this.gc = gc;
         this.game = game;
         panels = new ArrayList<Panel>();
         screenDimensions = new Point();
         camera = new Camera(screenDimensions);
-        
         civPanel = new CivilizationPanel(game);
         modePanel = new ControlModePanel(game);
         gamePanel = new GamePanel(game, camera);
@@ -45,6 +53,7 @@ public class View {
         structureDetailsPanel = new StructureDetailsPanel(game);
         miniMapPanel = new MiniMapPanel(game);
         makePanel = new MakeDetailsPanel(game);
+        mapMakerPanel = new MapMakerPanel(guiElements);
 
         panels.add(gamePanel);
         panels.add(civPanel);
@@ -55,9 +64,13 @@ public class View {
         panels.add(structureDetailsPanel);
         panels.add(miniMapPanel);
         panels.add(makePanel);
+        panels.add(mapMakerPanel);
+        
+        startView();
     }
 
     public void drawVisiblePanels(int width, int height) {
+    	//mapMakerMode();
     	screenDimensions.x = width;
     	screenDimensions.y = height;
     	checkVisibility();
@@ -128,7 +141,71 @@ public class View {
     }
     
     // Assign showing the make details panel
+    private void mainGameMode() {
+    	viewMode = ViewEnum.MAIN_GAME;
+        civPanel.setIsVisible(true);
+        modePanel.setIsVisible(true);
+        gamePanel.setIsVisible(true);
+        structureOverviewPanel.setIsVisible(false);
+        unitOverviewPanel.setIsVisible(false);
+        structureDetailsPanel.setIsVisible(true);
+        unitDetailsPanel.setIsVisible(true);
+        miniMapPanel.setIsVisible(true);
+        makePanel.setIsVisible(true);
+        mapMakerPanel.setIsVisible(false);
+    }
 
+    private void mapMakerMode() {
+    	viewMode = ViewEnum.MAP_MAKER;
+        civPanel.setIsVisible(false);
+        modePanel.setIsVisible(false);
+        gamePanel.setIsVisible(false);
+        structureOverviewPanel.setIsVisible(false);
+        unitOverviewPanel.setIsVisible(false);
+        structureDetailsPanel.setIsVisible(false);
+        unitDetailsPanel.setIsVisible(false);
+        miniMapPanel.setIsVisible(false);
+        makePanel.setIsVisible(false);
+        mapMakerPanel.setIsVisible(true);
+    }
+    
+    private void mainMenuMode() {
+    	viewMode = ViewEnum.MAIN_MENU;
+        civPanel.setIsVisible(false);
+        modePanel.setIsVisible(false);
+        gamePanel.setIsVisible(false);
+        structureOverviewPanel.setIsVisible(false);
+        unitOverviewPanel.setIsVisible(false);
+        structureDetailsPanel.setIsVisible(false);
+        unitDetailsPanel.setIsVisible(false);
+        miniMapPanel.setIsVisible(false);
+        makePanel.setIsVisible(false);
+        mapMakerPanel.setIsVisible(false);
+    }
+    
+    private void settingsMode() {
+    	viewMode = ViewEnum.SETTINGS;
+        civPanel.setIsVisible(false);
+        modePanel.setIsVisible(false);
+        gamePanel.setIsVisible(false);
+        structureOverviewPanel.setIsVisible(false);
+        unitOverviewPanel.setIsVisible(false);
+        structureDetailsPanel.setIsVisible(false);
+        unitDetailsPanel.setIsVisible(false);
+        miniMapPanel.setIsVisible(false);
+        makePanel.setIsVisible(false);
+        mapMakerPanel.setIsVisible(false);
+    }
 
+	public void paintMap(double x, double y) {
+		if (viewMode == ViewEnum.MAP_MAKER) {
+			mapMakerPanel.tileClicked(new Point((int)x, (int)y));
+		}
+	}
 
+	public void changePaintColor() {
+		if (viewMode == ViewEnum.MAP_MAKER) {
+			mapMakerPanel.changePaintColor();
+		}
+	}
 }
