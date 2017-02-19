@@ -14,9 +14,13 @@ public class Camera {
     private CameraCenterer panelCenterer;
     private Point screenDimensions;
     private Point offset = new Point(180, -2350);
-    private double scale = 0.8;
+    
+    //These values are used when dragging the Camera.
+    private double dragX = -999;
+    private double dragY = -999;
     
     //These values are used when zooming the Camera.
+    private double scale = 0.8;
 	private boolean zooming = false;
 	private int zoomCounter = -1;
 	Point mouseZoomStart = new Point(0,0);
@@ -83,6 +87,20 @@ public class Camera {
 				panelCenterer.quickCenter(mouseZoomStart);
 			}
 		}
+	}
+	
+	public void startDragging(double x, double y) {
+		dragX = x;
+		dragY = y;
+	}
+	
+	public void continueDragging(double x, double y) {
+		double diffX = dragX - x;
+		double diffY = dragY - y;
+		setOffset(new Point(getOffset().x - (int)diffX,
+				(getOffset().y - (int)diffY)));
+		dragX = x;
+		dragY = y;
 	}
 
     protected Point getOffset() {

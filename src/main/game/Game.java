@@ -39,6 +39,7 @@ public class Game {
     private Location centerCoordinates;
     private boolean centerCoordinatesUpdated;
     private boolean showingMakeDetails = false;
+    private boolean gameHasStarted = false;
     private int selectedUnit;
     private int makeOption = 0;
     
@@ -49,7 +50,9 @@ public class Game {
     
     Game() {
         Assets.getInstance().loadResources();
-        //TODO: initialize game with players
+    }
+    
+    public void initializeGame() {
         this.players = new ArrayList<Player>();
         centerCoordinates = new Location(0, 0);
         Location initLocation1 = new Location(5, 28);
@@ -68,6 +71,7 @@ public class Game {
         this.centerCoordinatesUpdated = false;
         this.moveCommands = new ArrayList<>();
         this.moveLocations = new ArrayList<>();
+        gameHasStarted =  true;
     }
 
     public ArrayList<Location> getMoveLocations() {
@@ -75,7 +79,9 @@ public class Game {
     }
 
     public void updateGame() { //This is called 20 times per second
-    	updateSelectedUnit();
+    	if (gameHasStarted) {
+    		updateSelectedUnit();
+    	}
     }
 
     public void startGame() {

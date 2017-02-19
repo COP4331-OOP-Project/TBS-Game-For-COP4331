@@ -1,10 +1,15 @@
 package view;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import game.Game;
+import javafx.scene.Group;
+import javafx.scene.Scene;
+import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
 import view.game.Camera;
 import view.game.GamePanel;
 import view.gui.*;
@@ -12,6 +17,8 @@ import view.gui.*;
 public class View {
     private Game game;
     private Camera camera;
+    
+    //Game Panels
     private CivilizationPanel civPanel;
     private ControlModePanel modePanel;
     private GamePanel gamePanel;
@@ -24,36 +31,34 @@ public class View {
     private MapMakerPanel mapMakerPanel;
     private MainMenuPanel mainMenuPanel;
     private SettingsPanel settingsPanel;
+    
+    //ArrayList Containing Panels
     private ArrayList<Panel> panels;
-    private GraphicsContext gc;
+
+    private int defaultScreenWidth = 1366;
+    private int defaultScreenHeight = 768;
+    
+    private Canvas canvas; //The GraphicsContext Goes on here.
+    private GraphicsContext gc; //Image drawing is done with this
+    private Group root; //Gui drawing is added to this
+    
     private Point screenDimensions;
-    private double dragX = 0;
-    private double dragY = 0;
     private ViewEnum viewMode;
+    private Scene scene;
     
-    private void startView() {
-    	mapMakerMode();
-    }
-    
-    public View(Game game, GraphicsContext gc, StackPane guiElements) {
-        this.gc = gc;
+    public View(Game game, Scene scene, Group root) {
+    	this.root = root;
+    	canvas = new Canvas(defaultScreenWidth, defaultScreenHeight);
+    	gc = canvas.getGraphicsContext2D();
+    	this.scene = scene;
+    	setScene();
         this.game = game;
         panels = new ArrayList<Panel>();
         screenDimensions = new Point();
         camera = new Camera(screenDimensions);
-        civPanel = new CivilizationPanel(game);
-        modePanel = new ControlModePanel(game);
-        gamePanel = new GamePanel(game, camera);
-        structureOverviewPanel = new StructureOverviewPanel(game);
-        unitOverviewPanel = new UnitOverviewPanel(game);
-        unitDetailsPanel = new UnitDetailsPanel(game);
-        structureDetailsPanel = new StructureDetailsPanel(game);
-        miniMapPanel = new MiniMapPanel(game);
-        makePanel = new MakeDetailsPanel(game);
-        mapMakerPanel = new MapMakerPanel(guiElements, this);
-        mainMenuPanel = new MainMenuPanel(guiElements, this);
-        settingsPanel = new SettingsPanel(guiElements, this);
-
+        
+        createPanels();
+        
         panels.add(gamePanel);
         panels.add(civPanel);
         panels.add(modePanel);
@@ -67,10 +72,32 @@ public class View {
         panels.add(mainMenuPanel);
         panels.add(settingsPanel);
         
-        startView();
+        mainMenuMode();
     }
 
-    public void drawVisiblePanels(int width, int height) {
+    private void setScene() {
+        root.getChildren().add(canvas);
+        File buttonStyle = new File("assets/buttonStyle.css");
+        scene.getStylesheets().clear();
+        scene.getStylesheets().add("file:///" + buttonStyle.getAbsolutePath().replace("\\", "/"));;
+	}
+
+	private void createPanels() {
+        civPanel = new CivilizationPanel(game);
+        modePanel = new ControlModePanel(game);
+        gamePanel = new GamePanel(game, camera);
+        structureOverviewPanel = new StructureOverviewPanel(game);
+        unitOverviewPanel = new UnitOverviewPanel(game);
+        unitDetailsPanel = new UnitDetailsPanel(game);
+        structureDetailsPanel = new StructureDetailsPanel(game);
+        miniMapPanel = new MiniMapPanel(game);
+        makePanel = new MakeDetailsPanel(game);
+        mapMakerPanel = new MapMakerPanel(root, this);
+        mainMenuPanel = new MainMenuPanel(root, this);
+        settingsPanel = new SettingsPanel(root, this);
+	}
+
+	public void drawVisiblePanels(int width, int height) {
     	screenDimensions.x = width;
     	screenDimensions.y = height;
     	checkVisibility();
@@ -97,24 +124,23 @@ public class View {
         unitDetailsPanel.updateAnimationCount();
     }
 
-    public void renderGame(int width, int height) {
+    public void renderGame() {
+    	double width = scene.getWidth();
+    	double height = scene.getHeight();
+        canvas.setWidth(width);
+        canvas.setHeight(height);
         updateAnimationTime();
         gc.clearRect(0, 0, width, height);
-        drawVisiblePanels(width, height);
+        drawVisiblePanels((int)width, (int)height);
     }
     
-	public void setDragging(double x, double y) {
-		dragX = x;
-		dragY = y;
-	}
-	
-	public void updateViewLocation(double x, double y) {
-		double diffX = dragX - x;
-		double diffY = dragY - y;
-		gamePanel.moveCamera(diffX, diffY);
-		dragX = x;
-		dragY = y;
-	}
+    public void startDragging(double x, double y) {
+    	camera.startDragging(x, y);
+    }
+    
+    public void continueDragging(double x, double y) {
+    	camera.continueDragging(x, y);
+    }
 
 	public void zoom(double deltaY) {
 		camera.zoom(deltaY);
@@ -137,6 +163,7 @@ public class View {
     
     // Assign showing the make details panel
     public void mainGameMode() {
+    	game.initializeGame();
     	viewMode = ViewEnum.MAIN_GAME;
         civPanel.setIsVisible(true);
         modePanel.setIsVisible(true);

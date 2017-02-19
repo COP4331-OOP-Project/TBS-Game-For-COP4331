@@ -50,8 +50,6 @@ public class GamePanel extends Panel {
         tileDrawer.drawMovingTiles();
     }
 
-
-
 	private void drawAllItems() {
         for (int i = 0; i < game.getGameBoard().getTiles().length; i++) {
             for (int j = 0; j < game.getGameBoard().getTiles()[i].length; j++) {
@@ -145,11 +143,6 @@ public class GamePanel extends Panel {
     public int getTileSize() {
         return TILE_PIXEL_SIZE;
     }
-
-	public void moveCamera(double diffX, double diffY) {
-		camera.setOffset(new Point(camera.getOffset().x - (int)diffX,
-				(camera.getOffset().y - (int)diffY)));
-	}
 
 	@Override
 	public void hideGUIElements() {

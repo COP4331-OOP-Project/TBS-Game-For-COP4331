@@ -2,6 +2,7 @@ package view.gui;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.Group;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
@@ -28,18 +29,21 @@ public class MapMakerPanel extends Panel{
     Point offset = new Point(20, -600);
     Camera camera = new Camera(screenDimensions);
 	MapLoader mapLoader = new MapLoader();
+	View view;
 	File waterMap = new File("assets/maps/allwater.map");
-	StackPane guiElements;
+	
+	Group root; //Any GUI Elements Must Be Added and Removed From Here
+	StackPane mapStuff = new StackPane();
 	Button loadMapButton = new Button("Load Map");
 	Button saveMapButton = new Button("Save Map");
 	Button exitToMenuButton = new Button("Exit To Main Menu");
-	View view;
+	
 	int currentDrawingType = 0;
 	int[][] map;
 	
-	public MapMakerPanel(StackPane guiElements, View view) {
+	public MapMakerPanel(Group root, View view) {
 		this.view = view;
-		this.guiElements = guiElements;
+		this.root = root;
 		camera.setScale(0.3);
 		camera.setOffset(offset);
 		map = mapLoader.getMap(BOARD_SIZE, waterMap);
@@ -49,6 +53,7 @@ public class MapMakerPanel extends Panel{
 	private void setUpButtons() {
 		loadMapButton.setTranslateX(300);
 		loadMapButton.setTranslateY(8);
+		loadMapButton.setId("button");
 		loadMapButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -57,6 +62,7 @@ public class MapMakerPanel extends Panel{
         });
 		saveMapButton.setTranslateX(450);
 		saveMapButton.setTranslateY(8);
+		saveMapButton.setId("button");
 		saveMapButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -64,15 +70,19 @@ public class MapMakerPanel extends Panel{
             }
         });
 		exitToMenuButton.setTranslateY(8);
-		guiElements.getChildren().add(loadMapButton);
-		guiElements.getChildren().add(saveMapButton);
-		guiElements.getChildren().add(exitToMenuButton);
+		exitToMenuButton.setId("button");
 		exitToMenuButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 view.mainMenuMode();
             }
         });
+		mapStuff.getChildren().add(loadMapButton);
+		mapStuff.getChildren().add(saveMapButton);
+		mapStuff.getChildren().add(exitToMenuButton);
+		loadMapButton.setVisible(true);
+		saveMapButton.setVisible(true);
+		exitToMenuButton.setVisible(true);
 	}
 
 	@Override
@@ -213,15 +223,11 @@ public class MapMakerPanel extends Panel{
 
 	@Override
 	public void hideGUIElements() {
-		exitToMenuButton.setVisible(false);
-		loadMapButton.setVisible(false);
-		saveMapButton.setVisible(false);
+		root.getChildren().remove(mapStuff);
 	}
 
 	@Override
 	public void showGUIElements() {
-		exitToMenuButton.setVisible(true);
-		loadMapButton.setVisible(true);
-		saveMapButton.setVisible(true);
+		root.getChildren().add(mapStuff);
 	}
 }

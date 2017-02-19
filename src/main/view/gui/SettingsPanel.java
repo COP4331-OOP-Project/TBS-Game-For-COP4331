@@ -1,5 +1,6 @@
 package view.gui;
 
+import javafx.scene.Group;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.StackPane;
 import view.Point;
@@ -8,7 +9,7 @@ import view.View;
 public class SettingsPanel extends Panel{
 	View view;
 	
-	public SettingsPanel(StackPane guiElements, View view) {
+	public SettingsPanel(Group root, View view) {
 		this.view = view;
 	}
 
