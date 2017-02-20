@@ -61,6 +61,21 @@ public class Camera {
 		p.x = (int)((pixel.x - offset.x) / (0.75f * scale * HEX_W ));
 		p.y = (int)(((pixel.y - offset.y)-((0.5 * HEX_H * scale) * 
 				((pixel.x - offset.x)/(0.75 * scale * HEX_W))))/(HEX_H * scale));
+		Point r = new Point(getPixelLocation(p).x - pixel.x + offset.x, getPixelLocation(p).y - pixel.y + offset.y);
+		if (r.y < -117 * scale) {
+			p.y++;
+		}
+		Point r2 = new Point(getPixelLocation(p).x - pixel.x + offset.x, getPixelLocation(p).y - pixel.y + offset.y);
+		if (r2.y <= -7 * scale && r2.y >= -63 * scale) {
+			if (r2.x > ((r2.y + 63 * scale)/-1.75)) { //Top Left Triangle
+				p.x--;
+			}
+		} else if (r2.y < -63 * scale && r2.y >= -117 * scale) {
+			if (r2.x > ((r2.y + 63 * scale)/1.75)) { //Bottom Left Triangle
+				p.x--;
+				p.y++;
+			}
+		}
     	return p;
     }
     

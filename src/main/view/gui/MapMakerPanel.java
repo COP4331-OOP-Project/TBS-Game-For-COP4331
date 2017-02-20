@@ -25,11 +25,13 @@ import game.gameboard.MapLoader;
 
 public class MapMakerPanel extends Panel{
     private static final int BOARD_SIZE = 42;
+    private static final int OFFSET_X = 620;
+    private static final int OFFSET_Y = 1015;
     private DropShadow ds = new DropShadow();
     public static int GUI_PANEL_WIDTH =
             (int) Assets.getInstance().getImage("GUI_TOP").getWidth();
     Point screenDimensions = new Point(0,0);
-    Point offset = new Point(20, -600);
+    Point offset = new Point();
     Camera camera = new Camera(screenDimensions);
 	MapLoader mapLoader = new MapLoader();
 	View view;
@@ -97,8 +99,8 @@ public class MapMakerPanel extends Panel{
 		//gc.drawImage(Assets.getInstance().getImage("GAME_BACKGROUND"), 0, 0, screenDimensions.x, screenDimensions.y);
 		this.screenDimensions.x = screenDimensions.x;
 		this.screenDimensions.y = screenDimensions.y;
-		this.offset.x = screenDimensions.x/2 -620;
-		this.offset.y = screenDimensions.y/2 - 1015;
+		this.offset.x = screenDimensions.x/2 - OFFSET_X;
+		this.offset.y = screenDimensions.y/2 - OFFSET_Y;
 		  for (int i = 0; i < map.length; i++) {
 	            for (int j = 0; j < map[i].length; j++) {
 	            	drawTile(gc, new Point(i,j), map[i][j]);
