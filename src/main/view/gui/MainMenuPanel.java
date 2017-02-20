@@ -7,17 +7,19 @@ import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
 import view.Point;
 import view.View;
 
 public class MainMenuPanel extends Panel{
-
+	private static final int MAIN_MENU_BUTTON_SPACING = 100;
+	private static final int DISTANCE_UP_FROM_CENTER = 20;
+    private DropShadow ds = new DropShadow();
 	View view;
 	StackPane mainMenuElements = new StackPane();
 	Group root;
-	private static final int MAIN_MENU_BUTTON_SPACING = 100;
-	private static final int DISTANCE_UP_FROM_CENTER = 20;
 	Button startGame = new Button("Start Game");
 	Button mapMaker = new Button("Map Maker");
 	Button settings = new Button("Settings");
@@ -26,6 +28,8 @@ public class MainMenuPanel extends Panel{
 	public MainMenuPanel(Group root, View view) {
 		this.view = view;
 		this.root = root;
+    	ds.setOffsetY(6.0);
+    	ds.setColor(Color.color(0, 0, 0));
 		setUpButtons();
 	}
 
@@ -68,6 +72,11 @@ public class MainMenuPanel extends Panel{
 	@Override
 	public void draw(GraphicsContext gc, Point screenDimensions) {
 		gc.drawImage(Assets.getInstance().getImage("MENU_BACKGROUND"), 0, 0, screenDimensions.x, screenDimensions.y);
+		gc.setEffect(ds);
+		gc.setFont(Assets.getInstance().getFont(4));
+		gc.setFill(Color.WHITE);
+		gc.fillText("Asian Game!", screenDimensions.x/4 + 150, screenDimensions.y/4);
+		gc.setEffect(null);
 		startGame.setTranslateX(screenDimensions.x / 2 - startGame.getWidth() / 2);
 		startGame.setTranslateY(screenDimensions.y / 2 - DISTANCE_UP_FROM_CENTER);
 		mapMaker.setTranslateX(screenDimensions.x / 2 - mapMaker.getWidth() / 2);

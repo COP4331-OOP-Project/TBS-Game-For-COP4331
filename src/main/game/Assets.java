@@ -72,15 +72,46 @@ public class Assets {
     private static final String AOE_DIE = "assets/images/areaEffect/loseHealth.png";
     private static final String AOE_LOSE = "assets/images/areaEffect/redCross.png";
     private static final String AOE_HEAL = "assets/images/areaEffect/skullDecal.png";
-    private static final String FONT = "assets/fonts/nuku.ttf";
+    private static final String COMMAND_ASSIGN_WORKER = "assets/images/gui/commandIcons/unselected/assignWorker.png";
+    private static final String COMMAND_ATTACK = "assets/images/gui/commandIcons/unselected/attack.png";
+    private static final String COMMAND_BUILD = "assets/images/gui/commandIcons/unselected/build.png";
+    private static final String COMMAND_CANCEL_QUEUE = "assets/images/gui/commandIcons/unselected/cancelQueue.png";
+    private static final String COMMAND_DECOMMISSION = "assets/images/gui/commandIcons/unselected/decommission.png";
+    private static final String COMMAND_DEFEND = "assets/images/gui/commandIcons/unselected/defend.png";
+    private static final String COMMAND_DROP_OFF_WORKER = "assets/images/gui/commandIcons/unselected/dropOffWorker.png";
+    private static final String COMMAND_FOUND_CAPITOL = "assets/images/gui/commandIcons/unselected/foundCapitol.png";
+    private static final String COMMAND_GOTO_RALLY_POINT = "assets/images/gui/commandIcons/unselected/gotoRallyPoint.png";
+    private static final String COMMAND_HEAL = "assets/images/gui/commandIcons/unselected/heal.png";
+    private static final String COMMAND_MOVE = "assets/images/gui/commandIcons/unselected/move.png";
+    private static final String COMMAND_PICKUP_WORKER = "assets/images/gui/commandIcons/unselected/pickupWorker.png";
+    private static final String COMMAND_POWER_DOWN = "assets/images/gui/commandIcons/unselected/powerDown.png";
+    private static final String COMMAND_POWER_UP = "assets/images/gui/commandIcons/unselected/powerUp.png";
+    private static final String COMMAND_UNASSIGN_ALL_WORKERS = "assets/images/gui/commandIcons/unselected/unassignAllWorkers.png";
+    private static final String COMMAND_ASSIGN_WORKER_S = "assets/images/gui/commandIcons/unselected/assignWorkerSelected.png";
+    private static final String COMMAND_ATTACK_S = "assets/images/gui/commandIcons/unselected/attackSelected.png";
+    private static final String COMMAND_BUILD_S = "assets/images/gui/commandIcons/unselected/buildSelected.png";
+    private static final String COMMAND_CANCEL_QUEUE_S = "assets/images/gui/commandIcons/unselected/cancelQueueSelected.png";
+    private static final String COMMAND_DECOMMISSION_S = "assets/images/gui/commandIcons/unselected/decommissionSelected.png";
+    private static final String COMMAND_DEFEND_S = "assets/images/gui/commandIcons/unselected/defendSelected.png";
+    private static final String COMMAND_DROP_OFF_WORKER_S = "assets/images/gui/commandIcons/unselected/dropOffWorkerSelected.png";
+    private static final String COMMAND_FOUND_CAPITOL_S = "assets/images/gui/commandIcons/unselected/foundCapitolSelected.png";
+    private static final String COMMAND_GOTO_RALLY_POINT_S = "assets/images/gui/commandIcons/unselected/gotoRallyPointSelected.png";
+    private static final String COMMAND_HEAL_S = "assets/images/gui/commandIcons/unselected/healSelected.png";
+    private static final String COMMAND_MOVE_S = "assets/images/gui/commandIcons/unselected/moveSelected.png";
+    private static final String COMMAND_PICKUP_WORKER_S = "assets/images/gui/commandIcons/unselected/pickupWorkerSelected.png";
+    private static final String COMMAND_POWER_DOWN_S = "assets/images/gui/commandIcons/unselected/powerDownSelected.png";
+    private static final String COMMAND_POWER_UP_S = "assets/images/gui/commandIcons/unselected/powerUpSelected.png";
+    private static final String COMMAND_UNASSIGN_ALL_WORKERS_S = "assets/images/gui/commandIcons/unselected/unassignAllWorkersSelected.png";
+    private static final String COMMAND_HOVERED = "assets/images/gui/commandIcons/commandHovered.png";
     private static final String TEXT_PATTERN = "assets/images/textTexture.jpg";
+    private static final String FONT = "assets/fonts/nuku.ttf";
     private HashMap<String, Integer> assets = new HashMap<String, Integer>();
     private Font defaultFont;
     private Font smallFont;
     private Font mediumFont;
     private Font largeFont;
     private Font hugeFont;
-
+    private Font veryHugeFont;
     private ArrayList<Image> gameImages;
     private int lastItemLoaded = 0;
 
@@ -102,13 +133,15 @@ public class Assets {
             smallFont = Font.loadFont(new FileInputStream(new File(FONT)), 20);
             mediumFont = Font.loadFont(new FileInputStream(new File(FONT)), 25);
             largeFont = Font.loadFont(new FileInputStream(new File(FONT)), 37);
-            hugeFont = Font.loadFont(new FileInputStream(new File(FONT)), 57);
+            hugeFont = Font.loadFont(new FileInputStream(new File(FONT)), 53);
+            veryHugeFont = Font.loadFont(new FileInputStream(new File(FONT)), 100);
         } catch (IOException e) {
             defaultFont = new Font("Lucida Sans", 20);
             smallFont = new Font("Lucida Sans", 18);
             mediumFont = new Font("Lucida Sans", 21);
             largeFont = new Font("Lucida Sans", 35);
             hugeFont = new Font("Lucida Sans", 55);
+            veryHugeFont = new Font("Lucida Sans", 100);
             e.printStackTrace();
         }
     }
@@ -173,6 +206,37 @@ public class Assets {
         loadItem("AOE_DIE", AOE_DIE);
         loadItem("AOE_LOSE", AOE_LOSE);
         loadItem("AOE_HEAL", AOE_HEAL);
+        loadItem("COMMAND_ASSIGN_WORKER", COMMAND_ASSIGN_WORKER);
+        loadItem("COMMAND_ATTACK", COMMAND_ATTACK);
+        loadItem("COMMAND_BUILD", COMMAND_BUILD);
+        loadItem("COMMAND_CANCEL_QUEUE", COMMAND_CANCEL_QUEUE);
+        loadItem("COMMAND_DECOMMISSION", COMMAND_DECOMMISSION);
+        loadItem("COMMAND_DEFEND", COMMAND_DEFEND);
+        loadItem("COMMAND_DROP_OFF_WORKER", COMMAND_DROP_OFF_WORKER);
+        loadItem("COMMAND_FOUND_CAPITOL", COMMAND_FOUND_CAPITOL);
+        loadItem("COMMAND_GOTO_RALLY_POINT", COMMAND_GOTO_RALLY_POINT);
+        loadItem("COMMAND_HEAL", COMMAND_HEAL);
+        loadItem("COMMAND_MOVE", COMMAND_MOVE);
+        loadItem("COMMAND_PICKUP_WORKER", COMMAND_PICKUP_WORKER);
+        loadItem("COMMAND_POWER_DOWN", COMMAND_POWER_DOWN);
+        loadItem("COMMAND_POWER_UP", COMMAND_POWER_UP);
+        loadItem("COMMAND_UNASSIGN_ALL_WORKERS", COMMAND_UNASSIGN_ALL_WORKERS);
+        loadItem("COMMAND_ASSIGN_WORKER_S", COMMAND_ASSIGN_WORKER_S);
+        loadItem("COMMAND_ATTACK_S", COMMAND_ATTACK_S);
+        loadItem("COMMAND_BUILD_S", COMMAND_BUILD_S);
+        loadItem("COMMAND_CANCEL_QUEUE_S", COMMAND_CANCEL_QUEUE_S);
+        loadItem("COMMAND_DECOMMISSION_S", COMMAND_DECOMMISSION_S);
+        loadItem("COMMAND_DEFEND_S", COMMAND_DEFEND_S);
+        loadItem("COMMAND_DROP_OFF_WORKER_S", COMMAND_DROP_OFF_WORKER_S);
+        loadItem("COMMAND_FOUND_CAPITOL_S", COMMAND_FOUND_CAPITOL_S);
+        loadItem("COMMAND_GOTO_RALLY_POINT_S", COMMAND_GOTO_RALLY_POINT_S);
+        loadItem("COMMAND_HEAL_S", COMMAND_HEAL_S);
+        loadItem("COMMAND_MOVE_S", COMMAND_MOVE_S);
+        loadItem("COMMAND_PICKUP_WORKER_S", COMMAND_PICKUP_WORKER_S);
+        loadItem("COMMAND_POWER_DOWN_S", COMMAND_POWER_DOWN_S);
+        loadItem("COMMAND_POWER_UP_S", COMMAND_POWER_UP_S);
+        loadItem("COMMAND_UNASSIGN_ALL_WORKERS_S", COMMAND_UNASSIGN_ALL_WORKERS_S);
+        loadItem("COMMAND_HOVERED", COMMAND_HOVERED);
         loadItem("TEXT_PATTERN", TEXT_PATTERN);
     }
 
@@ -204,6 +268,8 @@ public class Assets {
                 return largeFont;
             case 3:
                 return hugeFont;
+            case 4:
+            	return veryHugeFont;
             default:
                 return defaultFont;
         }

@@ -40,7 +40,7 @@ public class GamePanel extends Panel {
     }
 
     public void draw(GraphicsContext gc, Point screenDimensions) {
-		gc.drawImage(Assets.getInstance().getImage("GAME_BACKGROUND"), 0, 0, screenDimensions.x, screenDimensions.y);
+		//gc.drawImage(Assets.getInstance().getImage("GAME_BACKGROUND"), 0, 0, screenDimensions.x, screenDimensions.y);
     	this.screenDimensions = screenDimensions;
         this.gc = gc;
         Point selected = new Point(game.getCenterCoordinates().getX(),

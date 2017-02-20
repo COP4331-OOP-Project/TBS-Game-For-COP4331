@@ -46,11 +46,11 @@ public class StructureDetailsPanel extends DetailsPanel {
             if (game.getCurrentType() == StructureEnum.BASE) {
                 g.fillText("Base", X_DISTANCE + OFFSET, height - 35);
             }
-            g.fillText(game.getCurrentPlayer().getBases().get(0).getHealth() + "", 130, X_DISTANCE + OFFSET, height - 10);
-            g.fillText(game.getCurrentPlayer().getBases().get(0).getAttackDamage() + "", 530, X_DISTANCE + OFFSET + SPACING, height - 35);
-            g.fillText(game.getCurrentPlayer().getBases().get(0).getDefenseDamage() + "", 530, X_DISTANCE + OFFSET + SPACING, height - 10);
-            g.fillText(game.getCurrentPlayer().getBases().get(0).getArmor() + "", 930, X_DISTANCE + OFFSET + SPACING * 2, height - 35);
-            g.fillText(game.getCurrentPlayer().getBases().get(0).getUpkeep() + "", 930, X_DISTANCE + OFFSET + SPACING * 2, height - 10);
+            g.fillText(game.getCurrentPlayer().getBases().get(0).getHealth() + "", X_DISTANCE + OFFSET, height - 10);
+            g.fillText(game.getCurrentPlayer().getBases().get(0).getAttackDamage() + "", X_DISTANCE + OFFSET + SPACING, height - 35);
+            g.fillText(game.getCurrentPlayer().getBases().get(0).getDefenseDamage() + "", X_DISTANCE + OFFSET + SPACING, height - 10);
+            g.fillText(game.getCurrentPlayer().getBases().get(0).getArmor() + "", X_DISTANCE + OFFSET + SPACING * 2, height - 35);
+            g.fillText(game.getCurrentPlayer().getBases().get(0).getUpkeep() + "", X_DISTANCE + OFFSET + SPACING * 2, height - 10);
         } else {
             g.setFont(bigFont);
             g.fillText("You Have No Structures", X_DISTANCE, height - 17);

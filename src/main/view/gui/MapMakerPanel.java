@@ -94,7 +94,7 @@ public class MapMakerPanel extends Panel{
 
 	@Override
 	public void draw(GraphicsContext gc, Point screenDimensions) {
-		gc.drawImage(Assets.getInstance().getImage("GAME_BACKGROUND"), 0, 0, screenDimensions.x, screenDimensions.y);
+		//gc.drawImage(Assets.getInstance().getImage("GAME_BACKGROUND"), 0, 0, screenDimensions.x, screenDimensions.y);
 		this.screenDimensions.x = screenDimensions.x;
 		this.screenDimensions.y = screenDimensions.y;
 		this.offset.x = screenDimensions.x/2 -620;

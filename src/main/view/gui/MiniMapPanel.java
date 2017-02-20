@@ -14,8 +14,8 @@ import view.Point;
 public class MiniMapPanel extends Panel {
     private static final int HEX_SIZE = 12;
     private static final int HEX_HEIGHT = 10;
-    private static final int DISTANCE_FROM_RIGHT = 400;
-    private static final int DISTANCE_FROM_BOTTOM = 437;
+    private static final int DISTANCE_FROM_RIGHT = 390;
+    private static final int DISTANCE_FROM_BOTTOM = 427;
     private final static Logger log = LogManager.getLogger(MiniMapPanel.class);
     Game game;
     private Point screenDimensions;

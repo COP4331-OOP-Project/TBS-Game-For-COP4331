@@ -1,5 +1,6 @@
 package view.gui;
 
+import controls.ModeEnum;
 import controls.command.CommandEnum;
 import game.Assets;
 import game.Game;
@@ -12,8 +13,13 @@ public class CommandPanel extends Panel{
 	private DropShadow ds = new DropShadow();
 	private Game game;
 	Point screenDimensions;
+	private static final int COMMAND_Y_NORMAL = 99;
+	private static final int COMMAND_Y_RP = 50;
+	private int yDistance = COMMAND_Y_NORMAL;
+	private static final int ICON_WIDTH = (int)Assets.getInstance().getImage("COMMAND_BUILD").getWidth();
 	
 	public CommandPanel(Game game) {
+		
 		this.game = game;
 	}
 
@@ -25,44 +31,57 @@ public class CommandPanel extends Panel{
 	}
 
     private void drawCommandPanel(GraphicsContext g) {
-        g.drawImage(Assets.getInstance().getImage("GUI_COMMAND_PANEL"), 0, screenDimensions.y - 350);
+    	if (game.getCurrentMode() == ModeEnum.RALLY_POINT) {
+    		yDistance = COMMAND_Y_RP;
+    	} else {
+    		yDistance = COMMAND_Y_NORMAL;
+    	}
+		g.drawImage(Assets.getInstance().getImage("GUI_COMMAND_PANEL"), 0, yDistance);
+    	drawAllIcons(g);
     }
     
-    private void drawCurrentCommand(GraphicsContext g) {
+    private void drawAllIcons(GraphicsContext g) {
+    	g.drawImage(Assets.getInstance().getImage("COMMAND_BUILD"), 0, yDistance);
+    	g.drawImage(Assets.getInstance().getImage("COMMAND_HEAL"), ICON_WIDTH, yDistance);
+    	g.drawImage(Assets.getInstance().getImage("COMMAND_ATTACK"), ICON_WIDTH * 2, yDistance);
+    	g.drawImage(Assets.getInstance().getImage("COMMAND_DEFEND"), 0, yDistance + ICON_WIDTH);
+    	g.drawImage(Assets.getInstance().getImage("COMMAND_POWER_UP"), ICON_WIDTH, yDistance + + ICON_WIDTH);
+    	g.drawImage(Assets.getInstance().getImage("COMMAND_POWER_DOWN"), ICON_WIDTH * 2, yDistance + ICON_WIDTH);
+    	g.drawImage(Assets.getInstance().getImage("COMMAND_CANCEL_QUEUE"), 0, yDistance + ICON_WIDTH * 2);
+    	g.drawImage(Assets.getInstance().getImage("COMMAND_DECOMMISSION"), ICON_WIDTH, yDistance + ICON_WIDTH * 2);
+    	g.drawImage(Assets.getInstance().getImage("COMMAND_MOVE"), ICON_WIDTH * 2, yDistance + ICON_WIDTH * 2);
+}
+
+	private void drawCurrentCommand(GraphicsContext g) {
         String commandString = "";
         if (game.getCurrentCommand() != null &&
                 game.getCurrentCommand() == CommandEnum.MAKE) {
-            commandString = "Make";
+        	g.drawImage(Assets.getInstance().getImage("COMMAND_HOVERED"), 0, yDistance);
         } else if (game.getCurrentCommand() != null &&
                 game.getCurrentCommand() == CommandEnum.HEAL) {
-            commandString = "Heal";
+        	g.drawImage(Assets.getInstance().getImage("COMMAND_HOVERED"), ICON_WIDTH, yDistance);
         } else if (game.getCurrentCommand() != null &&
                 game.getCurrentCommand() == CommandEnum.ATTACK) {
-            commandString = "Attack";
+        	g.drawImage(Assets.getInstance().getImage("COMMAND_HOVERED"), ICON_WIDTH * 2, yDistance);
         } else if (game.getCurrentCommand() != null &&
                 game.getCurrentCommand() == CommandEnum.DEFEND) {
-            commandString = "Defend";
+        	g.drawImage(Assets.getInstance().getImage("COMMAND_HOVERED"), 0, yDistance + ICON_WIDTH);
         } else if (game.getCurrentCommand() != null &&
                 game.getCurrentCommand() == CommandEnum.POWER_UP) {
-            commandString = "Power Up";
+        	g.drawImage(Assets.getInstance().getImage("COMMAND_HOVERED"), ICON_WIDTH, yDistance + + ICON_WIDTH);
         } else if (game.getCurrentCommand() != null &&
                 game.getCurrentCommand() == CommandEnum.POWER_DOWN) {
-            commandString = "Power Down";
+        	g.drawImage(Assets.getInstance().getImage("COMMAND_HOVERED"), ICON_WIDTH * 2, yDistance + ICON_WIDTH);
         } else if (game.getCurrentCommand() != null &&
                 game.getCurrentCommand() == CommandEnum.CANCEL_COMMAND_QUEUE) {
-            commandString = "Cancel Command Queue";
+        	g.drawImage(Assets.getInstance().getImage("COMMAND_HOVERED"),  0, yDistance + ICON_WIDTH * 2);
         } else if (game.getCurrentCommand() != null &&
                 game.getCurrentCommand() == CommandEnum.DECOMISSION) {
-            commandString = "Decomission";
+        	g.drawImage(Assets.getInstance().getImage("COMMAND_HOVERED"),  ICON_WIDTH, yDistance + ICON_WIDTH * 2);
         } else if (game.getCurrentCommand() != null &&
                 game.getCurrentCommand() == CommandEnum.MOVE) {
-            commandString = "Move";
-        } else if (game.getCurrentCommand() == null) {
-            commandString = "None";
+        	g.drawImage(Assets.getInstance().getImage("COMMAND_HOVERED"),  ICON_WIDTH * 2, yDistance + ICON_WIDTH * 2);
         }
-        g.setEffect(ds);
-        g.fillText(commandString, 0, screenDimensions.y - 300);
-        g.setEffect(null);
     }
 	
 	@Override
