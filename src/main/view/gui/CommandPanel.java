@@ -25,7 +25,7 @@ public class CommandPanel extends Panel{
 	}
 
     private void drawCommandPanel(GraphicsContext g) {
-        g.drawImage(Assets.getInstance().getImage("GUI_COMMAND_PANEL"), 0, screenDimensions.y - 250);
+        g.drawImage(Assets.getInstance().getImage("GUI_COMMAND_PANEL"), 0, screenDimensions.y - 350);
     }
     
     private void drawCurrentCommand(GraphicsContext g) {
@@ -60,6 +60,9 @@ public class CommandPanel extends Panel{
         } else if (game.getCurrentCommand() == null) {
             commandString = "None";
         }
+        g.setEffect(ds);
+        g.fillText(commandString, 0, screenDimensions.y - 300);
+        g.setEffect(null);
     }
 	
 	@Override

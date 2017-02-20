@@ -1,21 +1,21 @@
 package game;
 
 import javafx.scene.image.Image;
-import javafx.scene.paint.ImagePattern;
 import javafx.scene.text.Font;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class Assets {
     private final static Logger log = LogManager.getLogger(Assets.class);
     private static final Assets INSTANCE = new Assets(); //This is the one instance of resources (singleton)
+    private static final String MENU_BACKGROUND = "assets/images/menu/menuBackground.jpg";
+    private static final String GAME_BACKGROUND = "assets/images/menu/gameBackground.jpg";
     private static final String GUI_TOP = "assets/images/gui/topBar.png";
     private static final String GUI_BOTTOM = "assets/images/gui/bottomBar.png";
     private static final String GUI_COMMAND_PANEL = "assets/images/gui/mode/commandPanel.png";
@@ -80,7 +80,6 @@ public class Assets {
     private Font mediumFont;
     private Font largeFont;
     private Font hugeFont;
-    private ImagePattern text;
 
     private ArrayList<Image> gameImages;
     private int lastItemLoaded = 0;
@@ -101,7 +100,7 @@ public class Assets {
         try {
             defaultFont = Font.loadFont(new FileInputStream(new File(FONT)), 22);
             smallFont = Font.loadFont(new FileInputStream(new File(FONT)), 20);
-            mediumFont = Font.loadFont(new FileInputStream(new File(FONT)), 24);
+            mediumFont = Font.loadFont(new FileInputStream(new File(FONT)), 25);
             largeFont = Font.loadFont(new FileInputStream(new File(FONT)), 37);
             hugeFont = Font.loadFont(new FileInputStream(new File(FONT)), 57);
         } catch (IOException e) {
@@ -116,20 +115,18 @@ public class Assets {
 
     private void loadImages() {
         gameImages = new ArrayList<Image>();
+        loadItem("MENU_BACKGROUND", MENU_BACKGROUND);
+        loadItem("GAME_BACKGROUND", GAME_BACKGROUND);
         loadItem("GUI_TOP", GUI_TOP);
         loadItem("GUI_BOTTOM", GUI_BOTTOM);
-
         loadItem("GUI_COMMAND_PANEL", GUI_COMMAND_PANEL);
         loadItem("GUI_MINI_MAP_BORDER", GUI_MINI_MAP_BORDER);
-
         loadItem("GUI_MODE_SELECTED1", GUI_MODE_SELECTED1);
         loadItem("GUI_MODE_SELECTED2", GUI_MODE_SELECTED2);
         loadItem("GUI_MODE_SELECTED3", GUI_MODE_SELECTED3);
         loadItem("GUI_MODE_SELECTED4", GUI_MODE_SELECTED4);
-
         loadItem("GUI_SUBMODE_PANEL", GUI_SUBMODE_PANEL);
         loadItem("GUI_MODE_PANEL", GUI_MODE_PANEL);
-
         loadItem("TERRAIN_SAND", TERRAIN_SAND);
         loadItem("TERRAIN_GRASS1", TERRAIN_GRASS1);
         loadItem("TERRAIN_GRASS2", TERRAIN_GRASS2);
@@ -140,48 +137,39 @@ public class Assets {
         loadItem("TERRAIN_WATER1", TERRAIN_WATER1);
         loadItem("TERRAIN_WATER2", TERRAIN_WATER2);
         loadItem("TERRAIN_WATER3", TERRAIN_WATER3);
-
         loadItem("GRASS_MINI", GRASS_MINI);
         loadItem("SAND_MINI", SAND_MINI);
         loadItem("WATER_MINI", WATER_MINI);
-        loadItem("MOUNTAIN_MINI", MOUNTAIN_MINI);
-        
+        loadItem("MOUNTAIN_MINI", MOUNTAIN_MINI); 
         loadItem("BASE_O_SMALL", BASE_O_SMALL);
         loadItem("BASE_B_SMALL", BASE_B_SMALL);
         loadItem("UNIT_O_SMALL", UNIT_O_SMALL);
         loadItem("UNIT_B_SMALL", UNIT_B_SMALL);
-
         loadItem("UNIT_SELECTED", UNIT_SELECTED);
         loadItem("UNIT_MELEE", UNIT_MELEE);
         loadItem("UNIT_RANGED", UNIT_RANGED);
         loadItem("UNIT_EXPLORER", UNIT_EXPLORER);
         loadItem("UNIT_COLONIST", UNIT_COLONIST);
-
         loadItem("UNIT_G", UNIT_G);
         loadItem("UNIT_B", UNIT_B);
         loadItem("UNIT_Y", UNIT_Y);
         loadItem("UNIT_O", UNIT_O);
-
         loadItem("BASE_SELECTED", BASE_SELECTED);
         loadItem("BASE_ARROW", BASE_ARROW);
         loadItem("BASE_G", BASE_G);
         loadItem("BASE_B", BASE_B);
         loadItem("BASE_Y", BASE_Y);
         loadItem("BASE_O", BASE_O);
-
         loadItem("ARMY_SELECTED", ARMY_SELECTED);
         loadItem("ARMY_G", ARMY_G);
         loadItem("ARMY_B", ARMY_B);
         loadItem("ARMY_Y", ARMY_Y);
         loadItem("ARMY_O", ARMY_O);
-
         loadItem("ICON_O", ICON_O);
         loadItem("ICON_B", ICON_B);
-
         loadItem("RALLY_POINT_SELECTED", RALLY_POINT_SELECTED);
         loadItem("DETAILS_PANEL", DETAILS_PANEL);
         loadItem("MOVE_SELECTED", MOVE_SELECTED);
-
         loadItem("AOE_DIE", AOE_DIE);
         loadItem("AOE_LOSE", AOE_LOSE);
         loadItem("AOE_HEAL", AOE_HEAL);

@@ -28,11 +28,7 @@ public class MouseEventController {
 	}
 
 	public void mouseClicked(MouseEvent event) {
-		if (!event.isShiftDown()) {
-			view.paintMap(event.getX(), event.getY());
-		} else {
-			view.changePaintColor();
-		}
+		view.paintMap(event.getX(), event.getY());
 	}
 	
 	private void mouseMoved(MouseEvent event) {

@@ -9,8 +9,6 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.effect.DropShadow;
-import javafx.scene.paint.Color;
 import view.game.Camera;
 import view.game.GamePanel;
 import view.gui.*;
@@ -33,13 +31,9 @@ public class View {
     private MapMakerPanel mapMakerPanel;
     private MainMenuPanel mainMenuPanel;
     private SettingsPanel settingsPanel;
-    
-    //ArrayList Containing Panels
-    private ArrayList<Panel> panels;
-
+    private ArrayList<Panel> panels; //ArrayList Containing Panels
     private int defaultScreenWidth = 1366;
-    private int defaultScreenHeight = 768;
-    
+    private int defaultScreenHeight = 768; 
     private Canvas canvas; //The GraphicsContext Goes on here.
     private GraphicsContext gc; //Image drawing is done with this
     private Group root; //Gui drawing is added to this
@@ -47,6 +41,12 @@ public class View {
     private Point screenDimensions;
     private ViewEnum viewMode;
     private Scene scene;
+    
+    private void startGameScreen() {
+        //mainGameMode();
+        //mapMakerMode();
+        mainMenuMode();
+	}
     
     public View(Game game, Scene scene, Group root) {
     	this.root = root;
@@ -57,10 +57,8 @@ public class View {
         this.game = game;
         panels = new ArrayList<Panel>();
         screenDimensions = new Point();
-        camera = new Camera(screenDimensions);
-        
+        camera = new Camera(screenDimensions);    
         createPanels();
-        
         panels.add(gamePanel);
         panels.add(civPanel);
         panels.add(modePanel);
@@ -74,12 +72,12 @@ public class View {
         panels.add(mapMakerPanel);
         panels.add(mainMenuPanel);
         panels.add(settingsPanel);
-        
-        mainGameMode();
-        //mainMenuMode();
+        startGameScreen();
     }
 
-    private void setScene() {
+
+
+	private void setScene() {
         root.getChildren().add(canvas);
         File buttonStyle = new File("assets/buttonStyle.css");
         scene.getStylesheets().clear();
@@ -251,12 +249,6 @@ public class View {
 	public void paintMap(double x, double y) {
 		if (viewMode == ViewEnum.MAP_MAKER) {
 			mapMakerPanel.tileClicked(new Point((int)x, (int)y));
-		}
-	}
-
-	public void changePaintColor() {
-		if (viewMode == ViewEnum.MAP_MAKER) {
-			mapMakerPanel.changePaintColor();
 		}
 	}
 }

@@ -19,6 +19,7 @@ public class CivilizationPanel extends Panel {
     Font civInfoFont = Assets.getInstance().getFont(2);
     private Game game;
     ImagePattern textFill = new ImagePattern(Assets.getInstance().getImage("TEXT_PATTERN"), 0, 0, 1, 1, true);
+    
     public CivilizationPanel(Game game) {
         this.game = game;
     	ds.setOffsetY(2.0f);
@@ -35,9 +36,9 @@ public class CivilizationPanel extends Panel {
 
     private void drawPlayerIcon(GraphicsContext g) {
         if (game.getCurrentPlayer().getPlayerID() == 0) {
-            g.drawImage(Assets.getInstance().getImage("ICON_O"), 130, 5);
+            g.drawImage(Assets.getInstance().getImage("ICON_O"), 130, 3);
         } else {
-            g.drawImage(Assets.getInstance().getImage("ICON_B"), 130, 5);
+            g.drawImage(Assets.getInstance().getImage("ICON_B"), 130, 3);
         }
     }
 
@@ -46,8 +47,8 @@ public class CivilizationPanel extends Panel {
         g.setFont(civInfoFont);
         g.setFill(textFill);
         g.setEffect(ds);
-        g.fillText("Player: ", 10, 37);
-        g.fillText("Turn: " + game.getTurnNum() + "   O: 1-1   E: 2-2   F: 3-5", 180, 37);
+        g.fillText("Player: ", 10, 34);
+        g.fillText("Turn: " + game.getTurnNum() + "   O: 1-1   E: 2-2   F: 3-5", 180, 34);
         g.setEffect(null);
         g.setFont(old);
     }

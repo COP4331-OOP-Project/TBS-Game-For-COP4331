@@ -1,5 +1,6 @@
 package view.gui;
 
+import game.Assets;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -7,7 +8,6 @@ import javafx.scene.Group;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
 import view.Point;
 import view.View;
 
@@ -30,8 +30,6 @@ public class MainMenuPanel extends Panel{
 	}
 
 	private void setUpButtons() {
-
-		
 		startGame.setId("mainMenuButton");
 		startGame.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -69,6 +67,7 @@ public class MainMenuPanel extends Panel{
 
 	@Override
 	public void draw(GraphicsContext gc, Point screenDimensions) {
+		gc.drawImage(Assets.getInstance().getImage("MENU_BACKGROUND"), 0, 0, screenDimensions.x, screenDimensions.y);
 		startGame.setTranslateX(screenDimensions.x / 2 - startGame.getWidth() / 2);
 		startGame.setTranslateY(screenDimensions.y / 2 - DISTANCE_UP_FROM_CENTER);
 		mapMaker.setTranslateX(screenDimensions.x / 2 - mapMaker.getWidth() / 2);

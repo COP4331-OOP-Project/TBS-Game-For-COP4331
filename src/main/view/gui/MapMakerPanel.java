@@ -5,8 +5,10 @@ import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import view.Point;
@@ -23,6 +25,7 @@ import game.gameboard.MapLoader;
 
 public class MapMakerPanel extends Panel{
     private static final int BOARD_SIZE = 42;
+    private DropShadow ds = new DropShadow();
     public static int GUI_PANEL_WIDTH =
             (int) Assets.getInstance().getImage("GUI_TOP").getWidth();
     Point screenDimensions = new Point(0,0);
@@ -44,6 +47,8 @@ public class MapMakerPanel extends Panel{
 	public MapMakerPanel(Group root, View view) {
 		this.view = view;
 		this.root = root;
+    	ds.setOffsetY(2.0f);
+    	ds.setColor(Color.color(0, 0, 0));
 		camera.setScale(0.3);
 		camera.setOffset(offset);
 		map = mapLoader.getMap(BOARD_SIZE, waterMap);
@@ -51,7 +56,7 @@ public class MapMakerPanel extends Panel{
 	}
 	
 	private void setUpButtons() {
-		loadMapButton.setTranslateX(300);
+		loadMapButton.setTranslateX(182);
 		loadMapButton.setTranslateY(8);
 		loadMapButton.setId("button");
 		loadMapButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -60,7 +65,7 @@ public class MapMakerPanel extends Panel{
                 loadMap();
             }
         });
-		saveMapButton.setTranslateX(450);
+		saveMapButton.setTranslateX(290);
 		saveMapButton.setTranslateY(8);
 		saveMapButton.setId("button");
 		saveMapButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -69,6 +74,8 @@ public class MapMakerPanel extends Panel{
                 saveMap();
             }
         });
+
+		exitToMenuButton.setTranslateX(440);
 		exitToMenuButton.setTranslateY(8);
 		exitToMenuButton.setId("button");
 		exitToMenuButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -87,7 +94,7 @@ public class MapMakerPanel extends Panel{
 
 	@Override
 	public void draw(GraphicsContext gc, Point screenDimensions) {
-		exitToMenuButton.setTranslateX(screenDimensions.x - 230);
+		gc.drawImage(Assets.getInstance().getImage("GAME_BACKGROUND"), 0, 0, screenDimensions.x, screenDimensions.y);
 		this.screenDimensions.x = screenDimensions.x;
 		this.screenDimensions.y = screenDimensions.y;
 		this.offset.x = screenDimensions.x/2 -620;
@@ -97,21 +104,17 @@ public class MapMakerPanel extends Panel{
 	            	drawTile(gc, new Point(i,j), map[i][j]);
 	            }
 		  }
-		  drawTopBar(gc);
-		 
+		  drawTopBar(gc);	 
 	}
 
 	private void drawTopBar(GraphicsContext gc) {
-	      gc.drawImage(Assets.getInstance().getImage("GUI_TOP_LEFT"), 0, 0);
-	      gc.drawImage(Assets.getInstance().getImage("GUI_TOP_RIGHT"),
-	      screenDimensions.x - GUI_PANEL_WIDTH, 0);
-	      int distanceFromRight = screenDimensions.x - GUI_PANEL_WIDTH;
-	      for (int i = GUI_PANEL_WIDTH; i < distanceFromRight; i++) {
-	            gc.drawImage(Assets.getInstance().getImage("GUI_TOP_MIDDLE"), i, 0);
-	      }
+	      gc.drawImage(Assets.getInstance().getImage("GUI_TOP"), 0, 0);
 	      drawCurrentTile(gc);
 	      gc.setFont(Assets.getInstance().getFont(2));
-	      gc.fillText("Map Maker", 12, 37);
+	      gc.setFill(Color.WHITE);
+	      gc.setEffect(ds);
+	      gc.fillText("Map Maker", 6, 35);
+	      gc.setEffect(null);
 	}
 
 	private void drawCurrentTile(GraphicsContext gc) {
@@ -119,23 +122,23 @@ public class MapMakerPanel extends Panel{
 		switch (currentDrawingType) {
 	    	case 0:
 	    		img = Assets.getInstance().getImage("TERRAIN_GRASS1");
-	        	gc.drawImage(img, 210, 0, img.getWidth()/2.5, 
-	            		img.getHeight()/2.5);
+	        	gc.drawImage(img, 175, 0, img.getWidth()/2.8, 
+	            		img.getHeight()/2.8 + 2);
 	            break;
 	        case 1:
 	    		img = Assets.getInstance().getImage("TERRAIN_SAND");
-	    		gc.drawImage(img, 210, 0, img.getWidth()/2.5, 
-	            		img.getHeight()/2.5);
+	    		gc.drawImage(img, 175, 0, img.getWidth()/2.8, 
+	            		img.getHeight()/2.8 + 2);
 	            break;
 	        case 2:
 	        	img = Assets.getInstance().getImage("TERRAIN_WATER1");
-	        	gc.drawImage(img, 210, 0, img.getWidth()/2.5, 
-	            		img.getHeight()/2.5);
+	        	gc.drawImage(img, 175, 0, img.getWidth()/2.8, 
+	            		img.getHeight()/2.8 + 2);
 	            break;
 	        case 3:
 	        	img = Assets.getInstance().getImage("TERRAIN_MOUNTAIN1");
-	        	gc.drawImage(img, 210, 0, img.getWidth()/2.5, 
-	            		img.getHeight()/2.5);
+	        	gc.drawImage(img, 175, 0, img.getWidth()/2.8, 
+	            		img.getHeight()/2.8 + 2);
 	            break;
 	        case -1:
 	            break;
@@ -172,6 +175,9 @@ public class MapMakerPanel extends Panel{
 	}
 
 	public void tileClicked(Point point) {
+		if (point.x >= 175 && point.x <= 221 && point.y <= 46) {
+			changePaintColor();
+		}
 		if (camera.getTileLocation(point).x < BOARD_SIZE &&
 				camera.getTileLocation(point).y < BOARD_SIZE) {
 			iterateTile(camera.getTileLocation(point));
@@ -184,11 +190,11 @@ public class MapMakerPanel extends Panel{
 		}
 	}
 
-	public void changePaintColor() {
+	private void changePaintColor() {
 		currentDrawingType = (currentDrawingType + 1) % 4;
 	}
 
-	public void saveMap() {
+	private void saveMap() {
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Save Map");
 		fileChooser.setInitialDirectory(new File("assets/maps"));
@@ -220,7 +226,7 @@ public class MapMakerPanel extends Panel{
 		   
 	}
 
-	public void loadMap() {
+	private void loadMap() {
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Open Map");
 		fileChooser.setInitialDirectory(new File("assets/maps"));

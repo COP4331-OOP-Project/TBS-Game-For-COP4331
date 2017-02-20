@@ -20,12 +20,13 @@ public class ControlModePanel extends Panel {
 	
     private final static Logger log = LogManager.getLogger(ControlModePanel.class);
     private static final int MODE_Y = 0;
-    private static final int SUBMODE_X = -18;
-    private static final int SUBMODE_Y = 115;
-    private static final int TEXT_SPACING = 172;
-    private static final int TEXT1_LOCATION = 13;
-    private static final int TEXT2_LOCATION = 10;
-	private static final int MODE_TEXT_HEIGHT = 87;
+    private static final int MODE_TEXT_X = 670;
+	private static final int MODE_TEXT_Y = 30;
+    private static final int MODE_TEXT_SPACING = 172;
+    private static final int SUBMODE_X = 0;
+    private static final int SUBMODE_Y = 50;
+    private static final int SUBMODE_TEXT_X = 10;
+    private static final int SUBMODE_TEXT_Y = 80;
 	private DropShadow ds = new DropShadow();
 	private Point screenDimensions;
     private Font modeFont = Assets.getInstance().getFont(1);
@@ -45,18 +46,12 @@ public class ControlModePanel extends Panel {
         updateModes();
         drawModePanel(gc);
         drawSubmodePanel(gc);
-
         gc.setFont(modeFont);
-        //g.setFont(currentCommandFont);
-        
         gc.setEffect(ds);
         drawModeStrings(gc);
         drawSubmodeStrings(gc);
         gc.setEffect(null);
     }
-
-
-
 
     private void updateModes() {
         if (game.getCurrentMode() == ModeEnum.RALLY_POINT) {
@@ -86,19 +81,17 @@ public class ControlModePanel extends Panel {
             if (game.getCurrentType() == ArmyEnum.REINFORCEMENTS)
             	submodeString = "Reinforcements";
         }
-
-
     }
 
     private void drawModeStrings(GraphicsContext g) {
-        g.fillText(modeString[0], TEXT1_LOCATION, MODE_TEXT_HEIGHT);
-        g.fillText(modeString[1], TEXT1_LOCATION + TEXT_SPACING, MODE_TEXT_HEIGHT);
-        g.fillText(modeString[2], TEXT1_LOCATION + 2 * TEXT_SPACING, MODE_TEXT_HEIGHT);
-        g.fillText(modeString[3], TEXT1_LOCATION + 3 * TEXT_SPACING, MODE_TEXT_HEIGHT);
+        g.fillText(modeString[0], screenDimensions.x - MODE_TEXT_X, MODE_TEXT_Y);
+        g.fillText(modeString[1], screenDimensions.x - MODE_TEXT_X + MODE_TEXT_SPACING, MODE_TEXT_Y);
+        g.fillText(modeString[2], screenDimensions.x - MODE_TEXT_X + 2 * MODE_TEXT_SPACING, MODE_TEXT_Y);
+        g.fillText(modeString[3], screenDimensions.x - MODE_TEXT_X + 3 * MODE_TEXT_SPACING, MODE_TEXT_Y);
     }
 
     private void drawSubmodeStrings(GraphicsContext g) {
-        g.fillText(submodeString, 10, TEXT2_LOCATION);
+        g.fillText(submodeString, SUBMODE_TEXT_X, SUBMODE_TEXT_Y);
     }
 
     private void drawModePanel(GraphicsContext g) {
@@ -120,25 +113,18 @@ public class ControlModePanel extends Panel {
             default:
                 log.warn("Invalid Mode to display");
         }
-
     }
 
     private void drawSubmodePanel(GraphicsContext g) {
-        g.drawImage(Assets.getInstance().getImage("GUI_SUBMODE_PANEL"), SUBMODE_X, SUBMODE_Y);
+    	if (game.getCurrentMode() != ModeEnum.RALLY_POINT)
+    		g.drawImage(Assets.getInstance().getImage("GUI_SUBMODE_PANEL"), SUBMODE_X, SUBMODE_Y);
     }
-
-
 
 	@Override
 	public void hideGUIElements() {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void showGUIElements() {
-		// TODO Auto-generated method stub
-		
 	}
-
 }
