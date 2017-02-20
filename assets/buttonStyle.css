@@ -1,6 +1,6 @@
 @main-font {
-    -fx-font-family: "Lato Black";
-     src: url('/fonts/Lato-Black.ttf');
+    -fx-font-family: "Nuku Nuku";
+     src: url('/fonts/nuku.ttf');
 }
 
 .button {
@@ -13,7 +13,7 @@
     -fx-background-insets: 0,1,2,0;
     -fx-text-fill: white;
     -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
-    -fx-font-family: "Lato Black";
+    -fx-font-family: "Nuku Nuku";
     -fx-text-fill: linear-gradient(white, #d0d0d0);
     -fx-font-size: 22px;
     -fx-padding: 5 10 5 10;

@@ -24,7 +24,7 @@ import game.gameboard.MapLoader;
 public class MapMakerPanel extends Panel{
     private static final int BOARD_SIZE = 42;
     public static int GUI_PANEL_WIDTH =
-            (int) Assets.getInstance().getImage("GUI_TOP_LEFT").getWidth();
+            (int) Assets.getInstance().getImage("GUI_TOP").getWidth();
     Point screenDimensions = new Point(0,0);
     Point offset = new Point(20, -600);
     Camera camera = new Camera(screenDimensions);
@@ -118,7 +118,7 @@ public class MapMakerPanel extends Panel{
 	    Image img;
 		switch (currentDrawingType) {
 	    	case 0:
-	    		img = Assets.getInstance().getImage("TERRAIN_GRASS");
+	    		img = Assets.getInstance().getImage("TERRAIN_GRASS1");
 	        	gc.drawImage(img, 210, 0, img.getWidth()/2.5, 
 	            		img.getHeight()/2.5);
 	            break;
@@ -132,6 +132,11 @@ public class MapMakerPanel extends Panel{
 	        	gc.drawImage(img, 210, 0, img.getWidth()/2.5, 
 	            		img.getHeight()/2.5);
 	            break;
+	        case 3:
+	        	img = Assets.getInstance().getImage("TERRAIN_MOUNTAIN1");
+	        	gc.drawImage(img, 210, 0, img.getWidth()/2.5, 
+	            		img.getHeight()/2.5);
+	            break;
 	        case -1:
 	            break;
 	    }
@@ -142,7 +147,7 @@ public class MapMakerPanel extends Panel{
 	    Image img;
 		switch (type) {
 	    	case 0:
-	    		img = Assets.getInstance().getImage("TERRAIN_GRASS");
+	    		img = Assets.getInstance().getImage("TERRAIN_GRASS1");
 	        	gc.drawImage(img, camera.offset(p).x, camera.offset(p).y, camera.getScale() * img.getWidth(), 
 	            		camera.getScale() * img.getHeight());
 	            break;
@@ -153,6 +158,11 @@ public class MapMakerPanel extends Panel{
 	            break;
 	        case 2:
 	        	img = Assets.getInstance().getImage("TERRAIN_WATER1");
+	        	gc.drawImage(img, camera.offset(p).x, camera.offset(p).y, camera.getScale() * img.getWidth(), 
+	            		camera.getScale() * img.getHeight());
+	            break;
+	        case 3:
+	        	img = Assets.getInstance().getImage("TERRAIN_MOUNTAIN1");
 	        	gc.drawImage(img, camera.offset(p).x, camera.offset(p).y, camera.getScale() * img.getWidth(), 
 	            		camera.getScale() * img.getHeight());
 	            break;
@@ -175,7 +185,7 @@ public class MapMakerPanel extends Panel{
 	}
 
 	public void changePaintColor() {
-		currentDrawingType = (currentDrawingType + 1) % 3;
+		currentDrawingType = (currentDrawingType + 1) % 4;
 	}
 
 	public void saveMap() {

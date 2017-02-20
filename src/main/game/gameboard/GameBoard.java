@@ -71,6 +71,8 @@ public class GameBoard {
                     gameMap[i][j] = new Tile(TerrainEnum.SAND, l);
                 if (map[i][j] == 2)
                     gameMap[i][j] = new Tile(TerrainEnum.WATER, l);
+                if (map[i][j] == 3)
+                    gameMap[i][j] = new Tile(TerrainEnum.MOUNTAIN, l);
             }
         }
     }

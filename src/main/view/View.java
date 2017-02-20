@@ -3,12 +3,13 @@ package view;
 import java.io.File;
 import java.util.ArrayList;
 
+import controls.ModeEnum;
 import game.Game;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.layout.StackPane;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.paint.Color;
 import view.game.Camera;
 import view.game.GamePanel;
@@ -28,6 +29,7 @@ public class View {
     private UnitDetailsPanel unitDetailsPanel;
     private MiniMapPanel miniMapPanel;
     private MakeDetailsPanel makePanel;
+    private CommandPanel commandPanel;
     private MapMakerPanel mapMakerPanel;
     private MainMenuPanel mainMenuPanel;
     private SettingsPanel settingsPanel;
@@ -68,11 +70,13 @@ public class View {
         panels.add(structureDetailsPanel);
         panels.add(miniMapPanel);
         panels.add(makePanel);
+        panels.add(commandPanel);
         panels.add(mapMakerPanel);
         panels.add(mainMenuPanel);
         panels.add(settingsPanel);
         
-        mainMenuMode();
+        mainGameMode();
+        //mainMenuMode();
     }
 
     private void setScene() {
@@ -92,6 +96,7 @@ public class View {
         structureDetailsPanel = new StructureDetailsPanel(game);
         miniMapPanel = new MiniMapPanel(game);
         makePanel = new MakeDetailsPanel(game);
+        commandPanel = new CommandPanel(game);
         mapMakerPanel = new MapMakerPanel(root, this);
         mainMenuPanel = new MainMenuPanel(root, this);
         settingsPanel = new SettingsPanel(root, this);
@@ -109,6 +114,18 @@ public class View {
     }
 
     private void checkVisibility() {
+    	if (viewMode == ViewEnum.MAIN_GAME) {
+    		if (game.getCurrentMode() == ModeEnum.UNIT) {
+    			unitDetailsPanel.setIsVisible(true);
+    			structureDetailsPanel.setIsVisible(false);
+    		} else if (game.getCurrentMode() == ModeEnum.STRUCTURE) {
+    			unitDetailsPanel.setIsVisible(false);
+    			structureDetailsPanel.setIsVisible(true);
+    		} else {
+    			unitDetailsPanel.setIsVisible(false);
+    			structureDetailsPanel.setIsVisible(false);
+    		}
+    	}
 		if (game.isShowingMakeDetails()) {
 			makePanel.setIsVisible(true);
 		} else {
@@ -170,10 +187,11 @@ public class View {
         gamePanel.setIsVisible(true);
         structureOverviewPanel.setIsVisible(false);
         unitOverviewPanel.setIsVisible(false);
-        structureDetailsPanel.setIsVisible(true);
-        unitDetailsPanel.setIsVisible(true);
+        structureDetailsPanel.setIsVisible(false);
+        unitDetailsPanel.setIsVisible(false);
         miniMapPanel.setIsVisible(true);
         makePanel.setIsVisible(true);
+        commandPanel.setIsVisible(true);
         mainMenuPanel.setIsVisible(false);
         settingsPanel.setIsVisible(false);
         mapMakerPanel.setIsVisible(false);
@@ -190,6 +208,7 @@ public class View {
         unitDetailsPanel.setIsVisible(false);
         miniMapPanel.setIsVisible(false);
         makePanel.setIsVisible(false);
+        commandPanel.setIsVisible(false);
         mainMenuPanel.setIsVisible(false);
         settingsPanel.setIsVisible(false);
         mapMakerPanel.setIsVisible(true);
@@ -206,6 +225,7 @@ public class View {
         unitDetailsPanel.setIsVisible(false);
         miniMapPanel.setIsVisible(false);
         makePanel.setIsVisible(false);
+        commandPanel.setIsVisible(false);
         mapMakerPanel.setIsVisible(false);
         mainMenuPanel.setIsVisible(true);
         settingsPanel.setIsVisible(false);
@@ -222,6 +242,7 @@ public class View {
         unitDetailsPanel.setIsVisible(false);
         miniMapPanel.setIsVisible(false);
         makePanel.setIsVisible(false);
+        commandPanel.setIsVisible(false);
         mapMakerPanel.setIsVisible(false);
         mainMenuPanel.setIsVisible(false);
         settingsPanel.setIsVisible(true);

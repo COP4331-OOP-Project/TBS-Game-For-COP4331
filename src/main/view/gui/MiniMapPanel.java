@@ -88,6 +88,10 @@ public class MiniMapPanel extends Panel {
                 gc.drawImage(Assets.getInstance().getImage("WATER_MINI"),
                 		offsetMini(tileLoc).x, offsetMini(tileLoc).y);
                 break;
+            case MOUNTAIN:
+                gc.drawImage(Assets.getInstance().getImage("MOUNTAIN_MINI"),
+                		offsetMini(tileLoc).x, offsetMini(tileLoc).y);
+                break;
             case INVISIBLE:
                 break;
             default:

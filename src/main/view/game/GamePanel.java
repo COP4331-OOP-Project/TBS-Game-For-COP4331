@@ -16,7 +16,7 @@ import view.gui.Panel;
 
 public class GamePanel extends Panel {
     private static final int TILE_PIXEL_SIZE =
-            (int) Assets.getInstance().getImage("TERRAIN_GRASS").getWidth();
+            (int) Assets.getInstance().getImage("TERRAIN_WATER1").getWidth();
     Font tileFont = new Font("Lucida Sans", 20);
     private Camera camera;
     private TileDrawer tileDrawer;
@@ -116,16 +116,29 @@ public class GamePanel extends Panel {
     }
 
     public void drawAnimatedTileElement(Point p, String image1, String image2, String image3) {
-        Image img;   
-    	switch (getAnimationImage()) { 
-	        	case 0:
-	            	img = Assets.getInstance().getImage(image1);
-	                break;
-	            case 2:
-	            	img = Assets.getInstance().getImage(image2);
-	                break;
-	            default:
-	            	img = Assets.getInstance().getImage(image3);
+        Image img;
+        if(p.x % 2 == 0) {
+	    	switch (getAnimationImage()) { 
+		        	case 0:
+		            	img = Assets.getInstance().getImage(image1);
+		                break;
+		            case 2:
+		            	img = Assets.getInstance().getImage(image3);
+		                break;
+		            default:
+		            	img = Assets.getInstance().getImage(image2);
+	    	}
+        } else {
+        	switch (getAnimationImage()) { 
+        	case 0:
+            	img = Assets.getInstance().getImage(image1);
+                break;
+            case 2:
+            	img = Assets.getInstance().getImage(image2);
+                break;
+            default:
+            	img = Assets.getInstance().getImage(image3);
+        	}
         }
     	
         gc.drawImage(img, camera.offset(p).x, camera.offset(p).y, camera.getScale() * img.getWidth(), 

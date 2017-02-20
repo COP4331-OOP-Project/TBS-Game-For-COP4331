@@ -16,10 +16,10 @@ public class GameEngine extends Application {
 
     @Override
     public void start(Stage stage) {
+        Assets.getInstance().loadResources();
         stage.setTitle("Game");
         Group root = new Group();
         Scene scene = new Scene(root, Color.BLACK);
-
         //primaryStage.setFullScreen(true);
         stage.setMaximized(true);
         view = new View(game, scene, root);

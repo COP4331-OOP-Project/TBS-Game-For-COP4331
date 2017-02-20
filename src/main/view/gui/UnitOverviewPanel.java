@@ -19,7 +19,6 @@ public class UnitOverviewPanel extends OverviewPanel {
     public void draw(GraphicsContext gc, Point screenDimensions) {
         drawPanelBox(gc, screenDimensions);
         Font oldFont = gc.getFont();
-        gc.setFill(Color.WHITE);
         gc.setFont(Assets.getInstance().getFont(2));
         gc.fillText("Unit Overview", screenDimensions.x / 2 - 370, screenDimensions.y / 2 - 245);
         for (int i = 0; i < game.getCurrentPlayer().getAllUnit().size(); i++) {
@@ -44,7 +43,6 @@ public class UnitOverviewPanel extends OverviewPanel {
             //}
             gc.fillText(unitString, screenDimensions.x / 2 - 370, screenDimensions.y / 2 + (i * 30) - 200);
         }
-        gc.setFill(Color.BLACK);
         gc.setFont(oldFont);
     }
 

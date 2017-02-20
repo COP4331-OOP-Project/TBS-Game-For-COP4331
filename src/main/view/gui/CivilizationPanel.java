@@ -3,19 +3,26 @@ package view.gui;
 import game.Assets;
 import game.Game;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.effect.DropShadow;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.text.Font;
 import view.Point;
 
 
 public class CivilizationPanel extends Panel {
+	DropShadow ds = new DropShadow();
     public static int GUI_PANEL_WIDTH =
-            (int) Assets.getInstance().getImage("GUI_TOP_LEFT").getWidth();
+            (int) Assets.getInstance().getImage("GUI_TOP").getWidth();
     public static int GUI_PANEL_HEIGHT =
-            (int) Assets.getInstance().getImage("GUI_TOP_LEFT").getHeight();
+            (int) Assets.getInstance().getImage("GUI_TOP").getHeight();
     Font civInfoFont = Assets.getInstance().getFont(2);
     private Game game;
+    ImagePattern textFill = new ImagePattern(Assets.getInstance().getImage("TEXT_PATTERN"), 0, 0, 1, 1, true);
     public CivilizationPanel(Game game) {
         this.game = game;
+    	ds.setOffsetY(2.0f);
+    	ds.setColor(Color.color(0, 0, 0));
     }
 
     
@@ -28,29 +35,26 @@ public class CivilizationPanel extends Panel {
 
     private void drawPlayerIcon(GraphicsContext g) {
         if (game.getCurrentPlayer().getPlayerID() == 0) {
-            g.drawImage(Assets.getInstance().getImage("ICON_O"), 120, 7);
+            g.drawImage(Assets.getInstance().getImage("ICON_O"), 130, 5);
         } else {
-            g.drawImage(Assets.getInstance().getImage("ICON_B"), 120, 7);
+            g.drawImage(Assets.getInstance().getImage("ICON_B"), 130, 5);
         }
     }
 
     private void drawText(GraphicsContext g) {
         Font old = g.getFont();
         g.setFont(civInfoFont);
+        g.setFill(textFill);
+        g.setEffect(ds);
         g.fillText("Player: ", 10, 37);
-        g.fillText("Turn: " + game.getTurnNum(), 180, 37);
+        g.fillText("Turn: " + game.getTurnNum() + "   O: 1-1   E: 2-2   F: 3-5", 180, 37);
+        g.setEffect(null);
         g.setFont(old);
     }
 
     //Draw the blue panel itself
     private void drawBar(GraphicsContext g, Point screenDimensions) {
-        g.drawImage(Assets.getInstance().getImage("GUI_TOP_LEFT"), 0, 0);
-        g.drawImage(Assets.getInstance().getImage("GUI_TOP_RIGHT"),
-                screenDimensions.x - GUI_PANEL_WIDTH, 0);
-        int distanceFromRight = screenDimensions.x - GUI_PANEL_WIDTH;
-        for (int i = GUI_PANEL_WIDTH; i < distanceFromRight; i++) {
-            g.drawImage(Assets.getInstance().getImage("GUI_TOP_MIDDLE"), i, 0);
-        }
+        g.drawImage(Assets.getInstance().getImage("GUI_TOP"), 0, 0);
     }
 
 

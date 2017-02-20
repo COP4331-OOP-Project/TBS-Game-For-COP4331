@@ -4,7 +4,7 @@ import game.Assets;
 import view.Point;
 
 public class Camera {
-    private static final int HEX_W = (int)Assets.getInstance().getImage("TERRAIN_GRASS").getWidth();
+    private static final int HEX_W = (int)Assets.getInstance().getImage("TERRAIN_WATER1").getWidth();
     private static final int HEX_H = (int)(HEX_W * 0.86);
     private static final int TILE_SIZE = HEX_W;
 	private static final double SCALE_AMOUNT = 0.05; //The amount change per zoom

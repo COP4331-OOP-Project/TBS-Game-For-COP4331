@@ -49,7 +49,7 @@ public class Game {
 
     
     Game() {
-        Assets.getInstance().loadResources();
+
     }
     
     public void initializeGame() {
