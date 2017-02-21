@@ -106,7 +106,7 @@ public class View {
         structureDetailsPanel = new StructureDetailsPanel(game);
         miniMapPanel = new MiniMapPanel(game);
         makePanel = new MakeDetailsPanel(game);
-        commandPanel = new CommandPanel(game);
+        commandPanel = new CommandPanel(game, root);
         mapMakerPanel = new MapMakerPanel(root, this);
         mainMenuPanel = new MainMenuPanel(root, this);
         settingsPanel = new SettingsPanel(root, this);
@@ -258,7 +258,7 @@ public class View {
         settingsPanel.setIsVisible(true);
     }
 
-	public void paintMap(double x, double y) {
+	public void tileClicked(double x, double y) {
 		if (viewMode == ViewEnum.MAP_MAKER) {
 			mapMakerPanel.tileClicked(new Point((int)x, (int)y));
 		}

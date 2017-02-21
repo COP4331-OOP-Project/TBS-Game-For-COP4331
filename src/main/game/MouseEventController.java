@@ -23,12 +23,12 @@ public class MouseEventController {
 		view.continueDragging(event.getX(),
 				event.getY());
 		if (!event.isShiftDown()) {
-			view.paintMap(event.getX(), event.getY());
+			view.tileClicked(event.getX(), event.getY());
 		}
 	}
 
 	public void mouseClicked(MouseEvent event) {
-		view.paintMap(event.getX(), event.getY());
+		view.tileClicked(event.getX(), event.getY());
 	}
 	
 	private void mouseMoved(MouseEvent event) {

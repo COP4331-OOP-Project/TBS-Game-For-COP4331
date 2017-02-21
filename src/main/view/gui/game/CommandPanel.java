@@ -4,8 +4,16 @@ import controls.ModeEnum;
 import controls.command.CommandEnum;
 import game.Assets;
 import game.Game;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.Group;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.ToggleButton;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.effect.DropShadow;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.StackPane;
 import view.Point;
 import view.gui.Panel;
 
@@ -17,18 +25,49 @@ public class CommandPanel extends Panel{
 	private static final int COMMAND_Y_NORMAL = 99;
 	private static final int COMMAND_Y_RP = 50;
 	private int yDistance = COMMAND_Y_NORMAL;
-	private static final int ICON_WIDTH = (int)Assets.getInstance().getImage("COMMAND_BUILD").getWidth();
+	private static final int ICON_WIDTH = 55;
+	private static final int SPACING = 15;
+	StackPane commandToggleButtons = new StackPane();
+	Group root;
+	ToggleButton commandBuild = new ToggleButton();
+	ToggleButton commandHeal = new ToggleButton();
+	ToggleButton commandAttack = new ToggleButton();
+	ToggleButton commandDefend = new ToggleButton();
+	ToggleButton commandPowerUp = new ToggleButton();
+	ToggleButton commandPowerDown = new ToggleButton();
+	ToggleButton cancelQueue = new ToggleButton();
+	ToggleButton commandDecommission = new ToggleButton();
+	ToggleButton commandMove = new ToggleButton();
 	
-	public CommandPanel(Game game) {
-		
+	public CommandPanel(Game game, Group root) {
 		this.game = game;
+		this.root = root;
+		setUpToggleButton(commandBuild, Assets.getInstance().getImage("COMMAND_BUILD"));
+		setUpToggleButton(commandHeal, Assets.getInstance().getImage("COMMAND_HEAL"));
+		setUpToggleButton(commandAttack, Assets.getInstance().getImage("COMMAND_ATTACK"));
+		setUpToggleButton(commandDefend, Assets.getInstance().getImage("COMMAND_DEFEND"));
+		setUpToggleButton(commandPowerUp, Assets.getInstance().getImage("COMMAND_POWER_UP"));
+		setUpToggleButton(commandPowerDown, Assets.getInstance().getImage("COMMAND_POWER_DOWN"));
+		setUpToggleButton(cancelQueue, Assets.getInstance().getImage("COMMAND_CANCEL_QUEUE"));
+		setUpToggleButton(commandDecommission, Assets.getInstance().getImage("COMMAND_DECOMMISSION"));
+		setUpToggleButton(commandMove, Assets.getInstance().getImage("COMMAND_MOVE"));
+	}
+	
+	public void setUpToggleButton(ToggleButton toggleButton, Image image) {
+		toggleButton.setGraphic(new ImageView(image));
+		commandToggleButtons.getChildren().add(toggleButton);
+		toggleButton.getStyleClass().setAll("commandButton");
+		toggleButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+            }
+        });
 	}
 
 	@Override
 	public void draw(GraphicsContext gc, Point screenDimensions) {
 		this.screenDimensions = screenDimensions;
         drawCommandPanel(gc);
-        drawCurrentCommand(gc);
 	}
 
     private void drawCommandPanel(GraphicsContext g) {
@@ -38,72 +77,45 @@ public class CommandPanel extends Panel{
     		yDistance = COMMAND_Y_NORMAL;
     	}
 		g.drawImage(Assets.getInstance().getImage("GUI_COMMAND_PANEL"), 0, yDistance);
-    	drawAllButtons(g);
+    	drawAllToggleButtons(g);
     }
     
-    private void drawAllButtons(GraphicsContext g) {
-    	drawButton(g, "COMMAND_BUILD", 0, yDistance, false);
-    	drawButton(g, "COMMAND_HEAL", ICON_WIDTH, yDistance, false);
-    	drawButton(g, "COMMAND_ATTACK", ICON_WIDTH * 2, yDistance, false);
-    	drawButton(g, "COMMAND_DEFEND", 0, yDistance + ICON_WIDTH, false);
-    	drawButton(g, "COMMAND_POWER_UP", ICON_WIDTH, yDistance + ICON_WIDTH, false);
-    	drawButton(g, "COMMAND_POWER_DOWN", ICON_WIDTH * 2, yDistance + ICON_WIDTH, false);
-    	drawButton(g, "COMMAND_CANCEL_QUEUE", 0, yDistance + ICON_WIDTH * 2, false);
-    	drawButton(g, "COMMAND_DECOMMISSION", ICON_WIDTH, yDistance + ICON_WIDTH * 2, false);
-    	drawButton(g, "COMMAND_MOVE", ICON_WIDTH * 2, yDistance + ICON_WIDTH * 2, false);
+    private void drawAllToggleButtons(GraphicsContext g) {
+    	drawToggleButton(g, commandBuild, 0, yDistance, CommandEnum.MAKE, game.getCurrentCommand());
+        drawToggleButton(g, commandHeal, ICON_WIDTH, yDistance, CommandEnum.HEAL, game.getCurrentCommand());
+    	drawToggleButton(g, commandAttack, ICON_WIDTH * 2, yDistance, CommandEnum.ATTACK, game.getCurrentCommand());
+    	drawToggleButton(g, commandDefend, 0, yDistance + ICON_WIDTH, CommandEnum.DEFEND, game.getCurrentCommand());
+    	drawToggleButton(g, commandPowerUp, ICON_WIDTH, yDistance + ICON_WIDTH, CommandEnum.POWER_UP, game.getCurrentCommand());
+    	drawToggleButton(g, commandPowerDown, ICON_WIDTH * 2, yDistance + ICON_WIDTH, CommandEnum.POWER_DOWN, game.getCurrentCommand());
+    	drawToggleButton(g, cancelQueue, 0, yDistance + ICON_WIDTH * 2, CommandEnum.CANCEL_COMMAND_QUEUE, game.getCurrentCommand());
+    	drawToggleButton(g, commandDecommission, ICON_WIDTH, yDistance + ICON_WIDTH * 2, CommandEnum.DECOMISSION, game.getCurrentCommand());
+    	drawToggleButton(g, commandMove, ICON_WIDTH * 2, yDistance + ICON_WIDTH * 2, CommandEnum.MOVE, game.getCurrentCommand());
 }
 
-	private void drawCurrentCommand(GraphicsContext g) {
-        String commandString = "";
-        if (game.getCurrentCommand() != null &&
-                game.getCurrentCommand() == CommandEnum.MAKE) {
-        	g.drawImage(Assets.getInstance().getImage("COMMAND_HOVERED"), 0, yDistance);
-        } else if (game.getCurrentCommand() != null &&
-                game.getCurrentCommand() == CommandEnum.HEAL) {
-        	g.drawImage(Assets.getInstance().getImage("COMMAND_HOVERED"), ICON_WIDTH, yDistance);
-        } else if (game.getCurrentCommand() != null &&
-                game.getCurrentCommand() == CommandEnum.ATTACK) {
-        	g.drawImage(Assets.getInstance().getImage("COMMAND_HOVERED"), ICON_WIDTH * 2, yDistance);
-        } else if (game.getCurrentCommand() != null &&
-                game.getCurrentCommand() == CommandEnum.DEFEND) {
-        	g.drawImage(Assets.getInstance().getImage("COMMAND_HOVERED"), 0, yDistance + ICON_WIDTH);
-        } else if (game.getCurrentCommand() != null &&
-                game.getCurrentCommand() == CommandEnum.POWER_UP) {
-        	g.drawImage(Assets.getInstance().getImage("COMMAND_HOVERED"), ICON_WIDTH, yDistance + + ICON_WIDTH);
-        } else if (game.getCurrentCommand() != null &&
-                game.getCurrentCommand() == CommandEnum.POWER_DOWN) {
-        	g.drawImage(Assets.getInstance().getImage("COMMAND_HOVERED"), ICON_WIDTH * 2, yDistance + ICON_WIDTH);
-        } else if (game.getCurrentCommand() != null &&
-                game.getCurrentCommand() == CommandEnum.CANCEL_COMMAND_QUEUE) {
-        	g.drawImage(Assets.getInstance().getImage("COMMAND_HOVERED"),  0, yDistance + ICON_WIDTH * 2);
-        } else if (game.getCurrentCommand() != null &&
-                game.getCurrentCommand() == CommandEnum.DECOMISSION) {
-        	g.drawImage(Assets.getInstance().getImage("COMMAND_HOVERED"),  ICON_WIDTH, yDistance + ICON_WIDTH * 2);
-        } else if (game.getCurrentCommand() != null &&
-                game.getCurrentCommand() == CommandEnum.MOVE) {
-        	g.drawImage(Assets.getInstance().getImage("COMMAND_HOVERED"),  ICON_WIDTH * 2, yDistance + ICON_WIDTH * 2);
-        }
+	private void drawHovered(GraphicsContext g, int x, int y) {
+		commandToggleButtons.toBack();
+		g.drawImage(Assets.getInstance().getImage("COMMAND_HOVERED"), x, y);
+		commandToggleButtons.toFront();
 	}
-	
-	private void drawButton(GraphicsContext g, String icon, int x, int y, boolean selected) {
-		if (selected) {
-			g.drawImage(Assets.getInstance().getImage("COMMAND_SELECTED"), x, y);
+
+	private void drawToggleButton(GraphicsContext g, ToggleButton commandBuild, int x, int y, CommandEnum selected, Enum current) {
+		if (current == selected) {
+			commandBuild.getStyleClass().setAll("commandButtonSelected");
 		} else {
-			g.drawImage(Assets.getInstance().getImage("COMMAND_UNSELECTED"), x, y);
+			commandBuild.getStyleClass().setAll("commandButton");
 		}
-		g.drawImage(Assets.getInstance().getImage(icon), x, y);
+		commandBuild.setTranslateX(x + SPACING);
+		commandBuild.setTranslateY(y + SPACING);
 	}
 	
 	@Override
 	public void hideGUIElements() {
-		// TODO Auto-generated method stub
-		
+		root.getChildren().remove(commandToggleButtons);
 	}
 
 	@Override
 	public void showGUIElements() {
-		// TODO Auto-generated method stub
-		
+		root.getChildren().add(commandToggleButtons);
 	}
 
 }
