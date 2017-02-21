@@ -18,6 +18,19 @@
     -fx-padding: 5 10 5 10;
 }
 
+.buttonSelected {
+     -fx-background-color:
+         #1b263b,
+     linear-gradient(#26313b, #263446);
+    -fx-background-radius: 5,4,3,5;
+    -fx-background-insets: 0,1,2,0;
+    -fx-text-fill: white;
+    -fx-font-family: "Nuku Nuku";
+    -fx-text-fill: linear-gradient(white, #d0d0d0);
+    -fx-font-size: 22px;
+    -fx-padding: 5 10 5 10;
+}
+
 .hover {
 	-fx-background-color: 
      	#090a0c;
@@ -53,7 +66,7 @@
 }
 
 .commandButtonSelected {
-     	-fx-background-color: 
+     -fx-background-color:
      	#1b263b,
      	linear-gradient(#26313b, #263446);
 	-fx-background-radius: 5,4,3,5;

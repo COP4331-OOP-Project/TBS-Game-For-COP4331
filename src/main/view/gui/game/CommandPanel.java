@@ -9,7 +9,6 @@ import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.ToggleButton;
-import javafx.scene.control.ToggleButton;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -38,6 +37,7 @@ public class CommandPanel extends Panel{
 	ToggleButton cancelQueue = new ToggleButton();
 	ToggleButton commandDecommission = new ToggleButton();
 	ToggleButton commandMove = new ToggleButton();
+	HoverPanel hoverPanel = new HoverPanel();
 	
 	public CommandPanel(Game game, Group root) {
 		this.game = game;
@@ -92,15 +92,42 @@ public class CommandPanel extends Panel{
     	drawToggleButton(g, commandMove, ICON_WIDTH * 2, yDistance + ICON_WIDTH * 2, CommandEnum.MOVE, game.getCurrentCommand());
 }
 
-	private void drawHovered(GraphicsContext g, int x, int y) {
-		commandToggleButtons.toBack();
-		g.drawImage(Assets.getInstance().getImage("COMMAND_HOVERED"), x, y);
-		commandToggleButtons.toFront();
+	private void drawHovered(GraphicsContext g, CommandEnum selected) {
+		switch(selected) {
+			case MAKE:
+				hoverPanel.drawText(g, new Point(190, yDistance), "Build Entity");
+				break;
+			case HEAL:
+				hoverPanel.drawText(g, new Point(190, yDistance), "Heal Entity");
+				break;
+			case ATTACK:
+				hoverPanel.drawText(g, new Point(190, yDistance), "Attack");
+				break;
+			case DEFEND:
+				hoverPanel.drawText(g, new Point(190, yDistance), "Defend");
+				break;
+			case POWER_UP:
+				hoverPanel.drawText(g, new Point(190, yDistance), "Power Up");
+				break;
+			case POWER_DOWN:
+				hoverPanel.drawText(g, new Point(190, yDistance), "Power Down");
+				break;
+			case CANCEL_COMMAND_QUEUE:
+				hoverPanel.drawText(g, new Point(190, yDistance), "Cancel Commands");
+				break;
+			case DECOMISSION:
+				hoverPanel.drawText(g, new Point(190, yDistance), "Decommission");
+				break;
+			case MOVE:
+				hoverPanel.drawText(g, new Point(190, yDistance), "Move");
+				break;
+		}
 	}
 
 	private void drawToggleButton(GraphicsContext g, ToggleButton commandBuild, int x, int y, CommandEnum selected, Enum current) {
 		if (current == selected) {
 			commandBuild.getStyleClass().setAll("commandButtonSelected");
+			drawHovered(g, selected);
 		} else {
 			commandBuild.getStyleClass().setAll("commandButton");
 		}

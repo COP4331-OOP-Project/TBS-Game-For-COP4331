@@ -17,6 +17,8 @@ public class Assets {
     private static final String MENU_BACKGROUND = "assets/images/menu/menuBackground.jpg";
     private static final String GAME_BACKGROUND = "assets/images/menu/gameBackground.jpg";
     private static final String GUI_TOP = "assets/images/gui/topBar.png";
+    private static final String GUI_HOVER = "assets/images/gui/hover.png";
+    private static final String GUI_MAP_BAR = "assets/images/gui/mapMakerBar.png";
     private static final String GUI_BOTTOM = "assets/images/gui/bottomBar.png";
     private static final String GUI_COMMAND_PANEL = "assets/images/gui/mode/commandPanel.png";
     private static final String GUI_MINI_MAP_BORDER = "assets/images/gui/miniBorder.png";
@@ -87,9 +89,6 @@ public class Assets {
     private static final String COMMAND_POWER_DOWN = "assets/images/gui/commandIcons/icons/powerDown.png";
     private static final String COMMAND_POWER_UP = "assets/images/gui/commandIcons/icons/powerUp.png";
     private static final String COMMAND_UNASSIGN_ALL_WORKERS = "assets/images/gui/commandIcons/icons/unassignAllWorkers.png";
-    private static final String COMMAND_UNSELECTED = "assets/images/gui/commandIcons/unSelected.png";
-    private static final String COMMAND_SELECTED = "assets/images/gui/commandIcons/selected.png";
-    private static final String COMMAND_HOVERED = "assets/images/gui/commandIcons/commandHovered.png";
     private static final String TEXT_PATTERN = "assets/images/textTexture.jpg";
     private static final String FONT = "assets/fonts/nuku.ttf";
     private HashMap<String, Integer> assets = new HashMap<String, Integer>();
@@ -138,6 +137,8 @@ public class Assets {
         loadItem("MENU_BACKGROUND", MENU_BACKGROUND);
         loadItem("GAME_BACKGROUND", GAME_BACKGROUND);
         loadItem("GUI_TOP", GUI_TOP);
+        loadItem("GUI_HOVER", GUI_HOVER);
+        loadItem("GUI_MAP_BAR", GUI_MAP_BAR);
         loadItem("GUI_BOTTOM", GUI_BOTTOM);
         loadItem("GUI_COMMAND_PANEL", GUI_COMMAND_PANEL);
         loadItem("GUI_MINI_MAP_BORDER", GUI_MINI_MAP_BORDER);
@@ -208,9 +209,6 @@ public class Assets {
         loadItem("COMMAND_POWER_DOWN", COMMAND_POWER_DOWN);
         loadItem("COMMAND_POWER_UP", COMMAND_POWER_UP);
         loadItem("COMMAND_UNASSIGN_ALL_WORKERS", COMMAND_UNASSIGN_ALL_WORKERS);
-        loadItem("COMMAND_SELECTED", COMMAND_SELECTED);
-        loadItem("COMMAND_UNSELECTED", COMMAND_UNSELECTED);
-        loadItem("COMMAND_HOVERED", COMMAND_HOVERED);
         loadItem("TEXT_PATTERN", TEXT_PATTERN);
     }
 
