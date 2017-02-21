@@ -1,4 +1,4 @@
-package view.gui;
+package view.gui.game;
 
 import game.Assets;
 import game.Game;
@@ -8,6 +8,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.text.Font;
 import view.Point;
+import view.gui.Panel;
 
 
 public class CivilizationPanel extends Panel {

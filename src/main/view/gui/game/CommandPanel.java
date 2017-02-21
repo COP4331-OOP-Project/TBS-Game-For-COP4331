@@ -1,4 +1,4 @@
-package view.gui;
+package view.gui.game;
 
 import controls.ModeEnum;
 import controls.command.CommandEnum;
@@ -7,6 +7,7 @@ import game.Game;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.effect.DropShadow;
 import view.Point;
+import view.gui.Panel;
 
 public class CommandPanel extends Panel{
 	

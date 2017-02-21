@@ -1,4 +1,4 @@
-package view.gui;
+package view.gui.screen;
 
 import game.Assets;
 import javafx.application.Platform;
@@ -12,6 +12,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import view.Point;
 import view.View;
+import view.gui.Panel;
 
 public class MainMenuPanel extends Panel{
 	private static final int MAIN_MENU_BUTTON_SPACING = 100;

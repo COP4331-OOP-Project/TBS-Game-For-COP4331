@@ -1,4 +1,4 @@
-package view.gui;
+package view.gui.screen;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -14,6 +14,7 @@ import javafx.stage.FileChooser.ExtensionFilter;
 import view.Point;
 import view.View;
 import view.game.Camera;
+import view.gui.Panel;
 
 import java.io.BufferedWriter;
 import java.io.File;

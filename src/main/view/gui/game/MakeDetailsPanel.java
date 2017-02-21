@@ -1,4 +1,4 @@
-package view.gui;
+package view.gui.game;
 
 import controls.unit.UnitEnum;
 import game.Assets;
@@ -6,6 +6,7 @@ import game.Game;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.text.Font;
 import view.Point;
+import view.gui.Panel;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

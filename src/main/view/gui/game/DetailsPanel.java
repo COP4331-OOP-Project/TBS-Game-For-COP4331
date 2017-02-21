@@ -1,8 +1,9 @@
-package view.gui;
+package view.gui.game;
 
 import game.Assets;
 import javafx.scene.canvas.GraphicsContext;
 import view.Point;
+import view.gui.Panel;
 
 public abstract class DetailsPanel extends Panel {
     private static final int GUI_PANEL_HEIGHT =

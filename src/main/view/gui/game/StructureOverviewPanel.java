@@ -1,4 +1,4 @@
-package view.gui;
+package view.gui.game;
 
 import game.Assets;
 import game.Game;

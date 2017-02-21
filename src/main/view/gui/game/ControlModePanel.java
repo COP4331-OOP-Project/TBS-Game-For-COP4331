@@ -1,4 +1,4 @@
-package view.gui;
+package view.gui.game;
 
 import controls.ModeEnum;
 import controls.army.ArmyEnum;
@@ -15,6 +15,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import view.Point;
+import view.gui.Panel;
 
 public class ControlModePanel extends Panel {
 	

@@ -1,8 +1,9 @@
-package view.gui;
+package view.gui.game;
 
 import game.Assets;
 import javafx.scene.canvas.GraphicsContext;
 import view.Point;
+import view.gui.Panel;
 
 public abstract class OverviewPanel extends Panel {
     public void drawPanelBox(GraphicsContext gc, Point screenDimensions) {

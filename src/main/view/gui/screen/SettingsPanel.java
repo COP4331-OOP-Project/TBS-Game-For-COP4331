@@ -1,10 +1,11 @@
-package view.gui;
+package view.gui.screen;
 
 import javafx.scene.Group;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.StackPane;
 import view.Point;
 import view.View;
+import view.gui.Panel;
 
 public class SettingsPanel extends Panel{
 	View view;

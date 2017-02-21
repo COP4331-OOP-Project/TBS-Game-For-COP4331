@@ -1,4 +1,4 @@
-package view.gui;
+package view.gui.game;
 
 import game.Assets;
 import game.Game;
@@ -10,6 +10,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import view.Point;
+import view.gui.Panel;
 
 public class MiniMapPanel extends Panel {
     private static final int HEX_SIZE = 12;

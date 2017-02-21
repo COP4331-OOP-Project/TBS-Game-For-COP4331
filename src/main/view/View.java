@@ -12,6 +12,18 @@ import javafx.scene.canvas.GraphicsContext;
 import view.game.Camera;
 import view.game.GamePanel;
 import view.gui.*;
+import view.gui.game.CivilizationPanel;
+import view.gui.game.CommandPanel;
+import view.gui.game.ControlModePanel;
+import view.gui.game.MakeDetailsPanel;
+import view.gui.game.MiniMapPanel;
+import view.gui.game.StructureDetailsPanel;
+import view.gui.game.StructureOverviewPanel;
+import view.gui.game.UnitDetailsPanel;
+import view.gui.game.UnitOverviewPanel;
+import view.gui.screen.MainMenuPanel;
+import view.gui.screen.MapMakerPanel;
+import view.gui.screen.SettingsPanel;
 
 public class View {
     private Game game;

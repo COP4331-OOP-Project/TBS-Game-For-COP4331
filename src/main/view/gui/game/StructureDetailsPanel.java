@@ -1,4 +1,4 @@
-package view.gui;
+package view.gui.game;
 
 import controls.structure.StructureEnum;
 import game.Assets;
