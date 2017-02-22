@@ -13,6 +13,7 @@ import game.entities.units.Unit;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.io.File;
 import java.util.ArrayList;
 
 /**
@@ -21,10 +22,10 @@ import java.util.ArrayList;
 public class GameBoard {
 
     private static final int BOARD_SIZE = 42;
+	private static final File MAP_FILE = new File("assets/maps/default.map");
     private final static Logger log = LogManager.getLogger(ModeController.class);
     private Tile[][] gameMap;     // Map for game tiles  // 0 is grass, 1 is sand, 2 is water
     private ArrayList<Player> players;              // Players for game
-    private MapLoader mapLoader;
 
     // Constructor
 /*
@@ -35,7 +36,6 @@ public class GameBoard {
     }
 */
     public GameBoard(ArrayList<Player> players) {
-    	mapLoader = new MapLoader();
         this.players = players;                     // Set players
         setupMap();                                 // Setup gameMap
         init();                                     // Set initial units to initial tiles
@@ -57,7 +57,7 @@ public class GameBoard {
 
     // Setup the gameMap array wit5h valid Tiles
     private void setupMap() {
-    	int[][] map = mapLoader.getMap(BOARD_SIZE);
+    	int[][] map = MapLoader.getMap(BOARD_SIZE, MAP_FILE);
         gameMap = new Tile[BOARD_SIZE][];
         for (int i = 0; i < BOARD_SIZE; i++) {
             gameMap[i] = new Tile[BOARD_SIZE];

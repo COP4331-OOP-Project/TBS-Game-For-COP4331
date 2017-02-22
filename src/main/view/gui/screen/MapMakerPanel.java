@@ -35,7 +35,6 @@ public class MapMakerPanel extends Panel{
     Point screenDimensions = new Point(0,0);
     Point offset = new Point();
     Camera camera = new Camera(screenDimensions);
-	MapLoader mapLoader = new MapLoader();
 	View view;
 	File waterMap = new File("assets/maps/allwater.map");
 	
@@ -58,7 +57,7 @@ public class MapMakerPanel extends Panel{
     	ds.setColor(Color.color(0, 0, 0));
 		camera.setScale(0.3);
 		camera.setOffset(offset);
-		map = mapLoader.getMap(BOARD_SIZE, waterMap);
+		map = MapLoader.getMap(BOARD_SIZE, waterMap);
 		setUpButtons();
 	}
 	
@@ -315,7 +314,7 @@ public class MapMakerPanel extends Panel{
 		fileChooser.getExtensionFilters().addAll(new ExtensionFilter("Map Files", "*.map"));
 		File newMap = fileChooser.showOpenDialog(null);
 		if (newMap != null) {
-			map = mapLoader.getMap(BOARD_SIZE, newMap);
+			map = MapLoader.getMap(BOARD_SIZE, newMap);
 		}
 	}
 
