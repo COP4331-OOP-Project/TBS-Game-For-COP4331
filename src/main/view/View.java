@@ -28,6 +28,9 @@ import view.gui.screen.SettingsPanel;
 public class View {
     private Game game;
     private Camera camera;
+
+    private static final int DEFAULT_SCREEN_WIDTH = 1366;
+    private static final int DEFAULT_SCREEN_HEIGHT = 768; 
     
     //Game Panels
     private CivilizationPanel civPanel;
@@ -44,8 +47,6 @@ public class View {
     private MainMenuPanel mainMenuPanel;
     private SettingsPanel settingsPanel;
     private ArrayList<Panel> panels; //ArrayList Containing Panels
-    private int defaultScreenWidth = 1366;
-    private int defaultScreenHeight = 768; 
     private Canvas canvas; //The GraphicsContext Goes on here.
     private GraphicsContext gc; //Image drawing is done with this
     private Group root; //Gui drawing is added to this
@@ -62,7 +63,7 @@ public class View {
     
     public View(Game game, Scene scene, Group root) {
     	this.root = root;
-    	canvas = new Canvas(defaultScreenWidth, defaultScreenHeight);
+    	canvas = new Canvas(DEFAULT_SCREEN_WIDTH, DEFAULT_SCREEN_HEIGHT);
     	gc = canvas.getGraphicsContext2D();
     	this.scene = scene;
     	setScene();
