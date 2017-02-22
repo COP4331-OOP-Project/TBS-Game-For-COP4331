@@ -4,19 +4,23 @@ import game.Assets;
 import view.Point;
 
 public class Camera {
-    private static final int HEX_W = (int)Assets.getInstance().getImage("TERRAIN_GRASS").getWidth();
+    private static final int HEX_W = (int)Assets.getInstance().getImage("TERRAIN_WATER1").getWidth();
     private static final int HEX_H = (int)(HEX_W * 0.86);
     private static final int TILE_SIZE = HEX_W;
 	private static final double SCALE_AMOUNT = 0.05; //The amount change per zoom
-	private static final double MIN_SCALE = 0.2; //Min amount to be zoomed in
+	private static final double MIN_SCALE = 0.4; //Min amount to be zoomed in
 	private static final double MAX_SCALE = 1.0; //Max amount to be zoomed in
 	
     private CameraCenterer panelCenterer;
     private Point screenDimensions;
     private Point offset = new Point(180, -2350);
-    private double scale = 0.8;
+    
+    //These values are used when dragging the Camera.
+    private double dragX = -999;
+    private double dragY = -999;
     
     //These values are used when zooming the Camera.
+    private double scale = 0.8;
 	private boolean zooming = false;
 	private int zoomCounter = -1;
 	Point mouseZoomStart = new Point(0,0);
@@ -57,6 +61,21 @@ public class Camera {
 		p.x = (int)((pixel.x - offset.x) / (0.75f * scale * HEX_W ));
 		p.y = (int)(((pixel.y - offset.y)-((0.5 * HEX_H * scale) * 
 				((pixel.x - offset.x)/(0.75 * scale * HEX_W))))/(HEX_H * scale));
+		Point r = new Point(getPixelLocation(p).x - pixel.x + offset.x, getPixelLocation(p).y - pixel.y + offset.y);
+		if (r.y < -117 * scale) {
+			p.y++;
+		}
+		Point r2 = new Point(getPixelLocation(p).x - pixel.x + offset.x, getPixelLocation(p).y - pixel.y + offset.y);
+		if (r2.y <= -7 * scale && r2.y >= -63 * scale) {
+			if (r2.x > ((r2.y + 63 * scale)/-1.75)) { //Top Left Triangle
+				p.x--;
+			}
+		} else if (r2.y < -63 * scale && r2.y >= -117 * scale) {
+			if (r2.x > ((r2.y + 63 * scale)/1.75)) { //Bottom Left Triangle
+				p.x--;
+				p.y++;
+			}
+		}
     	return p;
     }
     
@@ -84,20 +103,38 @@ public class Camera {
 			}
 		}
 	}
+	
+	public void startDragging(double x, double y) {
+		dragX = x;
+		dragY = y;
+	}
+	
+	public void continueDragging(double x, double y) {
+		double diffX = dragX - x;
+		double diffY = dragY - y;
+		setOffset(new Point(getOffset().x - (int)diffX,
+				(getOffset().y - (int)diffY)));
+		dragX = x;
+		dragY = y;
+	}
 
     protected Point getOffset() {
     	return offset;
     }
     
-    protected void setOffset(Point point) {
+    public void setOffset(Point point) {
         offset = point;
     }
     
-    protected double getScale() {
+    public void setScale(double scale) {
+    	this.scale = scale;
+    }
+    
+    public double getScale() {
     	return scale;
     }
 
-    protected Point offset(Point p) {
+    public Point offset(Point p) {
         return new Point(getPixelLocation(p).x + offset.x,
         		getPixelLocation(p).y + offset.y);
     }

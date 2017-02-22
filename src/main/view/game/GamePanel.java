@@ -11,12 +11,12 @@ import javafx.scene.image.Image;
 import javafx.scene.text.Font;
 import javafx.scene.transform.Affine;
 import javafx.scene.transform.Rotate;
-import view.Panel;
 import view.Point;
+import view.gui.Panel;
 
 public class GamePanel extends Panel {
     private static final int TILE_PIXEL_SIZE =
-            (int) Assets.getInstance().getImage("TERRAIN_GRASS").getWidth();
+            (int) Assets.getInstance().getImage("TERRAIN_WATER1").getWidth();
     Font tileFont = new Font("Lucida Sans", 20);
     private Camera camera;
     private TileDrawer tileDrawer;
@@ -40,6 +40,7 @@ public class GamePanel extends Panel {
     }
 
     public void draw(GraphicsContext gc, Point screenDimensions) {
+		//gc.drawImage(Assets.getInstance().getImage("GAME_BACKGROUND"), 0, 0, screenDimensions.x, screenDimensions.y);
     	this.screenDimensions = screenDimensions;
         this.gc = gc;
         Point selected = new Point(game.getCenterCoordinates().getX(),
@@ -49,8 +50,6 @@ public class GamePanel extends Panel {
         selectedDrawer.drawSelectedItemOutline();
         tileDrawer.drawMovingTiles();
     }
-
-
 
 	private void drawAllItems() {
         for (int i = 0; i < game.getGameBoard().getTiles().length; i++) {
@@ -113,20 +112,34 @@ public class GamePanel extends Panel {
         Rotate rotate = new Rotate(degrees,
                 (double) (camera.getTileCenter(p).x),
                 (double) (camera.getTileCenter(p).y));
-        gc.getTransform().setToTransform(rotate);
+        gc.setTransform(rotate.getMxx(), rotate.getMyx(), rotate.getMxy(), rotate.getMyy(), 
+        		rotate.getTx(), rotate.getTy());
     }
 
     public void drawAnimatedTileElement(Point p, String image1, String image2, String image3) {
-        Image img;   
-    	switch (getAnimationImage()) { 
-	        	case 0:
-	            	img = Assets.getInstance().getImage(image1);
-	                break;
-	            case 2:
-	            	img = Assets.getInstance().getImage(image2);
-	                break;
-	            default:
-	            	img = Assets.getInstance().getImage(image3);
+        Image img;
+        if(p.x % 2 == 0) {
+	    	switch (getAnimationImage()) { 
+		        	case 0:
+		            	img = Assets.getInstance().getImage(image1);
+		                break;
+		            case 2:
+		            	img = Assets.getInstance().getImage(image3);
+		                break;
+		            default:
+		            	img = Assets.getInstance().getImage(image2);
+	    	}
+        } else {
+        	switch (getAnimationImage()) { 
+        	case 0:
+            	img = Assets.getInstance().getImage(image1);
+                break;
+            case 2:
+            	img = Assets.getInstance().getImage(image2);
+                break;
+            default:
+            	img = Assets.getInstance().getImage(image3);
+        	}
         }
     	
         gc.drawImage(img, camera.offset(p).x, camera.offset(p).y, camera.getScale() * img.getWidth(), 
@@ -145,8 +158,15 @@ public class GamePanel extends Panel {
         return TILE_PIXEL_SIZE;
     }
 
-	public void moveCamera(double diffX, double diffY) {
-		camera.setOffset(new Point(camera.getOffset().x - (int)diffX,
-				(camera.getOffset().y - (int)diffY)));
+	@Override
+	public void hideGUIElements() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void showGUIElements() {
+		// TODO Auto-generated method stub
+		
 	}
 }

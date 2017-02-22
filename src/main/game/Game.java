@@ -38,9 +38,8 @@ public class Game {
     private ArrayList<Location> moveLocations;
     private Location centerCoordinates;
     private boolean centerCoordinatesUpdated;
-    private boolean unitOverviewVisible = false;
-    private boolean structureOverviewVisible = false;
     private boolean showingMakeDetails = false;
+    private boolean gameHasStarted = false;
     private int selectedUnit;
     private int makeOption = 0;
     
@@ -50,8 +49,10 @@ public class Game {
 
     
     Game() {
-        Assets.getInstance().loadResources();
-        //TODO: initialize game with players
+
+    }
+    
+    public void initializeGame() {
         this.players = new ArrayList<Player>();
         centerCoordinates = new Location(0, 0);
         Location initLocation1 = new Location(5, 28);
@@ -70,6 +71,7 @@ public class Game {
         this.centerCoordinatesUpdated = false;
         this.moveCommands = new ArrayList<>();
         this.moveLocations = new ArrayList<>();
+        gameHasStarted =  true;
     }
 
     public ArrayList<Location> getMoveLocations() {
@@ -77,7 +79,9 @@ public class Game {
     }
 
     public void updateGame() { //This is called 20 times per second
-    	updateSelectedUnit();
+    	if (gameHasStarted) {
+    		updateSelectedUnit();
+    	}
     }
 
     public void startGame() {
@@ -356,29 +360,6 @@ public class Game {
 
     public void centerOnLastMoveLocation() {
         this.changeCenterCoordinates(this.lastMoveLocation);
-    }
-
-    public void toggleUnitOverview() {
-        if (structureOverviewVisible) {
-            structureOverviewVisible = !structureOverviewVisible;
-        }
-        unitOverviewVisible = !unitOverviewVisible;
-    }
-
-    public void toggleStructureOverview() {
-        if (unitOverviewVisible) {
-            unitOverviewVisible = !unitOverviewVisible;
-        }
-        structureOverviewVisible = !structureOverviewVisible;
-
-    }
-
-    public boolean getUnitOverviewVisible() {
-        return unitOverviewVisible;
-    }
-
-    public boolean getStructureOverviewVisible() {
-        return structureOverviewVisible;
     }
 
     public ArrayList<Player> getAllPlayers() {
