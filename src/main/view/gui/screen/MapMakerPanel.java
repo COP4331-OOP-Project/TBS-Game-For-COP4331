@@ -237,8 +237,10 @@ public class MapMakerPanel extends Panel{
 	}
 
 	private void changeDrawingType(int x, int y) {
-        if (map[x][y] != -1) {
-            map[x][y] = currentDrawingType;
+        if (x >= 0 && y >=  0 && x < BOARD_SIZE && y < BOARD_SIZE) {
+			if (map[x][y] != -1) {
+	            map[x][y] = currentDrawingType;
+	        }
         }
     }
 
