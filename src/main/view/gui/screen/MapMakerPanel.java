@@ -230,8 +230,7 @@ public class MapMakerPanel extends Panel{
 	public void tileClicked(Point point) {
 		if (point.x >= 175 && point.x <= 221 && point.y <= 46) {
 			changePaintColor();
-		}
-		if (camera.getTileLocation(point).x < BOARD_SIZE &&
+		} else if (camera.getTileLocation(point).x < BOARD_SIZE &&
 				camera.getTileLocation(point).y < BOARD_SIZE) {
 			iterateTile(camera.getTileLocation(point));
 		}
