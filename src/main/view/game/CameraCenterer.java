@@ -3,7 +3,7 @@ package view.game;
 import view.Point;
 
 public class CameraCenterer {
-    private static final int TIME_TO_CENTER = 50;
+    private static final int TIME_TO_CENTER = 32;
     //GamePanel gamePanel;
     private int timeCentering = 0;
     private boolean isCentering = false;

@@ -17,13 +17,16 @@ public class TileDrawer {
     protected void drawTile(Point p, TerrainEnum type) {
         switch (type) {
             case GRASS:
-                gamePanel.drawStaticTileElement(p, "TERRAIN_GRASS");
+            	gamePanel.drawAnimatedTileElement(p, "TERRAIN_GRASS1", "TERRAIN_GRASS2", "TERRAIN_GRASS3");
                 break;
             case SAND:
                 gamePanel.drawStaticTileElement(p, "TERRAIN_SAND");
                 break;
             case WATER:
                 gamePanel.drawAnimatedTileElement(p, "TERRAIN_WATER1", "TERRAIN_WATER2", "TERRAIN_WATER3");
+                break;
+            case MOUNTAIN:
+                gamePanel.drawAnimatedTileElement(p, "TERRAIN_MOUNTAIN1", "TERRAIN_MOUNTAIN2", "TERRAIN_MOUNTAIN3");
                 break;
             case INVISIBLE:
                 break;

@@ -20,12 +20,15 @@ public class MouseEventController {
 	}
 
 	public void mouseDragged(MouseEvent event) {
-		view.updateViewLocation(event.getX(),
+		view.continueDragging(event.getX(),
 				event.getY());
+		if (!event.isShiftDown()) {
+			view.tileClicked(event.getX(), event.getY());
+		}
 	}
 
 	public void mouseClicked(MouseEvent event) {
-		view.setStoppedDragging();
+		view.tileClicked(event.getX(), event.getY());
 	}
 	
 	private void mouseMoved(MouseEvent event) {
@@ -37,8 +40,7 @@ public class MouseEventController {
 	}
 
 	protected void mousePressed(MouseEvent event) {
-		
-		view.setDragging(event.getSceneX(), event.getSceneY());
+		view.startDragging(event.getSceneX(), event.getSceneY());
 	}
 
 	public void mouseScrolled(ScrollEvent event) {
