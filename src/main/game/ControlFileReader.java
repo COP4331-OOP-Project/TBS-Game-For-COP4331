@@ -7,8 +7,10 @@ import java.io.IOException;
 import java.util.HashMap;
 import javafx.scene.input.KeyCode;
 
+
 public class ControlFileReader {
-	File controlsFile = new File("config/controls.cfg");
+	private static final String CONFIG_FILE = "config/controls.cfg";
+	File controlsFile = new File(CONFIG_FILE);
 	private HashMap<String, KeyCode> controls;
 	
 	public ControlFileReader() {
