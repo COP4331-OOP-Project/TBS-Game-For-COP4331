@@ -21,16 +21,17 @@ public class ControlModePanel extends Panel {
 	
     private final static Logger log = LogManager.getLogger(ControlModePanel.class);
     private static final int MODE_Y = 0;
-    private static final int MODE_TEXT_X = 670;
+    private static final int MODE_TEXT_X = 495;
 	private static final int MODE_TEXT_Y = 30;
-    private static final int MODE_TEXT_SPACING = 172;
+    private static final int MODE_TEXT_SPACING = 126;
     private static final int SUBMODE_X = 0;
     private static final int SUBMODE_Y = 50;
     private static final int SUBMODE_TEXT_X = 10;
     private static final int SUBMODE_TEXT_Y = 80;
 	private DropShadow ds = new DropShadow();
 	private Point screenDimensions;
-    private Font modeFont = Assets.getInstance().getFont(1);
+    private Font modeFont = Assets.getInstance().getFont(0);
+    private Font subModeFont = Assets.getInstance().getFont(1);
     private String[] modeString = {"Rally Point", "Structure", "Unit", "Army"};
     private String submodeString = "";
     private int mode = 0;
@@ -50,6 +51,7 @@ public class ControlModePanel extends Panel {
         gc.setFont(modeFont);
         gc.setEffect(ds);
         drawModeStrings(gc);
+        gc.setFont(subModeFont);
         drawSubmodeStrings(gc);
         gc.setEffect(null);
     }
