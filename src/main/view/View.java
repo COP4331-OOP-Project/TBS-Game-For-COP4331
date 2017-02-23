@@ -118,9 +118,7 @@ public class View {
     	screenDimensions.y = height;
     	checkVisibility();
     	for (Panel panel : panels) {
-    		if (panel.getIsVisible()) {
-    			panel.draw(gc, screenDimensions);
-    		}
+    			panel.drawPanel(gc, screenDimensions);
     	}
     }
 

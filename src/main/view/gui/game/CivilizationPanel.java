@@ -10,17 +10,17 @@ import javafx.scene.text.Font;
 import view.Point;
 import view.gui.Panel;
 
-
 public class CivilizationPanel extends Panel {
-	DropShadow ds = new DropShadow();
+	private DropShadow ds = new DropShadow();
     public static int GUI_PANEL_WIDTH =
             (int) Assets.getInstance().getImage("GUI_TOP").getWidth();
     public static int GUI_PANEL_HEIGHT =
             (int) Assets.getInstance().getImage("GUI_TOP").getHeight();
-    Font civInfoFont = Assets.getInstance().getFont(2);
+    private Font civInfoFont = Assets.getInstance().getFont(2);
+    private ImagePattern textFill = new ImagePattern(Assets.getInstance().getImage("TEXT_PATTERN"),
+            0, 0, 1, 1, true);
     private Game game;
-    ImagePattern textFill = new ImagePattern(Assets.getInstance().getImage("TEXT_PATTERN"), 0, 0, 1, 1, true);
-    
+
     public CivilizationPanel(Game game) {
         this.game = game;
     	ds.setOffsetY(2.0f);
@@ -29,9 +29,9 @@ public class CivilizationPanel extends Panel {
 
     
     public void draw(GraphicsContext gc, Point screenDimensions) {
-        drawBar(gc, screenDimensions);
-        drawText(gc);
-        drawPlayerIcon(gc);
+            drawBar(gc, screenDimensions);
+            drawText(gc);
+            drawPlayerIcon(gc);
     }
 
 

@@ -11,7 +11,13 @@ public abstract class Panel {
     private boolean isVisible = true;
     
     public abstract void draw(GraphicsContext gc, Point screenDimensions);
-    
+
+    public void drawPanel(GraphicsContext gc, Point screenDimensions) {
+        if (isVisible) {
+            draw(gc, screenDimensions);
+        }
+    }
+
     public abstract void hideGUIElements();
     
     public abstract void showGUIElements();
