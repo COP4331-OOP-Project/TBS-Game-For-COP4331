@@ -41,7 +41,6 @@ public class ArmyDrawer {
         GraphicsContext gc = gamePanel.getgc();
         Camera camera = gamePanel.getCamera();
         gc.setFont(armyFont);
-        Color original = (Color) gc.getFill();
 
         if (numOfUnits < 10) {
             gc.setFill(Color.BLACK);
@@ -62,6 +61,5 @@ public class ArmyDrawer {
                     gamePanel.getTileSize() / 2 - 25, camera.offset(p).y +
                     gamePanel.getTileSize() / 2 + 17);
         }
-        gc.setFill(original);
     }
 }
