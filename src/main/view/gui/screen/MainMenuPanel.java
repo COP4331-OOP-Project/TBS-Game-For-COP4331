@@ -97,5 +97,4 @@ public class MainMenuPanel extends Panel{
 	public void showGUIElements() {
 		root.getChildren().add(mainMenuElements);
 	}
-
 }
