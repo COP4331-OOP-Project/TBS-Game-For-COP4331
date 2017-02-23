@@ -21,12 +21,12 @@ public class GameEngine extends Application {
         Group root = new Group();
         Scene scene = new Scene(root, Color.BLACK);
         //primaryStage.setFullScreen(true);
-        stage.setMaximized(true);
+        //stage.setMaximized(true);
         view = new View(game, scene, root);
-    	keyEvents = new KeyEventController(game, view, scene);
-    	mouseEvents = new MouseEventController(game, view, scene);
-    	keyEvents.handleEvents();
-    	mouseEvents.handleEvents();
+        keyEvents = new KeyEventController(game, view, scene);
+        mouseEvents = new MouseEventController(game, view, scene);
+        keyEvents.handleEvents();
+        mouseEvents.handleEvents();
         //This is new game loop using JavaFX timer.
         AnimationTimer timer = new AnimationTimer() {
             @Override
@@ -39,6 +39,4 @@ public class GameEngine extends Application {
         stage.setScene(scene);
         stage.show();
     }
-
- 
 }

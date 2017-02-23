@@ -11,7 +11,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import view.game.Camera;
 import view.game.GamePanel;
-import view.gui.*;
+import view.gui.Panel;
 import view.gui.game.CivilizationPanel;
 import view.gui.game.CommandPanel;
 import view.gui.game.ControlModePanel;
@@ -29,8 +29,8 @@ public class View {
     private Game game;
     private Camera camera;
 
-    private static final int DEFAULT_SCREEN_WIDTH = 1366;
-    private static final int DEFAULT_SCREEN_HEIGHT = 768; 
+    private static final int DEFAULT_SCREEN_WIDTH = 1152;
+    private static final int DEFAULT_SCREEN_HEIGHT = 648;
     
     //Game Panels
     private CivilizationPanel civPanel;
@@ -169,9 +169,8 @@ public class View {
     }
 
 	public void zoom(double deltaY) {
-		camera.zoom(deltaY);
-	}
-	
+        camera.zoom(deltaY);
+    }
 
     public void toggleUnitOverview() {
         if (structureOverviewPanel.getIsVisible()) {
