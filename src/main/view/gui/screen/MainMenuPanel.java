@@ -8,6 +8,7 @@ import javafx.scene.Group;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.effect.DropShadow;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import view.Point;
@@ -19,7 +20,7 @@ public class MainMenuPanel extends Panel{
 	private static final int DISTANCE_UP_FROM_CENTER = 20;
     private DropShadow ds = new DropShadow();
 	View view;
-	StackPane mainMenuElements = new StackPane();
+	AnchorPane mainMenuElements = new AnchorPane();
 	Group root;
 	Button startGame = new Button("Start Game");
 	Button mapMaker = new Button("Map Maker");

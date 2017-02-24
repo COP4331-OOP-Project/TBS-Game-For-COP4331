@@ -8,7 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
@@ -39,7 +39,7 @@ public class MapMakerPanel extends Panel{
 	File waterMap = new File("assets/maps/allwater.map");
 	
 	Group root; //Any GUI Elements Must Be Added and Removed From Here
-	StackPane mapStuff = new StackPane();
+	AnchorPane mapStuff = new AnchorPane();
 	Button loadMapButton = new Button("Load Map");
 	Button saveMapButton = new Button("Save Map");
 	Button exitToMenuButton = new Button("Exit To Main Menu");
@@ -62,8 +62,8 @@ public class MapMakerPanel extends Panel{
 	}
 	
 	private void setUpButtons() {
-		loadMapButton.setTranslateX(182);
-		loadMapButton.setTranslateY(8);
+		loadMapButton.setTranslateX(230);
+		loadMapButton.setTranslateY(7);
 		loadMapButton.setId("button");
 		loadMapButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -71,8 +71,8 @@ public class MapMakerPanel extends Panel{
                 loadMap();
             }
         });
-		saveMapButton.setTranslateX(290);
-		saveMapButton.setTranslateY(8);
+		saveMapButton.setTranslateX(340);
+		saveMapButton.setTranslateY(7);
 		saveMapButton.setId("button");
 		saveMapButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -81,8 +81,8 @@ public class MapMakerPanel extends Panel{
             }
         });
 
-		exitToMenuButton.setTranslateX(440);
-		exitToMenuButton.setTranslateY(8);
+		exitToMenuButton.setTranslateX(450);
+		exitToMenuButton.setTranslateY(7);
 		exitToMenuButton.setId("button");
 		exitToMenuButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -91,8 +91,8 @@ public class MapMakerPanel extends Panel{
             }
         });
         brushSize1.getStyleClass().setAll("buttonSelected");
-		brushSize1.setTranslateX(600);
-        brushSize1.setTranslateY(8);
+		brushSize1.setTranslateX(660);
+        brushSize1.setTranslateY(7);
         brushSize1.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -105,8 +105,8 @@ public class MapMakerPanel extends Panel{
             }
         });
         brushSize2.getStyleClass().setAll("button");
-        brushSize2.setTranslateX(650);
-        brushSize2.setTranslateY(8);
+        brushSize2.setTranslateX(693);
+        brushSize2.setTranslateY(7);
         brushSize2.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -119,8 +119,8 @@ public class MapMakerPanel extends Panel{
             }
         });
         brushSize3.getStyleClass().setAll("button");
-        brushSize3.setTranslateX(700);
-        brushSize3.setTranslateY(8);
+        brushSize3.setTranslateX(730);
+        brushSize3.setTranslateY(7);
         brushSize3.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
