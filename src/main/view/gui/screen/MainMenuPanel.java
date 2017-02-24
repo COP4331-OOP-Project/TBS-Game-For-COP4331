@@ -17,7 +17,7 @@ import view.gui.Panel;
 
 public class MainMenuPanel extends Panel{
 	private static final int MAIN_MENU_BUTTON_SPACING = 100;
-	private static final int DISTANCE_UP_FROM_CENTER = 20;
+	private static final int DISTANCE_UP_FROM_CENTER = 80;
     private DropShadow ds = new DropShadow();
 	View view;
 	AnchorPane mainMenuElements = new AnchorPane();
@@ -77,7 +77,7 @@ public class MainMenuPanel extends Panel{
 		gc.setEffect(ds);
 		gc.setFont(Assets.getInstance().getFont(4));
 		gc.setFill(Color.WHITE);
-		gc.fillText("Asian Game!", screenDimensions.x/4 + 150, screenDimensions.y/4);
+		gc.fillText("Asian Game!", screenDimensions.x/2 - 240, screenDimensions.y/4);
 		gc.setEffect(null);
 		startGame.setTranslateX(screenDimensions.x / 2 - startGame.getWidth() / 2);
 		startGame.setTranslateY(screenDimensions.y / 2 - DISTANCE_UP_FROM_CENTER);
@@ -98,5 +98,4 @@ public class MainMenuPanel extends Panel{
 	public void showGUIElements() {
 		root.getChildren().add(mainMenuElements);
 	}
-
 }

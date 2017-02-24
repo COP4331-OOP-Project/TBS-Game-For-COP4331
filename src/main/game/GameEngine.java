@@ -4,6 +4,7 @@ import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyCombination;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import view.View;
@@ -20,25 +21,23 @@ public class GameEngine extends Application {
         stage.setTitle("Game");
         Group root = new Group();
         Scene scene = new Scene(root, Color.BLACK);
-        //primaryStage.setFullScreen(true);
-        stage.setMaximized(true);
+        //stage.setFullScreen(true);
+        //stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
+        //stage.setMaximized(true);
         view = new View(game, scene, root);
-    	keyEvents = new KeyEventController(game, view, scene);
-    	mouseEvents = new MouseEventController(game, view, scene);
-    	keyEvents.handleEvents();
-    	mouseEvents.handleEvents();
+        keyEvents = new KeyEventController(game, view, scene);
+        mouseEvents = new MouseEventController(game, view, scene);
+        keyEvents.handleEvents();
+        mouseEvents.handleEvents();
         //This is new game loop using JavaFX timer.
-        AnimationTimer timer = new AnimationTimer() {
+        new AnimationTimer() {
             @Override
             public void handle(long now) {
                 game.updateGame();
                 view.renderGame();
             }
-        };
-        timer.start();
+        }.start();
         stage.setScene(scene);
         stage.show();
     }
-
- 
 }
