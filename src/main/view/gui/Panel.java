@@ -7,6 +7,8 @@ public abstract class Panel {
     private static final int TICKS_PER_IMAGE = 30;
     private static final int IMAGES_TO_LOOP = 4;
     private int animationImage = 0;
+    private int animationImage2 = 0;
+    private int animationImage3 = 0;
     private int animationCount = 0;
     private boolean isVisible = true;
     

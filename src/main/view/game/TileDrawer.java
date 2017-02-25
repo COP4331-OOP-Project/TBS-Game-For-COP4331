@@ -36,7 +36,7 @@ public class TileDrawer {
     protected void drawMovingTiles() {
         for (Location moveLocation : game.getMoveLocations()) {
             if (game.getGameBoard().getTiles()[moveLocation.getX()][moveLocation.getY()].getTileType() != TerrainEnum.INVISIBLE) {
-                gamePanel.drawStaticTileElement(new Point(moveLocation.getX(), moveLocation.getY()), "MOVE_SELECTED");
+                gamePanel.drawAnimatedTileElement(new Point(moveLocation.getX(), moveLocation.getY()), "MOVE_SELECTED1", "MOVE_SELECTED2", "MOVE_SELECTED3");
             }
         }
     }

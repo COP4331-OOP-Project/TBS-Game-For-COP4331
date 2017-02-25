@@ -94,9 +94,9 @@ public class GamePanel extends Panel {
     }
 
     public void drawStaticTileElement(Point p, String image) {
-    	Image img = Assets.getInstance().getImage(image);
-    	gc.drawImage(img, camera.offset(p).x, camera.offset(p).y, camera.getScale() * img.getWidth(), 
+    	Assets.getInstance().getSprite(image).draw(img, camera.offset(p).x, camera.offset(p).y, camera.getScale() * img.getWidth(), 
         		camera.getScale() * img.getHeight());
+
     }
 
     public void drawStaticTileElement(Point p, int rotation, String image) {

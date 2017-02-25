@@ -27,6 +27,7 @@ public class MiniMapPanel extends Panel {
 
     public void draw(GraphicsContext gc, Point screenDimensions) {
         this.screenDimensions = screenDimensions;
+        drawBackground(gc);
         for (int i = 0; i < game.getGameBoard().getTiles().length; i++) {
             for (int j = 0; j < game.getGameBoard().getTiles()[i].length; j++) {
             	Point loc = new Point(i, j);
@@ -51,7 +52,12 @@ public class MiniMapPanel extends Panel {
         drawBorder(gc);
     }
 
-    private void drawSmallStructure(Point tileLoc, int ownerID, GraphicsContext gc) {
+    private void drawBackground(GraphicsContext gc) {
+        gc.drawImage(Assets.getInstance().getImage("GUI_MINI_MAP_BACKGROUND"), screenDimensions.x - DISTANCE_FROM_RIGHT - 27
+                , screenDimensions.y - DISTANCE_FROM_BOTTOM + 182);
+	}
+
+	private void drawSmallStructure(Point tileLoc, int ownerID, GraphicsContext gc) {
         if (ownerID == 0) {
             gc.drawImage(Assets.getInstance().getImage("BASE_O_SMALL"), offsetMini(tileLoc).x, offsetMini(tileLoc).y);
 
@@ -72,7 +78,6 @@ public class MiniMapPanel extends Panel {
     private void drawBorder(GraphicsContext gc) {
         gc.drawImage(Assets.getInstance().getImage("GUI_MINI_MAP_BORDER"), screenDimensions.x - DISTANCE_FROM_RIGHT - 27
                 , screenDimensions.y - DISTANCE_FROM_BOTTOM + 182);
-
     }
 
     private void drawSmallTile(GraphicsContext gc, Point tileLoc, TerrainEnum tileType) {
