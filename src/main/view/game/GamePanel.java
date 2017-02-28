@@ -11,6 +11,7 @@ import javafx.scene.image.Image;
 import javafx.scene.text.Font;
 import javafx.scene.transform.Affine;
 import javafx.scene.transform.Rotate;
+import view.Animation;
 import view.Point;
 import view.gui.Panel;
 
@@ -116,34 +117,9 @@ public class GamePanel extends Panel {
         		rotate.getTx(), rotate.getTy());
     }
 
-    public void drawAnimatedTileElement(Point p, String image1, String image2, String image3) {
-        Image img;
-        if(p.x % 2 == 0) {
-	    	switch (getAnimationImage()) { 
-		        	case 0:
-		            	img = Assets.getInstance().getImage(image1);
-		                break;
-		            case 2:
-		            	img = Assets.getInstance().getImage(image3);
-		                break;
-		            default:
-		            	img = Assets.getInstance().getImage(image2);
-	    	}
-        } else {
-        	switch (getAnimationImage()) { 
-        	case 0:
-            	img = Assets.getInstance().getImage(image1);
-                break;
-            case 2:
-            	img = Assets.getInstance().getImage(image2);
-                break;
-            default:
-            	img = Assets.getInstance().getImage(image3);
-        	}
-        }
-    	
-        gc.drawImage(img, camera.offset(p).x, camera.offset(p).y, camera.getScale() * img.getWidth(), 
-        		camera.getScale() * img.getHeight());
+    public void drawAnimatedTileElement(Point p, Animation a) {
+       a.draw(gc, camera.offset(p).x, camera.offset(p).y, camera.getScale() * TILE_PIXEL_SIZE, 
+        		camera.getScale() * TILE_PIXEL_SIZE, getAnimationCount());
     }
 
     public Camera getCamera() {
